@@ -4,7 +4,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url("https://wallpapercave.com/wp/wp2381184.jpg");
+    background: url("https://www.heet.org.uk/wp-content/uploads/2016/06/gradient-background-26046-26731-hd-wallpapers.jpg.png");
+    background-position: center center;
+    background-size: cover;
 
     h2,
     p {
@@ -13,7 +15,6 @@
     }
 
     form {
-        display: flex;
         padding: 1px;
         border-radius: 1rem;
         gap: 5px;
@@ -39,7 +40,6 @@
    
 
     &_block {
-        width: 60%;
         display: flex;
         flex-direction: column;
 

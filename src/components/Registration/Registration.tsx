@@ -15,10 +15,10 @@ const  Registration =() => {
                 <MyInput  placholder='age'/>
                 <Button  name='Registration'/>
             </div>
-            <div className={style.form_info}>
+            {/* <div className={style.form_info}>
                 <h2>Glad to see You!</h2>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
-            </div>
+            </div> */}
         </form>
     </div>
   )
