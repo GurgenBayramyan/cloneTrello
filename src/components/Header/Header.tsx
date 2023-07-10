@@ -15,15 +15,22 @@ import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";
 import { IHeaderState} from './HeaderTypes';
 const  Header = () => {
     const[headerState,setHeaderState] = useState<IHeaderState>({
-        open:false,
-        menuView:false
+        open:true,
+        menuView:true,
     })
     const handleOpenMenu = () => {
-        setHeaderState({...headerState,open:!headerState.open})
-        
+        setHeaderState({...headerState,
+          open:!headerState.open,
+          menuView:headerState.open ? true:headerState.menuView
+        })
+
     }
     const handleViewMenu = () => {
-      setHeaderState({...headerState,menuView:!headerState.menuView})
+      setHeaderState({
+        ...headerState,
+        menuView:!headerState.menuView,
+        open:headerState.menuView ? true:headerState.open
+      })
     }
   return <header className={style.header}>
       <div className={style.header_navbar}>
@@ -54,7 +61,7 @@ const  Header = () => {
         </div>
       </div>
       <MenuIcon onClick={handleOpenMenu} className={style.header_menuIcon} />
-      <div className={headerState.open == true ? style.header_menuBlock : style.header_menuBlockClose}>
+      <div className={headerState.open == false ? style.header_menuBlock : style.header_menuBlockClose}>
         <div className={style.header_navbar_iconTreloBlock}>
           <span>Trello</span>
         </div>
@@ -97,7 +104,7 @@ const  Header = () => {
         </div>
       </div>
       <ClearAllIcon onClick={handleViewMenu} className={style.menuHeader} />
-      <div className={`${headerState.menuView && style.k7} ${!headerState.menuView && style.k6} `}>
+      <div className={`${!headerState.menuView && style.k7} ${headerState.menuView && style.k6} `}>
         <h3>Tasks</h3>
         <p>Для рабочего пространства</p>
         <div className={style.dosk}>
