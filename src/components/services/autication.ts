@@ -1,5 +1,6 @@
 import { ILogin } from "components/login/LoginTypes"
-
-export const postLogin = (data:ILogin)=>{
-    console.log(data)
+import axios from 'axios'
+const url = "https://retoolapi.dev/29qJQC/data"
+export const postLogin = async(data:ILogin)=>{
+    await axios.post(url,data)
 }
