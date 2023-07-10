@@ -1,0 +1,54 @@
+@mixin burgerMenu{
+    padding: 15px;
+    position: relative;
+    color: white;
+    @media(max-width: 895px){
+        display: none;
+    }
+}
+@mixin menuBlock($top,$right:"0px"){
+    position: absolute;
+    right: $right;
+    top: $top;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background-color: #1d2836;
+    padding: 28px 35px;
+    border-radius: 14px;
+    height: max-content;
+    transition: all 400ms ease;
+    .text{
+        display: flex;
+        gap: 5px;
+        padding: 5px;
+        cursor: pointer;
+        &:hover{
+            background-color: #837f97;
+            border-radius: 5px;
+        }
+    }
+}
+@mixin BoardStyle{
+    padding: 2px 8px;
+    cursor: pointer;
+    display: flex;
+    gap:5px ;
+    background-color: rgba(240, 248, 255, 0.956);
+    color: black;
+    &:hover{
+        background-color: rgb(240, 248, 255);
+    }
+    span{
+        margin: 5px;
+    }
+    .rowDown{
+        padding-top: 2px;
+        border-radius: 5px;
+    }
+}
+@mixin flexCenter {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}

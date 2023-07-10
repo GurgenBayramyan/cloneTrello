@@ -1,0 +1,27 @@
+.loginPage {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    background: url("https://wallpapercave.com/wp/wp2381184.jpg");
+    
+    form{
+        padding: 50px;
+        border-radius: 14px;
+        background-color: wheat;
+    }
+    h2 {
+        text-align: center;
+        color: white;
+        font-family: 'Times New Roman', Times, serif;
+        font-weight: 800;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+}
