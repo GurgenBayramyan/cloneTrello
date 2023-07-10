@@ -60,8 +60,10 @@ const  Header = () => {
           <span>Создать</span>
         </div>
       </div>
+      <div>
       <MenuIcon onClick={handleOpenMenu} className={style.header_menuIcon} />
       <div className={headerState.open == false ? style.header_menuBlock : style.header_menuBlockClose}>
+      
         <div className={style.header_navbar_iconTreloBlock}>
           <span>Trello</span>
         </div>
@@ -90,6 +92,7 @@ const  Header = () => {
           <DisplaySettingsIcon className={style.id} sx={{ cursor: "pointer" }} />
           <Person3Icon className={style.id} sx={{ cursor: "pointer" }} />
         </div>
+      </div>
       </div>
       <div className={style.header_search_block}>
         <div className={style.header_search_block_inputBlock}>

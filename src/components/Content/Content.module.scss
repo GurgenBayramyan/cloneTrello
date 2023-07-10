@@ -86,17 +86,15 @@
         flex-direction: column;
         background: url("https://codetheweb.blog/assets/img/posts/css-advanced-background-images/cover.jpg");
         background-size: cover;
-
         .topSec {
             display: flex;
             justify-content: space-between;
             height: 55px;
             background-color: rgb(54, 48, 44);
-
+            @media(max-width: 895px) {
+                display: none;
+            }
         }
-
-
-
     }
 
     .rightContainer_down {
@@ -104,16 +102,16 @@
         flex: 1;
     }
 
-    @media(max-width:500px) {
-        .leftContainer{
+    @media(max-width:320px) {
+        .leftContainer {
             width: 100%;
         }
-        .close{
+
+        .close {
             width: 25px;
         }
     }
 }
-
 
 .leftBlock {
     display: flex;

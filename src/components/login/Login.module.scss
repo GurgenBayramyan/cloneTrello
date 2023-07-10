@@ -5,25 +5,76 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 25px;
     background: url("https://www.heet.org.uk/wp-content/uploads/2016/06/gradient-background-26046-26731-hd-wallpapers.jpg.png");
     background-position: center center;
     background-size: cover;
-    
-    form{
-        padding: 50px;
-        border-radius: 14px;
-        background-color: wheat;
-    }
-    h2 {
-        text-align: center;
-        color: white;
-        font-family: 'Times New Roman', Times, serif;
-        font-weight: 800;
-    }
 
     form {
+        padding: 25px;
+        border-radius: 14px;
+        background-color: wheat;
         display: flex;
         flex-direction: column;
+        gap: 20px;
+
+        h2 {
+            text-align: center;
+            color: rgb(10, 10, 10);
+            font-size: 35px;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: 800;
+            @media(max-width:1000px) {
+                font-size: 20px;
+            }
+        }
+
+        .input {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+
+            &:focus {
+                outline: none;
+                border-color: #007bff;
+                box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+            }
+            @media(max-width:1000px) {
+                width: 200px;
+                padding: 6px;
+            }
+        }
+
+        .btn {
+            background: #B9DFFF;
+            color: rgb(9, 9, 9);
+            border: 1px solid #eee;
+            border-radius: 20px;
+            box-shadow: 5px 5px 5px #eee;
+            text-shadow: none;
+            cursor: pointer;
+            padding: 5px;
+            margin-top: 5px;
+
+            &:hover {
+                background: #016ABC;
+                color: #fff;
+                border: 1px solid #eee;
+                border-radius: 20px;
+                box-shadow: 5px 5px 5px #eee;
+                text-shadow: none;
+            }
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            color: blue;
+        }
+
+        @media(max-width:1000px) {
+            padding: 15px;
+            
+        }
     }
 }

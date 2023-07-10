@@ -1,24 +1,25 @@
 import React from 'react'
 import style from './Registration.module.scss'
 import Input from '../Input/Input'
-import Button from '../Button'
+
 const  Registration =() => {
   return (
     <div className={style.form}>
         <form >
-            <div className={style.form_block}>
                 <h2>Hello friend!</h2>
-                <Input  placholder='firstname'/>
+                <input className={style.input} type="text" placeholder="firstName" />
+                <input className={style.input} type="text" placeholder="lastName" />
+                <input className={style.input} type="text" placeholder="gender" />
+                <input className={style.input} type="text" placeholder="email" />
+                <input className={style.input} type="text" placeholder="age" />
+                <input className={style.input} type="password" placeholder="password" />
+
+                {/* <Input  placholder='firstname'/>
                 <Input  placholder='lastName'/>
                 <Input  placholder='gender'/>
                 <Input  placholder='email'/>
-                <Input  placholder='age'/>
-                <Button  name='Registration'/>
-            </div>
-            {/* <div className={style.form_info}>
-                <h2>Glad to see You!</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
-            </div> */}
+                <Input  placholder='age'/> */}
+                <button type="submit" className={style.btn}>Registration</button>
         </form>
     </div>
   )
