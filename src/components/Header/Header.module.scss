@@ -112,7 +112,8 @@
                 border: 1px solid white;
                 border-radius: 1rem;
                 &:focus{
-                    width: 250px;
+                    width: 400px;
+                    border-radius: unset;
                 }
                 
             }
@@ -127,7 +128,7 @@
         }
         @media (max-width:500px) {
             &_inputBlock {
-                margin-right: 100px;
+                margin-right: 80px;
                 input {
                     width: 150px;
                     &:focus{
