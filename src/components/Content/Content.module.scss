@@ -1,0 +1,278 @@
+@import '../../assets//style.scss';
+@import '../../assets//vars.scss';
+
+.content {
+    display: flex;
+
+    .leftContainer {
+        width: 300px;
+        background-color: $leftContainer-bg;
+        height: 100vh;
+        display: flex;
+        transition: all 500ms ease;
+        flex-direction: column;
+
+        .numbers {
+            display: flex;
+            color: wheat;
+            font-weight: 800;
+            padding: 8px;
+
+            .first {
+                padding: 5px 10px;
+                background-color: $first-bg;
+
+                span {
+                    font-size: 20px;
+                }
+
+            }
+
+            .last {
+                padding: 8px;
+            }
+        }
+
+        &_top {
+            height: 55px;
+            border-bottom: 1px solid #4D4746;
+            position: relative;
+
+        }
+
+        &_down {
+            flex: 1;
+        }
+
+    }
+
+    .close {
+        width: 25px;
+
+        .numbers {
+            display: none;
+        }
+    }
+
+
+    .openBlock {
+        position: absolute;
+        top: 15px;
+        right: -15px;
+        color: wheat;
+        padding: 4px;
+
+        &:hover {
+            background-color: #837f97;
+        }
+    }
+
+    .closeblock {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        color: wheat;
+        padding: 4px;
+        border-radius: 14px 14px;
+
+        &:hover {
+            background-color: #837f97;
+        }
+    }
+
+    .rightContainer {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        background: url("https://codetheweb.blog/assets/img/posts/css-advanced-background-images/cover.jpg");
+        background-size: cover;
+        .topSec {
+            display: flex;
+            justify-content: space-between;
+            height: 55px;
+            background-color: rgb(54, 48, 44);
+            @media(max-width: 895px) {
+                display: none;
+            }
+        }
+    }
+
+    .rightContainer_down {
+        overflow-x: scroll;
+        flex: 1;
+    }
+
+    @media(max-width:320px) {
+        .leftContainer {
+            width: 100%;
+        }
+
+        .close {
+            width: 25px;
+        }
+    }
+}
+
+.leftBlock {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 50px;
+    width: 550px;
+    color: white;
+
+    h3 {
+        cursor: pointer;
+    }
+
+    .starIcon {
+        cursor: pointer;
+        padding: 2px;
+
+        &:hover {
+            transform: scale(1.2);
+            background-color: #4D4746;
+            color: sandybrown;
+        }
+    }
+
+    .textBlock {
+        display: flex;
+        gap: 15px;
+        padding: 1px 25px;
+        border-radius: 7px;
+        cursor: pointer;
+
+        span {
+            align-self: center;
+        }
+
+        &:hover {
+            background-color: #4D4746;
+        }
+    }
+
+    .board {
+        @include BoardStyle;
+
+    }
+
+    @media(max-width: 1000px) {
+        display: none;
+    }
+}
+
+.rightBlock {
+    display: flex;
+    justify-content: space-around;
+    color: $rightBlock-color;
+
+    .text {
+        display: flex;
+        align-self: center;
+        gap: 8px;
+        padding: 1px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+
+        p {
+            align-self: center;
+        }
+
+        &:hover {
+            background-color: #4D4746;
+        }
+    }
+
+    @media (max-width: 1500px) {
+        display: none;
+    }
+
+
+
+}
+
+.burgerMenu {
+    @include burgerMenu;
+
+    .menuBlock {
+        @include menuBlock(54px, 10px);
+
+        .board {
+            @include BoardStyle;
+        }
+    }
+
+    .none {
+        height: 0px;
+        width: 0;
+        padding: unset;
+
+        .text {
+            display: none;
+        }
+
+        .board {
+            display: none;
+        }
+
+    }
+
+    .listIcon {
+        font-size: 30px;
+        color: wheat;
+
+        &:hover {
+            transform: scale(0.9);
+        }
+    }
+
+    @media (min-width: 1500px) {
+        display: none;
+    }
+
+
+}
+
+
+.burgerMenuLeft {
+    @include burgerMenu;
+
+    .menuBlockLeft {
+        @include menuBlock(54px, );
+
+        .board {
+            @include BoardStyle;
+        }
+    }
+
+    .none {
+        height: 0px;
+        width: 0;
+        padding: unset;
+
+        .text {
+            display: none;
+        }
+
+        .board {
+            display: none;
+        }
+
+    }
+
+    .listIcon {
+        font-size: 30px;
+        color: wheat;
+
+        &:hover {
+            transform: scale(0.9);
+        }
+
+    }
+
+    @media(min-width: 1000px) {
+        display: none;
+    }
+
+}

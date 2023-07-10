@@ -1,0 +1,74 @@
+.form {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url("https://www.heet.org.uk/wp-content/uploads/2016/06/gradient-background-26046-26731-hd-wallpapers.jpg.png");
+    background-position: center center;
+    background-size: cover;
+
+   
+
+    form {
+        padding: 25px;
+        border-radius: 14px;
+        background-color: wheat;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        a{
+            display: block;
+            text-align: center;
+        }
+        .input {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            @media(max-width:1000px) {
+                padding: 4px;
+                width: 200px;
+            }
+
+            &:focus {
+                outline: none;
+                border-color: #007bff;
+                box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+            }
+           
+        }
+        h2 {
+            text-align: center;
+            color: rgb(7, 7, 7);
+        }
+        .btn {
+            background: #B9DFFF;
+            color: rgb(9, 9, 9);
+            border: 1px solid #eee;
+            border-radius: 20px;
+            box-shadow: 5px 5px 5px #eee;
+            text-shadow: none;
+            cursor: pointer;
+            padding: 5px;
+            margin-top: 5px;
+            &:hover {
+                background: #016ABC;
+                color: #fff;
+                border: 1px solid #eee;
+                border-radius: 20px;
+                box-shadow: 5px 5px 5px #eee;
+                text-shadow: none;
+            }
+        }
+        @media(max-width:1000px) {
+            padding: 10px;
+        }
+        
+    }
+
+    
+
+
+
+}
