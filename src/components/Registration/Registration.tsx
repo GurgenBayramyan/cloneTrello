@@ -1,8 +1,10 @@
 import React from 'react'
 import style from './Registration.module.scss'
-import Input from '../Input/Input'
+import { NavLink } from 'react-router-dom'
+
 
 const  Registration =() => {
+ 
   return (
     <div className={style.form}>
         <form >
@@ -13,13 +15,9 @@ const  Registration =() => {
                 <input className={style.input} type="text" placeholder="email" />
                 <input className={style.input} type="text" placeholder="age" />
                 <input className={style.input} type="password" placeholder="password" />
-
-                {/* <Input  placholder='firstname'/>
-                <Input  placholder='lastName'/>
-                <Input  placholder='gender'/>
-                <Input  placholder='email'/>
-                <Input  placholder='age'/> */}
+                <input className={style.input} type="password" placeholder="repeat password" />
                 <button type="submit" className={style.btn}>Registration</button>
+                <NavLink to="/login">go to login page</NavLink>
         </form>
     </div>
   )
