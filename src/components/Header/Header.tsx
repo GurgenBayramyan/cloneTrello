@@ -106,7 +106,7 @@ const  Header = () => {
       <ClearAllIcon onClick={handleViewMenu} className={style.menuHeader} />
       <div className={`${!headerState.menuView && style.k7} ${headerState.menuView && style.k6} `}>
         <h3>Tasks</h3>
-        <p>Для рабочего пространства</p>
+        <p className={style.parag}>Для рабочего пространства</p>
         <div className={style.dosk}>
           <p>По доске</p>
           <KeyboardArrowDownIcon className={style.img} />
