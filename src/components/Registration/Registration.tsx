@@ -1,6 +1,6 @@
 import React from 'react'
 import style from './Registration.module.scss'
-import MyInput from '../Input/Input'
+import Input from '../Input/Input'
 import Button from '../Button'
 const  Registration =() => {
   return (
@@ -8,11 +8,11 @@ const  Registration =() => {
         <form >
             <div className={style.form_block}>
                 <h2>Hello friend!</h2>
-                <MyInput  placholder='firstname'/>
-                <MyInput  placholder='lastName'/>
-                <MyInput  placholder='gender'/>
-                <MyInput  placholder='email'/>
-                <MyInput  placholder='age'/>
+                <Input  placholder='firstname'/>
+                <Input  placholder='lastName'/>
+                <Input  placholder='gender'/>
+                <Input  placholder='email'/>
+                <Input  placholder='age'/>
                 <Button  name='Registration'/>
             </div>
             {/* <div className={style.form_info}>
