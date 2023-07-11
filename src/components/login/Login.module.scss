@@ -77,4 +77,16 @@
             
         }
     }
+    
+}
+.inputBlock{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    span{
+        display: block;
+        padding: 3px;
+        color: red;
+        font-size: 14px;
+    }
 }

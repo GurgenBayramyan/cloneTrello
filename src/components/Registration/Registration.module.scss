@@ -11,7 +11,7 @@
    
 
     form {
-        padding: 25px;
+        padding: 45px;
         border-radius: 14px;
         background-color: wheat;
         display: flex;
@@ -20,6 +20,16 @@
         a{
             display: block;
             text-align: center;
+        }
+        label{
+            cursor: pointer;
+            color: #007bff;
+            font-weight: 900;
+        }
+        select{
+            padding: 2px;
+            border-radius: 3px;
+
         }
         .input {
             width: 300px;
@@ -40,7 +50,9 @@
         }
         h2 {
             text-align: center;
-            color: rgb(7, 7, 7);
+            color: rgb(211, 2, 2);
+            font-weight: 800;
+            box-shadow: 1px 2px 3px rgb(51, 40, 38);
         }
         .btn {
             background: #B9DFFF;
@@ -62,7 +74,7 @@
             }
         }
         @media(max-width:1000px) {
-            padding: 10px;
+            padding: 25px;
         }
         
     }
@@ -71,4 +83,47 @@
 
 
 
+}
+.optionBlock{
+    display: flex;
+   flex-direction: column;
+    label{
+        align-self: center;
+        padding: 5px;
+    }
+    span{
+        color: red;
+        font-size: 11px;
+    }
+    @media(max-width:1000px) {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+.blockInput{
+    display: flex;
+    flex-direction: column;
+    span{
+        color: red;
+        font-size: 11px;
+        @media(max-width:1000px) {
+           font-size: 7px;
+        }
+    }
+    
+}
+.err{
+    width: 300px;
+    padding: 10px;
+    border: 1px solid red;
+    border-radius: 4px;
+    &:focus {
+        outline: none;
+        border-color: #007bff;
+        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    }
+    @media(max-width:1000px) {
+        padding: 4px;
+        width: 200px;
+    }
 }

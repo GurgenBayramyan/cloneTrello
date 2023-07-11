@@ -1,39 +1,67 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { SubmitHandler, useForm } from 'react-hook-form';
-import {yupResolver} from '@hookform/resolvers/yup'
+import { SubmitHandler, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { ILogin } from "./LoginTypes";
 import { schemaLogin } from "schemas";
-import { postLogin } from "components/services/autication";
+import { postLogin } from "services/autication";
+import { ToastContainer, toast} from "react-toastify";
 import style from "./Login.module.scss";
+import "react-toastify/dist/ReactToastify.css";
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
-
-
-const Login =()=> {
-const { register, handleSubmit, formState:{ errors },reset } = useForm<{email:string,password:string}>({
-  	defaultValues: {},
+const Login = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<{ email: string; password: string }>({
+    defaultValues: {},
     resolver: yupResolver(schemaLogin),
-    mode:"onChange"
+    mode: "onChange",
   });
-  const onSubmit:SubmitHandler<ILogin> = async data => {
-    await postLogin(data) 
-    reset()
-    console.log(errors)
+  
+  const onSubmit: SubmitHandler<ILogin> = async (data) => {
+    const resp = await postLogin(data);
+    toast(resp,{
+      icon:()=> <ErrorOutlineIcon/>
+    })
+    reset();
   };
- 
- 
+
   return (
-      <div className={style.loginPage}>
-        
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <h2>login</h2>
-          <input className={style.input} type="text" placeholder="email" {...register("email")}/>
-          <input className={style.input} type="password" placeholder="password" {...register("password")}/>
+    <div className={style.loginPage}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <h2>login </h2>
+        <div className={style.inputBlock}>
+          <input
+            className={style.input}
+            type="text"
+            placeholder="email"
+            {...register("email")}
+          />
+          <span>{errors.email?.message}</span>
+        </div>
+
+        <div className={style.inputBlock}>
+          <input
+            className={style.input}
+            type="password"
+            placeholder="password"
+            {...register("password")}
+          />
           <span>{errors.password?.message}</span>
-          <button type="submit" className={style.btn}>logIn</button>
-          <NavLink to='/registration'>go to registration page</NavLink>
-        </form>
-      </div>
+        </div>
+        <button type="submit" className={style.btn}>
+          logIn
+        </button>
+        <NavLink to="/registration">go to registration page</NavLink>
+      </form>
+      <ToastContainer
+        position="top-center"
+        />
+    </div>
   );
-}
-export default Login
+};
+export default Login;
