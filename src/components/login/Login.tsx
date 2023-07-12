@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect } from "react";
+import { NavLink, Navigate, useNavigate } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ILogin } from "./LoginTypes";
 import { schemaLogin } from "schemas";
 import { postLogin } from "services/autication";
 import { ToastContainer, toast} from "react-toastify";
+import { toastError, toastOk } from "helpers";
 import style from "./Login.module.scss";
 import "react-toastify/dist/ReactToastify.css";
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import Cookies from "js-cookie";
+
 
 const Login = () => {
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -21,13 +24,21 @@ const Login = () => {
     resolver: yupResolver(schemaLogin),
     mode: "onChange",
   });
+  const cookie = Cookies.get("token");
+  
   
   const onSubmit: SubmitHandler<ILogin> = async (data) => {
     const resp = await postLogin(data);
-    toast(resp,{
-      icon:()=> <ErrorOutlineIcon/>
-    })
-    reset();
+    if(resp.statusText === "OK"){
+      const {token,message }= resp.data
+        toastOk(message)
+        navigate("/")
+        Cookies.set("token",token)
+        reset();
+    }else{
+      toastError(resp)
+    }
+    
   };
 
   return (

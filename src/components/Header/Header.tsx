@@ -13,11 +13,17 @@ import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";
 import { IHeaderState} from './HeaderTypes';
+import classNames from "classnames";
+import { fetchLogout, toastOk } from "helpers";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 const  Header = () => {
     const[headerState,setHeaderState] = useState<IHeaderState>({
         open:true,
         menuView:true,
+        userMenu:true
     })
+    const navigate = useNavigate();
     const handleOpenMenu = () => {
         setHeaderState({...headerState,
           open:!headerState.open,
@@ -31,6 +37,17 @@ const  Header = () => {
         menuView:!headerState.menuView,
         open:headerState.menuView ? true:headerState.open
       })
+    }
+    const handleOpenUserMenu = () => {
+        setHeaderState({...headerState,userMenu:!headerState.userMenu})
+    }
+    const handlelogOut = async() => {
+     const resp = await fetchLogout();
+     const {messege} = resp.data;
+     toastOk(messege);
+     Cookies.remove("token");
+     navigate("login")
+
     }
   return <header className={style.header}>
       <div className={style.header_navbar}>
@@ -103,7 +120,27 @@ const  Header = () => {
           <NotificationsIcon sx={{ cursor: "pointer" }} />
           <ContactSupportIcon sx={{ cursor: "pointer" }} />
           <DisplaySettingsIcon sx={{ cursor: "pointer" }} />
-          <Person3Icon sx={{ cursor: "pointer" }} />
+          <Person3Icon onClick={handleOpenUserMenu} sx={{ cursor: "pointer" }} />
+          <div className={classNames(style.userInfoBlock,{
+            [style.block_User]:headerState.userMenu
+          })}>
+              <div className={style.userAccount}>
+                  <span>ACCOUNT</span>
+                  
+              </div>
+              <div className={style.userAccountBlock}>
+                  <div>
+                      <Person3Icon />
+                  </div>
+                  <div className={style.userInfoData}>
+                      <span>Name Lastname</span>
+                      <span>Email</span>
+                  </div>
+              </div>
+              <div className={style.logOut}>
+                    <span onClick={handlelogOut}>Log out</span>
+              </div>
+          </div>
         </div>
       </div>
       <ClearAllIcon onClick={handleViewMenu} className={style.menuHeader} />

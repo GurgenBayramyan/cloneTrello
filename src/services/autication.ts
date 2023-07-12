@@ -7,13 +7,9 @@ import { removeRepeatPasword } from "helpers";
 export const postLogin = async(data:ILogin)=>{
     const url = "https://young-citadel-44598.herokuapp.com/login"
     try {
-        // await axios({
-        //     method: "post",
-        //     url,
-        //     data,
-        //     withCredentials: true
-        //   })
-        await axios.post(url,data, {withCredentials: true});
+        const resp = await axios.post(url,data, {withCredentials: true});
+        console.log(resp)
+        return resp
     } catch(e:any) {
         const {data} =  e.response
         return data
@@ -22,13 +18,16 @@ export const postLogin = async(data:ILogin)=>{
 
 export const postRegistration = async(data:IRegistration) => {
     const url = "https://young-citadel-44598.herokuapp.com/register";
-        console.log(removeRepeatPasword(data))
     try {
       const resp =  await axios.post(url,removeRepeatPasword(data));
-      return resp.data
+      return resp
     } catch(e:any) {
         const {data} =  e.response
         return data
     }
 }
+
+export const getprofileInfo = async() => {
+    
+} 
 

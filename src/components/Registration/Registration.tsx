@@ -1,14 +1,14 @@
 import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, Navigate, useNavigate } from "react-router-dom";
 import { SubmitHandler, useForm} from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaRegistr } from "schemas";
 import { IRegistration } from "./RegistrationTypes";
 import { postRegistration } from "services/autication";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer} from "react-toastify";
 import style from "./Registration.module.scss";
 import classNames from 'classnames'
-import { log } from "console";
+import { toastError, toastOk } from "helpers";
 
 const Registration = () => {
   const navigate = useNavigate()
@@ -27,14 +27,19 @@ const Registration = () => {
   const iscoincide = repeatPassword === password && password !== "" ;
 
   const onSubmit: SubmitHandler<IRegistration> = async(data) => {
-    console.log(data)
     const resp = await postRegistration(data);
-    toast(resp)
-    reset();
-    console.log(1)
-   
+    if(resp.statusText === "OK"){
+      navigate("/login")
+      toastOk(resp.data)  
+    }else{
+      toastError(resp.data)
+      reset();
+    }
+    
     
   };
+ 
+  
   return (
     <div className={style.form}>
       <form onSubmit={handleSubmit(onSubmit)}>
