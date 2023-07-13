@@ -10,6 +10,7 @@ import { toastError, toastOk } from "helpers";
 import style from "./Login.module.scss";
 import "react-toastify/dist/ReactToastify.css";
 import Cookies from "js-cookie";
+import classNames from "classnames";
 
 
 const Login = () => {
@@ -22,7 +23,7 @@ const Login = () => {
   } = useForm<{ email: string; password: string }>({
     defaultValues: {},
     resolver: yupResolver(schemaLogin),
-    mode: "onChange",
+    mode: "onSubmit",
   });
   const cookie = Cookies.get("token");
   
@@ -47,17 +48,22 @@ const Login = () => {
         <h2>login </h2>
         <div className={style.inputBlock}>
           <input
-            className={style.input}
+            className={classNames(style.input,{
+              [style.redBorder]:errors.email?.message
+            })}
             type="text"
             placeholder="email"
             {...register("email")}
           />
           <span>{errors.email?.message}</span>
+          
         </div>
 
         <div className={style.inputBlock}>
           <input
-            className={style.input}
+            className={classNames(style.input,{
+              [style.redBorder]:errors.password?.message
+            })}
             type="password"
             placeholder="password"
             {...register("password")}

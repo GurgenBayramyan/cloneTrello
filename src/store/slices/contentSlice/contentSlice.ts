@@ -1,5 +1,5 @@
-import {  createSlice } from "@reduxjs/toolkit";
-import { IContentInitial} from "./contentSliceTypes";
+import {  PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { IContentInitial, IUserData} from "./contentSliceTypes";
 
 const initialState: IContentInitial = {
   data: {
@@ -15,7 +15,7 @@ const contentSlice = createSlice({
     name:"contentSlice",
     initialState,
     reducers:{
-        setUserData:(state,{payload})=>{
+        setUserData:(state, {payload}:PayloadAction<IUserData>)=>{
             state.data =  payload
         }
     }

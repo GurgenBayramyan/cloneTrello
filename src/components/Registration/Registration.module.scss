@@ -26,11 +26,20 @@
             color: #007bff;
             font-weight: 900;
         }
-        select{
+        // select{
+        //     padding: 2px;
+        //     border-radius: 3px;
+
+        // }
+        select {
             padding: 2px;
             border-radius: 3px;
-
-        }
+            width: 300px; 
+            height: 30px; 
+            font-size: 14px; 
+            border: 1px solid #ccc;
+            outline: none;
+          }
         .input {
             width: 300px;
             padding: 10px;
@@ -47,6 +56,10 @@
                 box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
             }
            
+        }
+        .redBorder{
+            border: 1px solid red
+            
         }
         h2 {
             text-align: center;
