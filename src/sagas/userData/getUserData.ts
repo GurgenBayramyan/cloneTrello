@@ -4,10 +4,10 @@ import { getUserDataAction } from "store/actionTypes";
 import { setUserData } from "store/slices/contentSlice/contentSlice";
 
 function* setUserSaga():Generator<any, void> {
-    const data = yield call(getUSerData)
+    const data:any = yield call(getUSerData)
     yield put(setUserData(data))
 }
 
 export function* watchUserSaga() {
     yield takeLatest(getUserDataAction,setUserSaga)
-}
+}       
