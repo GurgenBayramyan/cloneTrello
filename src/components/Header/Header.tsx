@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AppsIcon from "@mui/icons-material/Apps";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import style from "./Header.module.scss";
@@ -17,17 +17,28 @@ import classNames from "classnames";
 import { fetchLogout, toastOk } from "helpers";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "Hooks/changDispatchSekector";
+import { getUserDataAction } from "store/actionTypes";
+import LoginIcon from '@mui/icons-material/Login';
+
+;
 const  Header = () => {
     const[headerState,setHeaderState] = useState<IHeaderState>({
         open:true,
         menuView:true,
         userMenu:true
     })
+    const{data}=useAppSelector(state=>state.contentSlice);
     const navigate = useNavigate();
+    const dispatch =  useAppDispatch()
+    useEffect(()=>{
+      dispatch(getUserDataAction())
+    },[])
     const handleOpenMenu = () => {
         setHeaderState({...headerState,
           open:!headerState.open,
-          menuView:headerState.open ? true:headerState.menuView
+          menuView:headerState.open ? true:headerState.menuView,
+          userMenu:true
         })
 
     }
@@ -35,18 +46,24 @@ const  Header = () => {
       setHeaderState({
         ...headerState,
         menuView:!headerState.menuView,
-        open:headerState.menuView ? true:headerState.open
+        open:headerState.menuView ? true:headerState.open,
+        userMenu:true
       })
     }
     const handleOpenUserMenu = () => {
-        setHeaderState({...headerState,userMenu:!headerState.userMenu})
+        setHeaderState({
+          userMenu:!headerState.userMenu,
+          menuView:true,
+          open:true
+        })
     }
     const handlelogOut = async() => {
      const resp = await fetchLogout();
      const {messege} = resp.data;
      toastOk(messege);
      Cookies.remove("token");
-     navigate("login")
+     navigate("login");
+     
 
     }
   return <header className={style.header}>
@@ -120,29 +137,32 @@ const  Header = () => {
           <NotificationsIcon sx={{ cursor: "pointer" }} />
           <ContactSupportIcon sx={{ cursor: "pointer" }} />
           <DisplaySettingsIcon sx={{ cursor: "pointer" }} />
-          <Person3Icon onClick={handleOpenUserMenu} sx={{ cursor: "pointer" }} />
+          
+        </div>
+        <div className={style.accountIcon}>
+        <LoginIcon onClick={handleOpenUserMenu}  sx={{ cursor: "pointer" }} />
           <div className={classNames(style.userInfoBlock,{
             [style.block_User]:headerState.userMenu
           })}>
               <div className={style.userAccount}>
                   <span>ACCOUNT</span>
-                  
               </div>
               <div className={style.userAccountBlock}>
                   <div>
                       <Person3Icon />
                   </div>
                   <div className={style.userInfoData}>
-                      <span>Name Lastname</span>
-                      <span>Email</span>
+                      <span>{data.firstname}{data.lastname}</span>
+                      <span>{data.email}</span>
                   </div>
               </div>
+              
               <div className={style.logOut}>
                     <span onClick={handlelogOut}>Log out</span>
               </div>
           </div>
         </div>
-      </div>
+      <div className={style.men}>
       <ClearAllIcon onClick={handleViewMenu} className={style.menuHeader} />
       <div className={`${!headerState.menuView && style.k7} ${headerState.menuView && style.k6} `}>
         <h3>Tasks</h3>
@@ -179,6 +199,9 @@ const  Header = () => {
               <span>...</span>
             </div>
       </div>
+      </div>
+      </div>
+     
     </header>;
 }
 export default Header

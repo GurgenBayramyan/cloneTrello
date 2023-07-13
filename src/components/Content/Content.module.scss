@@ -3,15 +3,15 @@
 
 .content {
     display: flex;
-
+    flex: 1;
+    
     .leftContainer {
         width: 300px;
         background-color: $leftContainer-bg;
-        height: 100vh;
+
         display: flex;
         transition: all 500ms ease;
         flex-direction: column;
-
         .numbers {
             display: flex;
             color: wheat;

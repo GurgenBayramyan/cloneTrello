@@ -5,8 +5,8 @@ import Home from "../Home/Home";
 import Registration from "../Registration";
 import { ToastContainer } from "react-toastify";
 import ErrorPage from "components/ErrorPage/ErrorPage";
-import Protected from "Hoks/completedRoutes/Protected";
-import ProtectedLoginRegistr from "Hoks/completedRoutLoginRegistr/ProtectedLoginRegistr";
+import Protected from "HOK/completedRoutes/Protected";
+import ProtectedLoginRegistr from "HOK/completedRoutLoginRegistr/ProtectedLoginRegistr";
 
 const App = () => {
   const HomeComponent = Protected(Home)

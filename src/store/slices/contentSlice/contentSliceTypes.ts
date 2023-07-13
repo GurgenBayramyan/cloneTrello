@@ -1,9 +1,10 @@
-export interface IRegistration{
+export interface IUserData {
     firstname: string
     lastname:string
     genders: string
     email:string
     age:string
-    password:string
-    repeatPassword:string 
 }
+export interface IContentInitial{
+    data:IUserData
+} 

@@ -8,11 +8,10 @@ export const postLogin = async(data:ILogin)=>{
     const url = "https://young-citadel-44598.herokuapp.com/login"
     try {
         const resp = await axios.post(url,data, {withCredentials: true});
-        console.log(resp)
         return resp
-    } catch(e:any) {
-        const {data} =  e.response
-        return data
+    } catch(error:any) {
+        
+        return await error
     }
 }
 
@@ -21,9 +20,8 @@ export const postRegistration = async(data:IRegistration) => {
     try {
       const resp =  await axios.post(url,removeRepeatPasword(data));
       return resp
-    } catch(e:any) {
-        const {data} =  e.response
-        return data
+    } catch(error:any) {
+        return await error
     }
 }
 

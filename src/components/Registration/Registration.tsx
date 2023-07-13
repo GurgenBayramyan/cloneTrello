@@ -32,8 +32,7 @@ const Registration = () => {
       navigate("/login")
       toastOk(resp.data)  
     }else{
-      toastError(resp.data)
-      reset();
+      toastError(resp.response.data)
     }
     
     
@@ -49,18 +48,18 @@ const Registration = () => {
             className={style.input}
             type="text"
             placeholder="firstName"
-            {...register("firstName")}
+            {...register("firstname")}
           />
-          <span>{errors.firstName?.message}</span>
+          <span>{errors.firstname?.message}</span>
         </div>
         <div className={style.blockInput}>
           <input
             className={style.input}
             type="text"
             placeholder="lastName"
-            {...register("lastName")}
+            {...register("lastname")}
           />
-          <span>{errors.firstName?.message}</span>
+          <span>{errors.firstname?.message}</span>
         </div>
 
         <div className={style.optionBlock}>

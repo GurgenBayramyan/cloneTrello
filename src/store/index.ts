@@ -1,10 +1,14 @@
 import{configureStore,getDefaultMiddleware} from '@reduxjs/toolkit'
 import { rootReducer } from './rootReducer'
 import saga from  'redux-saga'
+import { all, fork } from 'redux-saga/effects'
+import { watchUserSaga } from 'sagas/userData/getUserData'
+
 const sagaMiddleware = saga()
 
 function* RootSaga() {
-    
+    yield all([fork(watchUserSaga)])
+
 }
 
 

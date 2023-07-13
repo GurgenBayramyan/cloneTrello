@@ -5,8 +5,8 @@ export const schemaLogin = yup.object().shape({
     password: yup.string().required("required").matches(/^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})\S+$/,"password is incorrect")
 });
 export  const schemaRegistr = yup.object().shape({
-    firstName: yup.string().required("requied"),
-    lastName: yup.string().required("requied"),
+    firstname: yup.string().required("requied"),
+    lastname: yup.string().required("requied"),
     genders: yup.string().required(),
     email:yup.string().required("requied").email("invalid email"),
     age:yup.string().required("requied"),

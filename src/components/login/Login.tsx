@@ -30,13 +30,13 @@ const Login = () => {
   const onSubmit: SubmitHandler<ILogin> = async (data) => {
     const resp = await postLogin(data);
     if(resp.statusText === "OK"){
-      const {token,message }= resp.data
+      const {token,message }= resp
         toastOk(message)
         navigate("/")
         Cookies.set("token",token)
         reset();
     }else{
-      toastError(resp)
+      toastError(resp.response.data)
     }
     
   };
