@@ -7,13 +7,13 @@
     background: url("https://www.heet.org.uk/wp-content/uploads/2016/06/gradient-background-26046-26731-hd-wallpapers.jpg.png");
     background-position: center center;
     background-size: cover;
-
+   
    
 
     form {
         padding: 45px;
         border-radius: 14px;
-        background-color: wheat;
+        background: linear-gradient(to bottom right, #f8a5c2, #9b55c2);
         display: flex;
         flex-direction: column;
         gap: 20px;
@@ -26,11 +26,7 @@
             color: #007bff;
             font-weight: 900;
         }
-        // select{
-        //     padding: 2px;
-        //     border-radius: 3px;
-
-        // }
+      
         select {
             padding: 2px;
             border-radius: 3px;
@@ -39,6 +35,11 @@
             font-size: 14px; 
             border: 1px solid #ccc;
             outline: none;
+            transition: border-color 0.3s ease;
+            &:focus{
+                border-color: #00aaff;
+                box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+            }
           }
         .input {
             width: 300px;
@@ -84,6 +85,7 @@
                 border-radius: 20px;
                 box-shadow: 5px 5px 5px #eee;
                 text-shadow: none;
+                
             }
         }
         @media(max-width:1000px) {
@@ -130,11 +132,13 @@
     padding: 10px;
     border: 1px solid red;
     border-radius: 4px;
+    background-color: rgba(255, 0, 0, 0.1);
     &:focus {
         outline: none;
         border-color: #007bff;
         box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
     }
+  
     @media(max-width:1000px) {
         padding: 4px;
         width: 200px;

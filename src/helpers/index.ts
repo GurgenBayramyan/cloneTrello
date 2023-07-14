@@ -1,6 +1,7 @@
 import axios from "axios"
 import { IRegistration } from "components/Registration/RegistrationTypes"
-import { toast } from "react-toastify"
+import { ToastOptions, toast } from "react-toastify"
+import { IErrorObjectForAlert } from "types"
 
 
 export const removeRepeatPasword = (data:IRegistration) => {
@@ -12,29 +13,24 @@ export const removeRepeatPasword = (data:IRegistration) => {
 
 }
 
-export const toastOk = (text: string) => {
-  toast.success(text, {
+const toastDefaultValue = () => {
+  return {
     position: "top-left",
-    autoClose: 5000,
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
     theme: "light",
-  });
+  }
+};
+
+export const toastOk = (text: string) => {
+  toast.success(text, toastDefaultValue() as ToastOptions<{}>);
 };  
 export const toastError = (text: string) => [
-  toast.error(text, {
-    position: "top-right",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "light",
-  }),
+  toast.error(text, {...toastDefaultValue() as ToastOptions<{}> ,position:"top-right"})
 ];
 
 export const fetchLogout = async() =>{
@@ -45,4 +41,10 @@ export const fetchLogout = async() =>{
 export const  getUSerData = async() => {
     const resp = await axios.get("https://young-citadel-44598.herokuapp.com/user",{withCredentials:true})
     return resp.data
+}
+
+export const errorAlertFunction = (obj:IErrorObjectForAlert)=>{
+    for(let key in obj){
+      toastError(`${key} is ${obj[key as keyof typeof obj]?.message}`)
+    }
 }

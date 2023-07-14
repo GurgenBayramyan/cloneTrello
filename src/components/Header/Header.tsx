@@ -21,7 +21,7 @@ import { useAppDispatch, useAppSelector } from "Hooks/changDispatchSekector";
 import { getUserDataAction } from "store/actionTypes";
 import LoginIcon from '@mui/icons-material/Login';
 
-;
+
 const  Header = () => {
     const[headerState,setHeaderState] = useState<IHeaderState>({
         open:true,
