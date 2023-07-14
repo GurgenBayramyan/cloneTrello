@@ -13,10 +13,10 @@ export const removeRepeatPasword = (data:IRegistration) => {
 
 }
 
-const toastDefaultValue = () => {
+export const toastDefaultValue  = () => {
   return {
     position: "top-left",
-    autoClose: 2000,
+    autoClose: 5000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
@@ -29,9 +29,6 @@ const toastDefaultValue = () => {
 export const toastOk = (text: string) => {
   toast.success(text, toastDefaultValue() as ToastOptions<{}>);
 };  
-export const toastError = (text: string) => [
-  toast.error(text, {...toastDefaultValue() as ToastOptions<{}> ,position:"top-right"})
-];
 
 export const fetchLogout = async() =>{
   const resp = await axios.post("https://young-citadel-44598.herokuapp.com/logout");
@@ -43,8 +40,9 @@ export const  getUSerData = async() => {
     return resp.data
 }
 
-export const errorAlertFunction = (obj:IErrorObjectForAlert)=>{
-    for(let key in obj){
-      toastError(`${key} is ${obj[key as keyof typeof obj]?.message}`)
-    }
-}
+// export const errorAlertFunction = (obj:IErrorObjectForAlert)=>{
+//     for(let key in obj){
+
+//       toastError(`${key} is ${obj[key as keyof typeof obj]}`)
+//     }
+// }

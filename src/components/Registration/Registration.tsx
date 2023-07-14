@@ -1,15 +1,15 @@
 import React from "react";
-import { NavLink,  useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { SubmitErrorHandler, SubmitHandler, useForm} from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaRegistr } from "schemas";
 import { IRegistration } from "./RegistrationTypes";
 import { postRegistration } from "services/autication";
-import { ToastContainer} from "react-toastify";
+import { ToastContainer, ToastOptions, toast} from "react-toastify";
 import style from "./Registration.module.scss";
-import { errorAlertFunction, toastError, toastOk } from "helpers";
+import {toastDefaultValue, toastOk } from "helpers";
 import classNames from "classnames";
-import { RespStatus } from "types";
+import { IErrorObjectForAlert, RespStatus } from "types";
 
 const Registration = () => {
   const navigate = useNavigate()
@@ -29,16 +29,31 @@ const Registration = () => {
     const resp = await postRegistration(data);
     if(resp.statusText === RespStatus.request){
       navigate("/login")
-      toastOk(resp.data)  
+      toast.success(resp.data,toastDefaultValue() as ToastOptions<{}>)  
     }else{
-      toastError(resp.response.data)
+      toast.error(resp.response.data,{...toastDefaultValue() as ToastOptions<{}> ,position:"top-center"})
     }
     
     
   };
 
-  const onerror:SubmitErrorHandler<IRegistration> = (e) =>{
-      errorAlertFunction(e)
+  const onerror:SubmitErrorHandler<IRegistration> = (errors: IErrorObjectForAlert) =>{
+
+    toast.error(
+      <div>
+        {Object.keys(errors).map((item, index) => {
+          return (
+            <div className={style.errorMess} key={item}>
+                <span className={style.spanOne}>{index+1}--{item} is </span>
+                <span>{errors[item as keyof typeof errors]?.message}</span>
+                <hr />
+            </div>
+          )
+        })}
+      </div>,{
+        ...toastDefaultValue() as ToastOptions<{}> ,position:"top-left"
+      }
+    )
   }
   return (
     <div className={style.form}>

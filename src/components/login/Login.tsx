@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import { NavLink, Navigate, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ILogin } from "./LoginTypes";
 import { schemaLogin } from "schemas";
 import { postLogin } from "services/autication";
-import { ToastContainer, toast} from "react-toastify";
-import { errorAlertFunction, toastError, toastOk } from "helpers";
+import { ToastContainer, ToastOptions, toast} from "react-toastify";
+import { toastDefaultValue,  toastOk } from "helpers";
 import style from "./Login.module.scss";
 import "react-toastify/dist/ReactToastify.css";
 import Cookies from "js-cookie";
@@ -32,18 +32,18 @@ const Login = () => {
   const onSubmit: SubmitHandler<ILogin> = async (data) => {
     const resp = await postLogin(data);
     if(resp.statusText === RespStatus.request){
-      const {token,message }= resp
-        toastOk(message)
+      const {token,message }= resp.data
+      toast.success(message,toastDefaultValue() as ToastOptions<{}>)  
         navigate("/")
         Cookies.set("token",token)
         reset();
     }else{
-      toastError(resp.response.data)
+      toast.error(resp.response.data,{...toastDefaultValue() as ToastOptions<{}> ,position:"top-center"})
     }
     
   };
   const onerror:SubmitErrorHandler<IRegistration> = (e) =>{
-    errorAlertFunction(e)
+    // errorAlertFunction(e)
 }
   return (
     <div className={style.loginPage}>
