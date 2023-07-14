@@ -64,7 +64,7 @@ const  Header = () => {
      toast.success(messege,toastDefaultValue() as ToastOptions<{}>)  
      Cookies.remove("token");
      navigate("login");
-     
+      
 
     }
   return <header className={style.header}>
