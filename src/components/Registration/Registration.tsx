@@ -37,7 +37,7 @@ const Registration = () => {
     
   };
 
-  const onerror:SubmitErrorHandler<IRegistration> = (errors: IErrorObjectForAlert) =>{
+  const onerror:SubmitErrorHandler<IRegistration> = (errors) =>{
 
     toast.error(
       <div>
