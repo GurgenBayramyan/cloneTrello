@@ -11,4 +11,4 @@ function* setUserSaga():Generator<any, void> {
 
 export function* watchUserSaga() {
     yield takeLatest(getUserDataAction,setUserSaga)
-}
+}       
