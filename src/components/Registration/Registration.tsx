@@ -7,7 +7,7 @@ import { IRegistration } from "./RegistrationTypes";
 import { postRegistration } from "services/autication";
 import { ToastContainer, ToastOptions, toast} from "react-toastify";
 import style from "./Registration.module.scss";
-import {toastDefaultValue, toastOk } from "helpers";
+import {toastDefaultValue } from "helpers";
 import classNames from "classnames";
 import { IErrorObjectForAlert, RespStatus } from "types";
 

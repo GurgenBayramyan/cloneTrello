@@ -14,12 +14,13 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";
 import { IHeaderState} from './HeaderTypes';
 import classNames from "classnames";
-import { fetchLogout, toastOk } from "helpers";
+import { fetchLogout, toastDefaultValue } from "helpers";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "Hooks/changDispatchSekector";
 import { getUserDataAction } from "store/actionTypes";
 import LoginIcon from '@mui/icons-material/Login';
+import { ToastOptions, toast } from "react-toastify";
 
 
 const  Header = () => {
@@ -60,7 +61,7 @@ const  Header = () => {
     const handlelogOut = async() => {
      const resp = await fetchLogout();
      const {messege} = resp.data;
-     toastOk(messege);
+     toast.success(messege,toastDefaultValue() as ToastOptions<{}>)  
      Cookies.remove("token");
      navigate("login");
      

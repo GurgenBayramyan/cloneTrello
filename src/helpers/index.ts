@@ -1,7 +1,6 @@
 import axios from "axios"
 import { IRegistration } from "components/Registration/RegistrationTypes"
-import { ToastOptions, toast } from "react-toastify"
-import { IErrorObjectForAlert } from "types"
+
 
 
 export const removeRepeatPasword = (data:IRegistration) => {
@@ -26,9 +25,7 @@ export const toastDefaultValue  = () => {
   }
 };
 
-export const toastOk = (text: string) => {
-  toast.success(text, toastDefaultValue() as ToastOptions<{}>);
-};  
+ 
 
 export const fetchLogout = async() =>{
   const resp = await axios.post("https://young-citadel-44598.herokuapp.com/logout");
@@ -40,9 +37,3 @@ export const  getUSerData = async() => {
     return resp.data
 }
 
-// export const errorAlertFunction = (obj:IErrorObjectForAlert)=>{
-//     for(let key in obj){
-
-//       toastError(`${key} is ${obj[key as keyof typeof obj]}`)
-//     }
-// }

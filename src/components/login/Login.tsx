@@ -6,7 +6,7 @@ import { ILogin } from "./LoginTypes";
 import { schemaLogin } from "schemas";
 import { postLogin } from "services/autication";
 import { ToastContainer, ToastOptions, toast} from "react-toastify";
-import { toastDefaultValue,  toastOk } from "helpers";
+import { toastDefaultValue } from "helpers";
 import style from "./Login.module.scss";
 import "react-toastify/dist/ReactToastify.css";
 import Cookies from "js-cookie";
