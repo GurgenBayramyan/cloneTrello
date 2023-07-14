@@ -100,6 +100,7 @@
     .rightContainer_down {
         overflow-x: scroll;
         flex: 1;
+        display: flex;
     }
 
     @media(max-width:320px) {

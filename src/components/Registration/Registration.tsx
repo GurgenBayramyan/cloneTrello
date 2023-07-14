@@ -23,7 +23,7 @@ const Registration = () => {
     resolver: yupResolver(schemaRegistr),
   });
   const {repeatPassword,password} = watch();
-  const iscoincide = repeatPassword === password && password !== "" && repeatPassword !== "" ;
+
 
   const onSubmit: SubmitHandler<IRegistration> = async(data) => {
     const resp = await postRegistration(data);
@@ -107,7 +107,7 @@ const Registration = () => {
 
         <div className={style.blockInput}>
         <input
-          className={classNames(style.input,{
+          className={classNames(style.input,style.date,{
             [style.redBorder]:errors.age?.message
           })}
           type="date"

@@ -4,70 +4,218 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: url("https://www.heet.org.uk/wp-content/uploads/2016/06/gradient-background-26046-26731-hd-wallpapers.jpg.png");
+    background: url("https://www.pcclean.io/wp-content/uploads/2020/4/qiqEny.jpg");
     background-position: center center;
     background-size: cover;
-   
-   
+
+
 
     form {
         padding: 45px;
         border-radius: 14px;
-        background: linear-gradient(to bottom right, #f8a5c2, #9b55c2);
+        background-color: wheat;
+        height: max-content;
         display: flex;
         flex-direction: column;
         gap: 20px;
-        a{
-            display: block;
+
+        h2 {
             text-align: center;
+            color: rgb(10, 10, 10);
+            font-size: 35px;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(to bottom right, #f8a5c2, #9b55c2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow 3s linear infinite;
         }
-        label{
+
+        @keyframes rainbow {
+            0% {
+                filter: hue-rotate(0deg);
+            }
+
+            100% {
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        @media(max-width: 1000px) {
+            h2 {
+                font-size: 20px;
+            }
+        }
+
+        a {
+            display: inline-block;
+            text-align: center;
+            color: blue;
+            text-decoration: none;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        a:before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: blue;
+            visibility: hidden;
+            transform: scaleX(0);
+            transition: all 0.3s ease-in-out;
+        }
+
+        a:hover {
+            color: #007bff;
+        }
+
+        a:hover:before {
+            visibility: visible;
+            transform: scaleX(1);
+        }
+
+        label {
             cursor: pointer;
             color: #007bff;
             font-weight: 900;
+            transition: color 0.3s ease;
         }
-      
+
+        label:hover {
+            color: #00aaff;
+        }
+
+        label:active {
+            transform: translateY(1px);
+        }
+
         select {
             padding: 2px;
             border-radius: 3px;
-            width: 300px; 
-            height: 30px; 
-            font-size: 14px; 
+            width: 300px;
+            height: 30px;
+            font-size: 14px;
             border: 1px solid #ccc;
             outline: none;
             transition: border-color 0.3s ease;
-            &:focus{
-                border-color: #00aaff;
-                box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+
+            @media(max-width: 1000px) {
+                width: 200px;
+                padding: 6px;
             }
-          }
+        }
+
+        select:focus {
+            border-color: #00aaff;
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+        }
+
+        select option {
+            background-color: #fff;
+            color: #333;
+        }
+
+        select:hover {
+            border-color: #999;
+        }
+
+        select:disabled {
+            background-color: #f5f5f5;
+            color: #999;
+            cursor: not-allowed;
+        }
+
+
         .input {
             width: 300px;
             padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            @media(max-width:1000px) {
-                padding: 4px;
-                width: 200px;
+            background: linear-gradient(to bottom, #fff, #f5f5f5);
+            border: none;
+            color: #333;
+            border-radius: 8px;
+            transition: box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+
+            &:hover {
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
             }
 
             &:focus {
-                outline: none;
                 border-color: #007bff;
-                box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+                background-color: #f5f5f5;
+                outline: none;
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
             }
-           
+
+            @media(max-width: 1000px) {
+                width: 200px;
+                padding: 6px;
+            }
+
+            &::placeholder {
+                color: #999;
+            }
+
+
+
+            &:invalid {
+                box-shadow: none;
+            }
         }
-        .redBorder{
+
+        .redBorder {
             border: 1px solid red
-            
         }
-        h2 {
-            text-align: center;
-            color: rgb(211, 2, 2);
-            font-weight: 800;
-            box-shadow: 1px 2px 3px rgb(51, 40, 38);
+
+        .date {
+            width: 300px;
+            height: 40px;
+            background-color: #f2f2f2;
+            border: 1px solid #dddddd;
+
+            &:focus {
+                border-color: #3498db;
+                box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+            }
+
+            &::-webkit-calendar-picker-indicator {
+                color: #999999;
+                opacity: 0.7;
+            }
+
+            &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+            &::-webkit-datetime-edit {
+                color: #333333;
+
+            }
+
+
+            &::-webkit-datetime-edit-fields-wrapper {
+                background-color: #f2f2f2;
+                border: 1px solid #dddddd;
+
+            }
+
+
+            &::-webkit-calendar-picker-indicator {
+                background: url("https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg") no-repeat center center;
+
+            }
+
+            @media(max-width: 1000px) {
+                width: 200px;
+                padding: 6px;
+            }
         }
+
         .btn {
             background: #B9DFFF;
             color: rgb(9, 9, 9);
@@ -76,77 +224,87 @@
             box-shadow: 5px 5px 5px #eee;
             text-shadow: none;
             cursor: pointer;
-            padding: 5px;
-            margin-top: 5px;
+            padding: 10px 20px;
+            margin-top: 10px;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+
             &:hover {
                 background: #016ABC;
                 color: #fff;
-                border: 1px solid #eee;
-                border-radius: 20px;
-                box-shadow: 5px 5px 5px #eee;
-                text-shadow: none;
-                
+                transform: scale(1.05);
             }
         }
+
         @media(max-width:1000px) {
             padding: 25px;
         }
-        
+
     }
 
-    
+
 
 
 
 }
-.optionBlock{
+
+.optionBlock {
     display: flex;
-   flex-direction: column;
-    label{
+    flex-direction: column;
+
+    label {
         align-self: center;
         padding: 5px;
     }
-    span{
+
+    span {
         color: red;
         font-size: 11px;
     }
+
     @media(max-width:1000px) {
         flex-direction: column;
         gap: 8px;
     }
 }
-.blockInput{
+
+.blockInput {
     display: flex;
     flex-direction: column;
-    span{
+
+    span {
         color: red;
         font-size: 11px;
+
         @media(max-width:1000px) {
-           font-size: 7px;
+            font-size: 7px;
         }
     }
-    
+
 }
-.err{
+
+.err {
     width: 300px;
     padding: 10px;
     border: 1px solid red;
     border-radius: 4px;
     background-color: rgba(255, 0, 0, 0.1);
+
     &:focus {
         outline: none;
         border-color: #007bff;
         box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
     }
-  
+
     @media(max-width:1000px) {
         padding: 4px;
         width: 200px;
     }
 }
-.errorMess{
+
+.errorMess {
     color: red;
-    .spanOne{
+
+    .spanOne {
         color: #007bff;
     }
 }

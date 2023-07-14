@@ -166,7 +166,9 @@ const Content = () => {
             </div>
           </div>
         </div>
-        <div className={style.rightContainer_down} />
+        <div className={style.rightContainer_down} >
+          
+        </div>
       </div>
     </div>
   );

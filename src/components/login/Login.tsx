@@ -12,7 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Cookies from "js-cookie";
 import classNames from "classnames";
 import { RespStatus } from "types";
-import { IRegistration } from "components/Registration/RegistrationTypes";
+
 
 
 const Login = () => {
@@ -42,12 +42,10 @@ const Login = () => {
     }
     
   };
-  const onerror:SubmitErrorHandler<IRegistration> = (e) =>{
-    // errorAlertFunction(e)
-}
+  
   return (
     <div className={style.loginPage}>
-      <form onSubmit={handleSubmit(onSubmit,onerror)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <h2>login </h2>
         <div className={style.inputBlock}>
           <input
