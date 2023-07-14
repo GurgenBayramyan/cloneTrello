@@ -1,8 +1,16 @@
 import style from './List.module.scss'
+import { IListProps } from './ListTypes'
 
-const List = () => {
+const List = ({title}:IListProps) => {
   return (
-    <div>List</div>
+    <div className={style.listBlock}>
+      <div className={style.listBlock_header}>
+          <span>{title}</span>  
+          <div>
+            <span>...</span>
+          </div>
+      </div>
+    </div>
   )
 }
 

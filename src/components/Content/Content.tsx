@@ -11,6 +11,7 @@ import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";
 import ListIcon from "@mui/icons-material/List";
 import ShareIcon from '@mui/icons-material/Share';
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
+import List from "components/List/List";
 const Content = () => {
   const [state, setState] = useState<{
     open: boolean;
@@ -167,6 +168,14 @@ const Content = () => {
           </div>
         </div>
         <div className={style.rightContainer_down} >
+          <List title="To do" />
+          <List title="To do" />
+          <List title="To do" />
+          <List title="To do" />
+          <List title="To do" />
+          <List title="To do" />
+          <List title="To do" />
+          <List title="To do" />
           
         </div>
       </div>

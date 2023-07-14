@@ -1,0 +1,24 @@
+.listBlock{
+    display: flex;
+    flex-direction: column;
+    width: 230px;
+    height: max-content;
+    margin: 35px 25px;
+    background-color: #c5cad2;
+    border-radius: 9px;
+    cursor: pointer;
+    &_header{
+        display: flex;
+        justify-content: space-between;
+        padding: 15px;
+        color: #4e5c73;
+        font-weight: 400;
+        div{
+            &:hover{
+                background-color: #4351677f;
+            }
+           
+        }
+
+    }
+}
