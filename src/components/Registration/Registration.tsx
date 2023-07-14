@@ -44,7 +44,7 @@ const Registration = () => {
         {Object.keys(errors).map((item, index) => {
           return (
             <div className={style.errorMess} key={item}>
-                <span className={style.spanOne}>{index+1}--{item} is </span>
+                <span className={style.spanOne}>{index+1}-{item} is </span>
                 <span>{errors[item as keyof typeof errors]?.message}</span>
                 <hr />
             </div>
