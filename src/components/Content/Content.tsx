@@ -168,6 +168,8 @@ const Content = () => {
           </div>
         </div>
         <div className={style.rightContainer_down} >
+          <div className={style.downBlock}>
+               <List title="To do" />
           <List title="To do" />
           <List title="To do" />
           <List title="To do" />
@@ -175,7 +177,8 @@ const Content = () => {
           <List title="To do" />
           <List title="To do" />
           <List title="To do" />
-          <List title="To do" />
+          </div>
+         
           
         </div>
       </div>
