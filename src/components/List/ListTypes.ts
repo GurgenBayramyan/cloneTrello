@@ -1,7 +1,7 @@
 export interface IListProps{
     title:string
 }
-export interface iListState{
+export interface IListState{
     optionBlock:boolean
     addCard:boolean
 }

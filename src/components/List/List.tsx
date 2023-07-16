@@ -1,12 +1,16 @@
 import { useState,useEffect, useRef } from 'react'
 import style from './List.module.scss'
-import { IListProps, iListState } from './ListTypes'
+import { IListProps, IListState } from './ListTypes'
 import classNames from 'classnames';
 import BackupTableIcon from '@mui/icons-material/BackupTable';
+import Task from 'components/Task/Task';
+
+
+
 
 const List = ({title}:IListProps) => {
   const [changeTitle,setChangeTitle] = useState(title);
-  const[listState,setListState] = useState<iListState>({
+  const[listState,setListState] = useState<IListState>({
     optionBlock:true,
     addCard:false
   })
@@ -17,11 +21,13 @@ const List = ({title}:IListProps) => {
 useEffect(()=>{
   const handleClickOutside = (event: MouseEvent) => {
     if (listRef.current && !listRef.current.contains(event.target as Node)) {
-      setListState({ ...listState, optionBlock: true });
+      setListState({ ...listState, optionBlock: true});
     }
+    
   };
-  document.addEventListener('mousedown', handleClickOutside);
 
+  document.addEventListener('mousedown', handleClickOutside);
+ 
   return () => {
     document.removeEventListener('mousedown', handleClickOutside);
   };
@@ -95,6 +101,8 @@ useEffect(()=>{
 
         </div>
       </div>
+      <Task taskName="Authentication" />
+
       {listState.addCard ? <div className={style.addCardActive}>
           <div className={style.textArea}>
               <textarea placeholder='Enter title for this card...'></textarea>
@@ -114,8 +122,6 @@ useEffect(()=>{
               <BackupTableIcon sx={{cursor:"pointer",fontSize:"12px"}} />
           </div>
       </div>}
-    
-      
     </div>
   )
 }
