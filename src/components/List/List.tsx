@@ -101,7 +101,7 @@ useEffect(()=>{
 
         </div>
       </div>
-      <Task taskName="Authentication" />
+      <Task taskName="Authentication" listName={title}/>
 
       {listState.addCard ? <div className={style.addCardActive}>
           <div className={style.textArea}>

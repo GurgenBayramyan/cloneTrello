@@ -2,6 +2,7 @@
     padding: 15px;
     position: relative;
     color: white;
+    z-index: 1000;
     @media(max-width: 895px){
         display: none;
     }
