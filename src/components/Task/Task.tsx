@@ -1,24 +1,27 @@
-import React, { useState } from "react";
+import React, { useState,MouseEvent, FC, useRef, RefObject, HTMLAttributes, DetailedHTMLProps } from "react";
 import { ITask } from "./TaskTypes";
 import CreateIcon from "@mui/icons-material/Create";
 import MenuIcon from "@mui/icons-material/Menu";
 import PersonIcon from "@mui/icons-material/Person";
-import classNames from "classnames";
 import style from "./Task.module.scss";
-import ModalBlock from "components/ModallBlock/ModalBlock";
+import TaskSettings from "components/TaskSettings/TaskSettings";
 
-
-const Task = ({ taskName ,listName}: ITask) => {
-    const[modal,setModal] = useState(false);
-    const handleOpenModal = () => {
-        setModal(!modal)
+const Task:FC<ITask> = ({ openModal,setOption,showSetings}) => {
+  
+    const taskDiv = useRef<any>(null)
+    const openInfoSection = (e:MouseEvent<HTMLElement>) =>{
+      e.stopPropagation();
+      const div = taskDiv.current;
+      console.log(div.clientTop)
+      setOption()
     }
   return (
-    <div className={style.task} onClick={handleOpenModal}>
+    <div ref={taskDiv} className={style.task} onClick={openModal}>
+      
       <div className={style.task_header}>
-        <h4>{taskName}</h4>
-        <div className={style.iconBlock}>
-          <CreateIcon sx={{ cursor: "pointer", fontSize: "14px" }} />
+        <h4>TaskName</h4>
+        <div onClick={(e)=>openInfoSection(e)} className={style.iconBlock}>
+          <CreateIcon  sx={{ cursor: "pointer", fontSize: "14px" }} />
         </div>
       </div>
       <div className={style.task_footer}>
@@ -29,16 +32,10 @@ const Task = ({ taskName ,listName}: ITask) => {
           <PersonIcon sx={{ cursor: "pointer", fontSize: "14px" }} />
         </div>
       </div>
-      <div  className={classNames(style.modal,{
-        [style.isActive]:modal
-      })}>
-        <div className={style.modal_content}>
-            <div  onClick={(e:any)=>e.stopPropagation()}className={style.task_desc}>
-                <ModalBlock taskName={taskName} listName={listName}/>
-            </div>
-        </div>
-      </div>
+    
+     
     </div>
+
   );
 };
 

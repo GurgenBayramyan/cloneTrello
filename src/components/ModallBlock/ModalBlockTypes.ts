@@ -1,6 +1,6 @@
 export interface IModal{
-    taskName:string
-    listName:string
+    openModal:()=>void
+    showModal:boolean
 }
 export interface IModalState{
     taskDesc:boolean

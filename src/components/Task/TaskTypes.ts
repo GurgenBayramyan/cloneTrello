@@ -1,4 +1,5 @@
 export interface ITask{
-    taskName:string
-    listName:string
+    openModal:() => void
+    setOption:() => void
+    showSetings:boolean
 }
