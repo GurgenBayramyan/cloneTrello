@@ -1,0 +1,14 @@
+.settings{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.521);
+    transition: opacity 300ms ease;
+    z-index: 1000;
+}
+.settingsIsNone{
+    width: 0;
+    height: 0;
+    opacity: 0;
+}

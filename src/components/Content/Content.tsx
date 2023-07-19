@@ -13,7 +13,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import List from "components/List/List";
 import ModalBlock from "components/ModallBlock/ModalBlock";
-import TaskSettings from "components/TaskSettings/TaskSettings";
+
 const Content = () => {
   const [state, setState] = useState<{
     open: boolean;
@@ -25,12 +25,8 @@ const Content = () => {
     leftMenu: true
   });
   const [showModal, setShowModal] = useState(false);
-  const [ showSetings ,setShowSetings] = useState(false)
   const openModal = () => {
     setShowModal(!showModal)
-  }
-  const setOption = () =>{
-    setShowSetings(!showSetings)
   }
   
   const handleMenu = () => {
@@ -185,58 +181,42 @@ const Content = () => {
         <div className={style.rightContainer_down}>
           <div className={style.downBlock}>
             <List
-              showSetings={showSetings}
-              setOption={setOption}
               openModal={openModal}
               title="To do"
             />
             <List
-              showSetings={showSetings}
-              setOption={setOption}
               openModal={openModal}
               title="To do"
             />
             <List
-              showSetings={showSetings}
-              setOption={setOption}
               openModal={openModal}
               title="To do"
             />
             <List
-              showSetings={showSetings}
-              setOption={setOption}
               openModal={openModal}
               title="To do"
             />
             <List
-              showSetings={showSetings}
-              setOption={setOption}
               openModal={openModal}
               title="To do"
             />
             <List
-              showSetings={showSetings}
-              setOption={setOption}
               openModal={openModal}
               title="To do"
             />
             <List
-              showSetings={showSetings}
-              setOption={setOption}
               openModal={openModal}
               title="To do"
             />
             <List
-              showSetings={showSetings}
-              setOption={setOption}
               openModal={openModal}
               title="To do"
             />
           </div>
         </div>
       </div>
-      {showSetings && <div onClick={setOption} className={style.settings}></div>}
-      { showSetings && <TaskSettings taskName="TaskName" /> } 
+       
+      
       <ModalBlock openModal={openModal} showModal={showModal} />
     </div>
   );
