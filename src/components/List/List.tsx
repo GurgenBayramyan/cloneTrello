@@ -1,4 +1,4 @@
-import { useState, FC } from 'react'
+import { useState, FC, MouseEvent } from 'react'
 import style from './List.module.scss'
 import { IListProps, IListState } from './ListTypes'
 import classNames from 'classnames';
@@ -16,6 +16,8 @@ const List:FC<IListProps> = ({title,openModal,setOption,showSetings}) => {
     titleBlock:true
   })
 
+  const [bool, setBool] = useState(false)
+
   const handleChangeTitle = (event:React.ChangeEvent<HTMLInputElement>) => {
     setChangeTitle(event.target.value);
   };
@@ -27,11 +29,13 @@ const List:FC<IListProps> = ({title,openModal,setOption,showSetings}) => {
   const handleCloseOptionBlock = () => {
     setListState({...listState,optionBlock:true})
   }
-  const handleAddCard = () => {
-    setListState({...listState,addCard:!listState.addCard})
+  const handleAddCard = (e: MouseEvent<HTMLElement>) => {
+    console.log("handleAddCard -> ")
+     
   }
-  const handleClose = () => {
-      setListState({...listState,addCard:false})
+  const handleClose = (e:MouseEvent<HTMLElement>) => {
+      e.stopPropagation()
+      setListState({...listState,addCard:true})
   }
   const blurForOption = () =>{
     setListState({...listState,optionBlock:true})
@@ -42,15 +46,21 @@ const List:FC<IListProps> = ({title,openModal,setOption,showSetings}) => {
   const blurForTitle = () =>{
     setListState({...listState,titleBlock:!listState.titleBlock})
   }
-  const closeAddBlock = () => {
-    setListState({...listState,addCard:false})
+  const closeAddBlock = (e: any) => {
+    setBool(false)
   }
+
+  const handleOpenCard = () => {
+    console.log("handleOpenCard -> ")
+    setBool(true)
+  }
+
   return (
     <div className={style.listBlock}>
       <div className={style.listBlock_header}>
         {listState.titleBlock ? (
           <div onClick={setTitle} className={style.titleBlock}>
-              <span>{title}</span>
+            <span>{title}</span>
           </div>
         ) : (
           <input
@@ -114,23 +124,82 @@ const List:FC<IListProps> = ({title,openModal,setOption,showSetings}) => {
           </div>
         </div>
       </div>
-      <Task showSetings={showSetings} setOption={setOption} openModal={openModal}  />
+      <div className={style.tasks}>
+        <Task
+          showSetings={showSetings}
+          setOption={setOption}
+          openModal={openModal}
+        />
+        <Task
+          showSetings={showSetings}
+          setOption={setOption}
+          openModal={openModal}
+        />
+        <Task
+          showSetings={showSetings}
+          setOption={setOption}
+          openModal={openModal}
+        />
+        <Task
+          showSetings={showSetings}
+          setOption={setOption}
+          openModal={openModal}
+        />
+        <Task
+          showSetings={showSetings}
+          setOption={setOption}
+          openModal={openModal}
+        />
+        <Task
+          showSetings={showSetings}
+          setOption={setOption}
+          openModal={openModal}
+        />
+        <Task
+          showSetings={showSetings}
+          setOption={setOption}
+          openModal={openModal}
+        />
+        <Task
+          showSetings={showSetings}
+          setOption={setOption}
+          openModal={openModal}
+        />
+        <Task
+          showSetings={showSetings}
+          setOption={setOption}
+          openModal={openModal}
+        />
+        <Task
+          showSetings={showSetings}
+          setOption={setOption}
+          openModal={openModal}
+        />
 
-      {listState.addCard ? (
-        <div className={style.addCardActive}>
-          <div className={style.textArea}>
-            <textarea  tabIndex={0} autoFocus={true} onBlur={closeAddBlock} placeholder="Enter title for this card..."></textarea>
-          </div>
-          <div className={style.buttonblock}>
-            <div className={style.addButton}>
-              <span>Add card</span>
+        {bool ? (
+          <div className={style.addCardActive}>
+            <div className={style.textArea}>
+              <textarea
+                tabIndex={0}
+                autoFocus={true}
+                onBlur={closeAddBlock}
+                placeholder="Enter title for this card..."
+              ></textarea>
             </div>
-            <h3 onClick={handleClose}>X</h3>
           </div>
+        ):null}
+      </div>
+
+      {bool ? (
+        <div className={style.buttonblock}>
+          <div onClick={handleAddCard}  className={style.addButton}>
+            <span >Add card</span>
+          </div>
+          <h3 >X</h3>
         </div>
       ) : (
         <div className={style.addBlock}>
-          <div onClick={handleAddCard} className={style.addCardBlock}>
+          <div onClick={handleOpenCard} className={style.addCardBlock}>
             <span>+</span>
             <span>Add card</span>
           </div>

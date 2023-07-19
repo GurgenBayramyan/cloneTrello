@@ -4,15 +4,16 @@ import CreateIcon from "@mui/icons-material/Create";
 import MenuIcon from "@mui/icons-material/Menu";
 import PersonIcon from "@mui/icons-material/Person";
 import style from "./Task.module.scss";
-import TaskSettings from "components/TaskSettings/TaskSettings";
 
-const Task:FC<ITask> = ({ openModal,setOption,showSetings}) => {
+const Task:FC<ITask> = ({ openModal,setOption}) => {
   
     const taskDiv = useRef<any>(null)
     const openInfoSection = (e:MouseEvent<HTMLElement>) =>{
       e.stopPropagation();
       const div = taskDiv.current;
-      console.log(div.clientTop)
+      
+      console.log(div.offsetLeft)
+      console.log(div.offsetTop)
       setOption()
     }
   return (

@@ -4,7 +4,6 @@
     flex-direction: column;
     min-width: 272px;
     height: max-content;
-    margin: 35px 25px;
     background-color: #c5cad2;
     border-radius: 9px;
     cursor: pointer;
@@ -127,29 +126,7 @@
             }
         }
     }
-    .buttonblock{
-        display: flex;
-        justify-content: flex-start;
-        padding: 8px 10px;
-        border-radius: 3px;
-        gap: 8px;
-        font-weight: 700;
-        .addButton{
-            padding: 6px;
-            background-color: #105fdf;
-            color: white;
-            transition: all ease 500ms;
-            &:hover{
-                background-color: #116afa;
-                transform: scale(0.98);
-            }
-        }
-        h3{
-            color:#4e5c73;
-            align-self: center;
-        }
-
-    }
+   
 }   
 .listNone{
     display: none;
@@ -157,4 +134,35 @@
 .titleBlock{
     flex: 1;
     align-self: center;
+}
+.tasks{
+    height: max-content;
+    max-height: calc(100vh - 300px);
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.buttonblock{
+    display: flex;
+    justify-content: flex-start;
+    padding: 12px 7px;
+    border-radius: 3px;
+    gap: 8px;
+    font-weight: 700;
+    .addButton{
+        padding: 6px;
+        background-color: #105fdf;
+        color: white;
+        transition: all ease 500ms;
+        &:hover{
+            background-color: #116afa;
+            transform: scale(0.98);
+        }
+    }
+    h3{
+        color:#4e5c73;
+        align-self: center;
+    }
+
 }

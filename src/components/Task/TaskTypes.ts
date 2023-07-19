@@ -3,3 +3,7 @@ export interface ITask{
     setOption:() => void
     showSetings:boolean
 }
+export interface IStyles{
+    left:number
+    top:number
+}
