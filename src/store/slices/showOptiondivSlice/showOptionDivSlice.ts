@@ -4,7 +4,7 @@ import { ISetingsDiv } from "./showOptionDivSliceTypes";
 
 
 const initialState:ISetingsDiv  = {
-   show:false
+   show:true
 };
 
 const showOptionDivSlice = createSlice({

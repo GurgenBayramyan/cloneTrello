@@ -13,8 +13,10 @@ import ShareIcon from '@mui/icons-material/Share';
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import List from "components/List/List";
 import ModalBlock from "components/ModallBlock/ModalBlock";
+import AddBlock from "components/AddBlock/AddBlock";
+import { IContentProps } from "./ContentTypes";
 
-const Content = () => {
+const Content  = ({openModal}:IContentProps) => {
   const [state, setState] = useState<{
     open: boolean;
     menu: boolean;
@@ -24,10 +26,7 @@ const Content = () => {
     menu: true,
     leftMenu: true
   });
-  const [showModal, setShowModal] = useState(false);
-  const openModal = () => {
-    setShowModal(!showModal)
-  }
+ 
   
   const handleMenu = () => {
     setState({ ...state, open: !state.open });
@@ -212,12 +211,13 @@ const Content = () => {
               openModal={openModal}
               title="To do"
             />
+            <AddBlock />
           </div>
         </div>
       </div>
        
       
-      <ModalBlock openModal={openModal} showModal={showModal} />
+      
     </div>
   );
 };

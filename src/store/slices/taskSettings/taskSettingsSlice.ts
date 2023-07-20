@@ -3,8 +3,8 @@ import { ITaskSettingsSlice } from "./taskSettingsSliceTypes";
 
 
 const initialState:ITaskSettingsSlice  = {
-    currentLeft:0,
-    currentTop:0,
+    currentLeft:-600,
+    currentTop:-600,
 };
 
 const taskSettingsSlice = createSlice({

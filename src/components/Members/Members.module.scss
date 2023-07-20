@@ -1,0 +1,60 @@
+.members{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 15px 8px;
+    width: 300px;
+    &_header{
+        align-self: center;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        p{
+            padding-left: 30%;
+        }
+    }
+    .inputBlock{
+        width: 100%;
+        background-color: #000000;
+        padding: 3px 10px;
+        input{
+            width: 100%;
+            padding: 8px;
+            border: 2px solid transparent;
+            border-image: linear-gradient(to right, #ff0000, #00ff00);
+            border-image-slice: 1;
+            border-radius: 5px;
+            transition: border-image 0.3s ease;
+            &:focus{
+                border-image: linear-gradient(to right, #00ff00, #ff0000);
+            }
+            .inputBlock input::placeholder {
+                color: #ccc;
+            }
+            &:focus::placeholder {
+                animation: fadeInOut 2s infinite;
+            }
+        }
+    }
+    h5{
+        cursor: default;
+        padding: 4px;
+    }
+    .userBlock{
+        display: flex;
+        padding: 4px 14px;
+        border-radius: 9px;
+        .iconBlock{
+            padding: 5px;
+            align-self: center;
+        }
+        p{
+            padding: 5px;
+            align-self: center;
+        }
+        &:hover{
+            
+            background-color: #ccc;
+        }
+    }
+}
