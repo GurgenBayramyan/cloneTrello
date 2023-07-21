@@ -1,11 +1,9 @@
-import {  useEffect, useRef, useState } from "react";
+import  {  useEffect, useRef, useState } from "react";
 import { ITaskSettings } from "./TaskSettingTypes";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import PersonIcon from "@mui/icons-material/Person";
 import RadioIcon from "@mui/icons-material/Radio";
-import GolfCourseIcon from "@mui/icons-material/GolfCourse";
-import ForwardIcon from "@mui/icons-material/Forward";
 import ScheduleIcon from "@mui/icons-material/Schedule";
 import InboxIcon from "@mui/icons-material/Inbox";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
@@ -13,8 +11,11 @@ import classNames from "classnames";
 import style from "./TaskSettings.module.scss";
 import { setShowOptionDiv } from "store/slices/showOptiondivSlice/showOptionDivSlice";
 import { setStyles } from "store/slices/taskSettings/taskSettingsSlice";
-import EditLabels from "components/EditLabels/EditLabels";
-import Members from "components/Members/Members";
+import EditeLabelsInfo from "components/EditeLabelsInfo/EditeLabelsInfo";
+import MembersInfo from "components/MembersInfo/MembersInfo";
+import CoverInfo from "components/CoverInfo/CoverInfo";
+import MoveInfo from "components/MoveInfo/MoveInfo";
+import CopyInfo from "components/CopyInfo/CopyInfo";
 
 
 const TaskSettings = ({ taskName, openModal}: ITaskSettings) => {
@@ -23,10 +24,7 @@ const TaskSettings = ({ taskName, openModal}: ITaskSettings) => {
   const dispatch = useAppDispatch();
   const [postion,setPosition] = useState<number>(0)
   const refBlock = useRef<any>(null);
-  const [menuState,setMenuState] = useState({
-    editeLabels:false,
-    membersblock:false
-  })
+
 
  useEffect(() => {
    if ((styles.currentTop + refBlock.current.offsetHeight) > window.innerHeight) {
@@ -36,8 +34,9 @@ const TaskSettings = ({ taskName, openModal}: ITaskSettings) => {
    }else{
     setPosition(0)
   }
-
   
+  
+
  }, [show]);
   const openModalAndCloseAll = ()=>{
     dispatch(setShowOptionDiv(!show))
@@ -45,22 +44,10 @@ const TaskSettings = ({ taskName, openModal}: ITaskSettings) => {
       currentLeft:-600,
       currentTop:-600
     }))
-   
     openModal()
+   
   }
-  const handleOpenEditelabels = () => {
-    setMenuState({
-      ...menuState,
-      editeLabels:!menuState.editeLabels
-    })
-  }
-  const handleOpenMembers = () => {
-    setMenuState({
-      ...menuState,
-      membersblock:!menuState.membersblock
-    })
-  }
- 
+  
   return (
     <div
       style={{ top: `${styles.currentTop}px`, left: `${styles.currentLeft}px` }}
@@ -95,38 +82,14 @@ const TaskSettings = ({ taskName, openModal}: ITaskSettings) => {
         })}
       >
         <ul>
-          <li onClick={openModalAndCloseAll}>
+          <li  onClick={openModalAndCloseAll}>
             <RadioIcon sx={{ fontSize: "16px" }} /> Open Card
           </li>
-          <li className={style.editLi} onClick={handleOpenEditelabels}>
-            <div className={style.liBlock}>
-              <GolfCourseIcon  sx={{ fontSize: "16px" }} /> Edit labels
-              <div  className={classNames(style.menuBlock,{
-                [style.menuBlockActive]:menuState.editeLabels
-              })}>
-                <EditLabels onClose={handleOpenEditelabels} />
-              </div>
-            </div>
-          </li>
-          <li onClick={handleOpenMembers} className={style.membersLi}>
-            <PersonIcon sx={{ fontSize: "16px" }} /> Change members
-            <div className={classNames(style.members,{
-              [style.membersActive]:menuState.membersblock
-            })}>
-              <Members />
-            </div>
-           
-          </li>
-          <li>
-            <RadioIcon sx={{ fontSize: "16px" }} /> Change cover
-          </li>
-          <li>
-            <ForwardIcon sx={{ fontSize: "16px" }} />
-            Move
-          </li>
-          <li>
-            <RadioIcon sx={{ fontSize: "16px" }} /> Copy
-          </li>
+          <EditeLabelsInfo />
+          <MembersInfo />
+          <CoverInfo />
+          <MoveInfo />
+          <CopyInfo />
           <li>
             <ScheduleIcon sx={{ fontSize: "16px" }} /> Edit dates
           </li>

@@ -1,0 +1,12 @@
+.copyLi{
+    z-index: 6;
+}
+.copy{
+    display: none;
+    position: absolute;
+    top: 35px;
+    background-color: black;
+}
+.copyActive{
+    display: block;
+}

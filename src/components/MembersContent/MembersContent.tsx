@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { FC } from 'react'
 import PersonIcon from '@mui/icons-material/Person';
-import style from './Members.module.scss'
-const Members = () => {
+import style from './MembersContent.module.scss'
+import { IMembersProps } from './MembersContentTypes';
+const MembersContent:FC<IMembersProps> = ({onClose}) => {
   return (
-    <div onClick={(e)=>e.stopPropagation()} className={style.members}>
+    <div  onClick={(e)=>e.stopPropagation()} className={style.members}>
         <div className={style.members_header}>
             <p>Members</p>
-            <span>X</span>
+            <span onClick={onClose}>X</span>
         </div>
         <div className={style.inputBlock}>
             <input type="text" placeholder='Search members' />
@@ -22,4 +23,4 @@ const Members = () => {
   )
 }
 
-export default Members
+export default MembersContent

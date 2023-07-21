@@ -118,27 +118,5 @@
     height: 0;
 }
 
-.menuBlock{
-    display: none;
-    position: absolute;
-    top: 35px;
-    background-color: black;
-}
-.editLi{
-    z-index: 10;
-}
-.membersLi{
-    z-index: 9;
-}
-.members{
-    display: none;
-    position: absolute;
-    top: 35px;
-    background-color: black;
-}
-.membersActive{
-    display: block;
-}
-.menuBlockActive{
-    display: block;
-}
+
+

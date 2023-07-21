@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
-import style from './EditLabels.module.scss'
-import { IEdit } from './EditLabelsTypes';
-const EditLabels:FC<IEdit> = ({onClose}) => {
+import style from './EditLabelsContent.module.scss'
+import { IEdit } from './EditLabelsContentTypes';
+const EditLabelsContent:FC<IEdit> = ({onClose}) => {
   return (
     <div onClick={(e)=>e.stopPropagation()} className={style.editLabels}>
         <div className={style.editLabels_header}>
@@ -82,4 +82,4 @@ const EditLabels:FC<IEdit> = ({onClose}) => {
   )
 }
 
-export default EditLabels
+export default EditLabelsContent

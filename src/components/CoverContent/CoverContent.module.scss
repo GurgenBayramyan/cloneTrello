@@ -1,0 +1,79 @@
+.changecover{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 15px 8px;
+    width: 300px;
+    &_header{
+        align-self: center;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        p{
+            padding-left: 30%;
+        }
+    }
+    h5{
+        cursor: default;
+        padding: 4px;
+    }
+    &_colors{
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 5px 7px;
+        .rowOne,.rowTwo{
+            display: flex;
+            gap: 2px;
+            div{
+                height: 15px;
+                width: 25%;
+            }
+        }
+    }
+    .standartDiv{
+        display: flex;
+        padding: 4px 14px;
+        border-radius: 9px;
+        align-self: center;
+        background-color: #757070;
+        cursor: pointer;
+        p{
+            padding: 5px;
+            text-align: center;
+        }
+        &:hover{
+            
+            background-color: #ccc;
+        }
+    }
+    .standartParagraf{
+        margin: 5px 3px;
+        padding: 1px;
+        font-size: 12px;
+    }
+    .backgroundsBlock{
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 5px 7px;
+        &_rowOne,&_rowTwo{
+            display: flex;
+            gap: 2px;
+            div{
+                background-size: cover;
+                height: 45px;
+                width: 120px;
+                border: 1px solid red;
+            }
+        }
+    }
+    .befforEnd{
+        font-size: 12px;
+        cursor: default;
+        i{
+            cursor: pointer;
+            color: red;
+        }
+    }
+}
