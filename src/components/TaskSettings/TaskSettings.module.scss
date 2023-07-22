@@ -1,0 +1,122 @@
+.settings_container {
+    position: absolute;
+    height: max-content;
+    z-index: 1001;
+
+    .mainSection {
+        textarea {
+            resize: none;
+            width: 270px;
+            height: 150px;
+        }
+    }
+
+    .iconsSection {
+        padding: 2px 3px;
+        position: absolute;
+        top: 120px;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        border-top: 1px solid grey;
+
+        .iconsBlock {
+            display: flex;
+
+            .menuIcon {
+                cursor: pointer;
+                padding: 2px;
+
+                &:hover {
+                    transform: scale(0.9);
+                }
+            }
+
+            .commentIcon {
+
+                cursor: pointer;
+                padding: 2px;
+
+                &:hover {
+                    transform: scale(0.9);
+                }
+
+            }
+        }
+        .personIcon{
+            cursor: pointer;
+            padding: 2px;
+
+            &:hover {
+                transform: scale(0.9);
+            }
+        }
+    }
+
+    .buttonBlock {
+        position: absolute;
+        top: 155px;
+        background-color: aqua;
+        padding: 4px;
+        cursor: pointer;
+
+        &:hover {
+            transform: scale(0.98);
+            background-color: white;
+
+            span {
+                opacity: 0.9;
+                color: black;
+            }
+        }
+    }
+
+    .menuSection {
+        width: 220px;
+        color: white;
+        font-weight: 800;
+        position: absolute;
+        left: 100%;
+        top: 0;
+        opacity: 0;
+        transition: all .8s;
+        transform: translateX(-20px);
+       
+        ul{
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 15;
+           
+            li{
+                display: flex;
+                gap: 7px;
+                cursor: pointer;
+                width: max-content;
+                padding: 5px;
+                background-color: black;
+                transition: all .260s ease-in-out;
+                border-radius: 4px;
+                position: relative;
+                
+                &:hover{
+                    transform: translateX(10px);
+                }
+            }
+        }
+    }
+
+    .menuSectionActive {
+        transform: translateX(10px);
+        opacity: 1;
+    }
+}
+
+.settings_containerisNone {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+
+

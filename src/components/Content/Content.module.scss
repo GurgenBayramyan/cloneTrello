@@ -82,6 +82,7 @@
     }
 
     .rightContainer {
+        overflow: hidden;
         flex: 1;
         display: flex;
         flex-direction: column;
@@ -99,9 +100,45 @@
     }
 
     .rightContainer_down {
-        overflow-x: scroll;
         flex: 1;
         display: flex;
+        overflow: hidden;
+        .downBlock{
+           display: flex;
+           overflow-x: scroll;
+           position: relative;
+           gap: 25px;
+           padding: 15px;
+        &::-webkit-scrollbar {
+                width: 8px;
+                background-color: #f5f5f5;
+            }
+        
+            &::-webkit-scrollbar-thumb {
+                background-color: #837f97;
+                border-radius: 4px;
+            }
+        
+            &::-webkit-scrollbar-thumb:hover {
+                background-color: #6b6781;
+            }
+        
+            &::-webkit-scrollbar-thumb:active {
+                background-color: #544f6b;
+            }
+        
+            &::-webkit-scrollbar-track {
+                background-color: #f5f5f5;
+            }
+        
+            &::-webkit-scrollbar-track:hover {
+                background-color: #e0e0e0;
+            }
+        
+            &::-webkit-scrollbar-track:active {
+                background-color: #c4c4c4;
+            }
+        }
         
     }
 
@@ -278,4 +315,18 @@
         display: none;
     }
 
+}
+.settings{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.521);
+    transition: opacity 300ms ease;
+    z-index: 1000;
+}
+.settingsIsNone{
+    width: 0;
+    height: 0;
+    opacity: 0;
 }

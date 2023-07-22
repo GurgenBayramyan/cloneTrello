@@ -1,0 +1,60 @@
+.move{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 15px 8px;
+    width: 300px;
+    &_header{
+        align-self: center;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        p{
+            padding-left: 30%;
+        }
+    }
+   .boards{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        .boardBlock{
+            width: 95%;
+            background-color: rgb(161, 161, 144);
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+        .listsBlock{
+            width: 95%;
+            display: flex;
+            gap: 10px;
+            .list{
+                display: flex;
+                flex-direction: column;
+                width: 65%;
+                background-color: rgb(161, 161, 144);
+                display: flex;
+                flex-direction: column;
+                gap: 7px;
+            }
+            .position{
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+                background-color: rgb(161, 161, 144);
+                display: flex;
+                flex-direction: column;
+                gap: 7px;
+            }
+        }
+   }
+   .button{
+    padding: 6px 8px ;
+    background-color: rgba(41, 105, 223, 0.822);
+    width: 80px;
+    &:hover{
+        transform: scale(0.9);
+        background-color: rgba(41, 105, 223, 0.562);
+    }
+   }
+}

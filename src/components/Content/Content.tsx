@@ -12,7 +12,11 @@ import ListIcon from "@mui/icons-material/List";
 import ShareIcon from '@mui/icons-material/Share';
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import List from "components/List/List";
-const Content = () => {
+import ModalBlock from "components/ModallBlock/ModalBlock";
+import AddBlock from "components/AddBlock/AddBlock";
+import { IContentProps } from "./ContentTypes";
+
+const Content  = ({openModal}:IContentProps) => {
   const [state, setState] = useState<{
     open: boolean;
     menu: boolean;
@@ -22,6 +26,8 @@ const Content = () => {
     menu: true,
     leftMenu: true
   });
+ 
+  
   const handleMenu = () => {
     setState({ ...state, open: !state.open });
   };
@@ -34,6 +40,7 @@ const Content = () => {
   ];
   return (
     <div className={style.content}>
+      
       <div className={`${style.leftContainer} ${state.open && style.close} `}>
         <div className={style.leftContainer_top}>
           <div className={style.numbers}>
@@ -44,19 +51,21 @@ const Content = () => {
               <span>48</span>
             </div>
           </div>
-          {state.open
-            ? <div className={style.openBlock}>
-                <ChevronRightIcon
-                  sx={{ cursor: "pointer" }}
-                  onClick={handleMenu}
-                />
-              </div>
-            : <div className={style.closeblock}>
-                <ChevronLeftIcon
-                  sx={{ cursor: "pointer" }}
-                  onClick={handleMenu}
-                />
-              </div>}
+          {state.open ? (
+            <div className={style.openBlock}>
+              <ChevronRightIcon
+                sx={{ cursor: "pointer" }}
+                onClick={handleMenu}
+              />
+            </div>
+          ) : (
+            <div className={style.closeblock}>
+              <ChevronLeftIcon
+                sx={{ cursor: "pointer" }}
+                onClick={handleMenu}
+              />
+            </div>
+          )}
           <div />
         </div>
         <div className={style.leftContainer_down} />
@@ -84,22 +93,24 @@ const Content = () => {
               className={style.listIcon}
             />
             <div
-              className={`${style.menuBlockLeft} ${state.leftMenu && style.none}`}
+              className={`${style.menuBlockLeft} ${
+                state.leftMenu && style.none
+              }`}
             >
               <div className={style.text}>
-                  <h3>Tasks</h3>
-                  <StarBorderIcon />
+                <h3>Tasks</h3>
+                <StarBorderIcon />
               </div>
               <div className={style.text}>
                 {/* <PeopleAltIcon /> */}
                 <span>Рабочие пространства</span>
               </div>
               <div className={style.board}>
-              <span>Board</span>
-              <div className={style.rowDown}>
-                <KeyboardArrowDownIcon />
+                <span>Board</span>
+                <div className={style.rowDown}>
+                  <KeyboardArrowDownIcon />
+                </div>
               </div>
-            </div>
             </div>
           </div>
           <div className={style.rightBlock}>
@@ -125,9 +136,8 @@ const Content = () => {
               <p>Фильтр</p>
             </div>
             <div className={style.text}>
-                <ShareIcon className={style.logo}   sx={{ cursor: "pointer" }}/>
+              <ShareIcon className={style.logo} sx={{ cursor: "pointer" }} />
               <p>Поделиться</p>
-             
             </div>
             <div className={style.text}>
               <span>...</span>
@@ -167,18 +177,47 @@ const Content = () => {
             </div>
           </div>
         </div>
-        <div className={style.rightContainer_down} >
-          <List title="To do" />
-          <List title="To do" />
-          <List title="To do" />
-          <List title="To do" />
-          <List title="To do" />
-          <List title="To do" />
-          <List title="To do" />
-          <List title="To do" />
-          
+        <div className={style.rightContainer_down}>
+          <div className={style.downBlock}>
+            <List
+              openModal={openModal}
+              title="To do"
+            />
+            <List
+              openModal={openModal}
+              title="To do"
+            />
+            <List
+              openModal={openModal}
+              title="To do"
+            />
+            <List
+              openModal={openModal}
+              title="To do"
+            />
+            <List
+              openModal={openModal}
+              title="To do"
+            />
+            <List
+              openModal={openModal}
+              title="To do"
+            />
+            <List
+              openModal={openModal}
+              title="To do"
+            />
+            <List
+              openModal={openModal}
+              title="To do"
+            />
+            <AddBlock />
+          </div>
         </div>
       </div>
+       
+      
+      
     </div>
   );
 };

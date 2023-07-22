@@ -17,7 +17,7 @@ import classNames from "classnames";
 import { fetchLogout, toastDefaultValue } from "helpers";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "Hooks/changDispatchSekector";
+import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import { getUserDataAction } from "store/actionTypes";
 import LoginIcon from '@mui/icons-material/Login';
 import { ToastOptions, toast } from "react-toastify";
