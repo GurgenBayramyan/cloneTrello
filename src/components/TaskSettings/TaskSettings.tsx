@@ -31,7 +31,8 @@ const TaskSettings = ({ taskName, openModal}: ITaskSettings) => {
       const newTop = styles.currentTop + refBlock.current.offsetHeight - window.innerHeight;
       setPosition(newTop + 50)
      
-   }else{
+   }
+   else{
     setPosition(0)
   }
   

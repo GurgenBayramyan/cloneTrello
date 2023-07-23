@@ -1,18 +1,6 @@
+@import '../../assets//liStyles.scss';
 .editLabels{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    padding: 15px 8px;
-    width: 300px;
-    &_header{
-        align-self: center;
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        p{
-            padding-left: 30%;
-        }
-    }
+@include content;
     .inputBlock{
         width: 100%;
         background-color: #000000;

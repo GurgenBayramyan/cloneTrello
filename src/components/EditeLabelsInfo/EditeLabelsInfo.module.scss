@@ -1,11 +1,9 @@
+@import '../../assets/liStyles.scss';
 .editLi{
     z-index: 10;
 }
 .menuBlock{
-    display: none;
-    position: absolute;
-    top: 35px;
-    background-color: black;
+   @include liblocks;
 }
 .menuBlockActive{
     display: block;

@@ -1,4 +1,3 @@
-import React from 'react'
 import style from './AddBlock.module.scss'
 const AddBlock = () => {
   return (

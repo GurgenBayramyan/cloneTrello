@@ -14,7 +14,12 @@ const Task: FC<ITask> = ({ openModal }) => {
   const taskDiv = useRef<any>(null);
   const openInfoSection = (e: MouseEvent<HTMLElement>) => {
     e.stopPropagation();
+    
     const div = taskDiv.current;
+    div.scrollIntoView({
+      block: 'center',
+      inline: 'center'
+    })
     const rect = div.getBoundingClientRect();
     dispatch(
       setStyles({

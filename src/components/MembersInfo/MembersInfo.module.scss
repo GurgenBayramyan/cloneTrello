@@ -1,11 +1,9 @@
+@import '../../assets//liStyles.scss';
 .membersLi{
     z-index: 9;
 }
 .members{
-    display: none;
-    position: absolute;
-    top: 45px;
-    background-color: black;
+    @include liblocks;
 }
 .membersActive{
     display: block;

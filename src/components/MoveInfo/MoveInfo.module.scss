@@ -1,11 +1,9 @@
+@import '../../assets//liStyles.scss';
 .moveLi{
     z-index: 7;
 }
 .move{
-    display: none;
-    position: absolute;
-    top: 35px;
-    background-color: black;
+    @include liblocks;
 }
 .moveActive{
     display: block;

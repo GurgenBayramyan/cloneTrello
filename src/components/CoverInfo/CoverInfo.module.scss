@@ -1,11 +1,9 @@
+@import '../../assets/liStyles.scss';
 .coverLi{
     z-index: 8;
 } 
 .cover{
-    display: none;
-    position: absolute;
-    top: 35px;
-    background-color: black;
+    @include liblocks;
 }
 .coverActive{
     display: block;

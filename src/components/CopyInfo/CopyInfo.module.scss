@@ -1,11 +1,9 @@
+@import '../../assets//liStyles.scss';
 .copyLi{
     z-index: 6;
 }
 .copy{
-    display: none;
-    position: absolute;
-    top: 35px;
-    background-color: black;
+    @include liblocks;
 }
 .copyActive{
     display: block;

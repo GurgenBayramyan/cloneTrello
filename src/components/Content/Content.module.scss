@@ -102,13 +102,15 @@
     .rightContainer_down {
         flex: 1;
         display: flex;
-        overflow: hidden;
+        
         .downBlock{
            display: flex;
            overflow-x: scroll;
            position: relative;
-           gap: 25px;
+           gap: 50px;
            padding: 15px;
+           padding-right: 140px;
+           width: 100%;
         &::-webkit-scrollbar {
                 width: 8px;
                 background-color: #f5f5f5;

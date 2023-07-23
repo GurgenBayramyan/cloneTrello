@@ -17,11 +17,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+body{
+  overflow: hidden;
+}
 
 #root{
   display: flex;
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
-  
 }

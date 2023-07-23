@@ -13,7 +13,7 @@ const MembersContent:FC<IMembersProps> = ({onClose}) => {
             <span onClick={onClose}>X</span>
         </div>
         <div className={style.inputBlock}>
-            <input type="text" placeholder='Search members' />
+            <input  type="text" placeholder='Search members' />
         </div>
         <h5>Board members</h5>
         <div className={style.userBlock}>
