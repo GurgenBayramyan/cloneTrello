@@ -3,7 +3,6 @@ export interface IListProps{
     openModal:()=>void
 }
 export interface IListState{
-    optionBlock:boolean
     addCard:boolean
     titleBlock:boolean
 }

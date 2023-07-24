@@ -1,9 +1,9 @@
 import { useState, FC } from 'react'
 import style from './List.module.scss'
 import { IListProps, IListState } from './ListTypes'
-import classNames from 'classnames';
 import BackupTableIcon from '@mui/icons-material/BackupTable';
 import Task from 'components/Task/Task';
+import OptionList from 'components/OptionList/OptionList';
 
 
 
@@ -11,7 +11,6 @@ import Task from 'components/Task/Task';
 const List:FC<IListProps> = ({title,openModal}) => {
   const [changeTitle,setChangeTitle] = useState(title);
   const[listState,setListState] = useState<IListState>({
-    optionBlock:true,
     addCard:false,
     titleBlock:true
   })
@@ -21,21 +20,14 @@ const List:FC<IListProps> = ({title,openModal}) => {
   };
 
 
-  const handleOpenOption = () => {
-      setListState({...listState,optionBlock:!listState.optionBlock})
-  }
-  const handleCloseOptionBlock = () => {
-    setListState({...listState,optionBlock:true})
-  }
+
   const handleAddCard = () => {
     setListState({...listState,addCard:true})
   }
   const handleClose = () => {
       setListState({...listState,addCard:false})
   }
-  const blurForOption = () =>{
-    setListState({...listState,optionBlock:true})
-  }
+  
   const setTitle = () =>{
       setListState({...listState,titleBlock:!listState.titleBlock})
   }   
@@ -66,58 +58,7 @@ const List:FC<IListProps> = ({title,openModal}) => {
             onChange={(e) => handleChangeTitle(e)}
           />
         )}
-        <div tabIndex={0} onBlur={blurForOption}>
-          <h4 onClick={handleOpenOption}>...</h4>
-          <div
-            className={classNames(style.optionBlock, {
-              [style.listNone]: listState.optionBlock,
-            })}
-          >
-            <div className={style.optionBlock_header}>
-              <p>List actions</p>
-              <h4 onClick={handleCloseOptionBlock}>X</h4>
-            </div>
-            <div className={style.parentStandartDiv}>
-              <div className={style.standartBlock}>
-                <span>Add card...</span>
-              </div>
-              <div className={style.standartBlock}>
-                <span>Copy list...</span>
-              </div>
-              <div className={style.standartBlock}>
-                <span>Move list...</span>
-              </div>
-              <div className={style.standartBlock}>
-                <span>Watch</span>
-              </div>
-              <hr />
-              <h3>Automation</h3>
-              <div className={style.standartBlock}>
-                <span>When a card is added to the list...</span>
-              </div>
-              <div className={style.standartBlock}>
-                <span>Every day sort list by ...</span>
-              </div>
-              <div className={style.standartBlock}>
-                <span>Every Monday sort list by ...</span>
-              </div>
-              <div className={style.standartBlock}>
-                <span>Create a rule</span>
-              </div>
-              <hr />
-              <div className={style.standartBlock}>
-                <span>Move all cards in this list...</span>
-              </div>
-              <div className={style.standartBlock}>
-                <span>Archive all cards in this list...</span>
-              </div>
-              <hr />
-              <div className={style.standartBlock}>
-                <span>Archive this list...</span>
-              </div>
-            </div>
-          </div>
-        </div>
+       <OptionList /> 
       </div>
       <div className={style.tasks}>
         <Task

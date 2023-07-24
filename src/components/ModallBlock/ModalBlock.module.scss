@@ -305,3 +305,30 @@
     transform: scale(1);
 }
   
+.commentBlock{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    &_header{
+        gap: 10px;
+        width: 100%;
+        display: flex;
+
+        .iconPerson{
+            padding: 4px;
+        }
+        h4{
+            align-self: center;
+        }
+        p{
+            align-self: center;
+        }
+    }
+    .comentContnet{
+        padding: 5px;
+        padding-left: 42px;
+        border-radius: 9px;
+        background-color: #1d212581;
+        
+    }
+}

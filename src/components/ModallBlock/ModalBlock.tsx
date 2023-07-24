@@ -189,6 +189,18 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
                       <button>Save</button>
                     </div>}
               </div>
+              <div className={style.commentBlock}>
+                  <div className={style.commentBlock_header}>
+                      <div className={style.iconPerson}>
+                          <PersonIcon />
+                      </div>
+                      <h4>Name Lastname</h4>
+                      <p>Date</p>
+                  </div>
+                  <div className={style.comentContnet}>
+                      <span>this is comment</span>
+                  </div>
+              </div>
             </div>
             <div className={style.downRightComponent}>
               <h5>Add to card</h5>
