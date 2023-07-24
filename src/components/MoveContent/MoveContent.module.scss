@@ -1,41 +1,7 @@
 @import '../../assets//liStyles.scss';
 .move{
 @include content;
-   .boards{
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-        .boardBlock{
-            width: 95%;
-            background-color: rgb(161, 161, 144);
-            display: flex;
-            flex-direction: column;
-            gap: 7px;
-        }
-        .listsBlock{
-            width: 95%;
-            display: flex;
-            gap: 10px;
-            .list{
-                display: flex;
-                flex-direction: column;
-                width: 65%;
-                background-color: rgb(161, 161, 144);
-                display: flex;
-                flex-direction: column;
-                gap: 7px;
-            }
-            .position{
-                display: flex;
-                flex-direction: column;
-                flex: 1;
-                background-color: rgb(161, 161, 144);
-                display: flex;
-                flex-direction: column;
-                gap: 7px;
-            }
-        }
-   }
+   @include liBoardsStyle;
    .button{
     @include buttonLi(80px);
 }

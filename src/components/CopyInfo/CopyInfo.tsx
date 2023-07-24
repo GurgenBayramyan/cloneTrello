@@ -19,9 +19,10 @@ const CopyInfo = () => {
         const { top, height } = div.getBoundingClientRect();
         const widthParent = liRef.current.getBoundingClientRect().width;
         if (top + height > window.innerHeight) {
+          const topMinus = (top + height) - window.innerHeight
           setCurrentPos({
-            currentTop: 180,
-            curentLeft: 190
+            currentTop: topMinus,
+            curentLeft: widthParent + 100
           })
         }else{
           setCurrentPos({

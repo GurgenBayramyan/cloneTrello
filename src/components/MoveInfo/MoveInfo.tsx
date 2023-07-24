@@ -25,8 +25,9 @@ const MoveInfo = () => {
           const div = divRef.current;
           const { top, height} = div.getBoundingClientRect();
           if (top + height > window.innerHeight) {
+            const minus = (top + height) - window.innerHeight
             setCurrentPos({
-              currentTop:60,
+              currentTop:minus,
               curentLeft:190
             })
           }else{

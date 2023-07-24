@@ -19,9 +19,9 @@ const CoverInfo = () => {
         const { top, height } = div.getBoundingClientRect();
         const widthParent = liRef.current.getBoundingClientRect().width;
         if (top + height > window.innerHeight) {
-          const minus = top + height - window.innerHeight;
+          const minus = (top + height) - window.innerHeight;
           setCurrentPos({
-            currentTop: top - minus,
+            currentTop:  minus,
             curentLeft: widthParent + 35
           });
         } else {
