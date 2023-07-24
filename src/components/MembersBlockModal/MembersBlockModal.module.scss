@@ -1,0 +1,15 @@
+@import '../../assets//liStyles.scss';
+.menuMember{
+    position: relative;
+    .coostomBlock{
+        @include coostomBlock;
+    }
+     
+    .members{
+        @include liblocks;
+    }
+    .membersActive{
+        display: block;
+        z-index: 10;
+    }
+}

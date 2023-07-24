@@ -46,9 +46,6 @@ const EditeLabelsInfo = () => {
       onClick={handleOpenEditelabels}
     >
       <div
-        
-        
-        
         className={style.liBlock}
       >
         <GolfCourseIcon sx={{ fontSize: "16px" }} /> Edit labels

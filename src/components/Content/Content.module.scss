@@ -88,6 +88,7 @@
         flex-direction: column;
         background: url("https://codetheweb.blog/assets/img/posts/css-advanced-background-images/cover.jpg");
         background-size: cover;
+       
         .topSec {
             display: flex;
             justify-content: space-between;
@@ -102,8 +103,11 @@
     .rightContainer_down {
         flex: 1;
         display: flex;
+     
         
         .downBlock{
+      
+           margin-bottom: 15px;
            display: flex;
            overflow-x: scroll;
            position: relative;
@@ -111,36 +115,19 @@
            padding: 15px;
            padding-right: 140px;
            width: 100%;
-        &::-webkit-scrollbar {
-                width: 8px;
-                background-color: #f5f5f5;
-            }
-        
-            &::-webkit-scrollbar-thumb {
-                background-color: #837f97;
-                border-radius: 4px;
-            }
-        
-            &::-webkit-scrollbar-thumb:hover {
-                background-color: #6b6781;
-            }
-        
-            &::-webkit-scrollbar-thumb:active {
-                background-color: #544f6b;
-            }
-        
-            &::-webkit-scrollbar-track {
-                background-color: #f5f5f5;
-            }
-        
-            &::-webkit-scrollbar-track:hover {
-                background-color: #e0e0e0;
-            }
-        
-            &::-webkit-scrollbar-track:active {
-                background-color: #c4c4c4;
-            }
-        }
+
+
+           &::-webkit-scrollbar {
+            width: 10px;
+          }
+          &::-webkit-scrollbar-track {
+            background-color: transparent;
+            border-radius: 4px;
+          }
+          &::-webkit-scrollbar-thumb {
+            background-color: rgba(128, 125, 125, 0.6);
+            border-radius: 4px;
+          }}
         
     }
 

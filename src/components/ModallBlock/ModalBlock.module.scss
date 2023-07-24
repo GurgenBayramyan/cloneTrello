@@ -1,5 +1,6 @@
+@import '../../assets/liStyles.scss';
 .modal{
-    padding-top: 350px;
+    padding-top: 60px;
     padding-bottom: 100px;
     height: 100vh;
     width: 100vw;
@@ -10,17 +11,20 @@
     justify-content: center;
     transform: scale(0);
     transition: all 0.3s;
-    z-index: 1000;
+    z-index: 1;
     overflow-y: scroll;
 } 
 
 .task_desc{
     background-color: #323940;
     width: 700px;
+    min-height: 850px;
+    max-height: max-content;
+    border-radius: 25px ;
 }
 
 .modalBlock{
-    padding: 25px;
+    padding: 15px 25px;
     display: flex;
     flex-direction: column;
     color: #9fadbc;
@@ -43,6 +47,8 @@
 
 .taskName{
     display: flex;
+    width: 100%;
+    position: relative;
     .iconBlock{
         width: 45px;
         align-self: center;
@@ -64,8 +70,20 @@
         }
     }
     .closeBlock{
-        width: 45px;
-        margin-left: 25px;
+        position: absolute;
+        top: 0;
+        right: -10px;
+        width: 30px;
+        height: 30px;
+        align-self: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        cursor: pointer;
+       &:hover{
+            background-color: #6b7079;
+       }
     }
 }
 .downLeft{
@@ -80,23 +98,27 @@
     }
     .membersBlock{
         display: flex;
-        gap: 5px;
+        gap: 15px;
         
         .members{
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 15px;
             
             .userBlock{
                 display: flex;
-                gap: 5px;
-                padding: 10px;
+                gap: 4px;
                 div{
-                    padding: 3px;
-                    background-color: #1d212581;
-                    border-radius: 50%;
+                    width: 30px;
+                    height: 30px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 45%;
+                    cursor: pointer;
+                    background-color: #939da791;
                     &:hover{
-                        background-color: #1d21254d;
+                        background-color: #939da7cb;
                     }
                 }
             }
@@ -109,19 +131,20 @@
         
         .notigication_blocks{
             display: flex;
-            gap: 15px;
+            gap: 12px;
             flex-direction: column;
             div{
                 display: flex;
                 gap: 10px;
                 border-radius: 8px;
-                background-color: #1d212581;
-                padding: 10px;
+                background-color: #939da791;
+                padding: 5px;
+                cursor: pointer;
                 span{
                     align-self: center;
                 }
                 &:hover{
-                    background-color: #1d21254d;;
+                    background-color: #939da7cb;
                 }
 
             }
@@ -160,6 +183,7 @@
                 }
             }
         }
+       
     }
 }
 .modalTaskDesc{
@@ -267,28 +291,17 @@
 
 }
 .downRightComponent{
-    padding-left: 35px;
+    padding-left: 25px;
+    padding-top: px;
     flex: 1;
     display: flex;
     flex-direction: column;
     gap: 10px;
     h5{
-        padding: 5px 12px;
         cursor:default;
     }
     .coostomBlock{
-        display: flex;
-        padding: 5px 4px;
-        font-size: 15px;
-        background-color: #4f5861cb;
-        width: 100%;
-        gap: 6px;
-        span{
-            align-self: center;
-        }
-        &:hover{
-            background: #939da7cb;
-        }
+     @include coostomBlock;
     }
 }
 .opacityBlock{
@@ -297,6 +310,7 @@
     gap: 5px;
     width: 100%;
     font-size: 15px;
+    cursor: pointer;
     &:hover{
         background-color: #4f5861cb;
     }

@@ -1,0 +1,15 @@
+@import '../../assets/liStyles.scss';
+
+.labelModal{
+    position: relative;
+    .coostomBlock{
+        @include coostomBlock;
+    }
+    .menuBlock{
+       @include liblocks;
+    }
+    .menuBlockActive{
+        display: block;
+        z-index: 8;
+    }
+}

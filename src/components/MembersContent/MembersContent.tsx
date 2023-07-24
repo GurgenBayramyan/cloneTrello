@@ -3,11 +3,9 @@ import PersonIcon from '@mui/icons-material/Person';
 import style from './MembersContent.module.scss'
 import { IMembersProps } from './MembersContentTypes';
 const MembersContent:FC<IMembersProps> = ({onClose}) => {
-    const divRef = useRef<any>(null);
    
-
   return (
-    <div ref={divRef} onClick={(e)=>e.stopPropagation()} className={style.members}>
+    <div  onClick={(e)=>e.stopPropagation()} className={style.members}>
         <div className={style.members_header}>
             <p>Members</p>
             <span onClick={onClose}>X</span>

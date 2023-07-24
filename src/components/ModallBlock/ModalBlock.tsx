@@ -7,8 +7,6 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import MenuIcon from "@mui/icons-material/Menu";
 import CampaignIcon from "@mui/icons-material/Campaign";
 import SubjectIcon from "@mui/icons-material/Subject";
-import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
-import DoneIcon from "@mui/icons-material/Done";
 import HistoryIcon from "@mui/icons-material/History";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import CurtainsClosedIcon from "@mui/icons-material/CurtainsClosed";
@@ -20,6 +18,11 @@ import PhotoAlbumIcon from "@mui/icons-material/PhotoAlbum";
 import ShareIcon from "@mui/icons-material/Share";
 import style from "./ModalBlock.module.scss";
 import classNames from "classnames";
+import MembersBlockModal from "components/MembersBlockModal/MembersBlockModal";
+import LabelModal from "components/LabelsModal/LabelModal";
+import CheckList from "components/CheckList/CheckList";
+import CheckListModal from "components/CheckListModal/CheckListModal";
+
 
 const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
   const [valueInput, setValueInput] = useState("Axios");
@@ -27,6 +30,7 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
     taskDesc: true,
     comment: false
   });
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValueInput(e.target.value);
   };
@@ -58,10 +62,10 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
     <div
       onClick={openModal}
       className={classNames(style.modal, {
-        [style.isActive]: showModal
+        [style.isActive]: showModal,
       })}
     >
-      <div onClick={e => e.stopPropagation()} className={style.task_desc}>
+      <div onClick={(e) => e.stopPropagation()} className={style.task_desc}>
         <div className={style.modalBlock}>
           <div className={style.modalBlock_header}>
             <div className={style.taskName}>
@@ -71,12 +75,12 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
               <div className={style.inputBlock}>
                 <input
                   type="text"
-                  onChange={e => handleChange(e)}
+                  onChange={(e) => handleChange(e)}
                   value={valueInput}
                 />
               </div>
               <div className={style.closeBlock}>
-                <h4 onClick={openModal}>X</h4>
+                <span onClick={openModal}>x</span>
               </div>
             </div>
           </div>
@@ -123,38 +127,40 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
                     </div>
                   </div>
                 </div>
-                {state.taskDesc
-                  ? <div className={style.modalTaskDesc}>
-                      <div
-                        onClick={handleOpenChange}
-                        className={style.descrptionDiv}
-                      >
-                        <span>Add more detailed description...</span>
+                {state.taskDesc ? (
+                  <div className={style.modalTaskDesc}>
+                    <div
+                      onClick={handleOpenChange}
+                      className={style.descrptionDiv}
+                    >
+                      <span>Add more detailed description...</span>
+                    </div>
+                  </div>
+                ) : (
+                  <div className={style.modalTaskDescChangeBlock}>
+                    <textarea
+                      autoFocus={true}
+                      onBlur={handleblur}
+                      placeholder="typing..."
+                    />
+                    <div className={style.saveBlock}>
+                      <div className={style.saveBlock_leftSection}>
+                        <div className={style.save}>
+                          <span>Save</span>
+                        </div>
+                        <div className={style.cancel}>
+                          <span>Canel</span>
+                        </div>
+                      </div>
+                      <div className={style.shareblock}>
+                        <CampaignIcon />
+                        <div>
+                          <span>Share feedback</span>
+                        </div>
                       </div>
                     </div>
-                  : <div className={style.modalTaskDescChangeBlock}>
-                      <textarea
-                        autoFocus={true}
-                        onBlur={handleblur}
-                        placeholder="typing..."
-                      />
-                      <div className={style.saveBlock}>
-                        <div className={style.saveBlock_leftSection}>
-                          <div className={style.save}>
-                            <span>Save</span>
-                          </div>
-                          <div className={style.cancel}>
-                            <span>Canel</span>
-                          </div>
-                        </div>
-                        <div className={style.shareblock}>
-                          <CampaignIcon />
-                          <div>
-                            <span>Share feedback</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>}
+                  </div>
+                )}
               </div>
               <div className={style.activityBlock}>
                 <div className={style.activityBlock_icons}>
@@ -173,49 +179,43 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
                 <div className={style.userIcon}>
                   <PersonIcon />
                 </div>
-                {state.comment
-                  ? <div
-                      onClick={openUserCommentInput}
-                      className={style.commentInput}
-                    >
-                      <span>Write comment...</span>
-                    </div>
-                  : <div className={style.inputForComment}>
-                      <textarea
-                        autoFocus={true}
-                        onBlur={handleBlurComment}
-                        placeholder="Write a  your comment"
-                      />
-                      <button>Save</button>
-                    </div>}
+                {state.comment ? (
+                  <div
+                    onClick={openUserCommentInput}
+                    className={style.commentInput}
+                  >
+                    <span>Write comment...</span>
+                  </div>
+                ) : (
+                  <div className={style.inputForComment}>
+                    <textarea
+                      autoFocus={true}
+                      onBlur={handleBlurComment}
+                      placeholder="Write a  your comment"
+                    />
+                    <button>Save</button>
+                  </div>
+                )}
               </div>
               <div className={style.commentBlock}>
-                  <div className={style.commentBlock_header}>
-                      <div className={style.iconPerson}>
-                          <PersonIcon />
-                      </div>
-                      <h4>Name Lastname</h4>
-                      <p>Date</p>
+                <div className={style.commentBlock_header}>
+                  <div className={style.iconPerson}>
+                    <PersonIcon />
                   </div>
-                  <div className={style.comentContnet}>
-                      <span>this is comment</span>
-                  </div>
+                  <h4>Name Lastname</h4>
+                  <p>Date</p>
+                </div>
+                <div className={style.comentContnet}>
+                  <span>this is comment</span>
+                </div>
               </div>
             </div>
             <div className={style.downRightComponent}>
               <h5>Add to card</h5>
-              <div className={style.coostomBlock}>
-                <PersonIcon sx={{ fontSize: "15px" }} />
-                <span>Members</span>
-              </div>
-              <div className={style.coostomBlock}>
-                <TurnedInNotIcon sx={{ fontSize: "15px" }} />
-                <span>Labels</span>
-              </div>
-              <div className={style.coostomBlock}>
-                <DoneIcon sx={{ fontSize: "15px" }} />
-                <span>Checklist</span>
-              </div>
+              
+                <MembersBlockModal />
+                <LabelModal />
+                <CheckListModal />
               <div className={style.coostomBlock}>
                 <HistoryIcon sx={{ fontSize: "15px" }} />
                 <span>Dates</span>

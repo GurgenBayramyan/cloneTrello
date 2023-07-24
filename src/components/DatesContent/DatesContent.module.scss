@@ -1,0 +1,7 @@
+@import '../../assets//liStyles.scss';
+
+.dates{
+    @include content;
+    background-color: black;
+    color: white;
+}

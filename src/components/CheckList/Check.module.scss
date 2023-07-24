@@ -1,0 +1,8 @@
+@import '../../assets//liStyles.scss';
+.checkList{
+@include content;
+    @include liInputBlock;
+    .addBlock{
+        @include buttonLi;
+    }
+}

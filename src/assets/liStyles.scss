@@ -88,3 +88,20 @@
         }
     }
 }
+
+@mixin coostomBlock{
+    display: flex;
+    padding: 5px 4px;
+    font-size: 15px;
+    background-color: #4f5861cb;
+    width: 100%;
+    gap: 6px;
+    cursor: pointer;
+    span{
+        align-self: center;
+        
+    }
+    &:hover{
+        background: #939da7cb;
+    }
+}
