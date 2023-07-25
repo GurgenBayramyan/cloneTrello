@@ -5,10 +5,10 @@ import { ICheck } from "./CheckTypes";
 const CheckList:FC<ICheck> = ({onClose}) => {
   const [value, setValue] = useState("Checklist");
   return (
-    <div onClick={(e)=>e.stopPropagation()} className={style.checkList}>
+    <div  className={style.checkList}>
       <div className={style.checkList_header}>
         <p>Add checkList</p>
-        <span onClick={onClose}>x</span>
+        <span data-name="close" onClick={onClose}>x</span>
       </div>
       <h5>Title</h5>
       <div className={style.inputBlock}>

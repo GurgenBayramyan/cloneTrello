@@ -1,3 +1,3 @@
 export interface IMoveProps{
-    onClose:() =>void
+    onClose?:() =>void
 }

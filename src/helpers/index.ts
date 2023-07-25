@@ -37,5 +37,35 @@ export const  getUSerData = async() => {
     return resp.data
 }
 
+// export const getTemplateMenuState = (
+//   top: number,
+//   height: number,
+//   width: number,
+//   left: number
+// ) => {
 
+//   console.log(top, height, width, left)
+//   if (top + height > window.innerHeight) {
+//     if (window.innerWidth < width + left) {
+//       return {
+//         left: window.innerWidth - (width + left),
+//         top: -(top + height - window.innerHeight) - 60,
+//       };
+//     }
+//     return {
+//       top: -(top + height - window.innerHeight) - 60,
+//       left: 0,
+//     };
+//   }
+
+//   if (window.innerWidth < width + left) {
+//     return {
+//       left: window.innerWidth - (width + left),
+//     };
+//   }
+
+//   return {
+//     top: 0,
+//   };
+// };
  

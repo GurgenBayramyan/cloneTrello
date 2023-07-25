@@ -1,3 +1,3 @@
 export interface IEdit{
-    onClose:() => void
+    onClose?:() => void
 }

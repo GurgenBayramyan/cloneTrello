@@ -7,10 +7,10 @@ import Date from "components/Date/Date";
 const DatesContent:FC<IDates> = ({onClose}) => {
  
   return (
-    <div onClick={(e)=>e.stopPropagation()} className={style.dates}>
+    <div  className={style.dates}>
       <div className={style.dates_header}>
         <p>Dates</p>
-        <span onClick={onClose} >x</span>
+        <span data-name="close" onClick={onClose} >x</span>
       </div>
       <div className={style.calendar}>
         <Date />

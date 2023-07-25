@@ -1,13 +1,24 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useRef } from 'react'
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import style from './EditLabelsContent.module.scss'
 import { IEdit } from './EditLabelsContentTypes';
 const EditLabelsContent:FC<IEdit> = ({onClose}) => {
+
+    const divContent = useRef<any>(null)
+
+    useEffect(() => {
+        const div = divContent.current;
+        const { top, height } = div.getBoundingClientRect();
+
+        console.log("height -> ", height)
+    }, [])
+
+
   return (
-    <div  onClick={(e)=>e.stopPropagation()} className={style.editLabels}>
+    <div ref={divContent}  onClick={(e)=>e.stopPropagation()} className={style.editLabels}>
         <div className={style.editLabels_header}>
             <p>Labels</p>
-            <span onClick={onClose}>X</span>
+            <span data-name="close" onClick={onClose}>X</span>
         </div>
         <div className={style.inputBlock}>
             <input type="text" placeholder="Search Labels..." />

@@ -2,6 +2,11 @@
 .move{
 @include content;
    @include liBoardsStyle;
+   position: absolute;
+   top: 30px;
+   left: 0;
+   background-color: black;
+   z-index: 4;
    .button{
     @include buttonLi(80px);
 }

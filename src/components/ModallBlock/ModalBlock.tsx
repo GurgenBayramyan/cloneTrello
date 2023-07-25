@@ -25,6 +25,12 @@ import EditLabelsContent from "components/EditLabelsContent/EditLabelsContent";
 import style from "./ModalBlock.module.scss";
 import CheckList from "components/CheckList/CheckList";
 import DatesContent from "components/DatesContent/DatesContent";
+import AttackContent from "components/AttackContent/AttackContent";
+import CoverContent from "components/CoverContent/CoverContent";
+import CustomContent from "components/CustomContent/CustomContent";
+import MoveContent from "components/MoveContent/MoveContent";
+import CopyBlock from "components/CopyBlock/CopyBlock";
+
 
 
 const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
@@ -33,11 +39,15 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
     taskDesc: true,
     comment: false
   });
-  const MembersModal = Openable(() => <MembersContent />, "members");
-  // const EditLabelModal = Openable(EditLabelsContent,TurnedInNotIcon,"Labels");
-  // const CheckListModal = Openable(CheckList,DoneIcon,"Checklist");
-  // const DatesModal= Openable(DatesContent,HistoryIcon,"Dates");
-  
+  const MembersModal = Openable(() => <MembersContent />, "members",PersonIcon);
+  const EditLabelModal = Openable(()=> <EditLabelsContent/>,"Labels",TurnedInNotIcon);
+  const CheckListModal = Openable(()=><CheckList />,"Checklist",DoneIcon,);
+  const DatesModal= Openable(()=><DatesContent />,"Dates",HistoryIcon,);
+  const Attachment = Openable(()=> <AttackContent />,"Attachment",AttachFileIcon);
+  const CoverModal = Openable(()=><CoverContent />,"Cover",CurtainsClosedIcon);
+  const CustomModal = Openable(()=><CustomContent />,"CustomFields",FolderIcon);
+  const MoveModal = Openable(()=><MoveContent />,"Move",ArrowForwardIcon)
+  const CopyModal = Openable(()=><CopyBlock />,"Copy",ContentCopyIcon)
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValueInput(e.target.value);
   };
@@ -171,7 +181,10 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
               </div>
               <div className={style.activityBlock}>
                 <div className={style.activityBlock_icons}>
-                  <div>
+                  <div>   <div className={style.coostomBlock}>
+                <ContentCopyIcon sx={{ fontSize: "15px" }} />
+                <span>Copy</span>
+              </div>
                     <SubjectIcon />
                   </div>
                   <div>
@@ -221,21 +234,12 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
               <h5>Add to card</h5>
               
                 <MembersModal   />
-                {/* <EditLabelModal />
+                <EditLabelModal />
                 <CheckListModal />
-                <DatesModal /> */}
-              <div className={style.coostomBlock}>
-                <AttachFileIcon sx={{ fontSize: "15px" }} />
-                <span>Attachment</span>
-              </div>
-              <div className={style.coostomBlock}>
-                <CurtainsClosedIcon sx={{ fontSize: "15px" }} />
-                <span>Cover</span>
-              </div>
-              <div className={style.coostomBlock}>
-                <FolderIcon sx={{ fontSize: "15px" }} />
-                <span>Custom Fields</span>
-              </div>
+                <DatesModal />
+                <Attachment />
+                <CoverModal />
+                <CustomModal />
               <h5>Pover-Ups</h5>
               <div className={style.opacityBlock}>
                 <span>+</span>
@@ -247,14 +251,8 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
                 <span>Add button</span>
               </div>
               <h5>Actions</h5>
-              <div className={style.coostomBlock}>
-                <ArrowForwardIcon sx={{ fontSize: "15px" }} />
-                <span>Move</span>
-              </div>
-              <div className={style.coostomBlock}>
-                <ContentCopyIcon sx={{ fontSize: "15px" }} />
-                <span>Copy</span>
-              </div>
+              <MoveModal />
+              <CopyModal />
               <div className={style.coostomBlock}>
                 <DesktopMacIcon sx={{ fontSize: "15px" }} />
                 <span>Make template</span>

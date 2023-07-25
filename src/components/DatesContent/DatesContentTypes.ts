@@ -1,3 +1,3 @@
 export interface IDates{
-    onClose:() => void
+    onClose?:() => void
 }

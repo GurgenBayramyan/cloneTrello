@@ -1,4 +1,4 @@
 export interface IMembersProps{
-    onClose:() => void,
-    show:boolean
+    onClose?:() => void,
+    show?:boolean
 }

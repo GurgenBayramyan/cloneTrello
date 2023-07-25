@@ -1,3 +1,3 @@
 export interface ICopyProps {
-    onClose:()=> void
+    onClose?:()=> void
 }

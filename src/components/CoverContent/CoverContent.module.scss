@@ -1,6 +1,11 @@
 @import '../../assets//liStyles.scss';
 .changecover{
 @include content;
+position: absolute;
+    top: 30px;
+    left: 0;
+    background-color: black;
+    z-index: 5;
     h5{
         cursor: default;
         padding: 4px;

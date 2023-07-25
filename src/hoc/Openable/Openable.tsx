@@ -1,37 +1,43 @@
-import { ComponentType, useState } from 'react';
-import style from './Openable.module.scss'
+import { ComponentType, FocusEvent, MouseEvent, useState } from "react";
+import style from "./Openable.module.scss";
 
-const Openable = (Component: ComponentType, propsname: any) => {
-  const ReturnedComp = (props: any) => {
-    const [state, setState] = useState(false);
+const Openable = (Component: ComponentType, propsname: string, Icon: any) => {
+  const ReturnedComp = () => {
+    const [show, setShow] = useState<boolean>(false);
 
- 
-    const handleOpenMembers = (event: any) => {
-      console.dir(event.target.dataset.name)
-      if(event.target?.dataset.name === "close" || (event.target?.dataset.name === "toggle" && state ) ) {
-        setState(false)
+    const handleOpenMembers = (event: MouseEvent<HTMLElement>) => {
+      const targetElement = event.target as HTMLElement;
+      if (
+        targetElement.dataset.name === "close" ||
+        (targetElement.dataset.name === "toggle" && show)
+      ) {
+        setShow(false);
       } else {
-        setState(true)
+        setShow(true);
       }
-
     };
-    const handleClose = (event: any) => {
-      setState(false)
+    const handleClose = (event: FocusEvent<HTMLElement>) => {
+      if (!event.relatedTarget) {
+        setShow(false);
+      }
     };
-
-
-
 
     return (
-      <div onClick={handleOpenMembers} onBlur={handleClose} tabIndex={0} className={style.menu}>
+      <div
+        onClick={handleOpenMembers}
+        onBlur={handleClose}
+        tabIndex={0}
+        className={style.menu}
+      >
         <div data-name="toggle" className={style.coostomBlock}>
+          <Icon sx={{ fontSize: "15px" }} />
           <span>{propsname}</span>
         </div>
-        {state && <Component />}
+        {show && <Component />}
       </div>
     );
-  }
+  };
 
-  return  ReturnedComp
-} 
-export default Openable
+  return ReturnedComp;
+};
+export default Openable;

@@ -1,0 +1,9 @@
+@import '../../assets//liStyles.scss';
+.attach{
+    @include content;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    background-color: black;
+    z-index: 6;
+}

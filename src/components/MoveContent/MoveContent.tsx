@@ -5,10 +5,10 @@ import { IMoveProps } from './MoveContentTypes'
 const MoveContent:FC<IMoveProps> = ({onClose}) => {
     
   return (
-    <div onClick={(e)=>e.stopPropagation()} data-name="Content" className={style.move}>
+    <div  data-name="Content" className={style.move}>
         <div className={style.move_header}>
             <p>Move Card</p>
-            <span onClick={onClose}>X</span>
+            <span data-name="close" onClick={onClose}>X</span>
         </div>
         <h5>Select destination</h5>
         <div className={style.boards}>

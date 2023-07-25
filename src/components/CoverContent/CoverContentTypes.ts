@@ -1,3 +1,3 @@
 export interface ICoverProps{
-    onClose:() => void
+    onClose?:() => void
 }
