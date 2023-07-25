@@ -2,6 +2,58 @@
 
 .dates{
     @include content;
-    background-color: black;
+    background-color: #282e33;
     color: white;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    background-color: black;
+    z-index: 10;
+    h5{
+        padding: 10px 0;
+    }
+    .startDate{
+        display: flex;
+        gap: 10px;
+        background-color: rgba(20, 12, 12, 0.404);
+        width: max-content;
+        cursor: not-allowed;
+     
+       
+    }
+    .dateinfo{
+        padding: 5px;
+        background-color: #121314;
+        border-radius: 7px;
+        span{
+            color: rgb(114, 109, 109);
+        }
+    }
+    .blockCheck{
+        padding: 5px;
+        
+    }
 }
+.dueData{
+    display: flex;
+    gap: 10px;
+    background-color: rgba(20, 12, 12, 0.404);
+    width: max-content;
+    cursor: not-allowed;
+}
+select{
+    padding: 5px;
+    background-color: #282e33;
+    color: white;
+    font-weight: 800;
+    &:focus{
+        outline: 3px solid rgba(28, 117, 235, 0.733);
+    }
+    option{
+        &:checked,&:hover{
+            background-color: rgb(83, 40, 35);
+        }
+    }
+}
+
+

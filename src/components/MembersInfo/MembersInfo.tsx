@@ -49,7 +49,7 @@ const MembersInfo = () => {
           [style.membersActive]: membersblock
         })}
       >
-        <MembersContent show={membersblock} onClose={handleClose} />
+        {/* <MembersContent show={membersblock} onClose={handleClose} /> */}
       </div>
     </li>
   );

@@ -1,7 +1,11 @@
 @import '../../assets//liStyles.scss';
 .editLabels{
 @include content;
-    @include liInputBlock;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    background-color: black;
+    z-index: 9;
     h5{
         cursor: default;
         padding: 4px;

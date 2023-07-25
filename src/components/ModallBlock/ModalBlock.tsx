@@ -16,12 +16,15 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import DesktopMacIcon from "@mui/icons-material/DesktopMac";
 import PhotoAlbumIcon from "@mui/icons-material/PhotoAlbum";
 import ShareIcon from "@mui/icons-material/Share";
-import style from "./ModalBlock.module.scss";
+import DoneIcon from "@mui/icons-material/Done";
 import classNames from "classnames";
-import MembersBlockModal from "components/MembersBlockModal/MembersBlockModal";
-import LabelModal from "components/LabelsModal/LabelModal";
+import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
+import Openable from "hoc/Openable/Openable";
+import MembersContent from "components/MembersContent/MembersContent";
+import EditLabelsContent from "components/EditLabelsContent/EditLabelsContent";
+import style from "./ModalBlock.module.scss";
 import CheckList from "components/CheckList/CheckList";
-import CheckListModal from "components/CheckListModal/CheckListModal";
+import DatesContent from "components/DatesContent/DatesContent";
 
 
 const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
@@ -30,7 +33,11 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
     taskDesc: true,
     comment: false
   });
-
+  const MembersModal = Openable(() => <MembersContent />, "members");
+  // const EditLabelModal = Openable(EditLabelsContent,TurnedInNotIcon,"Labels");
+  // const CheckListModal = Openable(CheckList,DoneIcon,"Checklist");
+  // const DatesModal= Openable(DatesContent,HistoryIcon,"Dates");
+  
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValueInput(e.target.value);
   };
@@ -213,13 +220,10 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
             <div className={style.downRightComponent}>
               <h5>Add to card</h5>
               
-                <MembersBlockModal />
-                <LabelModal />
+                <MembersModal   />
+                {/* <EditLabelModal />
                 <CheckListModal />
-              <div className={style.coostomBlock}>
-                <HistoryIcon sx={{ fontSize: "15px" }} />
-                <span>Dates</span>
-              </div>
+                <DatesModal /> */}
               <div className={style.coostomBlock}>
                 <AttachFileIcon sx={{ fontSize: "15px" }} />
                 <span>Attachment</span>
