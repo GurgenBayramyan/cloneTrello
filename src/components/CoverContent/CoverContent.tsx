@@ -1,14 +1,28 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useRef, useState } from 'react'
 import style from './CoverContent.module.scss'
-import { ICoverProps } from './CoverContentTypes'
+import { ICoverProps, ICoverState } from './CoverContentTypes'
+import { getTemplateMenuState } from 'helpers';
 
 
 const CoverContent:FC<ICoverProps> = ({onClose}) => {
+    const divContent = useRef<HTMLDivElement >(null);
+   
+    const [currentStyle,setCurrentStyle] = useState<ICoverState>({
+        top:35,
+        left:0
+    })
+
+    useEffect(() => {
+        const div = divContent.current;
+        const { top, height,left,width } = div!.getBoundingClientRect();
+        const styleObject =  getTemplateMenuState(top,height,width,left);
+        setCurrentStyle({...styleObject})
+    }, [])
   return (
-    <div onClick={(e)=>e.stopPropagation()} className={style.changecover}>
+    <div style={{top:`${currentStyle.top}px`,left:`${currentStyle.left}px`}} ref={divContent}  className={style.changecover}>
             <div className={style.changecover_header}>
                 <p>Cover</p>
-                <span onClick={onClose}>X</span>
+                <span  data-name="close" onClick={onClose}>x</span>
             </div>
             <h5>Colors</h5>
             <div className={style.changecover_colors}>
@@ -28,7 +42,7 @@ const CoverContent:FC<ICoverProps> = ({onClose}) => {
                 </div>
             </div>
             <h5>Attachments</h5>
-            <div className={style.standartDiv}>
+            <div className={style.standartBlock}>
                 <p>Upload a cover Image</p>
             </div>
             <p className={style.standartParagraf}>Tip:Drag an image on to the card to upload it.</p>
@@ -45,7 +59,7 @@ const CoverContent:FC<ICoverProps> = ({onClose}) => {
                     <div style={{background:`url(https://thumbs.dreamstime.com/b/abstract-backgraund-design-element-graphics-artworks-purple-pink-chaotic-lines-colorful-background-digital-graphic-artwork-281772075.jpg)`}} ></div>
                 </div>
             </div>
-            <div className={style.standartDiv}>
+            <div className={style.standartBlock}>
                 <span>Search for photos</span>
             </div>
             <span className={style.befforEnd}>Byusing images from Unsplash,you agree to their <i>License</i> and <i>Terms of Service</i></span>

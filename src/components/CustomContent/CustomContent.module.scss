@@ -1,9 +1,6 @@
 @import '../../assets/liStyles.scss';
 .cusstomBlock{
- @include content;
-    top: 30px;
-    left: 0;
-    background-color: black;
+@include globalSection;
     z-index: 5;
     .image{
         width: 100%;

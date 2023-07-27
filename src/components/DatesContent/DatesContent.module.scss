@@ -1,13 +1,8 @@
 @import '../../assets//liStyles.scss';
 
 .dates{
-    @include content;
-    background-color: #282e33;
-    color: white;
-    position: absolute;
-    top: 30px;
-    left: 0;
-    background-color: black;
+  @include globalSection;
+   padding: 10px ;
     z-index: 7;
     h5{
         padding: 10px 0;
@@ -46,8 +41,9 @@ select{
     background-color: #282e33;
     color: white;
     font-weight: 800;
+    width: 100%;
     &:focus{
-        outline: 3px solid rgba(28, 117, 235, 0.733);
+        outline: 2px solid rgba(28, 117, 235, 0.733);
     }
     option{
         &:checked,&:hover{
@@ -55,5 +51,24 @@ select{
         }
     }
 }
+.save{
+    width: 100%;
+    text-align: center;
+    padding: 6px;
+    background-color: #579dff;
+    color: #282e33;
+    cursor: pointer;
+    &:hover{
+        background-color: #6995d1;
+    }
+}
+.remove{
+    margin-top: 5px;
+    width: 100%;
+    text-align: center;
+    padding: 6px;
+    background-color: #323940;
+    cursor: pointer;
 
+}
 

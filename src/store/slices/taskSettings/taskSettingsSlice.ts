@@ -14,6 +14,7 @@ const taskSettingsSlice = createSlice({
         setStyles:(state, {payload}:PayloadAction<ITaskSettingsSlice>)=>{
             state.currentLeft = payload.currentLeft
             state.currentTop = payload.currentTop
+            
         }
     }
 })

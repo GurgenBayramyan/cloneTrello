@@ -1,24 +1,29 @@
-import React, { FC, useEffect, useRef } from 'react'
+import  { FC, useEffect, useRef, useState } from 'react'
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import style from './EditLabelsContent.module.scss'
-import { IEdit } from './EditLabelsContentTypes';
+import { IEdit, IStyle } from './EditLabelsContentTypes';
+import { getTemplateMenuState } from 'helpers';
 const EditLabelsContent:FC<IEdit> = ({onClose}) => {
-
-    const divContent = useRef<any>(null)
+    const divContent = useRef<HTMLDivElement >(null);
+   
+    const [currentStyle,setCurrentStyle] = useState<IStyle>({
+        top:0,
+        left:0
+    })
 
     useEffect(() => {
         const div = divContent.current;
-        const { top, height } = div.getBoundingClientRect();
-
-        console.log("height -> ", height)
+        const { top, height,left,width } = div!.getBoundingClientRect();
+        const styleObject =  getTemplateMenuState(top,height,width,left);
+        setCurrentStyle({...styleObject})
     }, [])
 
 
   return (
-    <div ref={divContent}  onClick={(e)=>e.stopPropagation()} className={style.editLabels}>
+    <div style={{top:`${currentStyle.top}px`,left:`${currentStyle.left}px`}} ref={divContent}  className={style.editLabels}>
         <div className={style.editLabels_header}>
             <p>Labels</p>
-            <span data-name="close" onClick={onClose}>X</span>
+            <span data-name="close" onClick={onClose}>x</span>
         </div>
         <div className={style.inputBlock}>
             <input type="text" placeholder="Search Labels..." />
@@ -26,69 +31,65 @@ const EditLabelsContent:FC<IEdit> = ({onClose}) => {
         <h5>Labels</h5>
         <div className={style.colors}>
             <input type="checkbox" />
-            <div style={{background:"red"}} className={style.colors_color}>
+            <div  className={style.colors_color_red}>
 
             </div>
             <div className={style.icon}>
-                <ModeEditOutlineIcon sx={{fontSize:"14px"}}/>
+                <ModeEditOutlineIcon sx={{fontSize:"18px",cursor:"pointer"}}/>
             </div>
         </div>
         <div className={style.colors}>
             <input type="checkbox" />
-            <div style={{background:"blue"}}className={style.colors_color}>
+            <div className={style.colors_color_blue}>
                     
             </div>
             <div className={style.icon}>
-                <ModeEditOutlineIcon sx={{fontSize:"14px"}}/>
+                <ModeEditOutlineIcon sx={{fontSize:"18px",cursor:"pointer"}}/>
             </div>
         </div>
         <div className={style.colors}>
             <input type="checkbox" />
-            <div style={{background:"orange"}} className={style.colors_color}>
+            <div className={style.colors_color_orange}>
                     
             </div>
             <div className={style.icon}>
-                <ModeEditOutlineIcon sx={{fontSize:"14px"}}/>
+                <ModeEditOutlineIcon sx={{fontSize:"18px",cursor:"pointer"}}/>
             </div>
         </div>
         <div className={style.colors}>
             <input type="checkbox" />
-            <div style={{background:"green"}}className={style.colors_color}>
+            <div className={style.colors_color_green}>
                     
             </div>
             <div className={style.icon}>
-                <ModeEditOutlineIcon sx={{fontSize:"14px"}}/>
+                <ModeEditOutlineIcon sx={{fontSize:"18px",cursor:"pointer"}}/>
             </div>
         </div>
         <div className={style.colors}>
             <input type="checkbox" />
-            <div style={{background:"grey"}} className={style.colors_color}>
+            <div className={style.colors_color_grey}>
                     
             </div>
             <div className={style.icon}>
-                <ModeEditOutlineIcon sx={{fontSize:"14px"}}/>
+                <ModeEditOutlineIcon sx={{fontSize:"18px",cursor:"pointer"}}/>
             </div>
         </div>
         <div className={style.colors}>
             <input type="checkbox" />
-            <div style={{background:"pink"}} className={style.colors_color}>
+            <div className={style.colors_color_pink}>
                     
             </div>
             <div className={style.icon}>
-                <ModeEditOutlineIcon sx={{fontSize:"14px"}}/>
+                <ModeEditOutlineIcon sx={{fontSize:"18px",cursor:"pointer"}}/>
             </div>
         </div>
-        <div className={style.standartDiv}>
+        <div className={style.standartBlock}>
             <span>Create a new label</span>
         </div>
         <hr />
-        <div className={style.standartDiv}>
+        <div className={style.standartBlock}>
             <span>Enable colorblind friendly mode</span>
         </div>
-        <div className={style.standartDiv}>
-            <span>Give us feedback</span>
-        </div>
-
     </div>
   )
 }

@@ -1,14 +1,10 @@
 @import '../../assets//liStyles.scss';
 
 .checkList {
-    @include content;
-    position: absolute;
-    top: 30px;
-    left: 0;
-    background-color: black;
-    z-index: 8;
-
+   @include globalSection;
+   @include globalStylesForMenu;
+   
     .addBlock {
-        @include buttonLi;
+        @include styleForSubmit(60px);
     }
 }

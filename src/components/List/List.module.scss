@@ -70,11 +70,12 @@
         textarea{
             resize: none;
             border-radius: 8px;
-            height: 65px;
+            height: 75px;
             width: 100%;
             padding: 6px;
+            outline: none;
             &::placeholder{
-                color: #225ebe;
+                color: #5f708a;
             }
         }
     }

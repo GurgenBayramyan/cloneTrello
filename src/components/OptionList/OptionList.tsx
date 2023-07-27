@@ -23,7 +23,7 @@ const OptionList = () => {
           >
             <div className={style.optionBlock_header}>
               <p>List actions</p>
-              <h4 onClick={handleCloseOptionBlock}>X</h4>
+              <span onClick={handleCloseOptionBlock}>x</span>
             </div>
             <div className={style.parentStandartDiv}>
               <div className={style.standartBlock}>
@@ -37,6 +37,10 @@ const OptionList = () => {
               </div>
               <div className={style.standartBlock}>
                 <span>Watch</span>
+              </div>
+              <hr />
+              <div className={style.standartBlock}>
+                <span>Sort by</span>
               </div>
               <hr />
               <h3>Automation</h3>
@@ -61,7 +65,7 @@ const OptionList = () => {
               </div>
               <hr />
               <div className={style.standartBlock}>
-                <span>Archive this list...</span>
+                <span>Archive this list</span>
               </div>
             </div>
           </div>

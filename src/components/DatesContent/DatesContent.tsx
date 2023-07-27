@@ -1,4 +1,3 @@
-import Calendar from "react-calendar";
 import style from "./DatesContent.module.scss";
 import { FC} from "react";
 import { IDates } from "./DatesContentTypes";

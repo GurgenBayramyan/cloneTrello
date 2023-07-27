@@ -3,12 +3,12 @@ import style from "./AttackContent.module.scss";
 const AttackContent = () => {
   return (
     <div className={style.attach}>
-      <div className={style.editLabels_header}>
+      <div className={style.attach_header}>
         <p>Attach</p>
-        <span data-name="close"> X</span>
+        <span data-name="close"> x</span>
       </div>
       <h5>Arrach a file from your computer</h5>
-      <p>You can also drag and drop files to upload them.</p>
+      <p className={style.parag}>You can also drag and drop files to upload them.</p>
       <div className={style.chose}>
         <span>Choose a file</span>
       </div>

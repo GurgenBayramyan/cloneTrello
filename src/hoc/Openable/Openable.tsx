@@ -1,5 +1,6 @@
-import { ComponentType, FocusEvent, MouseEvent, useState } from "react";
+import { ComponentType, FC, FocusEvent, MouseEvent, useState } from "react";
 import style from "./Openable.module.scss";
+
 
 const Openable = (Component: ComponentType, propsname: string, Icon: any) => {
   const ReturnedComp = () => {
@@ -17,7 +18,7 @@ const Openable = (Component: ComponentType, propsname: string, Icon: any) => {
       }
     };
     const handleClose = (event: FocusEvent<HTMLElement>) => {
-      if (!event.relatedTarget) {
+      if (!event.relatedTarget ) {
         setShow(false);
       }
     };

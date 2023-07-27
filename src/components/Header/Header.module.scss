@@ -264,8 +264,6 @@
     z-index: 9000;
     right: 2px;
     padding: 25px 35px;
-   
-    
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -294,7 +292,11 @@
         font-weight: 900;
         font-family: Arial, Helvetica, sans-serif;
         font-style: italic;
-        cursor: pointer;position: relative;
+        cursor: pointer;
+        position: relative;
+        .icon{
+            align-self: center;
+        }
         .userInfoData{
             align-self: center;
         }
@@ -320,10 +322,6 @@
             color: #579dff;
         }
     }
-    
-  
-
-
 }
 .block_User{
     height: 0px;
@@ -334,12 +332,9 @@
         span{display: none;}
         
     }
-
 }
 .logOut{
     align-self: center;
-   
-    
 }
 .accountIcon{
     position: relative;

@@ -27,6 +27,12 @@
     &_footer {
         display: flex;
         justify-content: space-between;
+        position: relative;
+        .userIcon{
+            position: absolute;
+            right: -5px;
+            bottom: 0;
+        }
     }
 
     &:hover {

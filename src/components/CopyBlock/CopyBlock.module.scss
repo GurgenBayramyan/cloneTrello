@@ -1,10 +1,6 @@
 @import '../../assets//liStyles.scss';
 .copy{
- @include content;
- position: absolute;
- top: 30px;
- left: 0;
- background-color: black;
+ @include globalSection;
  z-index: 3;
     textarea{
         width: 95%;
@@ -13,6 +9,6 @@
     }
     @include liBoardsStyle;
    .button{
-    @include buttonLi;
+    @include styleForSubmit;
    }
 }

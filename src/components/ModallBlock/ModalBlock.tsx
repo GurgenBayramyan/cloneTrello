@@ -22,7 +22,6 @@ import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
 import Openable from "hoc/Openable/Openable";
 import MembersContent from "components/MembersContent/MembersContent";
 import EditLabelsContent from "components/EditLabelsContent/EditLabelsContent";
-import style from "./ModalBlock.module.scss";
 import CheckList from "components/CheckList/CheckList";
 import DatesContent from "components/DatesContent/DatesContent";
 import AttackContent from "components/AttackContent/AttackContent";
@@ -30,7 +29,7 @@ import CoverContent from "components/CoverContent/CoverContent";
 import CustomContent from "components/CustomContent/CustomContent";
 import MoveContent from "components/MoveContent/MoveContent";
 import CopyBlock from "components/CopyBlock/CopyBlock";
-
+import style from "./ModalBlock.module.scss";
 
 
 const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {

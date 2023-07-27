@@ -21,10 +21,11 @@
         }
     }
 }
-@mixin buttonLi($width:130px){
+@mixin styleForSubmit($width:130px){
     padding: 6px 8px ;
     background-color: rgba(41, 105, 223, 0.822);
     width: $width;
+    cursor: pointer;
     &:hover{
         transform: scale(0.9);
         background-color: rgba(41, 105, 223, 0.562);
@@ -37,7 +38,7 @@
         gap: 5px;
         .boardBlock{
             width: 95%;
-            background-color: rgb(161, 161, 144);
+            background-color: #323940;
             display: flex;
             flex-direction: column;
             gap: 7px;
@@ -50,14 +51,14 @@
                 display: flex;
                 flex-direction: column;
                 width: 65%;
-                background-color: rgb(161, 161, 144);
+                background-color: #323940;
                 gap: 7px;
             }
             .position{
                 display: flex;
                 flex-direction: column;
                 flex: 1;
-                background-color: rgb(161, 161, 144);
+                background-color: #323940;
                 gap: 7px;
             }
         }
@@ -99,9 +100,58 @@
     cursor: pointer;
     span{
         align-self: center;
-        
     }
     &:hover{
         background: #939da7cb;
+    }
+}
+@mixin globalSection{
+    width: 300px;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    z-index: 10;
+    background-color: #282e33;
+    padding: 5px 6px;
+    border-radius: 8px;
+    &_header{
+        display: flex;
+        justify-content: center;
+        position: relative;
+        padding: 10px 15px;
+        span{
+            position: absolute;
+            top: 3px;
+            right: 10px;
+            cursor: pointer;
+            border-radius: 12px;
+            padding: 6px 8px;
+            &:hover{
+                background-color: #474c5285;
+            }
+        }
+    }
+ 
+    h5{
+        cursor: default;
+        padding: 4px;
+    }
+}
+@mixin globalStylesForMenu{
+    .inputBlock{
+        padding: 15px 4px;
+        input{
+            width: 100%;
+            padding: 5px 10px;
+            outline: none;
+            border: 2px solid #384148;
+            background: transparent;
+            border-radius: 3px;
+            color: white;
+            &:focus{
+                border: 2px solid rgba(57, 142, 240, 0.774) ;
+            }
+        }
+
     }
 }

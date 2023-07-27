@@ -1,29 +1,20 @@
 @import '../../assets/liStyles.scss';
 .members{
-@include content;
-    position: absolute;
-    top: 30px;
-    left: 0;
-    background-color: black;
-    z-index: 10;
-    h5{
-        cursor: default;
-        padding: 4px;
-    }
+ @include globalSection;
+ @include globalStylesForMenu;
     .userBlock{
         display: flex;
-        padding: 4px 14px;
+        padding: 4px;
         border-radius: 9px;
         .iconBlock{
-            padding: 5px;
+            padding: 5px 0;
             align-self: center;
         }
         p{
-            padding: 5px;
+            padding: 5px 0;
             align-self: center;
         }
         &:hover{
-            
             background-color: #ccc;
         }
     }

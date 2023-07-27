@@ -4,7 +4,7 @@ const CustomContent = () => {
     <div className={style.cusstomBlock}>
       <div className={style.cusstomBlock_header}>
         <p>Attach</p>
-        <span data-name="close"> X</span>
+        <span data-name="close"> x</span>
       </div>
       <div className={style.image}>
 

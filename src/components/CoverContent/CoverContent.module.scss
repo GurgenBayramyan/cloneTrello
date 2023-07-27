@@ -1,11 +1,8 @@
 @import '../../assets//liStyles.scss';
 .changecover{
-@include content;
-position: absolute;
-    top: 30px;
-    left: 0;
-    background-color: black;
-    z-index: 5;
+@include globalSection;
+padding: 15px 10px;
+    z-index: 8;
     h5{
         cursor: default;
         padding: 4px;
@@ -24,12 +21,13 @@ position: absolute;
             }
         }
     }
-    .standartDiv{
+    .standartBlock{
         display: flex;
         padding: 4px 14px;
         border-radius: 9px;
         align-self: center;
-        background-color: #757070;
+        background-color: #323940;
+        margin: 15px 0;
         cursor: pointer;
         p{
             padding: 5px;
@@ -37,7 +35,7 @@ position: absolute;
         }
         &:hover{
             
-            background-color: #ccc;
+            background-color: #555e66;
         }
     }
     .standartParagraf{

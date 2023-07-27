@@ -13,6 +13,7 @@
     transition: all 0.3s;
     z-index: 1;
     overflow-y: scroll;
+    
 } 
 
 .task_desc{
@@ -20,7 +21,7 @@
     width: 700px;
     min-height: 850px;
     max-height: max-content;
-    border-radius: 25px ;
+    border-radius: 1rem ;
 }
 
 .modalBlock{
@@ -29,6 +30,7 @@
     flex-direction: column;
     color: #9fadbc;
     background-color: #323940;
+    border-radius: 2rem ;
     &_header{
         height: 50px;
         

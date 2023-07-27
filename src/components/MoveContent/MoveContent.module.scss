@@ -1,13 +1,10 @@
 @import '../../assets//liStyles.scss';
 .move{
-@include content;
+@include globalSection;
    @include liBoardsStyle;
-   position: absolute;
-   top: 30px;
-   left: 0;
-   background-color: black;
-   z-index: 4;
+  
+   z-index: 7;
    .button{
-    @include buttonLi(80px);
+    @include styleForSubmit(80px);
 }
 }

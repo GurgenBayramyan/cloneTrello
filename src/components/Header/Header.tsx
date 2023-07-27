@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import AppsIcon from "@mui/icons-material/Apps";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import style from "./Header.module.scss";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import SearchIcon from "@mui/icons-material/Search";
-import Person3Icon from "@mui/icons-material/Person3";
 import ContactSupportIcon from "@mui/icons-material/ContactSupport";
 import DisplaySettingsIcon from "@mui/icons-material/DisplaySettings";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -21,6 +20,7 @@ import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import { getUserDataAction } from "store/actionTypes";
 import LoginIcon from '@mui/icons-material/Login';
 import { ToastOptions, toast } from "react-toastify";
+import UserNameIcon from "components/UserNameIcon/UserNameIcon";
 
 
 const  Header = () => {
@@ -125,7 +125,7 @@ const  Header = () => {
           <NotificationsIcon className={style.id} sx={{ cursor: "pointer" }} />
           <ContactSupportIcon className={style.id} sx={{ cursor: "pointer" }} />
           <DisplaySettingsIcon className={style.id} sx={{ cursor: "pointer" }} />
-          <Person3Icon className={style.id} sx={{ cursor: "pointer" }} />
+          <UserNameIcon name="Vahe" lastName="Gevorgian"/>
         </div>
       </div>
       </div>
@@ -142,15 +142,15 @@ const  Header = () => {
         </div>
         <div className={style.accountIcon}>
         <LoginIcon onClick={handleOpenUserMenu}  sx={{ cursor: "pointer" }} />
-          <div className={classNames(style.userInfoBlock,{
+          <div  className={classNames(style.userInfoBlock,{
             [style.block_User]:headerState.userMenu
           })}>
               <div className={style.userAccount}>
                   <span>ACCOUNT</span>
               </div>
               <div className={style.userAccountBlock}>
-                  <div>
-                      <Person3Icon />
+                <div className={style.icon}>
+                  <UserNameIcon name={data.firstname} lastName={data.lastname}/>
                   </div>
                   <div className={style.userInfoData}>
                       <span>{data.firstname}{data.lastname}</span>

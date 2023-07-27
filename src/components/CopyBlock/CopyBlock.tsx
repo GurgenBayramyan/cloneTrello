@@ -1,9 +1,23 @@
-import React, { FC } from 'react'
-import { ICopyProps } from './CoppyBlockTypes'
+import React, { FC, useEffect, useRef, useState } from 'react'
+import { ICopyProps, ICopyState } from './CoppyBlockTypes'
 import style from './CopyBlock.module.scss'
+import { getTemplateMenuState } from 'helpers';
 const CopyBlock:FC<ICopyProps> = ({onClose}) => {
+    const divContent = useRef<HTMLDivElement >(null);
+   
+    const [currentStyle,setCurrentStyle] = useState<ICopyState>({
+        top:0,
+        left:0
+    })
+
+    useEffect(() => {
+        const div = divContent.current;
+        const { top, height,left,width } = div!.getBoundingClientRect();
+        const styleObject =  getTemplateMenuState(top,height,width,left);
+        setCurrentStyle({...styleObject})
+    }, [])
   return (
-    <div onClick={(e)=>e.stopPropagation()} className={style.copy}>
+    <div style={{top:`${currentStyle.top}px`,left:`${currentStyle.left}px`}} ref={divContent}  className={style.copy}>
         <div className={style.copy_header}>
             <p>Copy card</p>
             <span onClick={onClose}>x</span>
