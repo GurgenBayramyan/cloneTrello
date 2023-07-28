@@ -9,6 +9,7 @@
     }
     @include liBoardsStyle;
    .button{
+    margin-top: 15px;
     @include styleForSubmit;
    }
 }

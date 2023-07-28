@@ -1,25 +1,41 @@
-import { useState, FC } from 'react'
+import { useState, FC, useRef } from 'react'
 import style from './List.module.scss'
 import { IListProps, IListState } from './ListTypes'
 import BackupTableIcon from '@mui/icons-material/BackupTable';
 import Task from 'components/Task/Task';
 import OptionList from 'components/OptionList/OptionList';
+import { useAppDispatch, useAppSelector } from 'hooks/changDispatchSekector';
+import { getPositionDiv } from 'store/slices/templatesSlice/templatesSlice';
 
 
 
 
 const List:FC<IListProps> = ({title,openModal}) => {
+  const divRef = useRef<HTMLDivElement>(null);
   const [changeTitle,setChangeTitle] = useState(title);
+  const templatesBlock = useAppSelector(state=>state.templateSlice);
+
   const[listState,setListState] = useState<IListState>({
     addCard:false,
     titleBlock:true
   })
+  const dispatch = useAppDispatch();
 
   const handleChangeTitle = (event:React.ChangeEvent<HTMLInputElement>) => {
     setChangeTitle(event.target.value);
   };
 
-
+const handlePositionBlock = () => {
+  if(divRef.current){
+    const rect = divRef.current.getBoundingClientRect();
+    dispatch(getPositionDiv({
+      top:rect.top -280,
+      left:rect.left +40,
+      show:true
+    }))
+  }
+    
+}
 
   const handleAddCard = () => {
     setListState({...listState,addCard:true})
@@ -119,7 +135,7 @@ const List:FC<IListProps> = ({title,openModal}) => {
             <span>+</span>
             <span>Add card</span>
           </div>
-          <div className={style.iconBlockAdd}>
+          <div ref={divRef} onClick={handlePositionBlock} className={style.iconBlockAdd}>
             <BackupTableIcon sx={{ cursor: "pointer", fontSize: "12px" }} />
           </div>
         </div>

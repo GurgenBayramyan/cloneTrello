@@ -30,48 +30,68 @@ import CustomContent from "components/CustomContent/CustomContent";
 import MoveContent from "components/MoveContent/MoveContent";
 import CopyBlock from "components/CopyBlock/CopyBlock";
 import style from "./ModalBlock.module.scss";
-
+import UserNameIcon from "components/UserNameIcon/UserNameIcon";
 
 const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
   const [valueInput, setValueInput] = useState("Axios");
   const [state, setState] = useState<IModalState>({
     taskDesc: true,
-    comment: false
+    comment: false,
   });
-  const MembersModal = Openable(() => <MembersContent />, "members",PersonIcon);
-  const EditLabelModal = Openable(()=> <EditLabelsContent/>,"Labels",TurnedInNotIcon);
-  const CheckListModal = Openable(()=><CheckList />,"Checklist",DoneIcon,);
-  const DatesModal= Openable(()=><DatesContent />,"Dates",HistoryIcon,);
-  const Attachment = Openable(()=> <AttackContent />,"Attachment",AttachFileIcon);
-  const CoverModal = Openable(()=><CoverContent />,"Cover",CurtainsClosedIcon);
-  const CustomModal = Openable(()=><CustomContent />,"CustomFields",FolderIcon);
-  const MoveModal = Openable(()=><MoveContent />,"Move",ArrowForwardIcon)
-  const CopyModal = Openable(()=><CopyBlock />,"Copy",ContentCopyIcon)
+  const MembersModal = Openable(
+    () => <MembersContent />,
+    "members",
+    PersonIcon
+  );
+  const EditLabelModal = Openable(
+    () => <EditLabelsContent />,
+    "Labels",
+    TurnedInNotIcon
+  );
+  const CheckListModal = Openable(() => <CheckList />, "Checklist", DoneIcon);
+  const DatesModal = Openable(() => <DatesContent />, "Dates", HistoryIcon);
+  const Attachment = Openable(
+    () => <AttackContent />,
+    "Attachment",
+    AttachFileIcon
+  );
+  const CoverModal = Openable(
+    () => <CoverContent />,
+    "Cover",
+    CurtainsClosedIcon
+  );
+  const CustomModal = Openable(
+    () => <CustomContent />,
+    "CustomFields",
+    FolderIcon
+  );
+  const MoveModal = Openable(() => <MoveContent />, "Move", ArrowForwardIcon);
+  const CopyModal = Openable(() => <CopyBlock />, "Copy", ContentCopyIcon);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValueInput(e.target.value);
   };
   const handleOpenChange = () => {
     setState({
       ...state,
-      taskDesc: !state.taskDesc
+      taskDesc: !state.taskDesc,
     });
   };
   const handleblur = () => {
     setState({
       ...state,
-      taskDesc: true
+      taskDesc: true,
     });
   };
   const openUserCommentInput = () => {
     setState({
       ...state,
-      comment: !state.comment
+      comment: !state.comment,
     });
   };
   const handleBlurComment = () => {
     setState({
       ...state,
-      comment: true
+      comment: true,
     });
   };
   return (
@@ -180,10 +200,8 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
               </div>
               <div className={style.activityBlock}>
                 <div className={style.activityBlock_icons}>
-                  <div>   <div className={style.coostomBlock}>
-                <ContentCopyIcon sx={{ fontSize: "15px" }} />
-                <span>Copy</span>
-              </div>
+                  <div>
+                    
                     <SubjectIcon />
                   </div>
                   <div>
@@ -218,27 +236,31 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
               </div>
               <div className={style.commentBlock}>
                 <div className={style.commentBlock_header}>
-                  <div className={style.iconPerson}>
-                    <PersonIcon />
-                  </div>
-                  <h4>Name Lastname</h4>
-                  <p>Date</p>
+                    <div className={style.iconUser}>
+                    <UserNameIcon  name="Gurgen" lastName="Bayramyan"/>
+                    </div>
+                    <h4>Name Lastname</h4>
+                    <p>Date</p>
                 </div>
                 <div className={style.comentContnet}>
                   <span>this is comment</span>
+                </div>
+                <div className={style.settingsComment}>
+                  <span>Edit</span>
+                  <span>Delete</span>
                 </div>
               </div>
             </div>
             <div className={style.downRightComponent}>
               <h5>Add to card</h5>
-              
-                <MembersModal   />
-                <EditLabelModal />
-                <CheckListModal />
-                <DatesModal />
-                <Attachment />
-                <CoverModal />
-                <CustomModal />
+
+              <MembersModal />
+              <EditLabelModal />
+              <CheckListModal />
+              <DatesModal />
+              <Attachment />
+              <CoverModal />
+              <CustomModal />
               <h5>Pover-Ups</h5>
               <div className={style.opacityBlock}>
                 <span>+</span>

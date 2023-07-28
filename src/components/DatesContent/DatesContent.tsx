@@ -11,6 +11,7 @@ const DatesContent:FC<IDates> = ({onClose}) => {
         <p>Dates</p>
         <span data-name="close" onClick={onClose} >x</span>
       </div>
+      <div className={style.wrapper}>
       <div className={style.calendar}>
         <Date />
       </div>
@@ -53,6 +54,7 @@ const DatesContent:FC<IDates> = ({onClose}) => {
       </div>
       <div className={style.remove}>
           <span>Remove</span>
+      </div>
       </div>
     </div>
   );

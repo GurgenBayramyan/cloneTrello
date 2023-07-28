@@ -2,7 +2,7 @@ import UserName from "components/UserName/UserName";
 import style from "./UserSection.module.scss";
 import { FC} from "react";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
-import { setMenu } from "store/slices/ShowMenuUserSlice/showMenuUserSlice";
+import { setMenu } from "store/slices/showMenuUserSlice/showMenuUserSlice";
 
 const UserSection: FC = () => {
   const dispatch = useAppDispatch();

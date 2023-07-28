@@ -23,8 +23,9 @@
 }
 @mixin styleForSubmit($width:130px){
     padding: 6px 8px ;
-    background-color: rgba(41, 105, 223, 0.822);
+    background-color: rgba(70, 130, 241, 0.938);
     width: $width;
+    text-align: center;
     cursor: pointer;
     &:hover{
         transform: scale(0.9);
@@ -134,7 +135,6 @@
  
     h5{
         cursor: default;
-        padding: 4px;
     }
 }
 @mixin globalStylesForMenu{

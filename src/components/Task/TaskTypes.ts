@@ -1,5 +1,5 @@
 export interface ITask{
-    openModal:() => void
+    openModal?:() => void
 }
 export interface IStyles{
     left:number

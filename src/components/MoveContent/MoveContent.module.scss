@@ -2,9 +2,10 @@
 .move{
 @include globalSection;
    @include liBoardsStyle;
-  
    z-index: 7;
+   padding: 10px;
    .button{
-    @include styleForSubmit(80px);
+    @include styleForSubmit(70px);
+    margin-top: 15px;
 }
 }

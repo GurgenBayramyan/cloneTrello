@@ -4,6 +4,11 @@
   @include globalSection;
    padding: 10px ;
     z-index: 7;
+   .wrapper{
+    height: 620px;
+    overflow-x: hidden;
+    max-height: calc(100vh - 180px);
+   }
     h5{
         padding: 10px 0;
     }

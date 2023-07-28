@@ -5,7 +5,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import { setStyles } from "store/slices/taskSettings/taskSettingsSlice";
 import { setShowOptionDiv } from "store/slices/showOptiondivSlice/showOptionDivSlice";
-import { setMenu } from "store/slices/ShowMenuUserSlice/showMenuUserSlice";
+import { setMenu } from "store/slices/showMenuUserSlice/showMenuUserSlice";
 import UserNameIcon from "components/UserNameIcon/UserNameIcon";
 import style from "./Task.module.scss";
 

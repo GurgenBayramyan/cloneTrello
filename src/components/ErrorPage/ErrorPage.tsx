@@ -1,12 +1,10 @@
-import React from 'react'
 import style from "./ErrorPage.module.scss"
-
-import UserSection from 'components/UserSection/UserSection'
+import Templates from 'components/Templates/Templates'
 
 
 const ErrorPage = ()=> {
   return (
-    <div className={style.id}><UserSection /></div>
+    <div className={style.id}><Templates /></div>
   )
 }
 

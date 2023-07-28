@@ -1,0 +1,24 @@
+@import '../../assets//liStyles.scss';
+.templates{
+    @include globalSection;
+    color: rgb(12, 12, 12);
+    gap: 10px;
+    background-color: #c5c9cf;
+    .newTemplate{
+        @include coostomBlock;
+        background: none;
+        width: 100%;
+        padding: 10px 8px;
+        border-radius: 6px;
+    }
+    .editeTemplates{
+        @include coostomBlock;
+        border-radius: 6px;
+        justify-content: center;
+    }
+    .parentBlock{
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+}

@@ -1,7 +1,5 @@
 @import '../../assets/liStyles.scss';
 .modal{
-    padding-top: 60px;
-    padding-bottom: 100px;
     height: 100vh;
     width: 100vw;
     background-color: rgba($color: #000000, $alpha: 0.4);
@@ -17,10 +15,11 @@
 } 
 
 .task_desc{
+    position: absolute;
+    top: 70px;
     background-color: #323940;
     width: 700px;
-    min-height: 850px;
-    max-height: max-content;
+    min-height: 800px;
     border-radius: 1rem ;
 }
 
@@ -246,6 +245,7 @@
 .activityBlock{
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     &_icons{
         display: flex;
         gap: 25px;
@@ -265,9 +265,6 @@
 }
 .commentUser{
     display: flex;
-    .userIcon{
-        width: 35px;
-    }
     .commentInput{
         background-color: #21262bbd;
         border-radius: 8px;
@@ -324,15 +321,12 @@
 .commentBlock{
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 5px;
     &_header{
         gap: 10px;
         width: 100%;
         display: flex;
-
-        .iconPerson{
-            padding: 4px;
-        }
+        height: 25px;
         h4{
             align-self: center;
         }
@@ -340,11 +334,23 @@
             align-self: center;
         }
     }
+    .iconUser{
+        align-self: flex-end;
+    }
     .comentContnet{
         padding: 5px;
-        padding-left: 42px;
         border-radius: 9px;
         background-color: #1d212581;
-        
+        margin-left: 38px;
+    }
+}
+.settingsComment{
+    margin-left: 42px;
+    display: flex;
+    gap: 10px;
+    span{
+        font-size: 12px;
+        text-decoration: underline;
+        cursor: pointer;
     }
 }

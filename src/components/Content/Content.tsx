@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import style from "./Content.module.scss";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -12,11 +12,14 @@ import ListIcon from "@mui/icons-material/List";
 import ShareIcon from '@mui/icons-material/Share';
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import List from "components/List/List";
-import ModalBlock from "components/ModallBlock/ModalBlock";
 import AddBlock from "components/AddBlock/AddBlock";
 import { IContentProps } from "./ContentTypes";
+import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
+import { close } from "store/slices/templatesSlice/templatesSlice";
 
 const Content  = ({openModal}:IContentProps) => {
+  const templatesBlock = useAppSelector(state=>state.templateSlice);
+  const dispatch = useAppDispatch()
   const [state, setState] = useState<{
     open: boolean;
     menu: boolean;
@@ -27,7 +30,7 @@ const Content  = ({openModal}:IContentProps) => {
     leftMenu: true
   });
  
-  
+  const scrollRef = useRef<HTMLDivElement>(null)
   const handleMenu = () => {
     setState({ ...state, open: !state.open });
   };
@@ -38,6 +41,19 @@ const Content  = ({openModal}:IContentProps) => {
   const handleCloseLeftMenu = () => [
     setState({ ...state, leftMenu: !state.leftMenu })
   ];
+
+  const handleScroll = () => {
+    dispatch(close())
+  };
+  useEffect(()=>{
+    if(scrollRef.current){
+      scrollRef.current.addEventListener('scroll', handleScroll);
+    }  
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  },[])
   return (
     <div className={style.content}>
       
@@ -178,7 +194,7 @@ const Content  = ({openModal}:IContentProps) => {
           </div>
         </div>
         <div className={style.rightContainer_down}>
-          <div className={style.downBlock}>
+          <div ref={scrollRef} className={style.downBlock}>
             <List
               openModal={openModal}
               title="To do"
