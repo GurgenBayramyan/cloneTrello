@@ -5,12 +5,12 @@ import { useAppDispatch, useAppSelector } from 'hooks/changDispatchSekector'
 import { setShowOptionDiv } from 'store/slices/showOptiondivSlice/showOptionDivSlice'
 import TaskSettings from 'components/TaskSettings/TaskSettings'
 import { setStyles } from 'store/slices/taskSettings/taskSettingsSlice'
-import { useEffect, useState } from 'react'
+import {  useState } from 'react'
 import ModalBlock from 'components/ModallBlock/ModalBlock'
 import style from './Home.module.scss'
 import UserSection from 'components/UserSection/UserSection'
 import Templates from 'components/Templates/Templates'
-import { close } from 'store/slices/templatesSlice/templatesSlice'
+
 
 const Home = ()=> { 
   const [showModal, setShowModal] = useState(false);

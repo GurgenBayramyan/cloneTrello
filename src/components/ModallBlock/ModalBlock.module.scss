@@ -87,71 +87,7 @@
        }
     }
 }
-.downLeft{
-    margin-top: 40px;
-    width: 450px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    span{
-        font-size: 15px;
-        font-weight: 800;
-    }
-    .membersBlock{
-        display: flex;
-        gap: 15px;
-        
-        .members{
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            
-            .userBlock{
-                display: flex;
-                gap: 4px;
-                div{
-                    width: 30px;
-                    height: 30px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    border-radius: 45%;
-                    cursor: pointer;
-                    background-color: #939da791;
-                    &:hover{
-                        background-color: #939da7cb;
-                    }
-                }
-            }
-        }
-        
 
-    }
-    .notigication{
-        display: flex;
-        
-        .notigication_blocks{
-            display: flex;
-            gap: 12px;
-            flex-direction: column;
-            div{
-                display: flex;
-                gap: 10px;
-                border-radius: 8px;
-                background-color: #939da791;
-                padding: 5px;
-                cursor: pointer;
-                span{
-                    align-self: center;
-                }
-                &:hover{
-                    background-color: #939da7cb;
-                }
-
-            }
-        }
-    }
-}
 .modallDescription{
    display: flex;
    flex-direction: column;
@@ -209,31 +145,7 @@
             color: #9fadbc;
         }
     }
-    .saveBlock{
-        display: flex;
-        justify-content: space-between;
-        &_leftSection{
-            display: flex;
-            gap: 8px;
-            .save{
-                padding: 8px;
-                background-color: #4f90eb;
-                align-self: center;
-                color: black;
-                font-weight: 400;
-                &:hover{
-                    background-color: #4f90eb94;
-                }
-            }
-            .cancel{
-                align-self: center;
-                padding: 8px;
-                &:hover{
-                    background-color: #1f23275e;
-                }
-            }
-        }
-    }
+   
     .shareblock{
         display: flex;
         color: #4f90eb;
@@ -353,4 +265,95 @@
         text-decoration: underline;
         cursor: pointer;
     }
+}
+.notigication{
+    display: flex;
+    
+    .notigication_blocks{
+        display: flex;
+        gap: 12px;
+        flex-direction: column;
+        div{
+            display: flex;
+            gap: 10px;
+            border-radius: 8px;
+            background-color: #939da791;
+            padding: 5px;
+            cursor: pointer;
+            span{
+                align-self: center;
+            }
+            &:hover{
+                background-color: #939da7cb;
+            }
+
+        }
+    }
+}
+.saveBlock{
+    display: flex;
+    justify-content: space-between;
+    &_leftSection{
+        display: flex;
+        gap: 8px;
+        .save{
+            padding: 8px;
+            background-color: #4f90eb;
+            align-self: center;
+            color: black;
+            font-weight: 400;
+            &:hover{
+                background-color: #4f90eb94;
+            }
+        }
+        .cancel{
+            align-self: center;
+            padding: 8px;
+            &:hover{
+                background-color: #1f23275e;
+            }
+        }
+    }
+}
+.downLeft{
+    margin-top: 40px;
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    span{
+        font-size: 15px;
+        font-weight: 800;
+    }
+    .membersBlock{
+        display: flex;
+        gap: 15px;
+        
+        .members{
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            
+            .userBlock{
+                display: flex;
+                gap: 4px;
+                div{
+                    width: 30px;
+                    height: 30px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 45%;
+                    cursor: pointer;
+                    background-color: #939da791;
+                    &:hover{
+                        background-color: #939da7cb;
+                    }
+                }
+            }
+        }
+        
+
+    }
+  
 }

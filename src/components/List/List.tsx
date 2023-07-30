@@ -50,8 +50,9 @@ const handlePositionBlock = () => {
   const blurForTitle = () =>{
     setListState({...listState,titleBlock:!listState.titleBlock})
   }
-  const closeAddBlock = (e:any) => {
-    if(e.relatedTarget?.dataset?.name === "addCard") {
+  const closeAddBlock = (e: React.FocusEvent<HTMLElement>) => {
+    const target = e.relatedTarget as HTMLElement
+    if(target?.dataset?.name === "addCard") {
       return
     }
     

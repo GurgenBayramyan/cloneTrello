@@ -1,10 +1,3 @@
-@mixin liblocks{
-    display: none;
-    position: absolute;
-    top: 35px;
-    background-color: black;
-    transition: all .3s ease;
-}
 @mixin content{
     display: flex;
     flex-direction: column;

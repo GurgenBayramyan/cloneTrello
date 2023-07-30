@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import style from "./Content.module.scss";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -17,7 +17,7 @@ import { IContentProps } from "./ContentTypes";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import { close } from "store/slices/templatesSlice/templatesSlice";
 
-const Content  = ({openModal}:IContentProps) => {
+const Content:FC<IContentProps>  = ({openModal}) => {
   const templatesBlock = useAppSelector(state=>state.templateSlice);
   const dispatch = useAppDispatch()
   const [state, setState] = useState<{
