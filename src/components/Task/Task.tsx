@@ -8,23 +8,25 @@ import { setShowOptionDiv } from "store/slices/showOptiondivSlice/showOptionDivS
 import { setMenu } from "store/slices/showMenuUserSlice/showMenuUserSlice";
 import UserNameIcon from "components/UserNameIcon/UserNameIcon";
 import style from "./Task.module.scss";
+import { setShowOptionDivSelector } from "store/selectors";
 
 
 const Task: FC<ITask> = ({ openModal }) => {
   const dispatch = useAppDispatch();
-  const { show } = useAppSelector((state) => state.setShowOptionDiv);
+  const { show } = useAppSelector(setShowOptionDivSelector);
   const flag = useAppSelector(state=>state.showMenuUser)
-  const taskDiv = useRef<any>(null);
+  const taskDiv = useRef<HTMLDivElement>(null);
+  const nameRef = useRef<HTMLDivElement>(null);
 
   const positionAndShow = useAppSelector((state) => state.showMenuUser);
   const openInfoSection = (e: MouseEvent<HTMLElement>) => {
     e.stopPropagation();
     const div = taskDiv.current;
-    div.scrollIntoView({
+    div!.scrollIntoView({
       block: 'center',
       inline: 'center'
     })
-    const rect = div.getBoundingClientRect();
+    const rect = div!.getBoundingClientRect();
     dispatch(
       setStyles({
         currentLeft: rect.left,
@@ -36,14 +38,24 @@ const Task: FC<ITask> = ({ openModal }) => {
   };
   const handleOpenMenuUser = (e: MouseEvent<HTMLElement>) => {
     e.stopPropagation();
-    const div = taskDiv.current;
-    const rect = div.getBoundingClientRect();
+    const div = nameRef.current;
+    const { height, top , width, left } = div!.getBoundingClientRect();
+  
+
+    if(top + 300 > window.innerHeight) {
+      dispatch(setMenu({
+        top:590,
+        left:left + width - 25,
+        show:!flag.show
+      }))
+    } else {
+      dispatch(setMenu({
+        top:top + 30,
+        left:left + width - 25,
+        show:!flag.show
+      }))
+    }
     
-    dispatch(setMenu({
-      top:rect.top + 70,
-      left:rect.left + rect.width - 25,
-      show:!flag.show
-    }))
   }
 
   const handleblur = (event: React.FocusEvent<HTMLElement>) => {
@@ -72,7 +84,7 @@ const Task: FC<ITask> = ({ openModal }) => {
         <div className={style.footer_iconBlock}>
           <MenuIcon sx={{ cursor: "pointer", fontSize: "14px" }} />
         </div>
-        <div className={style.userIcon} tabIndex={0} onClick={handleOpenMenuUser} onBlur={handleblur}>
+        <div ref={nameRef} className={style.userIcon} tabIndex={0} onClick={handleOpenMenuUser} onBlur={handleblur}>
           <UserNameIcon name="Vahe" lastName="Gevorgian"/>
         </div>
       </div>

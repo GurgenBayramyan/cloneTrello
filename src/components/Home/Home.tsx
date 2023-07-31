@@ -7,9 +7,8 @@ import TaskSettings from 'components/TaskSettings/TaskSettings'
 import { setStyles } from 'store/slices/taskSettings/taskSettingsSlice'
 import {  useState } from 'react'
 import ModalBlock from 'components/ModallBlock/ModalBlock'
-import style from './Home.module.scss'
 import UserSection from 'components/UserSection/UserSection'
-import Templates from 'components/Templates/Templates'
+import style from './Home.module.scss'
 
 
 const Home = ()=> { 
@@ -18,7 +17,6 @@ const Home = ()=> {
     setShowModal(!showModal)
   }
   const {show} = useAppSelector(state=>state.setShowOptionDiv);
-  const templatesBlock = useAppSelector(state=>state.templateSlice);
   
   const dispatch = useAppDispatch()
   const setOption = () =>{
@@ -32,7 +30,6 @@ const Home = ()=> {
   
   return (
     <>
-      {templatesBlock.show && <Templates openModal={openModal}/>}
       <UserSection />
        <ModalBlock openModal={openModal} showModal={showModal} />
        <TaskSettings openModal={openModal} taskName="TaskName" />  

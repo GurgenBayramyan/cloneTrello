@@ -57,9 +57,8 @@
     .iconBlockAdd{
         width: 25px;
         padding: 8px;
-        &:hover{
-            background-color: #4e5c735e;
-        }
+        position: relative;
+       
     }
 
 }
@@ -117,4 +116,9 @@
         align-self: center;
     }
 
+}
+button{
+    background-color: #c5cad2;
+    border: none;
+    cursor: pointer;
 }

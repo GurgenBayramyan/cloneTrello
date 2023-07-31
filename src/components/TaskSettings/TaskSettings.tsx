@@ -36,7 +36,6 @@ const TaskSettings = ({ taskName, openModal}: ITaskSettings) => {
     setPosition(0)
   }
   
-  
 
  }, [show]);
   const openModalAndCloseAll = ()=>{

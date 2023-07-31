@@ -1,64 +1,56 @@
-import { useState, FC, useRef } from 'react'
-import style from './List.module.scss'
-import { IListProps, IListState } from './ListTypes'
-import BackupTableIcon from '@mui/icons-material/BackupTable';
-import Task from 'components/Task/Task';
-import OptionList from 'components/OptionList/OptionList';
-import { useAppDispatch, useAppSelector } from 'hooks/changDispatchSekector';
-import { getPositionDiv } from 'store/slices/templatesSlice/templatesSlice';
+import { useState, FC, useRef, useEffect } from "react";
+import style from "./List.module.scss";
+import { IListProps, IListState } from "./ListTypes";
+import BackupTableIcon from "@mui/icons-material/BackupTable";
+import Task from "components/Task/Task";
+import OptionList from "components/OptionList/OptionList";
+import Templates from "components/Templates/Templates";
 
 
+const List: FC<IListProps> = ({ title, openModal }) => {
+  const [changeTitle, setChangeTitle] = useState(title);
+  const [showMenuUser,setShowMenuUser] = useState(false)
+  const [listState, setListState] = useState<IListState>({
+    addCard: false,
+    titleBlock: true,
 
+  });
+  const divRef = useRef<HTMLDivElement>(null)
 
-const List:FC<IListProps> = ({title,openModal}) => {
-  const divRef = useRef<HTMLDivElement>(null);
-  const [changeTitle,setChangeTitle] = useState(title);
-  const templatesBlock = useAppSelector(state=>state.templateSlice);
-
-  const[listState,setListState] = useState<IListState>({
-    addCard:false,
-    titleBlock:true
-  })
-  const dispatch = useAppDispatch();
-
-  const handleChangeTitle = (event:React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChangeTitle(event.target.value);
   };
 
-const handlePositionBlock = () => {
-  if(divRef.current){
-    const rect = divRef.current.getBoundingClientRect();
-    dispatch(getPositionDiv({
-      top:rect.top -280,
-      left:rect.left +40,
-      show:true
-    }))
+  const handleClick = () => {
+ 
+    setShowMenuUser(true)
   }
-    
-}
-
+  const closeUserMenu = () => {
+      setShowMenuUser(false)
+  }
   const handleAddCard = () => {
-    setListState({...listState,addCard:true})
-  }
+    setListState({ ...listState, addCard: true });
+  };
   const handleClose = () => {
-      setListState({...listState,addCard:false})
-  }
-  
-  const setTitle = () =>{
-      setListState({...listState,titleBlock:!listState.titleBlock})
-  }   
-  const blurForTitle = () =>{
-    setListState({...listState,titleBlock:!listState.titleBlock})
-  }
+    setListState({ ...listState, addCard: false });
+  };
+
+  const setTitle = () => {
+    setListState({ ...listState, titleBlock: !listState.titleBlock });
+  };
+  const blurForTitle = () => {
+    setListState({ ...listState, titleBlock: !listState.titleBlock });
+  };
   const closeAddBlock = (e: React.FocusEvent<HTMLElement>) => {
-    const target = e.relatedTarget as HTMLElement
-    if(target?.dataset?.name === "addCard") {
-      return
+    const target = e.relatedTarget as HTMLElement;
+    if (target?.dataset?.name === "addCard") {
+      return;
     }
-    
-    setListState({...listState,addCard:false})
-  }
-  
+
+    setListState({ ...listState, addCard: false });
+  };
+
+
   return (
     <div className={style.listBlock}>
       <div className={style.listBlock_header}>
@@ -75,39 +67,19 @@ const handlePositionBlock = () => {
             onChange={(e) => handleChangeTitle(e)}
           />
         )}
-       <OptionList /> 
+        <OptionList />
       </div>
       <div className={style.tasks}>
-        <Task
-          openModal={openModal}
-        />
-        <Task
-          openModal={openModal}
-        />
-        <Task
-          openModal={openModal}
-        />
-        <Task
-          openModal={openModal}
-        />
-        <Task
-          openModal={openModal}
-        />
-        <Task
-          openModal={openModal}
-        />
-        <Task
-          openModal={openModal}
-        />
-        <Task
-          openModal={openModal}
-        />
-        <Task
-          openModal={openModal}
-        />
-        <Task
-          openModal={openModal}
-        />
+        <Task openModal={openModal} />
+        <Task openModal={openModal} />
+        <Task openModal={openModal} />
+        <Task openModal={openModal} />
+        <Task openModal={openModal} />
+        <Task openModal={openModal} />
+        <Task openModal={openModal} />
+        <Task openModal={openModal} />
+        <Task openModal={openModal} />
+        <Task openModal={openModal} />
 
         {listState.addCard ? (
           <div className={style.addCardActive}>
@@ -120,13 +92,19 @@ const handlePositionBlock = () => {
               ></textarea>
             </div>
           </div>
-        ):null}
+        ) : null}
       </div>
 
       {listState.addCard ? (
-        <div  className={style.buttonblock}>
-          <div  tabIndex={0} data-name="addCard" onClick={handleAddCard} onBlur={closeAddBlock} className={style.addButton}>
-            <span >Add card</span>
+        <div className={style.buttonblock}>
+          <div
+            tabIndex={0}
+            data-name="addCard"
+            onClick={handleAddCard}
+            onBlur={closeAddBlock}
+            className={style.addButton}
+          >
+            <span>Add card</span>
           </div>
           <h3 onClick={handleClose}>X</h3>
         </div>
@@ -136,13 +114,20 @@ const handlePositionBlock = () => {
             <span>+</span>
             <span>Add card</span>
           </div>
-          <div ref={divRef} onClick={handlePositionBlock} className={style.iconBlockAdd}>
-            <BackupTableIcon sx={{ cursor: "pointer", fontSize: "12px" }} />
+          <div
+           
+            className={style.iconBlockAdd}
+          >
+            <button onClick={handleClick}>
+            <BackupTableIcon    sx={{ cursor: "pointer", fontSize: "12px" }} />
+            </button>
+           
+           {showMenuUser &&  <Templates onClose={closeUserMenu} openModal={openModal}/>}
           </div>
         </div>
       )}
     </div>
   );
-}
+};
 
-export default List
+export default List;

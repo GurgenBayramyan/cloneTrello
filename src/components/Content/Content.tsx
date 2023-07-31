@@ -15,11 +15,8 @@ import List from "components/List/List";
 import AddBlock from "components/AddBlock/AddBlock";
 import { IContentProps } from "./ContentTypes";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
-import { close } from "store/slices/templatesSlice/templatesSlice";
 
 const Content:FC<IContentProps>  = ({openModal}) => {
-  const templatesBlock = useAppSelector(state=>state.templateSlice);
-  const dispatch = useAppDispatch()
   const [state, setState] = useState<{
     open: boolean;
     menu: boolean;
@@ -42,18 +39,8 @@ const Content:FC<IContentProps>  = ({openModal}) => {
     setState({ ...state, leftMenu: !state.leftMenu })
   ];
 
-  const handleScroll = () => {
-    dispatch(close())
-  };
-  useEffect(()=>{
-    if(scrollRef.current){
-      scrollRef.current.addEventListener('scroll', handleScroll);
-    }  
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  },[])
+
+
   return (
     <div className={style.content}>
       

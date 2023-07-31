@@ -4,6 +4,8 @@
     color: rgb(12, 12, 12);
     gap: 10px;
     background-color: #c5c9cf;
+    top:-320px;
+    left: 15px;
     .newTemplate{
         @include coostomBlock;
         background: none;

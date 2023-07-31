@@ -1,8 +1,8 @@
 import UserName from "components/UserName/UserName";
-import style from "./UserSection.module.scss";
-import { FC} from "react";
+import { FC, useState} from "react";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import { setMenu } from "store/slices/showMenuUserSlice/showMenuUserSlice";
+import style from "./UserSection.module.scss";
 
 const UserSection: FC = () => {
   const dispatch = useAppDispatch();
@@ -10,16 +10,12 @@ const UserSection: FC = () => {
 
 
   const handleClose = () => {
-
-   
-  
     dispatch(
       setMenu({
         ...positionAndShow,
         show: false,
       })
     );
-   
   };
   return (
       !!positionAndShow.show ? (
