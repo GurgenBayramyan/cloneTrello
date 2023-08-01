@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { FC,  useRef, useState } from "react";
 import style from "./Content.module.scss";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -14,7 +14,6 @@ import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import List from "components/List/List";
 import AddBlock from "components/AddBlock/AddBlock";
 import { IContentProps } from "./ContentTypes";
-import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 
 const Content:FC<IContentProps>  = ({openModal}) => {
   const [state, setState] = useState<{

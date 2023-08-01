@@ -21,6 +21,7 @@ import { getUserDataAction } from "store/actionTypes";
 import LoginIcon from '@mui/icons-material/Login';
 import { ToastOptions, toast } from "react-toastify";
 import UserNameIcon from "components/UserNameIcon/UserNameIcon";
+import { contentSliceSelector } from "store/selectors";
 
 
 const  Header = () => {
@@ -29,7 +30,7 @@ const  Header = () => {
         menuView:true,
         userMenu:true
     })
-    const{data}=useAppSelector(state=>state.contentSlice);
+    const{data}=useAppSelector(contentSliceSelector);
     const navigate = useNavigate();
     const dispatch =  useAppDispatch()
     useEffect(()=>{

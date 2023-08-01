@@ -1,12 +1,13 @@
 import UserName from "components/UserName/UserName";
-import { FC, useState} from "react";
+import { FC} from "react";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import { setMenu } from "store/slices/showMenuUserSlice/showMenuUserSlice";
 import style from "./UserSection.module.scss";
+import { setShowMenuUserSelector } from "store/selectors";
 
 const UserSection: FC = () => {
   const dispatch = useAppDispatch();
-  const positionAndShow = useAppSelector((state) => state.showMenuUser);
+  const positionAndShow = useAppSelector(setShowMenuUserSelector);
 
 
   const handleClose = () => {

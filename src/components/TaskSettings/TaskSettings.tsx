@@ -8,7 +8,6 @@ import ScheduleIcon from "@mui/icons-material/Schedule";
 import InboxIcon from "@mui/icons-material/Inbox";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import classNames from "classnames";
-import style from "./TaskSettings.module.scss";
 import { setShowOptionDiv } from "store/slices/showOptiondivSlice/showOptionDivSlice";
 import { setStyles } from "store/slices/taskSettings/taskSettingsSlice";
 import EditeLabelsInfo from "components/EditeLabelsInfo/EditeLabelsInfo";
@@ -16,11 +15,13 @@ import MembersInfo from "components/MembersInfo/MembersInfo";
 import CoverInfo from "components/CoverInfo/CoverInfo";
 import MoveInfo from "components/MoveInfo/MoveInfo";
 import CopyInfo from "components/CopyInfo/CopyInfo";
+import { setShowMenuUserSelector, taskSettingsSliceSelector } from "store/selectors";
+import style from "./TaskSettings.module.scss";
 
 
 const TaskSettings = ({ taskName, openModal}: ITaskSettings) => {
-  const styles = useAppSelector((state) => state.taskSettingsSlice);
-  const { show } = useAppSelector((state) => state.setShowOptionDiv);
+  const styles = useAppSelector(taskSettingsSliceSelector);
+  const { show } = useAppSelector(setShowMenuUserSelector);
   const dispatch = useAppDispatch();
   const [postion,setPosition] = useState<number>(0)
   const refBlock = useRef<any>(null);
