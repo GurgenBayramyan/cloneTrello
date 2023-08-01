@@ -75,7 +75,6 @@ export const getPosition = (
   top: number,
   left: number,
 ) => {
-  console.log(top,left,width,height)
   if (top + height > window.innerHeight) {
     if (left + width > window.innerWidth) {
       return {
@@ -97,3 +96,18 @@ export const getPosition = (
     };
   }
 }
+ export const getPositonShow = (top:number,left:number,width:number,show:boolean) => {
+  if(top + 300 > window.innerHeight){
+   return  {
+      top:590,
+      left:left + width - 25,
+      show:!show
+    }
+  }else{
+    return {
+        top:top + 30,
+        left:left + width - 25,
+        show:!show
+      }
+  }
+ }  

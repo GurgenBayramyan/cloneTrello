@@ -1,8 +1,8 @@
 .task {
     display: flex;
     flex-direction: column;
-    gap: 25px;
-    padding: 5px 17px;
+    gap: 15px;
+    padding: 8px 8px 4px 12px;
     border-radius: 9px;
     border: 1px solid #00000057;
     background-color: white;
@@ -11,6 +11,7 @@
     position: relative;
 
     &_header {
+        padding-right: 2px;
         display: flex;
         justify-content: space-between;
 
@@ -30,7 +31,8 @@
         position: relative;
         .userIcon{
             position: absolute;
-            right: -5px;
+            right: -1px;
+            top: -5px;
             bottom: 0;
         }
     }

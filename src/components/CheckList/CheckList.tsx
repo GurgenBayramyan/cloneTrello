@@ -13,6 +13,7 @@ const CheckList:FC<ICheck> = ({onClose}) => {
       <h5>Title</h5>
       <div className={style.inputBlock}>
         <input
+        autoFocus={true}
           type="text"
           value={value}
           onChange={(e) => setValue(e.target.value)}

@@ -1,0 +1,20 @@
+.task{
+    padding: 5px 10px;
+    background-color: #282e33;
+    display: flex;
+    gap: 10px;
+    cursor: pointer;
+
+    .textBlock{
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        span{
+            font-size: 14px;
+
+        }
+    }
+    &:hover{
+        background-color:#4e575e ;
+    }
+}

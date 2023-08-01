@@ -9,6 +9,7 @@ import { setMenu } from "store/slices/showMenuUserSlice/showMenuUserSlice";
 import UserNameIcon from "components/UserNameIcon/UserNameIcon";
 import style from "./Task.module.scss";
 import { setShowMenuUserSelector, setShowOptionDivSelector } from "store/selectors";
+import { getPosition, getPositonShow } from "helpers";
 
 
 const Task: FC<ITask> = ({ openModal }) => {
@@ -40,21 +41,9 @@ const Task: FC<ITask> = ({ openModal }) => {
     e.stopPropagation();
     const div = nameRef.current;
     const { height, top , width, left } = div!.getBoundingClientRect();
-  
-
-    if(top + 300 > window.innerHeight) {
-      dispatch(setMenu({
-        top:590,
-        left:left + width - 25,
-        show:!flag.show
-      }))
-    } else {
-      dispatch(setMenu({
-        top:top + 30,
-        left:left + width - 25,
-        show:!flag.show
-      }))
-    }
+    const newObj = getPositonShow(top,left,width,flag.show);
+    console.log(newObj)
+    dispatch(setMenu(newObj))
     
   }
 

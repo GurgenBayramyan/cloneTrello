@@ -2,10 +2,14 @@
 .members{
  @include globalSection;
  @include globalStylesForMenu;
+ padding: 10px 10px 20px;
     .userBlock{
+        margin: 10px 0;
+        padding: 0 4px;
         display: flex;
-        padding: 4px;
-        border-radius: 9px;
+        border-radius: 3px;
+        gap: 5px;
+        cursor: pointer;
         .iconBlock{
             padding: 5px 0;
             align-self: center;
@@ -16,6 +20,16 @@
         }
         &:hover{
             background-color: #ccc;
+        }
+    }
+    .showother{
+        background-color: #4f5861cb;
+        padding: 6px 0;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 4px;
+        &:hover{
+            background-color:#737c85a2 ;
         }
     }
 }

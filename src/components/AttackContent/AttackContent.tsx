@@ -1,3 +1,4 @@
+import AttachComponent from "components/AttachComponent/AttachComponent";
 import style from "./AttackContent.module.scss";
 
 const AttackContent = () => {
@@ -15,13 +16,23 @@ const AttackContent = () => {
       <hr />
       <div className={style.labelBlock}>
         <label htmlFor="link">Search or paste a link</label>
-        <input type="text" />
+        <input name="link" id="link" type="text" />
       </div>
       <div className={style.labelBlock}>
-        <label htmlFor="link">Display text (optional)</label>
-        <input type="text" />
+        <label htmlFor="link_two">Display text (optional)</label>
+        <input name="link_two"  id="link_two" type="text" />
       </div>
-
+     <h6>RECENTLY VIEWED</h6>
+     <div className={style.culumnLists}>
+        <AttachComponent  name="Task functional"/>
+        <AttachComponent  name="Task functional"/>
+        <AttachComponent  name="Task functional"/>
+        <AttachComponent  name="Task functional"/>
+     </div>
+     <div className={style.btnBlocks}>
+          <button className={style.cancelBtn}>Cancel</button>
+          <button className={style.insert}>Insert</button>
+     </div>
     </div>
   );
 };

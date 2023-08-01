@@ -1,36 +1,38 @@
 @import '../../assets//liStyles.scss';
 .changecover{
 @include globalSection;
-padding: 15px 10px;
+    padding: 10px 12px;
     z-index: 8;
     h5{
         cursor: default;
-        padding: 4px;
     }
     &_colors{
         display: flex;
         flex-direction: column;
-        gap: 4px;
-        padding: 5px 7px;
+        gap: 8px;
+        margin: 15px 0;
         .rowOne,.rowTwo{
             display: flex;
-            gap: 2px;
+            gap: 8px;
             div{
-                height: 15px;
+                height: 35px;
                 width: 25%;
+                border-radius: 10px;
+                cursor: pointer;
             }
         }
     }
     .standartBlock{
         display: flex;
-        padding: 4px 14px;
         border-radius: 9px;
         align-self: center;
         background-color: #323940;
         margin: 15px 0;
+        padding: 5px 0;
         cursor: pointer;
+        
         p{
-            padding: 5px;
+            width: 100%;
             text-align: center;
         }
         &:hover{
@@ -39,15 +41,16 @@ padding: 15px 10px;
         }
     }
     .standartParagraf{
-        margin: 5px 3px;
-        padding: 1px;
+        margin: 15px 0;
         font-size: 12px;
+        
     }
     .backgroundsBlock{
         display: flex;
         flex-direction: column;
         gap: 4px;
-        padding: 5px 7px;
+        margin: 15px 0;
+       
         &_rowOne,&_rowTwo{
             display: flex;
             gap: 2px;
@@ -55,7 +58,17 @@ padding: 15px 10px;
                 background-size: cover;
                 height: 45px;
                 width: 120px;
-                border: 1px solid red;
+                border-radius: 10px;
+                cursor: pointer;
+            }
+        }
+        &_rowOne{
+            .Back1{
+                background: url("https://media.istockphoto.com/id/524702892/photo/blue-backgraund.jpg?s=1024x1024&w=is&k=20&c=84PRGITG9VTpc7_Fw_uedZzhhkRwXAA8auZNk6iCI4o=");
+            }
+            .Back2{
+                background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbvCRsj7NHZUG-zlw95M6qAszRQMakp_lTmQ&usqp=CAU");
+
             }
         }
     }
@@ -67,4 +80,58 @@ padding: 15px 10px;
             color: red;
         }
     }
+}
+.silver{
+    background-color: silver;
+}
+.maroon{
+    background-color: maroon;
+}
+.red{
+    background-color: red;
+}
+.purple{
+    background-color: purple;
+}
+.lime{
+    background-color: lime;
+}
+.navy{
+    background-color: navy;
+}
+.teal{
+    background-color: teal;
+}
+.aqua{
+    background-color: aqua;
+}
+.rchartreuse{
+    background-color: rebeccapurple;
+}
+.gold{
+    background-color: gold;
+}
+.backgraund_one{
+    background: url("https://media.istockphoto.com/id/524702892/photo/blue-backgraund.jpg?s=1024x1024&w=is&k=20&c=84PRGITG9VTpc7_Fw_uedZzhhkRwXAA8auZNk6iCI4o=");
+    background-size: 100%;
+}
+.backgraund_two{
+    background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbvCRsj7NHZUG-zlw95M6qAszRQMakp_lTmQ&usqp=CAU");
+    background-size: 100%;
+}
+.backgraund_tree{
+    background: url("https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/rm222batch5-kul-03.jpg?w=800&dpr=1&fit=default&crop=default&q=65&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=08fbfb223887d33030e97becaf4e20dc");
+    background-size: 100%;
+}
+.backgraund_for{
+    background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7NN5kH4oRzvd9-BR79GlkGeTKTOwI-WgFuQ&usqp=CAU");
+    background-size: 100%;
+}
+.backgraund_five{
+    background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9n_5mGGICvKLQUV40oRIUNEGRgX6FJ1rL7A&usqp=CAU");
+    background-size: 100%;
+}
+.backgraund_six{
+    background: url("https://thumbs.dreamstime.com/b/abstract-backgraund-design-element-graphics-artworks-purple-pink-chaotic-lines-colorful-background-digital-graphic-artwork-281772075.jpg");
+    background-size: 100%;
 }

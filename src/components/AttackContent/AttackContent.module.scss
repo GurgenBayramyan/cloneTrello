@@ -2,16 +2,16 @@
 .attach{
   @include globalSection;
   @include globalStylesForMenu;
-  padding: 15px 8px;
+  padding: 4px 15px;
   z-index: 6;
   h5{
     font-weight: 800;
     font-size: 16px;
+    margin-bottom: 10px;
   }
   .parag{
     font-size: 12px;
     margin-bottom: 10px;
-    padding-left: 5px;
 }
   .chose{
     width: 100%;
@@ -30,6 +30,12 @@
   }
   .labelBlock{
     font-weight: 800;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    label{
+      cursor: pointer;
+    }
     input{
         width: 100%;
         padding: 5px 10px;
@@ -38,9 +44,41 @@
         background: transparent;
         border-radius: 3px;
         color: white;
+        margin-bottom: 10px;
         &:focus{
             border: 2px solid rgba(57, 142, 240, 0.774) ;
         }
+    }
+  
+  }
+}
+h6{
+  margin-bottom: 5px;
+}
+.culumnLists{
+  margin-bottom: 15px;
+}
+.btnBlocks{
+  display: flex;
+  justify-content: flex-end;
+  gap: 2px;
+  button{
+    padding: 6px;
+    font-size: 16px;
+  }
+  .cancelBtn{
+    background-color: #282e33;
+    color: white;
+
+    &:hover{
+       background-color: #474d52;
+    }
+  }
+  .insert{
+    color: black;
+    background-color:#579dff ;
+    &:hover{
+      background-color: #8ebdff;
     }
   }
 }

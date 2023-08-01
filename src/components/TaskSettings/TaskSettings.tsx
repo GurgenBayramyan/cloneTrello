@@ -24,12 +24,12 @@ const TaskSettings = ({ taskName, openModal}: ITaskSettings) => {
   const { show } = useAppSelector(setShowMenuUserSelector);
   const dispatch = useAppDispatch();
   const [postion,setPosition] = useState<number>(0)
-  const refBlock = useRef<any>(null);
+  const refBlock = useRef<HTMLDivElement>(null);
 
 
  useEffect(() => {
-   if ((styles.currentTop + refBlock.current.offsetHeight) > window.innerHeight) {
-      const newTop = styles.currentTop + refBlock.current.offsetHeight - window.innerHeight;
+   if ((styles.currentTop + refBlock.current!.offsetHeight) > window.innerHeight) {
+      const newTop = styles.currentTop + refBlock.current!.offsetHeight - window.innerHeight;
       setPosition(newTop + 50)
      
    }
