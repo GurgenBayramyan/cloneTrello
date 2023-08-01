@@ -27,9 +27,7 @@ const Templates:FC<ITemplateProps> = ({openModal,onClose}) => {
       <p>Card Templates</p>
       <span onClick={onClose} >x</span>
     </div>
-    <Task openModal={openModal} />
-    <Task openModal={openModal} />
-    <Task openModal={openModal} />
+   
     <div className={style.parentBlock}>
       <div className={style.newTemplate}>
         <span>+ Create a new Template</span>

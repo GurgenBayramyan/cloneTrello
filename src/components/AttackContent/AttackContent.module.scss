@@ -2,7 +2,7 @@
 .attach{
   @include globalSection;
   @include globalStylesForMenu;
-  padding: 4px 15px;
+  padding: 8px 15px 14px;
   z-index: 6;
   h5{
     font-weight: 800;
@@ -53,10 +53,13 @@
   }
 }
 h6{
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 .culumnLists{
   margin-bottom: 15px;
+  width: 300px;
+  margin-left: -15px;
+  background-color: none;
 }
 .btnBlocks{
   display: flex;

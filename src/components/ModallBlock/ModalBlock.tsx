@@ -115,8 +115,8 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
                   value={valueInput}
                 />
               </div>
-              <div className={style.closeBlock}>
-                <span onClick={openModal}>x</span>
+              <div onClick={openModal} className={style.closeBlock}>
+                <span >x</span>
               </div>
             </div>
           </div>
