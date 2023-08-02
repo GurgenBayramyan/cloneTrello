@@ -22,7 +22,6 @@ const List: FC<IListProps> = ({ title, openModal }) => {
   };
 
   const handleClick = () => {
- 
     setShowMenuUser(true)
   }
   const closeUserMenu = () => {

@@ -4,15 +4,17 @@
     color: rgb(12, 12, 12);
     gap: 10px;
     background-color: #c5c9cf;
-    top:-320px;
-    left: 15px;
+    top:-328px;
+    left: 30px;
     z-index: 1;
+    padding: 8px 12px 18px;
     .newTemplate{
         @include coostomBlock;
         background: none;
         width: 100%;
         padding: 10px 8px;
         border-radius: 6px;
+        margin-top: 10px
     }
     .editeTemplates{
         @include coostomBlock;
@@ -24,4 +26,9 @@
         flex-direction: column;
         gap: 6px;
     }
+}
+.contentsBlock{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
