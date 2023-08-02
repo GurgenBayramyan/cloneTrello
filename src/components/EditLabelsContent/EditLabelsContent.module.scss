@@ -1,0 +1,74 @@
+@import '../../assets//liStyles.scss';
+.editLabels{
+@include globalSection;
+@include globalStylesForMenu;
+
+    h5{
+        cursor: default;
+        padding: 4px;
+    }
+    .colors{
+        display: flex;
+        gap: 10px;
+        
+        &_color_red{
+            flex: 1;
+            padding: 15px;
+            background-color: red;
+            margin-top: 5px;
+        }
+        &_color_red{
+            flex: 1;
+            padding: 15px;
+            background-color: red;
+            margin-top: 5px;
+        }
+        &_color_orange{
+            flex: 1;
+            padding: 15px;
+            background-color: orange;
+            margin-top: 5px;
+        }
+        &_color_blue{
+            flex: 1;
+            padding: 15px;
+            background-color: blue;
+            margin-top: 5px;
+        }
+        &_color_green{
+            flex: 1;
+            padding: 15px;
+            background-color: green;
+            margin-top: 5px;
+        }
+        &_color_grey{
+            flex: 1;
+            padding: 15px;
+            background-color: grey;
+            margin-top: 5px;
+        }
+        &_color_pink{
+            flex: 1;
+            padding: 15px;
+            background-color: pink;
+            margin-top: 5px;
+        }
+        .icon{
+            align-self: center;
+            width: 25px;
+        }
+    }
+    .standartBlock{
+        margin:15px 0;
+        text-align: center;
+        background-color:#323940 ;
+        padding: 6px 0;
+        cursor: pointer;
+        &:hover{
+            background-color: #656e77b7;
+        }
+    }
+}
+
+
+

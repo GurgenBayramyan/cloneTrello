@@ -1,0 +1,13 @@
+@import '../../assets/liStyles.scss';
+.cusstomBlock{
+@include globalSection;
+    z-index: 5;
+    .image{
+        width: 100%;
+        height: 500px;
+        background: url("https://trello.com/assets/2e4c395d9d1f2d341f2b.png") no-repeat;
+        background-position: center;
+        background-size: 100%;
+        
+    }
+}

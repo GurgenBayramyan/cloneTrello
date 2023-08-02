@@ -1,0 +1,364 @@
+@import '../../assets/liStyles.scss';
+.modal{
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba($color: #000000, $alpha: 0.4);
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    transform: scale(0);
+    transition: all 0.3s;
+    overflow-x: hidden;
+    z-index: 4;
+} 
+
+.task_desc{
+    background-color: #323940;
+    width: 700px;
+    border-radius: 1rem ;
+    height: 800px;
+    margin: 50px 0;
+}
+
+.modalBlock{
+    padding: 15px 25px;
+    display: flex;
+    flex-direction: column;
+    color: #9fadbc;
+    background-color: #323940;
+    border-radius: 10px ;
+    
+    
+    &_header{
+        height: 50px;
+        
+    }
+    b{
+        text-decoration:underline;
+    }
+    &_downContent{
+        flex: 1;
+        display: flex;
+
+    }
+ 
+    
+}
+
+.taskName{
+    display: flex;
+    width: 100%;
+    position: relative;
+    .iconBlock{
+        width: 45px;
+        align-self: center;
+       
+    }
+    .inputBlock{
+        flex: 1;
+        input{
+            color: #9fadbc;
+            width: 100%;
+            padding: 3px;
+            background-color: #323940;
+            border: 1px solid #323940;
+            outline: none;
+            font-size: 20px;
+            &:focus{
+                border: 1px solid rgb(78, 9, 236);
+            }
+        }
+    }
+    .closeBlock{
+        position: absolute;
+        top: 0;
+        right: -10px;
+        width: 30px;
+        height: 30px;
+        align-self: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        cursor: pointer;
+       &:hover{
+            background-color: #6b7079;
+       }
+    }
+}
+
+.modallDescription{
+   display: flex;
+   flex-direction: column;
+   gap: 15px;
+    .modalHeader{
+        display: flex;
+        justify-content: space-between;
+        &_leftBlock{
+            display: flex;
+            gap: 10px;
+            .desc{
+                align-self: center;
+                padding: 3px;
+                span{
+                    font-size: 20px;
+                }
+            }
+            .iconB{
+                padding: 3px;
+                align-self: center;
+            }
+        }
+        &_rightBlock{
+            padding: 3px;
+            div{
+                padding: 6px 12px;
+                background-color: #48515ad7;
+                &:hover{
+                    background-color: #828c9663;
+                }
+            }
+        }
+       
+    }
+}
+.modalTaskDesc{
+    padding-left: 42px;
+    .descrptionDiv{
+        padding-left: 5px;
+        margin-top: 25px;
+        height: 50px;
+    }
+}
+.modalTaskDescChangeBlock{
+    padding-left: 42px;
+    textarea{
+        resize: none;
+        padding: 20px 10px;
+        height: 250px;
+        width: 100%;
+        background-color: #1d212581;
+        outline: none;
+        color: white;
+        &::placeholder{
+            color: #9fadbc;
+        }
+    }
+   
+    .shareblock{
+        display: flex;
+        color: #4f90eb;
+        div{
+            padding: 3px;
+        }
+    }
+}
+.activityBlock{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    &_icons{
+        display: flex;
+        gap: 25px;
+        div{
+            span{
+                font-size: 20px;
+            }
+        }
+    }
+    .hideDetalis{
+        padding: 8px;
+        background-color: #555e68d2;
+        &:hover{
+            background-color: #a7aeb663;
+        }
+    }
+}
+.commentUser{
+    display: flex;
+    .commentInput{
+        background-color: #21262bbd;
+        border-radius: 8px;
+        padding: 5px 7px;
+        flex: 1;
+    }
+}
+.inputForComment{
+    flex: 1;
+   textarea{
+    resize: none;
+    color: white;
+    background-color: #21262bbd;
+    padding: 5px 4px;
+    width: 100%;
+    outline: 1px solid #657483;
+    height: 70px;
+   }
+   button{
+    padding: 8px;
+    cursor: pointer;
+   }
+
+}
+.downRightComponent{
+    padding-left: 25px;
+    padding-top: px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    h5{
+        cursor:default;
+    }
+    .coostomBlock{
+     @include coostomBlock;
+    }
+}
+.opacityBlock{
+    display: flex;
+    padding: 5px 4px;
+    gap: 5px;
+    width: 100%;
+    font-size: 15px;
+    cursor: pointer;
+    &:hover{
+        background-color: #4f5861cb;
+    }
+}
+.isActive{
+    transform: scale(1);
+}
+  
+.commentBlock{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 5px;
+    &_header{
+        gap: 10px;
+        width: 100%;
+        display: flex;
+        height: 25px;
+        padding-left: 43px;
+        
+        h4{
+            align-self: center;
+        }
+        p{
+            align-self: center;
+        }
+    }
+    .iconUser{
+        position: absolute;
+        left: 0;
+        top: 10px;
+        cursor: pointer;
+    }
+    .comentContnet{
+        padding: 5px;
+        border-radius: 9px;
+        background-color: #1d212581;
+        margin-left: 38px;
+    }
+}
+.settingsComment{
+    margin-left: 42px;
+    display: flex;
+    gap: 10px;
+    span{
+        font-size: 12px;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}
+.notigication{
+    display: flex;
+    
+    .notigication_blocks{
+        display: flex;
+        gap: 12px;
+        flex-direction: column;
+        div{
+            display: flex;
+            gap: 10px;
+            border-radius: 8px;
+            background-color: #939da791;
+            padding: 5px;
+            cursor: pointer;
+            span{
+                align-self: center;
+            }
+            &:hover{
+                background-color: #939da7cb;
+            }
+
+        }
+    }
+}
+.saveBlock{
+    display: flex;
+    justify-content: space-between;
+    &_leftSection{
+        display: flex;
+        gap: 8px;
+        .save{
+            padding: 8px;
+            background-color: #4f90eb;
+            align-self: center;
+            color: black;
+            font-weight: 400;
+            &:hover{
+                background-color: #4f90eb94;
+            }
+        }
+        .cancel{
+            align-self: center;
+            padding: 8px;
+            &:hover{
+                background-color: #1f23275e;
+            }
+        }
+    }
+}
+.downLeft{
+    margin-top: 40px;
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    span{
+        font-size: 15px;
+        font-weight: 800;
+    }
+    .membersBlock{
+        display: flex;
+        gap: 15px;
+        
+        .members{
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            
+            .userBlock{
+                display: flex;
+                gap: 4px;
+                div{
+                    width: 30px;
+                    height: 30px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 45%;
+                    cursor: pointer;
+                    background-color: #939da791;
+                    &:hover{
+                        background-color: #939da7cb;
+                    }
+                }
+            }
+        }
+        
+
+    }
+  
+}

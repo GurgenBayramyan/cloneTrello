@@ -1,0 +1,79 @@
+@import '../../assets//liStyles.scss';
+
+.dates{
+  @include globalSection;
+   padding: 10px ;
+    z-index: 7;
+   .wrapper{
+    height: 620px;
+    overflow-x: hidden;
+    max-height: calc(100vh - 180px);
+   }
+    h5{
+        padding: 10px 0;
+    }
+    .startDate{
+        display: flex;
+        gap: 10px;
+        background-color: rgba(20, 12, 12, 0.404);
+        width: max-content;
+        cursor: not-allowed;
+     
+       
+    }
+    .dateinfo{
+        padding: 5px;
+        background-color: #121314;
+        border-radius: 7px;
+        span{
+            color: rgb(114, 109, 109);
+        }
+    }
+    .blockCheck{
+        padding: 5px;
+        
+    }
+}
+.dueData{
+    display: flex;
+    gap: 10px;
+    background-color: rgba(20, 12, 12, 0.404);
+    width: max-content;
+    cursor: not-allowed;
+}
+select{
+    padding: 5px;
+    background-color: #282e33;
+    color: white;
+    font-weight: 800;
+    width: 100%;
+    &:focus{
+        outline: 2px solid rgba(28, 117, 235, 0.733);
+    }
+    option{
+        &:checked,&:hover{
+            background-color: rgb(83, 40, 35);
+        }
+    }
+}
+.save{
+    width: 100%;
+    text-align: center;
+    padding: 6px;
+    background-color: #579dff;
+    color: #282e33;
+    cursor: pointer;
+    &:hover{
+        background-color: #6995d1;
+    }
+}
+.remove{
+    margin-top: 5px;
+    width: 100%;
+    text-align: center;
+    padding: 6px;
+    background-color: #323940;
+    cursor: pointer;
+
+}
+

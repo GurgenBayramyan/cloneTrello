@@ -1,0 +1,10 @@
+@import '../../assets//liStyles.scss';
+
+.checkList {
+   @include globalSection;
+   @include globalStylesForMenu;
+   
+    .addBlock {
+        @include styleForSubmit(60px);
+    }
+}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FC,  useRef, useState } from "react";
 import style from "./Content.module.scss";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -11,7 +11,11 @@ import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";
 import ListIcon from "@mui/icons-material/List";
 import ShareIcon from '@mui/icons-material/Share';
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
-const Content = () => {
+import List from "components/List/List";
+import AddBlock from "components/AddBlock/AddBlock";
+import { IContentProps } from "./ContentTypes";
+
+const Content:FC<IContentProps>  = ({openModal}) => {
   const [state, setState] = useState<{
     open: boolean;
     menu: boolean;
@@ -21,6 +25,8 @@ const Content = () => {
     menu: true,
     leftMenu: true
   });
+ 
+  const scrollRef = useRef<HTMLDivElement>(null)
   const handleMenu = () => {
     setState({ ...state, open: !state.open });
   };
@@ -31,8 +37,12 @@ const Content = () => {
   const handleCloseLeftMenu = () => [
     setState({ ...state, leftMenu: !state.leftMenu })
   ];
+
+
+
   return (
     <div className={style.content}>
+      
       <div className={`${style.leftContainer} ${state.open && style.close} `}>
         <div className={style.leftContainer_top}>
           <div className={style.numbers}>
@@ -43,19 +53,21 @@ const Content = () => {
               <span>48</span>
             </div>
           </div>
-          {state.open
-            ? <div className={style.openBlock}>
-                <ChevronRightIcon
-                  sx={{ cursor: "pointer" }}
-                  onClick={handleMenu}
-                />
-              </div>
-            : <div className={style.closeblock}>
-                <ChevronLeftIcon
-                  sx={{ cursor: "pointer" }}
-                  onClick={handleMenu}
-                />
-              </div>}
+          {state.open ? (
+            <div className={style.openBlock}>
+              <ChevronRightIcon
+                sx={{ cursor: "pointer" }}
+                onClick={handleMenu}
+              />
+            </div>
+          ) : (
+            <div className={style.closeblock}>
+              <ChevronLeftIcon
+                sx={{ cursor: "pointer" }}
+                onClick={handleMenu}
+              />
+            </div>
+          )}
           <div />
         </div>
         <div className={style.leftContainer_down} />
@@ -83,22 +95,24 @@ const Content = () => {
               className={style.listIcon}
             />
             <div
-              className={`${style.menuBlockLeft} ${state.leftMenu && style.none}`}
+              className={`${style.menuBlockLeft} ${
+                state.leftMenu && style.none
+              }`}
             >
               <div className={style.text}>
-                  <h3>Tasks</h3>
-                  <StarBorderIcon />
+                <h3>Tasks</h3>
+                <StarBorderIcon />
               </div>
               <div className={style.text}>
                 {/* <PeopleAltIcon /> */}
                 <span>Рабочие пространства</span>
               </div>
               <div className={style.board}>
-              <span>Board</span>
-              <div className={style.rowDown}>
-                <KeyboardArrowDownIcon />
+                <span>Board</span>
+                <div className={style.rowDown}>
+                  <KeyboardArrowDownIcon />
+                </div>
               </div>
-            </div>
             </div>
           </div>
           <div className={style.rightBlock}>
@@ -124,9 +138,8 @@ const Content = () => {
               <p>Фильтр</p>
             </div>
             <div className={style.text}>
-                <ShareIcon className={style.logo}   sx={{ cursor: "pointer" }}/>
+              <ShareIcon className={style.logo} sx={{ cursor: "pointer" }} />
               <p>Поделиться</p>
-             
             </div>
             <div className={style.text}>
               <span>...</span>
@@ -166,8 +179,47 @@ const Content = () => {
             </div>
           </div>
         </div>
-        <div className={style.rightContainer_down} />
+        <div className={style.rightContainer_down}>
+          <div ref={scrollRef} className={style.downBlock}>
+            <List
+              openModal={openModal}
+              title="To do"
+            />
+            <List
+              openModal={openModal}
+              title="To do"
+            />
+            <List
+              openModal={openModal}
+              title="To do"
+            />
+            <List
+              openModal={openModal}
+              title="To do"
+            />
+            <List
+              openModal={openModal}
+              title="To do"
+            />
+            <List
+              openModal={openModal}
+              title="To do"
+            />
+            <List
+              openModal={openModal}
+              title="To do"
+            />
+            <List
+              openModal={openModal}
+              title="To do"
+            />
+            <AddBlock />
+          </div>
+        </div>
       </div>
+       
+      
+      
     </div>
   );
 };

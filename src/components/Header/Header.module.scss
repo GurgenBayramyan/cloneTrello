@@ -20,7 +20,7 @@
         border-radius: 25px;
         background-color: $menuBlock-bg;
         color: $menuBlock-color;
-        z-index: 2000;
+        z-index: 3;
         gap: 10px;
         padding: 30px 15px;
         
@@ -202,7 +202,7 @@
         border-radius: 25px;
         background-color: $k7-bg;
         color: $k7-color;
-        z-index: 2000;
+        z-index: 3;
         padding: 20px 30px;
         height: max-content;
         text-align: center;
@@ -261,11 +261,9 @@
 .userInfoBlock{
     background-color: #1d2125;
     position: absolute;
-
+    z-index: 4;
     right: 2px;
     padding: 25px 35px;
-   
-    
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -294,7 +292,11 @@
         font-weight: 900;
         font-family: Arial, Helvetica, sans-serif;
         font-style: italic;
-        cursor: pointer;position: relative;
+        cursor: pointer;
+        position: relative;
+        .icon{
+            align-self: center;
+        }
         .userInfoData{
             align-self: center;
         }
@@ -320,10 +322,6 @@
             color: #579dff;
         }
     }
-    
-  
-
-
 }
 .block_User{
     height: 0px;
@@ -334,12 +332,9 @@
         span{display: none;}
         
     }
-
 }
 .logOut{
     align-self: center;
-   
-    
 }
 .accountIcon{
     position: relative;

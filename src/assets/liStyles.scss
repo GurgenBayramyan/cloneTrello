@@ -1,0 +1,149 @@
+@mixin content{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 15px 8px;
+    width: 250px;
+    &_header{
+        align-self: center;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        p{
+            padding-left: 30%;
+        }
+    }
+}
+@mixin styleForSubmit($width:130px){
+    padding: 6px 8px ;
+    background-color: rgba(70, 130, 241, 0.938);
+    width: $width;
+    text-align: center;
+    cursor: pointer;
+    &:hover{
+        background-color: rgba(101, 133, 194, 0.938);
+    }
+}
+@mixin liBoardsStyle{
+    .boards{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        .boardBlock{
+            width: 100%;
+            background-color: #323940;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+        .listsBlock{
+            width: 100%;
+            display: flex;
+            gap: 10px;
+            .list{
+                display: flex;
+                flex-direction: column;
+                width: 65%;
+                background-color: #323940;
+                gap: 7px;
+            }
+            .position{
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+                background-color: #323940;
+                gap: 7px;
+            }
+        }
+   }
+}
+@mixin liInputBlock{
+    .inputBlock{
+        width: 100%;
+        background-color: #000000;
+        padding: 3px 10px;
+        input{
+            width: 100%;
+            padding: 8px;
+            border: 2px solid transparent;
+            border-image: linear-gradient(to right, #ff0000, #00ff00);
+            border-image-slice: 1;
+            border-radius: 5px;
+            transition: border-image 0.3s ease;
+            &:focus{
+                border-image: linear-gradient(to right, #00ff00, #ff0000);
+            }
+            .inputBlock input::placeholder {
+                color: #ccc;
+            }
+            &:focus::placeholder {
+                animation: fadeInOut 2s infinite;
+            }
+        }
+    }
+}
+
+@mixin coostomBlock{
+    display: flex;
+    padding: 5px 4px;
+    font-size: 15px;
+    background-color: #4f5861cb;
+    width: 100%;
+    gap: 6px;
+    cursor: pointer;
+    span{
+        align-self: center;
+    }
+    &:hover{
+        background: #939da7cb;
+    }
+}
+@mixin globalSection{
+    width: 300px;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    z-index: 10;
+    background-color: #282e33;
+    padding: 5px 6px;
+    border-radius: 8px;
+    &_header{
+        display: flex;
+        justify-content: center;
+        position: relative;
+        padding: 10px 15px;
+        span{
+            position: absolute;
+            top: 3px;
+            right: -2px;
+            cursor: pointer;
+            border-radius: 7px;
+            padding: 6px 8px;
+            &:hover{
+                background-color: #474c5285;
+            }
+        }
+    }
+ 
+    h5{
+        cursor: default;
+    }
+}
+@mixin globalStylesForMenu{
+    .inputBlock{
+        padding: 15px 0;
+        input{
+            width: 100%;
+            padding: 5px 10px;
+            outline: none;
+            border: 2px solid #384148;
+            background: transparent;
+            border-radius: 3px;
+            color: white;
+            &:focus{
+                border: 2px solid rgba(57, 142, 240, 0.774) ;
+            }
+        }
+
+    }
+}

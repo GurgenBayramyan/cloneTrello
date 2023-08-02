@@ -1,0 +1,49 @@
+.task {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 8px 8px 4px 12px;
+    border-radius: 9px;
+    border: 1px solid #00000057;
+    background-color: white;
+    transition: all 300ms ease;
+    height: 70px;
+    position: relative;
+
+    &_header {
+        padding-right: 2px;
+        display: flex;
+        justify-content: space-between;
+
+        h4 {
+            font-weight: 100;
+        }
+
+        .iconBlock {
+            opacity: 0;
+        }
+
+    }
+
+    &_footer {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        .userIcon{
+            position: absolute;
+            right: -1px;
+            top: -5px;
+            bottom: 0;
+        }
+    }
+
+    &:hover {
+        background-color: #0567e741;
+
+        .iconBlock {
+            opacity: 1;
+
+        }
+    }
+}
+

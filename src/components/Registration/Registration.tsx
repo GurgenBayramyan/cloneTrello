@@ -23,7 +23,7 @@ const Registration = () => {
     resolver: yupResolver(schemaRegistr),
   });
   const {repeatPassword,password} = watch();
-  const iscoincide = repeatPassword === password && password !== "" && repeatPassword !== "" ;
+
 
   const onSubmit: SubmitHandler<IRegistration> = async(data) => {
     const resp = await postRegistration(data);
@@ -44,7 +44,7 @@ const Registration = () => {
         {Object.keys(errors).map((item, index) => {
           return (
             <div className={style.errorMess} key={item}>
-                <span className={style.spanOne}>{index+1}--{item} is </span>
+                <span className={style.spanOne}>{index+1}-{item} is </span>
                 <span>{errors[item as keyof typeof errors]?.message}</span>
                 <hr />
             </div>
@@ -107,7 +107,7 @@ const Registration = () => {
 
         <div className={style.blockInput}>
         <input
-          className={classNames(style.input,{
+          className={classNames(style.input,style.date,{
             [style.redBorder]:errors.age?.message
           })}
           type="date"

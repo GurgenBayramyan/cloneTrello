@@ -42,6 +42,7 @@
 
         &_down {
             flex: 1;
+
         }
 
     }
@@ -81,11 +82,13 @@
     }
 
     .rightContainer {
+        overflow: hidden;
         flex: 1;
         display: flex;
         flex-direction: column;
         background: url("https://codetheweb.blog/assets/img/posts/css-advanced-background-images/cover.jpg");
         background-size: cover;
+       
         .topSec {
             display: flex;
             justify-content: space-between;
@@ -98,8 +101,34 @@
     }
 
     .rightContainer_down {
-        overflow-x: scroll;
         flex: 1;
+        display: flex;
+     
+        
+        .downBlock{
+      
+           margin-bottom: 15px;
+           display: flex;
+           overflow-x: scroll;
+           position: relative;
+           gap: 50px;
+           padding: 15px;
+           padding-right: 140px;
+           width: 100%;
+           align-items: flex-start;
+
+           &::-webkit-scrollbar {
+            width: 10px;
+          }
+          &::-webkit-scrollbar-track {
+            background-color: transparent;
+            border-radius: 4px;
+          }
+          &::-webkit-scrollbar-thumb {
+            background-color: rgba(128, 125, 125, 0.6);
+            border-radius: 4px;
+          }}
+        
     }
 
     @media(max-width:320px) {
@@ -275,4 +304,18 @@
         display: none;
     }
 
+}
+.settings{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.521);
+    transition: opacity 300ms ease;
+    z-index: 1;
+}
+.settingsIsNone{
+    width: 0;
+    height: 0;
+    opacity: 0;
 }

@@ -1,0 +1,20 @@
+.addBlock{
+    min-width: 300px;
+    padding: 15px 10px;
+    border-radius: 15px;
+    background-color: rgba(100, 96, 90, 0.596);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 900;
+    transition: all ease-in-out .3s;
+    span{
+        color: white;
+        cursor: pointer;
+    }
+    &:hover{
+        span{
+            color: rgb(223, 182, 146);
+        }
+    }
+}

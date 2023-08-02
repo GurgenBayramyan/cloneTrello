@@ -1,0 +1,7 @@
+@import '../../assets//liStyles.scss';
+.menu{
+    position: relative;
+    .coostomBlock{
+        @include coostomBlock;
+    }
+}

@@ -1,0 +1,11 @@
+@import '../../assets//liStyles.scss';
+.move{
+@include globalSection;
+   @include liBoardsStyle;
+   padding: 10px 8px;
+   z-index: 7;
+   .button{
+    @include styleForSubmit(70px);
+    margin-top: 7px;
+}
+}

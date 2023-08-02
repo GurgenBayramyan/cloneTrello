@@ -1,0 +1,49 @@
+.userBlock{
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    z-index: 4;
+    transition: all ease 300s ease-in-out;
+    &_top{
+        background-color:#0b66e4 ;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 15px;
+        border-radius: 10px 10px 0 0;
+        span{
+            color: white;
+            font-weight: 800;
+            cursor: pointer;
+        }
+        .userDAta{
+            display: flex;
+            flex-direction: column;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            align-self: flex-end;
+        }
+        .userName{
+            transform: translateY(25px);
+        }
+    }
+    &_down{
+        background-color: rgb(252, 243, 243);
+        padding: 35px 10px;
+        border-radius: 0 0 5px 5px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        span{
+            cursor: pointer;
+            padding: 7px;
+            border-radius: 8px;
+            &:hover{
+                background-color: rgba(121, 121, 115, 0.253);
+            }
+        }
+    }
+}
