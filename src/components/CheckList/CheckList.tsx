@@ -1,9 +1,12 @@
-import { FC, useState } from "react";
+import { ChangeEvent, FC, useState } from "react";
 import style from "./Check.module.scss";
 import { ICheck } from "./CheckTypes";
 
 const CheckList:FC<ICheck> = ({onClose}) => {
   const [value, setValue] = useState("Checklist");
+  const changeInputValue = (e:ChangeEvent<HTMLInputElement>) => [
+    setValue(e.target.value)
+  ]
   return (
     <div  className={style.checkList}>
       <div className={style.checkList_header}>
@@ -16,7 +19,7 @@ const CheckList:FC<ICheck> = ({onClose}) => {
         autoFocus={true}
           type="text"
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={changeInputValue}
         />
       </div>
       <div className={style.addBlock}>
