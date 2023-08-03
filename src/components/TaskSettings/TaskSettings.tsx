@@ -31,13 +31,11 @@ const TaskSettings = ({ taskName, openModal}: ITaskSettings) => {
    if ((styles.currentTop + refBlock.current!.offsetHeight) > window.innerHeight) {
       const newTop = styles.currentTop + refBlock.current!.offsetHeight - window.innerHeight;
       setPosition(newTop + 50)
-     
    }
    else{
     setPosition(0)
   }
   
-
  }, [show]);
   const openModalAndCloseAll = ()=>{
     dispatch(setShowOptionDiv(!show))

@@ -4,6 +4,9 @@ interface iDeleteModalProps{
   onClose:() => void
 }
 const DeleteModal:FC<iDeleteModalProps> = ({onClose}) => {
+  const handleBlur = () => {
+    onClose()
+  }
   return (
     <div className={style.deleteBlock}>
       <div className={style.deleteBlock_header}>

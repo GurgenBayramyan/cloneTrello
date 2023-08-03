@@ -111,3 +111,14 @@ export const getPosition = (
       }
   }
  }  
+ export const getTemplateMenuStates = (
+  top: number,
+  height: number,
+) => {
+  if (top + height > window.innerHeight) {
+    return true
+    
+  }else{
+    return false
+  }
+};

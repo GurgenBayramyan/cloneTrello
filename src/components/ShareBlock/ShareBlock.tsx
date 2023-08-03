@@ -1,4 +1,4 @@
-import { getTemplateMenuState } from "helpers";
+import { getTemplateMenuStates } from "helpers";
 import {
   ChangeEvent,
   FC,
@@ -7,30 +7,28 @@ import {
   useRef,
   useState,
 } from "react";
-import { ICShareProps, IShareState } from "./ShareBlockTypes";
+import { ICShareProps } from "./ShareBlockTypes";
 import style from "./ShareBlock.module.scss";
+import classNames from "classnames";
 
 const ShareBlock: FC<ICShareProps> = ({ onClose }) => {
   const divContent = useRef<HTMLDivElement>(null);
   const [value, setValue] = useState("https://trello.com/c/ztTF2o19");
-  const [currentStyle, setCurrentStyle] = useState<IShareState>({
-    top: 0,
-    left: 0,
-  });
+  const [positionClass,setPositionClass] = useState(false)
   const handleFocus = (e: FocusEvent<HTMLInputElement>) => e.currentTarget.select();
 
   const changeInputValue = (e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
-
   useEffect(() => {
     const div = divContent.current;
-    const { top, height, left, width } = div!.getBoundingClientRect();
-    const styleObject = getTemplateMenuState(top, height, width, left);
-    setCurrentStyle({ ...styleObject });
+    const { top, height } = div!.getBoundingClientRect();
+    const styleObject = getTemplateMenuStates(top, height);
+   setPositionClass(styleObject)
   }, []);
   return (
     <div
-      style={{ top: `${currentStyle.top}px`, left: `${currentStyle.left}px` }}
-      className={style.share}
+      className={classNames(style.share,{
+        [style.top]:positionClass
+      })}
       ref={divContent}
     >
       <div className={style.share_header}>
