@@ -1,0 +1,41 @@
+@import '../../assets//liStyles.scss';
+.share{
+    @include globalSection;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 15px;
+    .printBlock{
+        width: 300px;
+        margin-left: -15px;
+        cursor: pointer;
+        padding: 10px 15px;
+        &:hover{
+            background-color: #3d474f;
+        }
+    }
+
+}
+hr{
+   
+   border: 1px solid #868e961a;
+}
+.labelBlock{
+    @include stylesBlockLabels;
+}
+.show{
+    margin: 2px 0 15px;
+    span{
+        cursor: pointer;
+        color: #4a95f8;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+}
+h5{
+    span{
+        color:#4a95f8 ;
+        cursor: pointer;
+    }
+}

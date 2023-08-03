@@ -147,3 +147,27 @@
 
     }
 }
+@mixin stylesBlockLabels{
+        font-weight: 800;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        label{
+          cursor: pointer;
+        }
+        input{
+            width: 100%;
+            padding: 9px 10px;
+            outline: none;
+            border: 2px solid #384148;
+            background: transparent;
+            border-radius: 3px;
+            color: white;
+            margin-bottom: 10px;
+            &:focus{
+                border: 2px solid rgba(57, 142, 240, 0.774) ;
+            }
+        }
+      
+      
+}

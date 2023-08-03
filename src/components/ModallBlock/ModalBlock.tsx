@@ -29,15 +29,31 @@ import CoverContent from "components/CoverContent/CoverContent";
 import CustomContent from "components/CustomContent/CustomContent";
 import MoveContent from "components/MoveContent/MoveContent";
 import CopyBlock from "components/CopyBlock/CopyBlock";
-import style from "./ModalBlock.module.scss";
+import RefreshIcon from '@mui/icons-material/Refresh';
 import UserNameIcon from "components/UserNameIcon/UserNameIcon";
+import ShareBlock from "components/ShareBlock/ShareBlock";
+import UpModalComponent from "components/UpModalComponent/UpModalComponent";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import RemoveFromQueueIcon from "@mui/icons-material/RemoveFromQueue";
+import RemoveIcon from "@mui/icons-material/Remove";
+import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
+import { setShow } from "store/slices/modalSlice/modalSlice";
+import { modalBlockSelector } from "store/selectors";
+import Archive from "components/Archive/Archive";
+import style from "./ModalBlock.module.scss";
+import DeleteModal from "components/DeleteModal/DeleteModal";
 
 const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
   const [valueInput, setValueInput] = useState("Axios");
+  const dispatch = useAppDispatch();
+  const modalState = useAppSelector(modalBlockSelector);
+  const[hide,setHide] = useState(false)
+  const [showUp,setShowUp] = useState(false);
   const [state, setState] = useState<IModalState>({
     taskDesc: true,
     comment: false,
   });
+  const [deleteModal,setDeleteModal] = useState(false)
   const MembersModal = Openable(
     () => <MembersContent />,
     "members",
@@ -67,6 +83,7 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
   );
   const MoveModal = Openable(() => <MoveContent />, "Move", ArrowForwardIcon);
   const CopyModal = Openable(() => <CopyBlock />, "Copy", ContentCopyIcon);
+  const ShareModal = Openable(() => <ShareBlock />, "Share", ShareIcon);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValueInput(e.target.value);
   };
@@ -94,6 +111,24 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
       comment: true,
     });
   };
+
+  const openTemplateModal = () => {
+    setShowUp(false);
+    dispatch(setShow(!modalState.upModalShow));
+  };
+  const openArchiveBlock = () => {
+    dispatch(setShow(false));
+    setShowUp(!showUp)
+  }
+  const handleClose = () => {
+    setShowUp(false)
+  }
+  const handleChangeHide = () => {
+    setHide(!hide)
+  }
+  const openDeleteModal =() => {
+    setDeleteModal(!deleteModal)
+  }
   return (
     <div
       onClick={openModal}
@@ -101,7 +136,10 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
         [style.isActive]: showModal,
       })}
     >
-      <div onClick={(e) => e.stopPropagation()} className={style.task_desc}>
+      <div  onClick={(e) => e.stopPropagation()} className={style.task_desc}>
+        {!!deleteModal && <DeleteModal  onClose={openDeleteModal}/>}
+        {!!modalState.upModalShow  && <UpModalComponent onClose={openModal} />}
+        {!!showUp && <Archive  onClose={openModal}/>}
         <div className={style.modalBlock}>
           <div className={style.modalBlock_header}>
             <div className={style.taskName}>
@@ -115,9 +153,11 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
                   value={valueInput}
                 />
               </div>
-              <div onClick={openModal} className={style.closeBlock}>
-                <span >x</span>
-              </div>
+              {(!modalState.upModalShow && !showUp )&& (
+                <div onClick={openModal} className={style.closeBlock}>
+                  <span>x</span>
+                </div>
+              )}
             </div>
           </div>
           <span>
@@ -201,7 +241,6 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
               <div className={style.activityBlock}>
                 <div className={style.activityBlock_icons}>
                   <div>
-                    
                     <SubjectIcon />
                   </div>
                   <div>
@@ -236,11 +275,11 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
               </div>
               <div className={style.commentBlock}>
                 <div className={style.commentBlock_header}>
-                    <div className={style.iconUser}>
-                    <UserNameIcon  name="Gurgen" lastName="Bayramyan"/>
-                    </div>
-                    <h4>Name Lastname</h4>
-                    <p>Date</p>
+                  <div className={style.iconUser}>
+                    <UserNameIcon name="Gurgen" lastName="Bayramyan" />
+                  </div>
+                  <h4>Name Lastname</h4>
+                  <p>Date</p>
                 </div>
                 <div className={style.comentContnet}>
                   <span>this is comment</span>
@@ -274,18 +313,43 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
               <h5>Actions</h5>
               <MoveModal />
               <CopyModal />
-              <div className={style.coostomBlock}>
-                <DesktopMacIcon sx={{ fontSize: "15px" }} />
-                <span>Make template</span>
-              </div>
-              <div className={style.coostomBlock}>
-                <PhotoAlbumIcon sx={{ fontSize: "15px" }} />
-                <span>Archive</span>
-              </div>
-              <div className={style.coostomBlock}>
-                <ShareIcon sx={{ fontSize: "15px" }} />
-                <span>Share</span>
-              </div>
+              {modalState.upModalShow ? (
+                <div onClick={openTemplateModal} className={style.coostomBlock}>
+                  <span>Template</span>
+                  <CheckBoxIcon sx={{ fontSize: "17px" }} />
+                </div>
+              ) : (
+                <div onClick={openTemplateModal} className={style.coostomBlock}>
+                  <DesktopMacIcon sx={{ fontSize: "15px" }} />
+                  <span>Make template</span>
+                </div>
+              )}
+              <hr />
+              {!!showUp && (
+                <div onClick={handleClose} className={style.coostomBlock}>
+                  <RemoveFromQueueIcon sx={{ fontSize: "15px" }} />
+                  <span>Send to board</span>
+                </div>
+              )}
+              {(!!showUp || modalState.upModalShow ) && (
+                <div onClick={openDeleteModal}  className={style.coostomDelete}>
+                  <RemoveIcon sx={{ fontSize: "15px" }} />
+                  <span>Delete</span>
+                </div>
+              )}
+              {(!modalState.upModalShow && !showUp) &&  (
+                <div onClick={openArchiveBlock} className={style.coostomBlock}>
+                  <PhotoAlbumIcon sx={{ fontSize: "15px" }} />
+                  <span>Archive</span>
+                </div>
+              )}
+              {modalState.upModalShow && (
+                <div onClick={handleChangeHide} className={style.coostomBlock}>
+                 {!hide ?  <RemoveFromQueueIcon sx={{ fontSize: "15px" }} /> : <RefreshIcon  sx={{fontSize:"15px"}}/>}
+                 {!hide ?  <span>Hide from list</span> : <span>Show in list</span>}
+                </div>
+              )}
+              <ShareModal />
             </div>
           </div>
         </div>

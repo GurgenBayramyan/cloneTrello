@@ -20,7 +20,7 @@ const CopyBlock:FC<ICopyProps> = ({onClose}) => {
     <div style={{top:`${currentStyle.top}px`,left:`${currentStyle.left}px`}} ref={divContent}  className={style.copy}>
         <div className={style.copy_header}>
             <p>Copy card</p>
-            <span onClick={onClose}>x</span>
+            <span data-name="close" onClick={onClose}>x</span>
         </div>
         <h5>Title</h5>
         <textarea></textarea>

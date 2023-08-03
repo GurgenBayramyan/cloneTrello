@@ -1,0 +1,51 @@
+.upModalComponent{
+    padding: 8px 15px;
+    background-color:#092957 ;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    justify-content: space-between;
+    .leftBlock{
+        display: flex;
+        span{
+            color: #b6c2cf;
+            font-weight: 800;
+            align-self: center;
+        }
+    }
+    .rightBlock{
+        display: flex;
+        gap: 25px;
+    }
+}
+.cardblock{
+    background-image: url("https://trello.com/assets/05d178e750601eba6f93.png");
+    width: 100px;
+    background-size: contain;
+    height: 60px;
+   
+}
+.templateSection{
+    background-color: #579dff;
+    display: flex;
+    height: 35px;
+    padding: 8px 7px;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+    gap: 3px;
+    align-self: center;
+    &:hover{
+        background-color: hsl(215, 100%, 78%);
+    }
+}
+.closeSection{
+    align-self: center;
+    border-radius: 9px;
+    height: 30px;
+    padding: 7px ;
+    cursor: pointer;
+    color: #9fadbc;
+    &:hover{
+        background-color: #9db3ca48;
+    }
+}

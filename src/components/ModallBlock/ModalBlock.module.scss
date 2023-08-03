@@ -16,7 +16,7 @@
     background-color: #323940;
     width: 700px;
     border-radius: 1rem ;
-    height: 800px;
+    min-height: 700px;
     margin: 50px 0;
 }
 
@@ -212,6 +212,14 @@
     }
     .coostomBlock{
      @include coostomBlock;
+    }
+    .coostomDelete{
+        @include coostomBlock;
+        background-color:#f87462;
+        color: black;
+        &:hover{
+            background-color: #ff9283 ;
+        }
     }
 }
 .opacityBlock{
