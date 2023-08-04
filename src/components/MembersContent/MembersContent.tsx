@@ -1,27 +1,25 @@
-import  { FC, useEffect, useRef, useState } from 'react'
-import PersonIcon from '@mui/icons-material/Person';
-import { IMembersProps, ImembersState } from './MembersContentTypes';
-import { getTemplateMenuState } from 'helpers';
+import  { FC,  useLayoutEffect, useRef, useState } from 'react'
+import { IMembersProps} from './MembersContentTypes';
+import {  getTemplateMenuStates } from 'helpers';
 import style from './MembersContent.module.scss'
 import UserNameIcon from 'components/UserNameIcon/UserNameIcon';
+import classNames from 'classnames';
 
 
 const MembersContent:FC<IMembersProps> = ({onClose}) => {
     const divContent = useRef<HTMLDivElement >(null);
    
-    const [currentStyle,setCurrentStyle] = useState<ImembersState>({
-        top:0,
-        left:0
-    })
+    const [positionClass,setPositionClass] = useState(false)
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const div = divContent.current;
-        const { top, height,left,width } = div!.getBoundingClientRect();
-        const styleObject =  getTemplateMenuState(top,height,width,left);
-        setCurrentStyle({...styleObject})
-    }, [])
+        const isHidden = getTemplateMenuStates(div!);
+        setPositionClass(isHidden);
+      }, []);
   return (
-    <div style={{top:`${currentStyle.top}px`,left:`${currentStyle.left}px`}} ref={divContent}   className={style.members}>
+    <div ref={divContent}   className={classNames(style.members,{
+        [style.top]:positionClass
+    })}>
         <div className={style.members_header}>
             <p>Members</p>
             <span data-name="close" onClick={onClose}>x</span>

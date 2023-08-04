@@ -3,6 +3,7 @@ import contentSlice from "./slices/contentSlice/contentSlice";
 import taskSettingsSlice from "./slices/taskSettings/taskSettingsSlice";
 import showOptionDivSlice from "./slices/showOptiondivSlice/showOptionDivSlice";
 import showMenuUserSlice from "./slices/showMenuUserSlice/showMenuUserSlice";
+import ModalSlice from "./slices/modalSlice/modalSlice";
 
 
 export const rootReducer = combineReducers({
@@ -10,4 +11,5 @@ export const rootReducer = combineReducers({
     [taskSettingsSlice.name] : taskSettingsSlice.reducer,
     [showOptionDivSlice.name] : showOptionDivSlice.reducer,
     [showMenuUserSlice.name]:showMenuUserSlice.reducer,
+    [ModalSlice.name]:ModalSlice.reducer
 })

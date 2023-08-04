@@ -1,0 +1,41 @@
+.archiveBlock {
+    padding: 22px 15px;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    color: #b6c2cf;
+    font-weight: 800;
+    justify-content: space-between;
+    background-color: #3f3102;
+    background-image: linear-gradient(to bottom right,
+            #a1bdd914,
+            rgba(0, 0, 0, 0.05) 25%,
+            transparent 25%,
+            transparent 50%,
+            #a1bdd914,
+            rgba(0, 0, 0, 0.05) 50%,
+            #a1bdd914,
+            rgba(0, 0, 0, 0.05) 75%,
+            transparent 75%,
+            transparent);
+    background-size: 14px 14px;
+
+    .leftBlock {
+        display: flex;
+        gap: 25px;
+
+        span {
+            align-self: center;
+        }
+    }
+    .closeSection{
+        align-self: center;
+        border-radius: 9px;
+        height: 30px;
+        padding: 7px ;
+        cursor: pointer;
+        color: #9fadbc;
+        &:hover{
+            background-color: #9db3ca48;
+        }
+    }
+}

@@ -135,3 +135,6 @@
     background: url("https://thumbs.dreamstime.com/b/abstract-backgraund-design-element-graphics-artworks-purple-pink-chaotic-lines-colorful-background-digital-graphic-artwork-281772075.jpg");
     background-size: 100%;
 }
+.top{
+    @include topStyle;
+}

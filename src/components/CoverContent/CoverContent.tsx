@@ -1,25 +1,24 @@
-import React, { FC, useEffect, useRef, useState } from 'react'
+import  { FC, useLayoutEffect, useRef, useState } from 'react'
 import style from './CoverContent.module.scss'
-import { ICoverProps, ICoverState } from './CoverContentTypes'
-import { getTemplateMenuState } from 'helpers';
+import { ICoverProps } from './CoverContentTypes'
+import { getTemplateMenuStates } from 'helpers';
+import classNames from 'classnames';
 
 
 const CoverContent:FC<ICoverProps> = ({onClose}) => {
     const divContent = useRef<HTMLDivElement >(null);
    
-    const [currentStyle,setCurrentStyle] = useState<ICoverState>({
-        top:35,
-        left:0
-    })
+    const [positionClass,setPositionClass] = useState(false)
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const div = divContent.current;
-        const { top, height,left,width } = div!.getBoundingClientRect();
-        const styleObject =  getTemplateMenuState(top,height,width,left);
-        setCurrentStyle({...styleObject})
-    }, [])
+        const isHidden = getTemplateMenuStates(div!);
+        setPositionClass(isHidden);
+      }, []);
   return (
-    <div style={{top:`${currentStyle.top}px`,left:`${currentStyle.left}px`}} ref={divContent}  className={style.changecover}>
+    <div  ref={divContent}  className={classNames(style.changecover,{
+        [style.top]:positionClass
+    })}>
             <div className={style.changecover_header}>
                 <p>Cover</p>
                 <span  data-name="close" onClick={onClose}>x</span>

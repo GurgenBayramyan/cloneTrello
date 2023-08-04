@@ -33,3 +33,6 @@
         }
     }
 }
+.top{
+    @include topStyle;
+}

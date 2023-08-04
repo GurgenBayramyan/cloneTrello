@@ -1,9 +1,8 @@
-import React, { FC } from 'react'
+import  { FC } from 'react'
 import InsertChartIcon from '@mui/icons-material/InsertChart';
 import style from './AttachComponent.module.scss'
-interface IPropsAttachmenContent {
-    name:string
-}
+import { IPropsAttachmenContent } from './AttachComponentTypes';
+
 const AttachComponent:FC<IPropsAttachmenContent> = ({name}) => {
   return (
     <div className={style.task}>
