@@ -22,6 +22,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import { ToastOptions, toast } from "react-toastify";
 import UserNameIcon from "components/UserNameIcon/UserNameIcon";
 import { contentSliceSelector } from "store/selectors";
+import CreateContent from "components/CreateContent/CreateContent";
 
 
 const  Header = () => {
@@ -30,6 +31,7 @@ const  Header = () => {
         menuView:true,
         userMenu:true
     })
+    const[createContent,setCreatContent] = useState(false)
     const{data}=useAppSelector(contentSliceSelector);
     const navigate = useNavigate();
     const dispatch =  useAppDispatch()
@@ -65,10 +67,13 @@ const  Header = () => {
      toast.success(messege,toastDefaultValue() as ToastOptions<{}>)  
      Cookies.remove("token");
      navigate("login");
-      
-
     }
-  return <header className={style.header}>
+
+    const openCreateSection = () => {
+      setCreatContent(!createContent)
+    }
+  return (
+    <header className={style.header}>
       <div className={style.header_navbar}>
         <div className={style.header_navbar_buttonBlock}>
           <AppsIcon sx={{ cursor: "pointer" }} />
@@ -77,58 +82,73 @@ const  Header = () => {
           <span>Trello</span>
         </div>
         <div className={style.header_navbar_textBlock}>
-          <span>Рабочие пространства</span>
+          <span>Workspaces</span>
           <KeyboardArrowDownIcon sx={{ cursor: "pointer" }} />
         </div>
         <div className={style.header_navbar_textBlock}>
-          <span>Недавние</span>
+          <span>Recent</span>
           <KeyboardArrowDownIcon sx={{ cursor: "pointer" }} />
         </div>
         <div className={style.header_navbar_textBlock}>
-          <span> В избранном</span>
+          <span> Starred</span>
           <KeyboardArrowDownIcon sx={{ cursor: "pointer" }} />
         </div>
         <div className={style.header_navbar_textBlock}>
-          <span>Шаблоны</span>
+          <span>Templates</span>
           <KeyboardArrowDownIcon sx={{ cursor: "pointer" }} />
         </div>
-        <div className={style.header_navbar_search}>
-          <span>Создать</span>
+        <div onClick={openCreateSection} className={style.header_navbar_search}>
+            <span>Create</span>
+            {createContent && <CreateContent />}
         </div>
       </div>
       <div>
-      <MenuIcon onClick={handleOpenMenu} className={style.header_menuIcon} />
-      <div className={headerState.open == false ? style.header_menuBlock : style.header_menuBlockClose}>
-      
-        <div className={style.header_navbar_iconTreloBlock}>
-          <span>Trello</span>
+        <MenuIcon onClick={handleOpenMenu} className={style.header_menuIcon} />
+        <div
+          className={
+            headerState.open == false
+              ? style.header_menuBlock
+              : style.header_menuBlockClose
+          }
+        >
+          <div className={style.header_navbar_iconTreloBlock}>
+            <span>Trello</span>
+          </div>
+          <div className={style.header_navbar_textBlock}>
+            <span>Workspaces</span>
+            <KeyboardArrowDownIcon sx={{ cursor: "pointer" }} />
+          </div>
+          <div className={style.header_navbar_textBlock}>
+            <span>Recent</span>
+            <KeyboardArrowDownIcon sx={{ cursor: "pointer" }} />
+          </div>
+          <div className={style.header_navbar_textBlock}>
+            <span> Starred</span>
+            <KeyboardArrowDownIcon sx={{ cursor: "pointer" }} />
+          </div>
+          <div className={style.header_navbar_textBlock}>
+            <span>Templates</span>
+            <KeyboardArrowDownIcon sx={{ cursor: "pointer" }} />
+          </div>
+          <div className={style.header_navbar_search}>
+            <span>Create</span>
+          </div>
+          <div className={style.iconsBlock}>
+            <NotificationsIcon
+              className={style.id}
+              sx={{ cursor: "pointer" }}
+            />
+            <ContactSupportIcon
+              className={style.id}
+              sx={{ cursor: "pointer" }}
+            />
+            <DisplaySettingsIcon
+              className={style.id}
+              sx={{ cursor: "pointer" }}
+            />
+            <UserNameIcon name="Vahe" lastName="Gevorgian" />
+          </div>
         </div>
-        <div className={style.header_navbar_textBlock}>
-          <span>Рабочие пространства</span>
-          <KeyboardArrowDownIcon sx={{ cursor: "pointer" }} />
-        </div>
-        <div className={style.header_navbar_textBlock}>
-          <span>Недавние</span>
-          <KeyboardArrowDownIcon sx={{ cursor: "pointer" }} />
-        </div>
-        <div className={style.header_navbar_textBlock}>
-          <span> В избранном</span>
-          <KeyboardArrowDownIcon sx={{ cursor: "pointer" }} />
-        </div>
-        <div className={style.header_navbar_textBlock}>
-          <span>Шаблоны</span>
-          <KeyboardArrowDownIcon sx={{ cursor: "pointer" }} />
-        </div>
-        <div className={style.header_navbar_search}>
-          <span>Создать</span>
-        </div>
-        <div className={style.iconsBlock}>
-          <NotificationsIcon className={style.id} sx={{ cursor: "pointer" }} />
-          <ContactSupportIcon className={style.id} sx={{ cursor: "pointer" }} />
-          <DisplaySettingsIcon className={style.id} sx={{ cursor: "pointer" }} />
-          <UserNameIcon name="Vahe" lastName="Gevorgian"/>
-        </div>
-      </div>
       </div>
       <div className={style.header_search_block}>
         <div className={style.header_search_block_inputBlock}>
@@ -139,71 +159,79 @@ const  Header = () => {
           <NotificationsIcon sx={{ cursor: "pointer" }} />
           <ContactSupportIcon sx={{ cursor: "pointer" }} />
           <DisplaySettingsIcon sx={{ cursor: "pointer" }} />
-          
         </div>
         <div className={style.accountIcon}>
-        <LoginIcon onClick={handleOpenUserMenu}  sx={{ cursor: "pointer" }} />
-          <div  className={classNames(style.userInfoBlock,{
-            [style.block_User]:headerState.userMenu
-          })}>
-              <div className={style.userAccount}>
-                  <span>ACCOUNT</span>
+          <LoginIcon onClick={handleOpenUserMenu} sx={{ cursor: "pointer" }} />
+          <div
+            className={classNames(style.userInfoBlock, {
+              [style.block_User]: headerState.userMenu,
+            })}
+          >
+            <div className={style.userAccount}>
+              <span>ACCOUNT</span>
+            </div>
+            <div className={style.userAccountBlock}>
+              <div className={style.icon}>
+                <UserNameIcon name={data.firstname} lastName={data.lastname} />
               </div>
-              <div className={style.userAccountBlock}>
-                <div className={style.icon}>
-                  <UserNameIcon name={data.firstname} lastName={data.lastname}/>
-                  </div>
-                  <div className={style.userInfoData}>
-                      <span>{data.firstname}{data.lastname}</span>
-                      <span>{data.email}</span>
-                  </div>
+              <div className={style.userInfoData}>
+                <span>
+                  {data.firstname}
+                  {data.lastname}
+                </span>
+                <span>{data.email}</span>
               </div>
-              
-              <div className={style.logOut}>
-                    <span onClick={handlelogOut}>Log out</span>
-              </div>
+            </div>
+
+            <div className={style.logOut}>
+              <span onClick={handlelogOut}>Log out</span>
+            </div>
           </div>
         </div>
-      <div className={style.men}>
-      <ClearAllIcon onClick={handleViewMenu} className={style.menuHeader} />
-      <div className={`${!headerState.menuView && style.k7} ${headerState.menuView && style.k6} `}>
-        <h3>Tasks</h3>
-        <p className={style.parag}>Для рабочего пространства</p>
-        <div className={style.dosk}>
-          <p>По доске</p>
-          <KeyboardArrowDownIcon className={style.img} />
-        </div>
-        <div className={style.text}>
+        <div className={style.men}>
+          <ClearAllIcon onClick={handleViewMenu} className={style.menuHeader} />
+          <div
+            className={`${!headerState.menuView && style.k7} ${
+              headerState.menuView && style.k6
+            } `}
+          >
+            <h3>Tasks</h3>
+            <p className={style.parag}>Workspaces visible</p>
+            <div className={style.dosk}>
+              <p>Board</p>
+              <KeyboardArrowDownIcon className={style.img} />
+            </div>
+            <div className={style.text}>
               <RocketLaunchIcon
                 className={style.logo}
                 sx={{ cursor: "pointer" }}
               />
-              <p>Улучшения</p>
+              <p>Power-Ups</p>
             </div>
             <div className={style.text}>
               <ElectricBoltIcon
                 className={style.logo}
                 sx={{ cursor: "pointer" }}
               />
-              <p>Автоматизация</p>
+              <p>Automation</p>
             </div>
             <div className={style.text}>
               <FilterListIcon
                 className={style.logo}
                 sx={{ cursor: "pointer" }}
               />
-              <p>Фильтр</p>
+              <p>Flter</p>
             </div>
             <div className={style.text}>
-              <p>Поделиться</p>
+              <p>Share</p>
             </div>
             <div className={style.text}>
               <span>...</span>
             </div>
+          </div>
+        </div>
       </div>
-      </div>
-      </div>
-     
-    </header>;
+    </header>
+  );
 }
 export default Header

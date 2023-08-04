@@ -79,10 +79,10 @@ const Content:FC<IContentProps>  = ({openModal}) => {
             <StarBorderIcon className={style.starIcon} />
             <div className={style.textBlock}>
               <PeopleAltIcon />
-              <span>Рабочие пространства</span>
+              <span>Workspace visible</span>
             </div>
             <div className={style.board}>
-              <span>Доска</span>
+              <span>Board</span>
               <div className={style.rowDown}>
                 <KeyboardArrowDownIcon />
               </div>
@@ -104,8 +104,7 @@ const Content:FC<IContentProps>  = ({openModal}) => {
                 <StarBorderIcon />
               </div>
               <div className={style.text}>
-                {/* <PeopleAltIcon /> */}
-                <span>Рабочие пространства</span>
+                <span>Workspace visible</span>
               </div>
               <div className={style.board}>
                 <span>Board</span>
@@ -121,25 +120,25 @@ const Content:FC<IContentProps>  = ({openModal}) => {
                 className={style.logo}
                 sx={{ cursor: "pointer" }}
               />
-              <p>Улучшения</p>
+              <p>Power-Ups</p>
             </div>
             <div className={style.text}>
               <ElectricBoltIcon
                 className={style.logo}
                 sx={{ cursor: "pointer" }}
               />
-              <p>Автоматизация</p>
+              <p>Automation</p>
             </div>
             <div className={style.text}>
               <FilterListIcon
                 className={style.logo}
                 sx={{ cursor: "pointer" }}
               />
-              <p>Фильтр</p>
+              <p>filter</p>
             </div>
             <div className={style.text}>
               <ShareIcon className={style.logo} sx={{ cursor: "pointer" }} />
-              <p>Поделиться</p>
+              <p>Share</p>
             </div>
             <div className={style.text}>
               <span>...</span>
@@ -157,24 +156,24 @@ const Content:FC<IContentProps>  = ({openModal}) => {
                   className={style.logo}
                   sx={{ cursor: "pointer" }}
                 />
-                <p>Улучшения</p>
+                <p>Power-Ups</p>
               </div>
               <div className={style.text}>
                 <ElectricBoltIcon
                   className={style.logo}
                   sx={{ cursor: "pointer" }}
                 />
-                <p>Автоматизация</p>
+                <p>Automation</p>
               </div>
               <div className={style.text}>
                 <FilterListIcon
                   className={style.logo}
                   sx={{ cursor: "pointer" }}
                 />
-                <p>Фильтр</p>
+                <p>Filter</p>
               </div>
               <div className={style.text}>
-                <p>Поделиться</p>
+                <p>Share</p>
               </div>
             </div>
           </div>
