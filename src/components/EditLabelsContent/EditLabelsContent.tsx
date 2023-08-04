@@ -1,26 +1,24 @@
-import  { FC, useEffect, useRef, useState } from 'react'
+import  { FC, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import ModeEditOutlineIcon from '@mui/icons-material/ModeEditOutline';
 import style from './EditLabelsContent.module.scss'
-import { IEdit, IStyle } from './EditLabelsContentTypes';
-import { getTemplateMenuState } from 'helpers';
+import { IEdit} from './EditLabelsContentTypes';
+import {  getTemplateMenuStates } from 'helpers';
+import classNames from 'classnames';
 const EditLabelsContent:FC<IEdit> = ({onClose}) => {
     const divContent = useRef<HTMLDivElement >(null);
-   
-    const [currentStyle,setCurrentStyle] = useState<IStyle>({
-        top:0,
-        left:0
-    })
+    const [positionClass,setPositionClass] = useState(false)
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const div = divContent.current;
-        const { top, height,left,width } = div!.getBoundingClientRect();
-        const styleObject =  getTemplateMenuState(top,height,width,left);
-        setCurrentStyle({...styleObject})
-    }, [])
+        const isHidden = getTemplateMenuStates(div!);
+        setPositionClass(isHidden);
+      }, []);
 
 
   return (
-    <div style={{top:`${currentStyle.top}px`,left:`${currentStyle.left}px`}} ref={divContent}  className={style.editLabels}>
+    <div ref={divContent}  className={classNames(style.editLabels,{
+        [style.top]:positionClass
+    })}>
         <div className={style.editLabels_header}>
             <p>Labels</p>
             <span data-name="close" onClick={onClose}>x</span>

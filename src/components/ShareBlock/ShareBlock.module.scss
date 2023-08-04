@@ -33,12 +33,13 @@ hr{
         }
     }
 }
-h5{
-    span{
+
+    .span{
         color:#4a95f8 ;
         cursor: pointer;
+        position: relative;
     }
-}
+
 .top{
     position: absolute;
     top:-5px;

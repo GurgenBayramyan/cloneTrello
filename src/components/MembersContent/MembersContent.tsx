@@ -1,4 +1,4 @@
-import  { FC, useEffect, useRef, useState } from 'react'
+import  { FC,  useLayoutEffect, useRef, useState } from 'react'
 import { IMembersProps} from './MembersContentTypes';
 import {  getTemplateMenuStates } from 'helpers';
 import style from './MembersContent.module.scss'
@@ -11,12 +11,11 @@ const MembersContent:FC<IMembersProps> = ({onClose}) => {
    
     const [positionClass,setPositionClass] = useState(false)
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const div = divContent.current;
-        const { top, height} = div!.getBoundingClientRect();
-        const styleObject =  getTemplateMenuStates(top,height);
-        setPositionClass(styleObject)
-    }, [])
+        const isHidden = getTemplateMenuStates(div!);
+        setPositionClass(isHidden);
+      }, []);
   return (
     <div ref={divContent}   className={classNames(style.members,{
         [style.top]:positionClass

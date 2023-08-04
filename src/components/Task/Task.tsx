@@ -9,7 +9,7 @@ import { setMenu } from "store/slices/showMenuUserSlice/showMenuUserSlice";
 import UserNameIcon from "components/UserNameIcon/UserNameIcon";
 import style from "./Task.module.scss";
 import { setShowMenuUserSelector, setShowOptionDivSelector } from "store/selectors";
-import { getPosition, getPositonShow } from "helpers";
+import {  getPositonShow } from "helpers";
 
 
 const Task: FC<ITask> = ({ openModal }) => {
@@ -28,6 +28,7 @@ const Task: FC<ITask> = ({ openModal }) => {
       inline: 'center'
     })
     const rect = div!.getBoundingClientRect();
+
     dispatch(
       setStyles({
         currentLeft: rect.left,
@@ -40,9 +41,8 @@ const Task: FC<ITask> = ({ openModal }) => {
   const handleOpenMenuUser = (e: MouseEvent<HTMLElement>) => {
     e.stopPropagation();
     const div = nameRef.current;
-    const { height, top , width, left } = div!.getBoundingClientRect();
+    const { top , width, left } = div!.getBoundingClientRect();
     const newObj = getPositonShow(top,left,width,flag.show);
-    console.log(newObj)
     dispatch(setMenu(newObj))
     
   }

@@ -15,28 +15,30 @@ import MembersInfo from "components/MembersInfo/MembersInfo";
 import CoverInfo from "components/CoverInfo/CoverInfo";
 import MoveInfo from "components/MoveInfo/MoveInfo";
 import CopyInfo from "components/CopyInfo/CopyInfo";
-import { setShowMenuUserSelector, taskSettingsSliceSelector } from "store/selectors";
+import { setShowMenuUserSelector, setShowOptionDivSelector, taskSettingsSliceSelector } from "store/selectors";
 import style from "./TaskSettings.module.scss";
 
 
 const TaskSettings = ({ taskName, openModal}: ITaskSettings) => {
   const styles = useAppSelector(taskSettingsSliceSelector);
-  const { show } = useAppSelector(setShowMenuUserSelector);
+  const { show } = useAppSelector(setShowOptionDivSelector);
   const dispatch = useAppDispatch();
   const [postion,setPosition] = useState<number>(0)
   const refBlock = useRef<HTMLDivElement>(null);
 
-
  useEffect(() => {
-   if ((styles.currentTop + refBlock.current!.offsetHeight) > window.innerHeight) {
-      const newTop = styles.currentTop + refBlock.current!.offsetHeight - window.innerHeight;
-      setPosition(newTop + 50)
+   if (
+     styles.currentTop + refBlock.current!.offsetHeight >
+     window.innerHeight
+   ) {
+     const newTop =
+       styles.currentTop + refBlock.current!.offsetHeight - window.innerHeight;
+     setPosition(newTop + 50);
+   } else {
+     setPosition(0);
    }
-   else{
-    setPosition(0)
-  }
-  
  }, [show]);
+ 
   const openModalAndCloseAll = ()=>{
     dispatch(setShowOptionDiv(!show))
     dispatch(setStyles({
@@ -44,7 +46,6 @@ const TaskSettings = ({ taskName, openModal}: ITaskSettings) => {
       currentTop:-600
     }))
     openModal()
-   
   }
   
   return (

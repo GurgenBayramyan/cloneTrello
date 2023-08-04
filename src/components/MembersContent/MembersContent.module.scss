@@ -34,7 +34,5 @@
     }
 }
 .top{
-    position: absolute;
-    top:-5px;
-    transform: translateY(-100%);
+    @include topStyle;
 }

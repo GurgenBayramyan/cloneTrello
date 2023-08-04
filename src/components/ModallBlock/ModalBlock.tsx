@@ -29,7 +29,7 @@ import CoverContent from "components/CoverContent/CoverContent";
 import CustomContent from "components/CustomContent/CustomContent";
 import MoveContent from "components/MoveContent/MoveContent";
 import CopyBlock from "components/CopyBlock/CopyBlock";
-import RefreshIcon from '@mui/icons-material/Refresh';
+import RefreshIcon from "@mui/icons-material/Refresh";
 import UserNameIcon from "components/UserNameIcon/UserNameIcon";
 import ShareBlock from "components/ShareBlock/ShareBlock";
 import UpModalComponent from "components/UpModalComponent/UpModalComponent";
@@ -47,13 +47,13 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
   const [valueInput, setValueInput] = useState("Axios");
   const dispatch = useAppDispatch();
   const modalState = useAppSelector(modalBlockSelector);
-  const[hide,setHide] = useState(false)
-  const [showUp,setShowUp] = useState(false);
+  const [hide, setHide] = useState(false);
+  const [showUp, setShowUp] = useState(false);
   const [state, setState] = useState<IModalState>({
     taskDesc: true,
     comment: false,
   });
-  const [deleteModal,setDeleteModal] = useState(false)
+  const [deleteModal, setDeleteModal] = useState(false);
   const MembersModal = Openable(
     () => <MembersContent />,
     "members",
@@ -118,17 +118,17 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
   };
   const openArchiveBlock = () => {
     dispatch(setShow(false));
-    setShowUp(!showUp)
-  }
+    setShowUp(!showUp);
+  };
   const handleClose = () => {
-    setShowUp(false)
-  }
+    setShowUp(false);
+  };
   const handleChangeHide = () => {
-    setHide(!hide)
-  }
-  const openDeleteModal =() => {
-    setDeleteModal(!deleteModal)
-  }
+    setHide(!hide);
+  };
+  const openDeleteModal = () => {
+    setDeleteModal(!deleteModal);
+  };
   return (
     <div
       onClick={openModal}
@@ -136,10 +136,9 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
         [style.isActive]: showModal,
       })}
     >
-      <div  onClick={(e) => e.stopPropagation()} className={style.task_desc}>
-        {!!deleteModal && <DeleteModal  onClose={openDeleteModal}/>}
-        {!!modalState.upModalShow  && <UpModalComponent onClose={openModal} />}
-        {!!showUp && <Archive  onClose={openModal}/>}
+      <div onClick={(e) => e.stopPropagation()} className={style.task_desc}>
+        {!!modalState.upModalShow && <UpModalComponent onClose={openModal} />}
+        {!!showUp && <Archive onClose={openModal} />}
         <div className={style.modalBlock}>
           <div className={style.modalBlock_header}>
             <div className={style.taskName}>
@@ -153,7 +152,7 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
                   value={valueInput}
                 />
               </div>
-              {(!modalState.upModalShow && !showUp )&& (
+              {!modalState.upModalShow && !showUp && (
                 <div onClick={openModal} className={style.closeBlock}>
                   <span>x</span>
                 </div>
@@ -331,13 +330,20 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
                   <span>Send to board</span>
                 </div>
               )}
-              {(!!showUp || modalState.upModalShow ) && (
-                <div onClick={openDeleteModal}  className={style.coostomDelete}>
-                  <RemoveIcon sx={{ fontSize: "15px" }} />
-                  <span>Delete</span>
+              {(!!showUp || modalState.upModalShow) && (
+                <div className={style.section}>
+                  
+                  <div
+                    onClick={openDeleteModal}
+                    className={style.coostomDelete}
+                  >
+                    <RemoveIcon sx={{ fontSize: "15px" }} />
+                    <span>Delete</span>
+                  </div>
+                  {!!deleteModal && <DeleteModal onClose={openDeleteModal} />}
                 </div>
               )}
-              {(!modalState.upModalShow && !showUp) &&  (
+              {!modalState.upModalShow && !showUp && (
                 <div onClick={openArchiveBlock} className={style.coostomBlock}>
                   <PhotoAlbumIcon sx={{ fontSize: "15px" }} />
                   <span>Archive</span>
@@ -345,8 +351,16 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
               )}
               {modalState.upModalShow && (
                 <div onClick={handleChangeHide} className={style.coostomBlock}>
-                 {!hide ?  <RemoveFromQueueIcon sx={{ fontSize: "15px" }} /> : <RefreshIcon  sx={{fontSize:"15px"}}/>}
-                 {!hide ?  <span>Hide from list</span> : <span>Show in list</span>}
+                  {!hide ? (
+                    <RemoveFromQueueIcon sx={{ fontSize: "15px" }} />
+                  ) : (
+                    <RefreshIcon sx={{ fontSize: "15px" }} />
+                  )}
+                  {!hide ? (
+                    <span>Hide from list</span>
+                  ) : (
+                    <span>Show in list</span>
+                  )}
                 </div>
               )}
               <ShareModal />

@@ -3,34 +3,45 @@ import {
   ChangeEvent,
   FC,
   FocusEvent,
-  useEffect,
+  useLayoutEffect,
   useRef,
   useState,
 } from "react";
 import { ICShareProps } from "./ShareBlockTypes";
 import style from "./ShareBlock.module.scss";
 import classNames from "classnames";
+import DeleteModal from "components/DeleteModal/DeleteModal";
 
 const ShareBlock: FC<ICShareProps> = ({ onClose }) => {
   const divContent = useRef<HTMLDivElement>(null);
   const [value, setValue] = useState("https://trello.com/c/ztTF2o19");
-  const [positionClass,setPositionClass] = useState(false)
-  const handleFocus = (e: FocusEvent<HTMLInputElement>) => e.currentTarget.select();
+  const [positionClass, setPositionClass] = useState(false);
+  const handleFocus = (e: FocusEvent<HTMLInputElement>) =>
+    e.currentTarget.select();
 
-  const changeInputValue = (e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
-  useEffect(() => {
+  const changeInputValue = (e: ChangeEvent<HTMLInputElement>) =>
+    setValue(e.target.value);
+  const [opendelete, setopenDelete] = useState(false);
+  
+  useLayoutEffect(() => {
     const div = divContent.current;
-    const { top, height } = div!.getBoundingClientRect();
-    const styleObject = getTemplateMenuStates(top, height);
-   setPositionClass(styleObject)
+    const isHidden = getTemplateMenuStates(div!);
+    setPositionClass(isHidden);
   }, []);
+
+  const openDeleteBlock = () => {
+    setopenDelete(!opendelete)
+  }
+ 
   return (
+
     <div
-      className={classNames(style.share,{
-        [style.top]:positionClass
+      className={classNames(style.share, {
+        [style.top]: positionClass,
       })}
       ref={divContent}
     >
+     
       <div className={style.share_header}>
         <p>Share and more...</p>
         <span data-name="close" onClick={onClose}>
@@ -63,13 +74,7 @@ const ShareBlock: FC<ICShareProps> = ({ onClose }) => {
       <div className={style.labelBlock}>
         <label htmlFor="inptwo">Embed this Card</label>
         <div className={style.LinkToCard}>
-          <input
-            id="inptwo"
-            type="text"
-            value={
-              `${window.location.href}`
-            }
-          />
+          <input id="inptwo" type="text" value={`${window.location.href}`} />
         </div>
       </div>
       <div className={style.labelBlock}>
@@ -86,9 +91,10 @@ const ShareBlock: FC<ICShareProps> = ({ onClose }) => {
         Emails sent to this address will appear as a comment by you on the card
       </h5>
       <hr />
-      <h5>
-        Card #2 Added an hour ago . <span>Delete</span>
-      </h5>
+      <div onClick={openDeleteBlock}>
+          Card #2 Added an hour ago . <span className={style.span} >Delete {opendelete && <DeleteModal  onClose={openDeleteBlock}/>}</span>
+      </div>
+      
     </div>
   );
 };

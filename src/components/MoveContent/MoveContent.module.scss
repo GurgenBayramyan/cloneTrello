@@ -9,3 +9,6 @@
     margin-top: 7px;
 }
 }
+.top{
+    @include topStyle;
+}
