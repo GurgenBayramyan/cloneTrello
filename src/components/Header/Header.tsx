@@ -99,7 +99,7 @@ const  Header = () => {
         </div>
         <div onClick={openCreateSection} className={style.header_navbar_search}>
             <span>Create</span>
-            {createContent && <CreateContent />}
+            {createContent && <CreateContent  onClose={openCreateSection} />}
         </div>
       </div>
       <div>
