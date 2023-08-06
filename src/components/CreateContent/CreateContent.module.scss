@@ -150,3 +150,81 @@
         font-weight: 800;
     }  
 }
+.labelBlock{
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    label{
+        margin-bottom: 2px;
+        span{
+            color: red;
+        }
+    }
+    input{
+        padding: 8px 10px;
+        outline: none;
+        border: 2px solid rgba(57, 142, 240, 0.774) ;
+        background-color: #1e2024;
+        color: white;
+        &:focus{
+            border: 2px solid rgba(57, 142, 240, 0.774) ;
+        }
+        &:hover{
+            border:  2px solid rgb(255, 94, 0);
+            background-color: #292b30;
+        }
+    }
+    p{
+        margin-top: 5px;
+    }
+}
+.selectBlock{
+    margin-top: 15px;
+  
+}
+.select{
+    margin-top: 2px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #1e2024;
+    width: 100%;
+    border: 2px solid rgb(168, 166, 166);
+    padding: 3px 10px;
+    &:hover{
+        background-color: #292b30;
+    }
+    span{
+        align-self: center;
+        color: white;
+    }
+
+}
+.btns{
+    margin-top: 14px;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    button{
+        padding: 9px 5px;
+        border-radius: 6px;
+    }
+    .createBtn{
+        background-color: #5e656d;
+        color: #9fadbcb4;
+        cursor: not-allowed;   
+    }
+    .templateBtn{
+        background-color: #616b75;
+        color: #fbfdff;
+    }
+}
+.paragBlock{
+    margin-top: 8px;
+    font-size: 12px;
+    span{
+        color: #9fadbc;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+}

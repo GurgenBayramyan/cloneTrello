@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ILogin } from "./LoginTypes";
 import { schemaLogin } from "schemas";

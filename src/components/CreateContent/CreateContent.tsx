@@ -1,12 +1,25 @@
-import style from './CreateContent.module.scss'
 import ViewTimelineIcon from '@mui/icons-material/ViewTimeline';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import PhotoSizeSelectSmallIcon from '@mui/icons-material/PhotoSizeSelectSmall';
 import { FC, MouseEvent, useState } from 'react';
-import { ICreateProps } from './CreateContentTypes';
+import { ICreateProps, IFormState } from './CreateContentTypes';
+import {SubmitHandler, useForm } from "react-hook-form";
+import style from './CreateContent.module.scss'
 const CreateContent:FC<ICreateProps> = ({onClose}) => {
     const [content, setContent] = useState(true);
     const [classNameBlock,setClassNameBlock] = useState<string>("");
+    const {
+      register,
+      handleSubmit,
+      formState: { errors },
+      reset,
+    } = useForm<{ boardTitle: string }>({
+      mode: "onTouched"
+    });
+    const onSubmit:SubmitHandler<IFormState> = (data) => {
+        console.log(data)
+    }
     const handleAddBackgraund = (e: React.MouseEvent<HTMLDivElement>) => {
       setClassNameBlock(e.currentTarget.className);
   };
@@ -15,7 +28,7 @@ const CreateContent:FC<ICreateProps> = ({onClose}) => {
     }
     const stopProp = (e:MouseEvent)=> e.stopPropagation()
     return content ? (
-      <div onClick={stopProp} className={style.creatBoardParent}>
+      <div  onClick={stopProp} className={style.creatBoardParent}>
         <div onClick={handleClick} className={style.createBoard}>
           <div className={style.iconsBlock}>
             <ViewTimelineIcon sx={{ fontSize: "15px" }} />
@@ -79,8 +92,29 @@ const CreateContent:FC<ICreateProps> = ({onClose}) => {
               </div>
             </div>
         </div>
-        <form>
-          
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className={style.labelBlock}>
+              <label htmlFor="boardTitle">Board Title <span>*</span></label>
+              <input autoFocus  type="text" id='boardTitle' {...register("boardTitle",{required:"👋  Board title is required"})} />
+              <p>{errors.boardTitle?.message}</p>
+          </div>
+            
+           <div className={style.selectBlock}>
+              <label>Visability</label>
+              <div  className={style.select}>
+                  <span>Workspace</span>
+                  <div className={style.iconBlock}>
+                      <KeyboardArrowDownIcon />
+                  </div>
+              </div>
+           </div> 
+           <div className={style.btns}>
+                <button  className={style.createBtn} type='submit'>Create</button>
+                <button className={style.templateBtn}>Start with a template</button>
+           </div>
+           <div className={style.paragBlock}>
+              <p>By using  images from  Unsplash, you agree to their <span>license</span> and <span>Terms of Service</span></p>
+           </div>
         </form>
         
       </div>
