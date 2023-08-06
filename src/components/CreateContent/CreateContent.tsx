@@ -6,6 +6,7 @@ import { FC, MouseEvent, useState } from 'react';
 import { ICreateProps, IFormState } from './CreateContentTypes';
 import {SubmitHandler, useForm } from "react-hook-form";
 import style from './CreateContent.module.scss'
+import classNames from 'classnames';
 const CreateContent:FC<ICreateProps> = ({onClose}) => {
     const [content, setContent] = useState(true);
     const [classNameBlock,setClassNameBlock] = useState<string>("");
@@ -13,10 +14,11 @@ const CreateContent:FC<ICreateProps> = ({onClose}) => {
       register,
       handleSubmit,
       formState: { errors },
-      reset,
+      watch,
     } = useForm<{ boardTitle: string }>({
       mode: "onTouched"
     });
+    const value = watch("boardTitle");
     const onSubmit:SubmitHandler<IFormState> = (data) => {
         console.log(data)
     }
@@ -96,7 +98,7 @@ const CreateContent:FC<ICreateProps> = ({onClose}) => {
           <div className={style.labelBlock}>
               <label htmlFor="boardTitle">Board Title <span>*</span></label>
               <input autoFocus  type="text" id='boardTitle' {...register("boardTitle",{required:"👋  Board title is required"})} />
-              <p>{errors.boardTitle?.message}</p>
+              {!value ? <p>👋  Board title is required</p>:null}
           </div>
             
            <div className={style.selectBlock}>
@@ -109,7 +111,9 @@ const CreateContent:FC<ICreateProps> = ({onClose}) => {
               </div>
            </div> 
            <div className={style.btns}>
-                <button  className={style.createBtn} type='submit'>Create</button>
+                <button  className={classNames(style.createBtn,{
+                  [style.activeCreate]:value
+                })} type='submit'>Create</button>
                 <button className={style.templateBtn}>Start with a template</button>
            </div>
            <div className={style.paragBlock}>

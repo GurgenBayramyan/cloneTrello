@@ -168,6 +168,7 @@
         color: white;
         &:focus{
             border: 2px solid rgba(57, 142, 240, 0.774) ;
+            background-color: #1e2024;
         }
         &:hover{
             border:  2px solid rgb(255, 94, 0);
@@ -188,14 +189,15 @@
     justify-content: space-between;
     background-color: #1e2024;
     width: 100%;
-    border: 2px solid rgb(168, 166, 166);
+    border: 2px solid #384149;
     padding: 3px 10px;
     &:hover{
         background-color: #292b30;
     }
     span{
         align-self: center;
-        color: white;
+        color: #9fadbc;
+
     }
 
 }
@@ -209,13 +211,25 @@
         border-radius: 6px;
     }
     .createBtn{
-        background-color: #5e656d;
+        background-color: #2E353B;
         color: #9fadbcb4;
         cursor: not-allowed;   
     }
+    .activeCreate{
+        background-color: #579DFF;
+        color: #1D2125;
+        cursor: pointer;
+        &:hover{
+            background-color: #76aefd;
+        }
+        
+    }
     .templateBtn{
-        background-color: #616b75;
+        background-color: #323940;
         color: #fbfdff;
+        &:hover{
+            background-color:#515b6496 ;
+        }
     }
 }
 .paragBlock{
