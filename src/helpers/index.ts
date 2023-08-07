@@ -123,3 +123,17 @@ export const getPosition = (
     return false
   }
 };
+
+export const getChangeDivPosition = (top:number,left:number) => {
+  const minus = (top +300) - window.innerHeight
+    if(top + 300 > window.innerHeight){
+      return {
+        top: top -minus  - 50,
+        left:left
+      }
+    }
+    return {
+      top:top + 50,
+      left:left
+    }
+}

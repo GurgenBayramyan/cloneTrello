@@ -4,6 +4,8 @@ import taskSettingsSlice from "./slices/taskSettings/taskSettingsSlice";
 import showOptionDivSlice from "./slices/showOptiondivSlice/showOptionDivSlice";
 import showMenuUserSlice from "./slices/showMenuUserSlice/showMenuUserSlice";
 import ModalSlice from "./slices/modalSlice/modalSlice";
+import workspaceSlice from "./slices/workspaceSlice/workspaceSlice";
+import backgraundSlice from "./slices/backgraundMenuSlice/backgraundMenuSlice";
 
 
 export const rootReducer = combineReducers({
@@ -11,5 +13,7 @@ export const rootReducer = combineReducers({
     [taskSettingsSlice.name] : taskSettingsSlice.reducer,
     [showOptionDivSlice.name] : showOptionDivSlice.reducer,
     [showMenuUserSlice.name]:showMenuUserSlice.reducer,
-    [ModalSlice.name]:ModalSlice.reducer
+    [ModalSlice.name]:ModalSlice.reducer,
+    [workspaceSlice.name]:workspaceSlice.reducer,
+    [backgraundSlice.name]:backgraundSlice.reducer
 })

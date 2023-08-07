@@ -15,3 +15,12 @@ export interface IErrorObjectForAlert{
     repeatPassword?:IErrorcase
     
 }
+export enum PageLocation{
+    CREATEMENU = "CreateMenu",
+    CREATEBOARD = "CreateBoard"
+}
+export enum Menus{
+    WORKSPACE = "Workspace",
+    PRIVATE = "Private",
+    PUBLIC = "Public"
+}

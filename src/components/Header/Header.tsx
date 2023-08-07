@@ -22,7 +22,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import { ToastOptions, toast } from "react-toastify";
 import UserNameIcon from "components/UserNameIcon/UserNameIcon";
 import { contentSliceSelector } from "store/selectors";
-import CreateContent from "components/CreateContent/CreateContent";
+import CreateMenu from "components/CreateMenu/CreateMenu";
 
 
 const  Header = () => {
@@ -31,7 +31,6 @@ const  Header = () => {
         menuView:true,
         userMenu:true
     })
-    const[createContent,setCreatContent] = useState(false)
     const{data}=useAppSelector(contentSliceSelector);
     const navigate = useNavigate();
     const dispatch =  useAppDispatch()
@@ -69,9 +68,6 @@ const  Header = () => {
      navigate("login");
     }
 
-    const openCreateSection = () => {
-      setCreatContent(!createContent)
-    }
   return (
     <header className={style.header}>
       <div className={style.header_navbar}>
@@ -97,10 +93,7 @@ const  Header = () => {
           <span>Templates</span>
           <KeyboardArrowDownIcon sx={{ cursor: "pointer" }} />
         </div>
-        <div onClick={openCreateSection} className={style.header_navbar_search}>
-            <span>Create</span>
-            {createContent && <CreateContent  onClose={openCreateSection} />}
-        </div>
+        <CreateMenu />
       </div>
       <div>
         <MenuIcon onClick={handleOpenMenu} className={style.header_menuIcon} />
