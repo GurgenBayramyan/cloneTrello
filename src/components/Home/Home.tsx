@@ -10,16 +10,14 @@ import ModalBlock from "components/ModallBlock/ModalBlock";
 import UserSection from "components/UserSection/UserSection";
 import WorkspaceContent from "components/WorkspaceContent/WorkspaceContent";
 import style from "./Home.module.scss";
-import { visibilitySelector } from "store/selectors";
+import BoardBackgraund from "components/BoardBackgraund/BoardBackgraund";
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
-  const visibility = useAppSelector(visibilitySelector);
   const openModal = () => {
     setShowModal(!showModal);
   };
   const { show } = useAppSelector((state) => state.setShowOptionDiv);
-
   const dispatch = useAppDispatch();
   const setOption = () => {
     dispatch(
@@ -33,7 +31,8 @@ const Home = () => {
   return (
     <>
       <UserSection />
-      {visibility.show && <WorkspaceContent />}
+      <BoardBackgraund />
+       <WorkspaceContent />
       <ModalBlock openModal={openModal} showModal={showModal} />
       <TaskSettings openModal={openModal} taskName="TaskName" />
       <div
@@ -43,6 +42,7 @@ const Home = () => {
         })}
       ></div>
       <Header />
+      
       <Content openModal={openModal} />
     </>
   );

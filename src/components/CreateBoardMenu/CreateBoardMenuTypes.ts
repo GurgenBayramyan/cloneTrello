@@ -1,4 +1,4 @@
 export interface ICreateBoardsMenu{
-    openCreateSection:() => void
-    goToMain:() => void
+    openCreateSection?:() => void
+    goToMain?:() => void
 }

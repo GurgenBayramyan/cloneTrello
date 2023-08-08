@@ -2,16 +2,22 @@ import ViewTimelineIcon from '@mui/icons-material/ViewTimeline';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import PhotoSizeSelectSmallIcon from '@mui/icons-material/PhotoSizeSelectSmall';
 import style from './CreateMenuContent.module.scss'
-import { FC, MouseEvent } from 'react';
+import { FC} from 'react';
 import { ICreateProps } from './CreateMenuContentTypes';
-import { PageLocation } from 'types';
+import { useAppDispatch, useAppSelector } from 'hooks/changDispatchSekector';
+import { popupsSelector } from 'store/selectors';
+import { goToCreateBoard } from 'store/slices/popupsSlice/popupSlice';
 
-const CreateMenuContent:FC<ICreateProps> = ({goToCreateBoard}) => {
-    const stopProp = (e:MouseEvent)=> e.stopPropagation()
-  
+const CreateMenuContent:FC<ICreateProps> = () => {
+  const {menuState} = useAppSelector(popupsSelector);
+  const dispatch = useAppDispatch();
+
+    const locationBoard = () => {
+      dispatch(goToCreateBoard())
+    }
   return (
-    <div  onClick={stopProp} className={style.creatBoardParent}>
-    <div onClick={goToCreateBoard} className={style.createBoard}>
+    <div  className={style.creatBoardParent}>
+    <div onClick={locationBoard} className={style.createBoard}>
       <div  className={style.iconsBlock}>
         <ViewTimelineIcon sx={{ fontSize: "15px" }} />
         <p>Create board</p>

@@ -1,24 +1,46 @@
-import { FC, MouseEvent, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import classNames from "classnames";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { ICreateBoardsMenu } from "./CreateBoardMenuTypes";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
-import { visibilitySelector } from "store/selectors";
-import { setClose, setPosition } from "store/slices/workspaceSlice/workspaceSlice";
+import { closeMenu, goToMain, openBackMenuBlock, openCreateSection, setClassName, setClose, setPosition, setPositionCurrent } from "store/slices/popupsSlice/popupSlice";
 import { getChangeDivPosition} from "helpers";
+import { PageLocation } from "types";
 import style from "./Createboard.module.scss";
+import { popupsSelector } from "store/selectors";
+import { setBoard } from "services/autication";
 
-const CreateboardMenu:FC<ICreateBoardsMenu> = ({openCreateSection,goToMain}) => {
-  const [classNameBlock, setClassNameBlock] = useState<string>("");
+
+const CreateboardMenu:FC<ICreateBoardsMenu> = () => {
+  
   const divRef = useRef<HTMLDivElement>(null)
+  const parentRef = useRef<HTMLDivElement>(null)
   const dispatch = useAppDispatch();
-  const visibility = useAppSelector(visibilitySelector)
+  const visibility = useAppSelector(popupsSelector)
   const handleAddBackgraund = (e: React.MouseEvent<HTMLDivElement>) => {
-    setClassNameBlock(e.currentTarget.className);
+    dispatch(setClassName(e.currentTarget.className));
   };
 
-  const stopProp = (e: MouseEvent) => e.stopPropagation();
+  const openBackMenu = () => {
+    const {top,right} = parentRef.current!.getBoundingClientRect()
+    dispatch(setPositionCurrent({
+      top,
+      right,
+    }))
+    dispatch(openBackMenuBlock(!visibility.backgroundState.show))
+  }
+  const locationMain = () =>{
+    dispatch(goToMain(PageLocation.CREATEMENU))
+  }
+ 
+  const openMenu = () => {
+    dispatch(openCreateSection({
+      menuActive:!visibility.menuState.menuActive,
+      menuBlock:(PageLocation.CREATEMENU)
+    }))
+ }
+ 
   const {
     register,
     handleSubmit,
@@ -35,23 +57,24 @@ const CreateboardMenu:FC<ICreateBoardsMenu> = ({openCreateSection,goToMain}) => 
     const{top,left} = block.getBoundingClientRect();
     const findPosition = getChangeDivPosition(top,left)
     dispatch(setPosition(findPosition))
-    dispatch(setClose(!visibility.show))
+    dispatch(setClose(!visibility.workspace.show))
   }
   const onSubmit: SubmitHandler<{boardTitle: string }> = (data) => {
-
+    const resp = setBoard(data.boardTitle);
+    console.log(resp)
   };
   return (
-    <div onClick={stopProp} className={style.creatBoardParentTwo}>
+    <div className={style.creatBoardParentTwo}>
       <div className={style.creatBoardParentTwo_header}>
-        <div onClick={goToMain} className={style.rightIcon}>
+        <div onClick={locationMain} className={style.rightIcon}>
           <span className={style.left}>{"<"}</span>
         </div>
         <span className={style.boardTitle}>Create board</span>
-        <div onClick={openCreateSection} className={style.rightIcon}>
+        <div onClick={openMenu} className={style.rightIcon}>
           <span>x</span>
         </div>
       </div>
-      <div className={`${style.backgraundImg} ${classNameBlock}`}>
+      <div className={`${style.backgraundImg} ${visibility.className}`}>
         <div className={style.childBackgraundImg}>
           <img
             src="https://trello.com/assets/14cda5dc635d1f13bc48.svg"
@@ -109,7 +132,7 @@ const CreateboardMenu:FC<ICreateBoardsMenu> = ({openCreateSection,goToMain}) => 
             className={style.selectBackgraundDownE}
             title="🍑"
           ></div>
-          <div className={style.selectBackgraundDownF}>
+          <div ref ={parentRef} data-name="divparents" tabIndex={0} onClick={openBackMenu} className={style.selectBackgraundDownF}>
             <span>...</span>
           </div>
         </div>
@@ -133,7 +156,7 @@ const CreateboardMenu:FC<ICreateBoardsMenu> = ({openCreateSection,goToMain}) => 
         <div  className={style.selectBlock}>
           <label>Visability</label>
           <div ref={divRef} onClick={openVisibility} className={style.select}>
-            <span>{visibility.content}</span>
+            <span>{visibility.workspace.content}</span>
             <div className={style.iconBlock}>
               <KeyboardArrowDownIcon />
             </div>

@@ -131,11 +131,16 @@
 }
 .selectBackgraundDownF{
     background: #626c77;
-    text-align: center;
+    display: flex;
+    justify-content: center;
     span{
+        margin-top: 4px;
         color: white;
         font-weight: 800;
     }  
+    &:hover{
+        background: #8e959c;
+    }
 }
 .labelBlock{
     margin-top: 25px;

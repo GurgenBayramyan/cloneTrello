@@ -1,12 +1,11 @@
-import DeleteModal from "components/DeleteModal/DeleteModal"
+
 import style from "./ErrorPage.module.scss"
-import Templates from 'components/Templates/Templates'
-import WorkspaceContent from "components/WorkspaceContent/WorkspaceContent"
+import BoardBackgraund from "components/BoardBackgraund/BoardBackgraund"
 
 
 const ErrorPage = ()=> {
   return (
-    <div className={style.id}><WorkspaceContent /></div>
+    <div className={style.id}><BoardBackgraund /></div>
   )
 }
 

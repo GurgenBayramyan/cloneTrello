@@ -25,7 +25,11 @@ export const postRegistration = async(data:IRegistration) => {
     }
 }
 
-export const getprofileInfo = async() => {
+export const setBoard = async(title:string) => {
+    const url = `https://young-citadel-44598.herokuapp.com/boards`
+    const resp = await axios.post(url, {name: title},{withCredentials: true})
+
+    
     
 } 
 
