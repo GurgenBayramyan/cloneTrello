@@ -1,17 +1,16 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useRef} from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import classNames from "classnames";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { ICreateBoardsMenu } from "./CreateBoardMenuTypes";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
-import { closeMenu, goToMain, openBackMenuBlock, openCreateSection, setClassName, setClose, setPosition, setPositionCurrent } from "store/slices/popupsSlice/popupSlice";
+import {  goToMain, openBackMenuBlock, openCreateSection, setClassName, setClose, setPosition, setPositionCurrent } from "store/slices/popupsSlice/popupSlice";
 import { getChangeDivPosition} from "helpers";
 import { PageLocation } from "types";
-import style from "./Createboard.module.scss";
 import { popupsSelector } from "store/selectors";
-import { setBoard } from "services/autication";
 import { useNavigate } from "react-router-dom";
-
+import { setBoardDataAction } from "store/actionTypes";
+import style from "./Createboard.module.scss";
 
 const CreateboardMenu:FC<ICreateBoardsMenu> = () => {
   const navigate = useNavigate();
@@ -19,6 +18,7 @@ const CreateboardMenu:FC<ICreateBoardsMenu> = () => {
   const parentRef = useRef<HTMLDivElement>(null)
   const dispatch = useAppDispatch();
   const visibility = useAppSelector(popupsSelector)
+  const board = useAppSelector(state => state.boardSlice)
   const handleAddBackgraund = (e: React.MouseEvent<HTMLDivElement>) => {
     dispatch(setClassName(e.currentTarget.className));
   };
@@ -61,10 +61,10 @@ const CreateboardMenu:FC<ICreateBoardsMenu> = () => {
     dispatch(setClose(!visibility.workspace.show))
   }
   const onSubmit: SubmitHandler<{boardTitle: string }> = async(data) => {
-    const resp = await setBoard(data.boardTitle);
-    navigate(`/${resp.data.id}`)
-    console.log(resp.data)
+    dispatch(setBoardDataAction({ boardTitle: data.boardTitle }));
+    
   };
+  
   return (
     <div className={style.creatBoardParentTwo}>
       <div className={style.creatBoardParentTwo_header}>

@@ -5,9 +5,11 @@ import BackupTableIcon from "@mui/icons-material/BackupTable";
 import Task from "components/Task/Task";
 import OptionList from "components/OptionList/OptionList";
 import Templates from "components/Templates/Templates";
+import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
+import { setShowModal } from "store/slices/modalSlice/modalSlice";
 
 
-const List: FC<IListProps> = ({ title, openModal }) => {
+const List: FC<IListProps> = ({ title}) => {
   const [changeTitle, setChangeTitle] = useState(title);
   const [showMenuUser,setShowMenuUser] = useState(false)
   const [listState, setListState] = useState<IListState>({
@@ -16,7 +18,11 @@ const List: FC<IListProps> = ({ title, openModal }) => {
 
   });
   const divRef = useRef<HTMLDivElement>(null)
-
+  const dispatch = useAppDispatch();
+  const modal = useAppSelector(state => state.modallMeniu)
+  const openModal = () => {
+    dispatch(setShowModal(!modal.upModalShow))
+  };
   const handleChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChangeTitle(event.target.value);
   };
@@ -69,16 +75,16 @@ const List: FC<IListProps> = ({ title, openModal }) => {
         <OptionList />
       </div>
       <div className={style.tasks}>
-        <Task openModal={openModal} />
-        <Task openModal={openModal} />
-        <Task openModal={openModal} />
-        <Task openModal={openModal} />
-        <Task openModal={openModal} />
-        <Task openModal={openModal} />
-        <Task openModal={openModal} />
-        <Task openModal={openModal} />
-        <Task openModal={openModal} />
-        <Task openModal={openModal} />
+        <Task />
+        <Task />
+        <Task />
+        <Task />
+        <Task />
+        <Task />
+        <Task />
+        <Task />
+        <Task />
+        <Task />
 
         {listState.addCard ? (
           <div className={style.addCardActive}>
@@ -121,7 +127,7 @@ const List: FC<IListProps> = ({ title, openModal }) => {
             <BackupTableIcon    sx={{ cursor: "pointer", fontSize: "12px" }} />
             </button>
            
-           {showMenuUser &&  <Templates onClose={closeUserMenu} openModal={openModal}/>}
+           {showMenuUser &&  <Templates onClose={closeUserMenu} />}
           </div>
         </div>
       )}

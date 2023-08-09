@@ -3,11 +3,12 @@ import { rootReducer } from './rootReducer'
 import saga from  'redux-saga'
 import { all, fork } from 'redux-saga/effects'
 import { watchUserSaga } from 'sagas/userData/getUserData'
+import { watchSetBoardSaga } from 'sagas/boardsData/setBoardsData'
 
 const sagaMiddleware = saga()
 
 function* RootSaga() {
-    yield all([fork(watchUserSaga)])
+    yield all([fork(watchUserSaga),fork(watchSetBoardSaga)])
 
 }
 

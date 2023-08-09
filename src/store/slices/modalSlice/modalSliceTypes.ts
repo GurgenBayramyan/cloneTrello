@@ -1,3 +1,4 @@
 export interface IInitState{
-    upModalShow:boolean
+    upModalShow:boolean,
+    showModal:boolean
 }

@@ -10,15 +10,19 @@ import UserNameIcon from "components/UserNameIcon/UserNameIcon";
 import style from "./Task.module.scss";
 import { setShowMenuUserSelector, setShowOptionDivSelector } from "store/selectors";
 import {  getPositonShow } from "helpers";
+import { setShowModal } from "store/slices/modalSlice/modalSlice";
 
 
-const Task: FC<ITask> = ({ openModal }) => {
+const Task: FC<ITask> = () => {
   const dispatch = useAppDispatch();
   const { show } = useAppSelector(setShowOptionDivSelector);
   const flag = useAppSelector(setShowMenuUserSelector)
   const taskDiv = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLDivElement>(null);
-
+  const modal = useAppSelector(state => state.modallMeniu)
+  const openModal = () => {
+    dispatch(setShowModal(!modal.showModal))
+  };
   const positionAndShow = useAppSelector(setShowMenuUserSelector);
   const openInfoSection = (e: MouseEvent<HTMLElement>) => {
     e.stopPropagation();

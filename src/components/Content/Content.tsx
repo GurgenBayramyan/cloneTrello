@@ -1,7 +1,4 @@
-import React, { FC,  useRef, useState } from "react";
-import style from "./Content.module.scss";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import { FC,  useRef, useState } from "react";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -13,23 +10,21 @@ import ShareIcon from '@mui/icons-material/Share';
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import List from "components/List/List";
 import AddBlock from "components/AddBlock/AddBlock";
-import { IContentProps } from "./ContentTypes";
+import style from "./Content.module.scss";
 
-const Content:FC<IContentProps>  = ({openModal}) => {
+
+
+const Content:FC = () => {
   const [state, setState] = useState<{
-    open: boolean;
     menu: boolean;
     leftMenu: boolean;
   }>({
-    open: true,
     menu: true,
     leftMenu: true
   });
- 
+
   const scrollRef = useRef<HTMLDivElement>(null)
-  const handleMenu = () => {
-    setState({ ...state, open: !state.open });
-  };
+
   const handleOpenMenu = () => {
     setState({ ...state, menu: !state.menu });
   };
@@ -38,40 +33,7 @@ const Content:FC<IContentProps>  = ({openModal}) => {
     setState({ ...state, leftMenu: !state.leftMenu })
   };
   
-
-
   return (
-    <div className={style.content}>
-      
-      <div className={`${style.leftContainer} ${state.open && style.close} `}>
-        <div className={style.leftContainer_top}>
-          <div className={style.numbers}>
-            <div className={style.first}>
-              <span>4</span>
-            </div>
-            <div className={style.last}>
-              <span>48</span>
-            </div>
-          </div>
-          {state.open ? (
-            <div className={style.openBlock}>
-              <ChevronRightIcon
-                sx={{ cursor: "pointer" }}
-                onClick={handleMenu}
-              />
-            </div>
-          ) : (
-            <div className={style.closeblock}>
-              <ChevronLeftIcon
-                sx={{ cursor: "pointer" }}
-                onClick={handleMenu}
-              />
-            </div>
-          )}
-          <div />
-        </div>
-        <div className={style.leftContainer_down} />
-      </div>
       <div className={style.rightContainer}>
         <div className={style.topSec}>
           <div className={style.leftBlock}>
@@ -181,45 +143,33 @@ const Content:FC<IContentProps>  = ({openModal}) => {
         <div className={style.rightContainer_down}>
           <div ref={scrollRef} className={style.downBlock}>
             <List
-              openModal={openModal}
               title="To do"
             />
             <List
-              openModal={openModal}
               title="To do"
             />
             <List
-              openModal={openModal}
               title="To do"
             />
             <List
-              openModal={openModal}
               title="To do"
             />
             <List
-              openModal={openModal}
               title="To do"
             />
             <List
-              openModal={openModal}
               title="To do"
             />
             <List
-              openModal={openModal}
               title="To do"
             />
             <List
-              openModal={openModal}
               title="To do"
             />
             <AddBlock />
           </div>
         </div>
       </div>
-       
-      
-      
-    </div>
   );
 };
 

@@ -1,0 +1,75 @@
+@import '../../assets//style.scss';
+@import '../../assets//vars.scss';
+
+.leftContainer {
+    width: 300px;
+    background-color: $leftContainer-bg;
+
+    display: flex;
+    transition: all 500ms ease;
+    flex-direction: column;
+    .numbers {
+        display: flex;
+        color: wheat;
+        font-weight: 800;
+        padding: 8px;
+
+        .first {
+            padding: 5px 10px;
+            background-color: $first-bg;
+
+            span {
+                font-size: 20px;
+            }
+
+        }
+
+        .last {
+            padding: 8px;
+        }
+    }
+
+    &_top {
+        height: 55px;
+        border-bottom: 1px solid #4D4746;
+        position: relative;
+
+    }
+
+    &_down {
+        flex: 1;
+
+    }
+
+}
+.close {
+    width: 25px;
+
+    .numbers {
+        display: none;
+    }
+}
+.openBlock {
+    position: absolute;
+    top: 15px;
+    right: -15px;
+    color: wheat;
+    padding: 4px;
+
+    &:hover {
+        background-color: #837f97;
+    }
+}
+
+.closeblock {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: wheat;
+    padding: 4px;
+    border-radius: 14px 14px;
+
+    &:hover {
+        background-color: #837f97;
+    }
+}
