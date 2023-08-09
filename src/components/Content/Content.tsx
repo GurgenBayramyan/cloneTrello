@@ -34,10 +34,10 @@ const Content:FC<IContentProps>  = ({openModal}) => {
     setState({ ...state, menu: !state.menu });
   };
 
-  const handleCloseLeftMenu = () => [
+  const handleCloseLeftMenu = () => {
     setState({ ...state, leftMenu: !state.leftMenu })
-  ];
-
+  };
+  
 
 
   return (

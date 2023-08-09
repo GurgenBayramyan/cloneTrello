@@ -1,6 +1,6 @@
 export interface IListProps{
     title:string
-    openModal:()=>void
+    openModal?:()=>void
 }
 export interface IListState{
     addCard:boolean

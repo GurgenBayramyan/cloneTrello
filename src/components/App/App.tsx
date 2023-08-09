@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 import ErrorPage from "components/ErrorPage/ErrorPage";
 import Protected from "hoc/CompletedRoutes/Protected";
 import ProtectedLoginRegistr from "hoc/CompletedRoutLoginRegistr/ProtectedLoginRegistr";
+import Content from "components/Content/Content";
 
 const App = () => {
   const HomeComponent = Protected(Home)
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="login" element={<LoginComponent />} />
         <Route path="registration" element={<RegistrationComponent />} />
         <Route path="*" element={<ErrorPage />} />
+        <Route path="/:id" element={<Content openModal={() => console.log("yay")}  />} />
       </Routes>
       <ToastContainer />
     </>

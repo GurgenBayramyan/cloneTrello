@@ -1,3 +1,3 @@
 export interface IContentProps{
-    openModal:() => void
+    openModal?:() => void
 }

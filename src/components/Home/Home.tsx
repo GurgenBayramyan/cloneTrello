@@ -11,6 +11,7 @@ import UserSection from "components/UserSection/UserSection";
 import WorkspaceContent from "components/WorkspaceContent/WorkspaceContent";
 import style from "./Home.module.scss";
 import BoardBackgraund from "components/BoardBackgraund/BoardBackgraund";
+import { Route } from "react-router-dom";
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
@@ -42,7 +43,6 @@ const Home = () => {
         })}
       ></div>
       <Header />
-      
       <Content openModal={openModal} />
     </>
   );

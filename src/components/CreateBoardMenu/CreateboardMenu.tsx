@@ -10,10 +10,11 @@ import { PageLocation } from "types";
 import style from "./Createboard.module.scss";
 import { popupsSelector } from "store/selectors";
 import { setBoard } from "services/autication";
+import { useNavigate } from "react-router-dom";
 
 
 const CreateboardMenu:FC<ICreateBoardsMenu> = () => {
-  
+  const navigate = useNavigate();
   const divRef = useRef<HTMLDivElement>(null)
   const parentRef = useRef<HTMLDivElement>(null)
   const dispatch = useAppDispatch();
@@ -59,9 +60,10 @@ const CreateboardMenu:FC<ICreateBoardsMenu> = () => {
     dispatch(setPosition(findPosition))
     dispatch(setClose(!visibility.workspace.show))
   }
-  const onSubmit: SubmitHandler<{boardTitle: string }> = (data) => {
-    const resp = setBoard(data.boardTitle);
-    console.log(resp)
+  const onSubmit: SubmitHandler<{boardTitle: string }> = async(data) => {
+    const resp = await setBoard(data.boardTitle);
+    navigate(`/${resp.data.id}`)
+    console.log(resp.data)
   };
   return (
     <div className={style.creatBoardParentTwo}>
