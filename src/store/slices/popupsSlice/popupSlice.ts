@@ -17,7 +17,7 @@ const initialState: IWorkspaceInitial = {
     top: 0,
     right: 0
   },
-  className:""
+  url:"https://images.unsplash.com/photo-1690692322953-fb0f543c6658?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjkxMjQ1MTQ4fA&ixlib=rb-4.0.3&q=80&w=400https://images.unsplash.com/photo-1690692322953-fb0f543c6658?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjkxMjQ1MTQ4fA&ixlib=rb-4.0.3&q=80&w=400"
 };
 const popupSlice = createSlice({
     name:"popupSlice",
@@ -53,8 +53,8 @@ const popupSlice = createSlice({
           state.backgroundState.top = payload.top - 188
           state.backgroundState.right = payload.right
         },
-        setClassName: (state,{payload}:PayloadAction<string>) => {
-          state.className = payload
+        setUrl: (state,{payload}:PayloadAction<string>) => {
+          state.url = payload
         }
 
     }
@@ -71,5 +71,5 @@ export const {
   openBackMenuBlock,
   closeMenu,
   setPositionCurrent,
-  setClassName
+  setUrl
 } = popupSlice.actions;

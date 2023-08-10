@@ -1,11 +1,16 @@
-
+import Layout from "components/Layout/Layout"
 import style from "./ErrorPage.module.scss"
-import BoardBackgraund from "components/BoardBackgraund/BoardBackgraund"
+
+
 
 
 const ErrorPage = ()=> {
   return (
-    <div className={style.id}><BoardBackgraund /></div>
+    <Layout>
+        <div className={style.error}>
+            <h5>This board is not a fount</h5>
+        </div>
+    </Layout>
   )
 }
 

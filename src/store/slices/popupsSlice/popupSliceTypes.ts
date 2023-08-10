@@ -18,5 +18,5 @@ export interface IWorkspaceInitial {
   workspace:IWorkspace
   menuState:IStateBlock
   backgroundState:IBackgroundBlockInitial
-  className:string
+  url:string
 }

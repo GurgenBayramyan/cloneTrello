@@ -51,7 +51,6 @@
     height: 120px;
     display: flex;
     justify-content: center;
-    background: url("https://images.unsplash.com/photo-1690692322953-fb0f543c6658?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjkxMjQ1MTQ4fA&ixlib=rb-4.0.3&q=80&w=400https://images.unsplash.com/photo-1690692322953-fb0f543c6658?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjkxMjQ1MTQ4fA&ixlib=rb-4.0.3&q=80&w=400");
     background-size: cover;
     background-position: center center;
     border-radius: 7px;
@@ -67,6 +66,8 @@
             width: 70px;
             height: 40px;
             border-radius: 5px;
+            background-size: 100%;
+            background-position: center center;
             cursor: pointer;
         }
     }
@@ -83,52 +84,9 @@
     }
    
 }
-.selecBackgraundOne{
-   background-image: url("https://images.unsplash.com/photo-1690692322953-fb0f543c6658?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjkxMjQ1MTQ4fA&ixlib=rb-4.0.3&q=80&w=400https://images.unsplash.com/photo-1690692322953-fb0f543c6658?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjkxMjQ1MTQ4fA&ixlib=rb-4.0.3&q=80&w=400");
-   background-size: cover;
-   background-position: center center;
-}
-.selecBackgraundTwo{
-    background: url("https://images.unsplash.com/photo-1690738083729-f5d21709425c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDJ8MzE3MDk5fHx8fHwyfHwxNjkxMjQ1MTQ4fA&ixlib=rb-4.0.3&q=80&w=400");
-    background-size: 100%;
-    background-position: center center;
 
-}
-.selecBackgraundTree{
-    background: url("https://images.unsplash.com/photo-1690382285917-73dfd2a22d07?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDN8MzE3MDk5fHx8fHwyfHwxNjkxMjQ1MTQ4fA&ixlib=rb-4.0.3&q=80&w=400");
-    background-size: 100%;
-    background-position: center center;
-}
-.selecBackgraundFor{
-    background: url("https://images.unsplash.com/photo-1690373618614-41a535020206?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDR8MzE3MDk5fHx8fHwyfHwxNjkxMjQ1MTQ4fA&ixlib=rb-4.0.3&q=80&w=400");
-    background-size: 100%;
-    background-position: center center;
-}
-.selectBackgraundDownA{
-    background: url("https://trello.com/assets/707f35bc691220846678.svg");
-    background-size: 100%;
-    background-position: center center;
-}
-.selectBackgraundDownB{
-    background: url("https://trello.com/assets/d106776cb297f000b1f4.svg");
-    background-size: 100%;
-    background-position: center center;
-}
-.selectBackgraundDownC{
-    background: url("https://trello.com/assets/8ab3b35f3a786bb6cdac.svg");
-    background-size: 100%;
-    background-position: center center;
-}
-.selectBackgraundDownD{
-    background: url("https://trello.com/assets/a7c521b94eb153008f2d.svg");
-    background-size: 100%;
-    background-position: center center;
-}
-.selectBackgraundDownE{
-    background: url("https://trello.com/assets/aec98becb6d15a5fc95e.svg");
-    background-size: 100%;
-    background-position: center center;
-}
+
+
 .selectBackgraundDownF{
     background: #626c77;
     display: flex;

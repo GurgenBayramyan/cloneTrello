@@ -1,8 +1,12 @@
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
-import style from "./BoardBackgraund.module.scss";
-import { openBackMenuBlock, setClassName } from "store/slices/popupsSlice/popupSlice";
+import { openBackMenuBlock, setUrl } from "store/slices/popupsSlice/popupSlice";
 import { useEffect, useRef } from "react";
 import { backgroundStateSelector } from "store/selectors";
+import style from "./BoardBackgraund.module.scss";
+import { backgraundImagesFirst, backgraundImagesFor, backgraundImagesLast, backgraundImagesTree } from "types/constants";
+
+
+
 const BoardBackgraund = () => {
   const dispatch = useAppDispatch();
   const {top,right,show} = useAppSelector(backgroundStateSelector)
@@ -20,8 +24,8 @@ const BoardBackgraund = () => {
     }
     dispatch(openBackMenuBlock(false))
   }
-  const handleChangeBackgraund = (e:React.MouseEvent<HTMLDivElement>) => {
-    dispatch(setClassName(e.currentTarget.className));
+  const handleChangeBackgraund = (url:string) => {
+    dispatch(setUrl(url));
   }
   return (
    show ?  <div ref={divRef} data-name = "UI" onBlur={handleBlur} tabIndex={0} style={{top:`${top}px`,right:`${right}px`}} className={style.boardBackgraund}>
@@ -37,14 +41,24 @@ const BoardBackgraund = () => {
    </div>
    <div className={style.backgraunds}>
      <div className={style.first}>
-       <div onClick={handleChangeBackgraund}  className={style.backgraund1}></div>
-       <div  onClick={handleChangeBackgraund} className={style.backgraund2}></div>
-       <div onClick={handleChangeBackgraund}  className={style.backgraund3}></div>
+     {backgraundImagesFirst.map((img) => {
+            return (
+              <div
+                onClick={()=>handleChangeBackgraund(img)}
+                style={{ backgroundImage: `url("${img}")` }}
+              ></div>
+            );
+          })}
      </div>
      <div className={style.last}>
-       <div onClick={handleChangeBackgraund}  className={style.backgraund4}></div>
-       <div onClick={handleChangeBackgraund}  className={style.backgraund5}></div>
-       <div  onClick={handleChangeBackgraund} className={style.backgraund6}> </div>
+     {backgraundImagesLast.map((img) => {
+            return (
+              <div
+                onClick={()=>handleChangeBackgraund(img)}
+                style={{ backgroundImage: `url("${img}")` }}
+              ></div>
+            );
+          })}
      </div>
    </div>
    <div className={style.photosBlock}>
@@ -55,14 +69,26 @@ const BoardBackgraund = () => {
    </div>
    <div className={style.backgraunds}>
      <div className={style.first}>
-       <div  onClick={handleChangeBackgraund} className={style.backgraund9}></div>
-       <div  onClick={handleChangeBackgraund} className={style.backgraund10}></div>
-       <div  onClick={handleChangeBackgraund} className={style.backgraund11}></div>
+     {backgraundImagesTree.map((img) => {
+            return (
+              <div
+                onClick={()=>handleChangeBackgraund(img.url)}
+                style={{ backgroundImage: `url("${img.url}")` }}
+                title={img.simbol}
+              ></div>
+            );
+          })}
      </div>
      <div className={style.last}>
-       <div onClick={handleChangeBackgraund}  className={style.backgraund12}></div>
-       <div  onClick={handleChangeBackgraund} className={style.backgraund13}></div>
-       <div onClick={handleChangeBackgraund}  className={style.backgraund14}> </div>
+     {backgraundImagesFor.map((img) => {
+            return (
+              <div
+                onClick={()=>handleChangeBackgraund(img.url)}
+                style={{ backgroundImage: `url("${img.url}")` }}
+                title={img.simbol}
+              ></div>
+            );
+          })}
      </div>
    </div>
  </div>:null

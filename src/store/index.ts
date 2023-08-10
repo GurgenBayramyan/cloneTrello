@@ -2,8 +2,8 @@ import{configureStore,getDefaultMiddleware} from '@reduxjs/toolkit'
 import { rootReducer } from './rootReducer'
 import saga from  'redux-saga'
 import { all, fork } from 'redux-saga/effects'
-import { watchUserSaga } from 'sagas/userData/getUserData'
-import { watchSetBoardSaga } from 'sagas/boardsData/setBoardsData'
+import { watchUserSaga } from 'store/sagas/userData/getUserData'
+import { watchSetBoardSaga } from 'store/sagas/boardsData/setBoardsData'
 
 const sagaMiddleware = saga()
 

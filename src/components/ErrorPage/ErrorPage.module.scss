@@ -1,5 +1,16 @@
-.id{
-    background-color: aqua;
-    width: 100vh;
-    height: 100vh;
+.error{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+background-color: red;
+  background-size: cover;
+  color: rgb(47, 206, 118);
+  font-size: 100px;
+  font-weight: 800;
+  h5{
+    box-shadow: 5px 0 20px black;
+    background-color: aliceblue;
+  }
 }

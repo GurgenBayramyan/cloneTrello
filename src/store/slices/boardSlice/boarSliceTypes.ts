@@ -4,12 +4,18 @@ export interface IBoardData {
   sortId: number;
   userId: number;
 }
-export enum StatusEnums{
-    LOADING = "loading",
-    SUCSESS =  "succes",
-    ERROR = "error"
+
+export interface IBoardInitialState {
+  loading: boolean;
+  boardData: IBoardData[];
+  currentBoard:ICurrentGetBoardData;
+  error:boolean
 }
-export interface IBoardInitialState{
-    status: StatusEnums,
-    boardData: IBoardData[]
+export interface ICurrentGetBoardData {
+  background?: string
+  id?: number;
+  name?: string;
+  sortId?: number;
+  userId?: number;
+  error?:object
 }

@@ -25,10 +25,27 @@ export const postRegistration = async(data:IRegistration) => {
     }
 }
 
-export const setBoard = async(title:string) => {
-    const url = `https://young-citadel-44598.herokuapp.com/boards`
-    const resp = await axios.post(url, {name: title},{withCredentials: true})   
-    return resp    
-    
-} 
+export const setBoard = async (boardTitle: string,bg:string) => {
+    const url = 'https://young-citadel-44598.herokuapp.com/boards';
+
+    try {
+        const { data } = await axios.post(url, { name: boardTitle,background:bg }, { withCredentials: true })
+
+        return data;
+    } catch (err: any) {
+        const { data } = err.response;
+        return data;
+    }
+}
+export const getBoard = async (id: string) => {
+  const url = `https://young-citadel-44598.herokuapp.com/boards/${id}`;
+
+  try {
+    const { data } = await axios.get(url,{ withCredentials: true });
+    return data;
+  } catch (err: any) {
+    const { data } = err.response;
+    return data;
+  }
+};
 
