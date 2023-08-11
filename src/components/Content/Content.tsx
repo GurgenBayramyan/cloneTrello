@@ -14,7 +14,8 @@ import style from "./Content.module.scss";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import { useNavigate, useParams } from "react-router-dom";
 import { getBoardDataAction } from "store/actionTypes";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress} from "@mui/material";
+import { loading } from "store/slices/boardSlice/boardSlice";
 
 const Content: FC = () => {
   const [state, setState] = useState<{
@@ -29,7 +30,9 @@ const Content: FC = () => {
   const board = useAppSelector((state) => state.boardSlice);
 
   const { id } = useParams();
-
+  useEffect(()=>{
+    dispatch(loading(true))
+  },[])
   useEffect(() => {
     if (id) {
       dispatch(getBoardDataAction(id));
@@ -41,7 +44,6 @@ const Content: FC = () => {
       navigate("/error")
     }
   },[board.error])
-  console.log(board)
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const handleOpenMenu = () => {
@@ -172,6 +174,7 @@ const Content: FC = () => {
     <div className={style.loading}>
       <CircularProgress  />
     </div>
+   
   );
 };
 

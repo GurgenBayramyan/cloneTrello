@@ -16,12 +16,7 @@ import SideBar from 'components/SideBar/SideBar';
 
 
 const Layout:FC<ILayoutProps> = ({ children }) => {
-    const modal = useAppSelector(state => state.modallMeniu)
   const dispatch = useAppDispatch();
-  const board = useAppSelector(state=> state.boardSlice.currentBoard)
-  const openModal = () => {
-    dispatch(setShowModal(!modal.upModalShow))
-  };
   const { show } = useAppSelector(state => state.setShowOptionDiv);
   const setOption = () => {
     dispatch(

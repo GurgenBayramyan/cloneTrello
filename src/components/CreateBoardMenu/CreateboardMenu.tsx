@@ -75,6 +75,13 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
   };
   const onSubmit: SubmitHandler<{ boardTitle: string }> = async (data) => {
     dispatch(setBoardDataAction({ boardTitle: data.boardTitle, navigate,bg:visibility.url}));
+    dispatch(
+      openCreateSection({
+        menuActive: false,
+        menuBlock: PageLocation.CREATEMENU,
+      })
+    );
+   
   };
 
   return (

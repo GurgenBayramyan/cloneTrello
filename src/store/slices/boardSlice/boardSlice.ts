@@ -10,6 +10,8 @@ const initialState: IBoardInitialState = {
   boardData: [],
   currentBoard: {},
   error: false,
+  allBoardsData: [],
+  upDate: false,
 };
 
 const boardSlice = createSlice({
@@ -31,8 +33,27 @@ const boardSlice = createSlice({
     setError: (state, { payload }: PayloadAction<boolean>) => {
       state.error = payload;
     },
+    setAllBoards: (state, { payload }: PayloadAction<IBoardData[]>) => {
+      state.allBoardsData = [...payload];
+    },
+    setCurrentBoard: (
+      state,
+      { payload }: PayloadAction<ICurrentGetBoardData>
+    ) => {
+      state.currentBoard = payload;
+    },
+    setUpdate: (state, { payload }: PayloadAction<boolean>) => {
+      state.upDate = payload;
+    },
   },
 });
 export default boardSlice;
-export const { setBoardData, setCurrentBoardData, loading, setError } =
-  boardSlice.actions;
+export const {
+  setBoardData,
+  setCurrentBoardData,
+  loading,
+  setError,
+  setAllBoards,
+  setCurrentBoard,
+  setUpdate,
+} = boardSlice.actions;

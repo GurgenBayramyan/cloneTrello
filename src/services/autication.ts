@@ -48,4 +48,14 @@ export const getBoard = async (id: string) => {
     return data;
   }
 };
+export const getAllBoards = async() => {
+  const url = `https://young-citadel-44598.herokuapp.com/boards`;
+  try {
+    const { data } = await axios.get(url,{ withCredentials: true });
+    return data;
+  } catch (err: any) {
+    const { data } = err.response;
+    return data;
+  }
+}
 

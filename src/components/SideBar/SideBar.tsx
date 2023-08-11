@@ -1,44 +1,85 @@
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import style from './SideBar.module.scss'
-import { useState } from "react";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
+import { getAllBoardsAction } from "store/actionTypes";
+import { useNavigate } from "react-router-dom";
+import { setCurrentBoard } from "store/slices/boardSlice/boardSlice";
+import style from "./SideBar.module.scss";
 
 const SideBar = () => {
-    const [open,setOpen] = useState(true);
-    const handleMenu = () => {
-        setOpen(!open)
-    }
+  const dispatch = useAppDispatch();
+  const allBoards = useAppSelector((state) => state.boardSlice);
+  const navigate = useNavigate();
+
+  const [open, setOpen] = useState(true);
+  const handleMenu = () => {
+    setOpen(!open);
+  };
+  useEffect(() => {
+    dispatch(getAllBoardsAction());
+  }, [allBoards.upDate]);
+  const handleNavigate = (id: number) => {
+    const elem = allBoards.allBoardsData.find((el) => el.id === id);
+    dispatch(setCurrentBoard(elem!));
+    navigate(`/board/${id}`);
+  };
+ 
   return (
     <div className={`${style.leftContainer} ${open && style.close} `}>
-        <div className={style.leftContainer_top}>
-          <div className={style.numbers}>
-            <div className={style.first}>
-              <span>4</span>
-            </div>
-            <div className={style.last}>
-              <span>48</span>
-            </div>
+      <div className={style.leftContainer_top}>
+        <div className={style.numbers}>
+          <div className={style.first}>
+            <span>4</span>
           </div>
-          {open ? (
-            <div className={style.openBlock}>
-              <ChevronRightIcon
-                sx={{ cursor: "pointer" }}
-                onClick={handleMenu}
-              />
-            </div>
-          ) : (
-            <div className={style.closeblock}>
-              <ChevronLeftIcon
-                sx={{ cursor: "pointer" }}
-                onClick={handleMenu}
-              />
-            </div>
-          )}
-          <div />
+          <div className={style.last}>
+            <span>48</span>
+          </div>
         </div>
-        <div className={style.leftContainer_down} />
+        {open ? (
+          <div className={style.openBlock}>
+            <ChevronRightIcon sx={{ cursor: "pointer" }} onClick={handleMenu} />
+          </div>
+        ) : (
+          <div className={style.closeblock}>
+            <ChevronLeftIcon sx={{ cursor: "pointer" }} onClick={handleMenu} />
+          </div>
+        )}
+        <div />
       </div>
-  )
-}
+      <div className={style.leftContainer_down}>
+        <div className={style.titleBlock}>
+          <h5>Your boards</h5>
+        </div>
+        {allBoards.allBoardsData.map((el) => {
+          return (
+            <div
+              key={el.id}
+              onClick={() => handleNavigate(el.id)}
+              className={style.boardBlock}
+            >
+              <div className={style.taskInfo}>
+                <div
+                  style={{ backgroundImage: `url(${el.background})` }}
+                  className={style.backgraundBlock}
+                ></div>
+                <span>{el.name}</span>
+              </div>
+              <div className={style.iconBlock}>
+                <div  className={style.firstIcon}>
+                  <span>...</span>
+                </div>
+                <div className={style.lastIcon}>
+                  <StarBorderIcon />
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
 
-export default SideBar
+export default SideBar;
