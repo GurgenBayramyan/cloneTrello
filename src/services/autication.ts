@@ -59,3 +59,14 @@ export const getAllBoards = async() => {
   }
 }
 
+export const deleteBoard = async(id:number) => {
+  const url = `https://young-citadel-44598.herokuapp.com/boards/${id}`;
+
+  try {
+    const  { status }  = await axios.delete(url,{ withCredentials: true });
+    return status;
+  } catch (err: any) {
+    const { data } = err.response;
+    return data;
+  }
+}

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { IRegistration } from "components/Registration/RegistrationTypes";
+import { IBoardData, IBoardInitialState, ICurrentGetBoardData } from "store/slices/boardSlice/boarSliceTypes";
 
 export const removeRepeatPasword = (data: IRegistration) => {
   const filteredUserObject = Object.entries(data).filter(([key]) => {
@@ -136,4 +137,10 @@ export const getChangeDivPosition = (top:number,left:number) => {
       top:top + 50,
       left:left
     }
+}
+
+export const filterForId = (state:IBoardData[],id:number) => {
+  return state.filter(el=> {
+    return el.id != id
+  })
 }

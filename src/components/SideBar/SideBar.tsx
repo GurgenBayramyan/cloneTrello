@@ -1,18 +1,20 @@
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
-import { useEffect, useState } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import { getAllBoardsAction } from "store/actionTypes";
 import { useNavigate } from "react-router-dom";
 import { setCurrentBoard } from "store/slices/boardSlice/boardSlice";
 import style from "./SideBar.module.scss";
+import { setOptionBoardPosition} from "store/slices/popupsSlice/popupSlice";
+import { popupsSelector } from "store/selectors";
 
 const SideBar = () => {
   const dispatch = useAppDispatch();
   const allBoards = useAppSelector((state) => state.boardSlice);
+  const { optionboard } = useAppSelector(popupsSelector);
   const navigate = useNavigate();
-
   const [open, setOpen] = useState(true);
   const handleMenu = () => {
     setOpen(!open);
@@ -25,7 +27,18 @@ const SideBar = () => {
     dispatch(setCurrentBoard(elem!));
     navigate(`/board/${id}`);
   };
- 
+  const openOptionBoard = (e:MouseEvent<HTMLDivElement>,name:string,id:number) => {
+    e.stopPropagation();
+    const{top,left} = e.currentTarget.getBoundingClientRect();
+    dispatch(setOptionBoardPosition({
+      top,
+      left,
+      show:!optionboard.show,
+      name:name,
+      id,
+    }))
+  }
+
   return (
     <div className={`${style.leftContainer} ${open && style.close} `}>
       <div className={style.leftContainer_top}>
@@ -67,8 +80,8 @@ const SideBar = () => {
                 <span>{el.name}</span>
               </div>
               <div className={style.iconBlock}>
-                <div  className={style.firstIcon}>
-                  <span>...</span>
+                <div  onClick={(e)=>openOptionBoard(e,el.name,el.id)} className={style.firstIcon}>
+                  <span >...</span>
                 </div>
                 <div className={style.lastIcon}>
                   <StarBorderIcon />

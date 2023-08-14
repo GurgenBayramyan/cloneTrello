@@ -13,10 +13,22 @@ interface IBackgroundBlockInitial{
   top:number
   right:number
 }
+interface   Ioptionboard{
+  show: boolean,
+  currentTop: number,
+  currentLeft: number,
+  name:string
+  id:number
+}
 
 export interface IWorkspaceInitial {
   workspace:IWorkspace
   menuState:IStateBlock
   backgroundState:IBackgroundBlockInitial
-  url:string
+  url:string,
+  optionboard:Ioptionboard
+  deleteBoard:{
+    show:boolean
+  }
+ 
 }

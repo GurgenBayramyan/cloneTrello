@@ -1,0 +1,76 @@
+.option{
+    position: absolute;
+    background-color: #282e33;
+    color: #9caab8;
+    font-weight: 700;
+    width: 290px;
+    z-index: 3;
+    padding: 5px 15px 10px;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    .header{
+        display: flex;
+        justify-content: center;
+        position: relative;
+        padding: 10px 15px;
+        margin-bottom: 15px;
+        span{
+            position: absolute;
+            top: 3px;
+            right: -12px;
+            cursor: pointer;
+            border-radius: 7px;
+            padding: 6px 8px;
+            &:hover{
+                background-color: #474c5285;
+            }
+        }
+    }
+}
+.settingsSection{
+    width: 290px;
+    margin-left: -14px;
+    padding: 10px;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    &:hover{
+        background-color: #667380;
+    }
+}
+.prev{
+    position: absolute;
+    left: 0;
+    top: 5px;
+    cursor: pointer;
+    border-radius: 7px;
+    padding: 6px 8px;
+    &:hover{
+        background-color: #474c5285;
+    }
+}
+.disc{
+    padding: 5px 0;
+    font-size: 13px;
+    p{
+        .blue{
+            color: #40679d;
+            cursor: pointer;
+        }
+    }
+}
+.closeBlock{
+    margin-top: 10px;
+    background-color: #f87462;
+    color: #392433;
+    text-align: center;
+    padding: 5px 4px;
+    cursor: pointer;
+    border-radius: 6px;
+    user-select: none;
+    &:hover{
+        background-color: #ffa497;
+    }
+}

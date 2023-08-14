@@ -17,7 +17,17 @@ const initialState: IWorkspaceInitial = {
     top: 0,
     right: 0
   },
-  url:"https://images.unsplash.com/photo-1690692322953-fb0f543c6658?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjkxMjQ1MTQ4fA&ixlib=rb-4.0.3&q=80&w=400https://images.unsplash.com/photo-1690692322953-fb0f543c6658?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjkxMjQ1MTQ4fA&ixlib=rb-4.0.3&q=80&w=400"
+  url:"https://images.unsplash.com/photo-1690692322953-fb0f543c6658?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjkxMjQ1MTQ4fA&ixlib=rb-4.0.3&q=80&w=400https://images.unsplash.com/photo-1690692322953-fb0f543c6658?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjkxMjQ1MTQ4fA&ixlib=rb-4.0.3&q=80&w=400",
+  optionboard:{
+    show: false,
+    currentTop: 0,
+    currentLeft: 0,
+    name:"",
+    id:0
+  },
+  deleteBoard:{
+    show:false
+  }
 };
 const popupSlice = createSlice({
     name:"popupSlice",
@@ -55,6 +65,19 @@ const popupSlice = createSlice({
         },
         setUrl: (state,{payload}:PayloadAction<string>) => {
           state.url = payload
+        },
+        setOptionBoardShow:(state,{payload}:PayloadAction<boolean>)=>{
+            state.optionboard.show = payload
+        },
+        setOptionBoardPosition:(state,{payload}:PayloadAction<{top:number,left:number,show:boolean,name:string,id:number}>) => {
+          state.optionboard.show = payload.show
+          state.optionboard.currentLeft = payload.left
+          state.optionboard.currentTop = payload.top + 25
+          state.optionboard.name = payload.name
+          state.optionboard.id = payload.id
+        },
+        setDeleteBoardShow:(state,{payload}:PayloadAction<boolean>) => {
+          state.deleteBoard.show = payload
         }
 
     }
@@ -71,5 +94,8 @@ export const {
   openBackMenuBlock,
   closeMenu,
   setPositionCurrent,
-  setUrl
+  setUrl,
+  setOptionBoardShow,
+  setOptionBoardPosition,
+  setDeleteBoardShow
 } = popupSlice.actions;

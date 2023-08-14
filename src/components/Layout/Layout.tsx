@@ -13,6 +13,8 @@ import ModalBlock from 'components/ModallBlock/ModalBlock';
 import TaskSettings from 'components/TaskSettings/TaskSettings';
 import classNames from 'classnames';
 import SideBar from 'components/SideBar/SideBar';
+import OptionBoard from 'components/OptionBoard/OptionBoard';
+import DeleteBoard from 'components/DeleteBoard/DeleteBoard';
 
 
 const Layout:FC<ILayoutProps> = ({ children }) => {
@@ -35,6 +37,8 @@ const Layout:FC<ILayoutProps> = ({ children }) => {
       <WorkspaceContent />
       <ModalBlock  />
       <TaskSettings taskName="TaskName" />
+      <OptionBoard />
+      <DeleteBoard />
       <div
         onClick={setOption}
         className={classNames(style.settings, {
