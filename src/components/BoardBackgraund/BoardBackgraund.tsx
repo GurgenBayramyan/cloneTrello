@@ -1,15 +1,18 @@
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
-import { openBackMenuBlock, setUrl } from "store/slices/popupsSlice/popupSlice";
+import { openBackMenuBlock } from "store/slices/popupsSlice/popupSlice";
 import { useEffect, useRef } from "react";
-import { backgroundStateSelector } from "store/selectors";
+import { backgroundStateSelector, popupsSelector } from "store/selectors";
+import DoneIcon from '@mui/icons-material/Done';
 import style from "./BoardBackgraund.module.scss";
 import { backgraundImagesFirst, backgraundImagesFor, backgraundImagesLast, backgraundImagesTree } from "types/constants";
+import { setUrl } from "store/slices/boardSlice/boardSlice";
 
 
 
 const BoardBackgraund = () => {
   const dispatch = useAppDispatch();
-  const {top,right,show} = useAppSelector(backgroundStateSelector)
+  const {top,right,show} = useAppSelector(backgroundStateSelector);
+  const allboards = useAppSelector(state=>state.boardSlice)
   const divRef = useRef<HTMLDivElement>(null);
   useEffect(()=>{
     divRef.current?.focus()
@@ -28,7 +31,7 @@ const BoardBackgraund = () => {
     dispatch(setUrl(url));
   }
   return (
-   show ?  <div ref={divRef} data-name = "UI" onBlur={handleBlur} tabIndex={0} style={{top:`${top}px`,right:`${right}px`}} className={style.boardBackgraund}>
+   show ?  <div ref={divRef} onBlur={handleBlur} tabIndex={0} style={{top:`${top}px`,right:`${right}px`}} className={style.boardBackgraund}>
    <div className={style.boardBackgraund_header}>
      <p>Board backgraund</p>
      <span onClick={handleClose}>x</span>
@@ -44,9 +47,10 @@ const BoardBackgraund = () => {
      {backgraundImagesFirst.map((img) => {
             return (
               <div
-                onClick={()=>handleChangeBackgraund(img)}
-                style={{ backgroundImage: `url("${img}")` }}
-              ></div>
+                key={img.id}
+                onClick={()=>handleChangeBackgraund(img.url)}
+                style={{ backgroundImage: `url("${img.url}")` }}
+              >{allboards.url === img.url && <DoneIcon fontSize="small" sx={{color:"black"}} /> }</div>
             );
           })}
      </div>
@@ -54,9 +58,10 @@ const BoardBackgraund = () => {
      {backgraundImagesLast.map((img) => {
             return (
               <div
-                onClick={()=>handleChangeBackgraund(img)}
-                style={{ backgroundImage: `url("${img}")` }}
-              ></div>
+              key={img.id}
+                onClick={()=>handleChangeBackgraund(img.url)}
+                style={{ backgroundImage: `url("${img.url}")` }}
+              >{allboards.url === img.url && <DoneIcon fontSize="small" sx={{color:"black"}} /> }</div>
             );
           })}
      </div>
@@ -72,10 +77,11 @@ const BoardBackgraund = () => {
      {backgraundImagesTree.map((img) => {
             return (
               <div
+                key={img.simbol}
                 onClick={()=>handleChangeBackgraund(img.url)}
                 style={{ backgroundImage: `url("${img.url}")` }}
                 title={img.simbol}
-              ></div>
+              >{allboards.url === img.url && <DoneIcon fontSize="small" sx={{color:"black"}} /> }</div>
             );
           })}
      </div>
@@ -83,10 +89,11 @@ const BoardBackgraund = () => {
      {backgraundImagesFor.map((img) => {
             return (
               <div
+              key={img.id}
                 onClick={()=>handleChangeBackgraund(img.url)}
                 style={{ backgroundImage: `url("${img.url}")` }}
                 title={img.simbol}
-              ></div>
+              >{allboards.url === img.url && <DoneIcon fontSize="small" sx={{color:"black"}} /> }</div>
             );
           })}
      </div>

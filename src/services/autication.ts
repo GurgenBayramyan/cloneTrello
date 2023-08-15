@@ -66,7 +66,7 @@ export const deleteBoard = async(id:number) => {
     const  { status }  = await axios.delete(url,{ withCredentials: true });
     return status;
   } catch (err: any) {
-    const { data } = err.response;
+    const {data} = err.response;
     return data;
   }
 }

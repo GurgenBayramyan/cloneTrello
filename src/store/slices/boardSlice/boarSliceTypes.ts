@@ -6,13 +6,15 @@ export interface IBoardData {
   background?:string
 }
 
+
 export interface IBoardInitialState {
   loading: boolean;
   boardData: IBoardData[];
   currentBoard:ICurrentGetBoardData;
   error:boolean
   allBoardsData:IBoardData[]
-  upDate:boolean
+  url:string
+  changeBoard:Partial<IBoardData>
 }
 export interface ICurrentGetBoardData {
   background?: string
@@ -21,5 +23,6 @@ export interface ICurrentGetBoardData {
   sortId?: number
   userId?: number
   error?:object
+
 }
 

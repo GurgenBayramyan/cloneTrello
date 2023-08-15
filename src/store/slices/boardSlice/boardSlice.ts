@@ -11,7 +11,8 @@ const initialState: IBoardInitialState = {
   currentBoard: {},
   error: false,
   allBoardsData: [],
-  upDate: false,
+  changeBoard:{},
+  url:"https://images.unsplash.com/photo-1690692322953-fb0f543c6658?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjkxMjQ1MTQ4fA&ixlib=rb-4.0.3&q=80&w=400https://images.unsplash.com/photo-1690692322953-fb0f543c6658?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjkxMjQ1MTQ4fA&ixlib=rb-4.0.3&q=80&w=400",
 };
 
 const boardSlice = createSlice({
@@ -42,9 +43,15 @@ const boardSlice = createSlice({
     ) => {
       state.currentBoard = payload;
     },
-    setUpdate: (state, { payload }: PayloadAction<boolean>) => {
-      state.upDate = payload;
+    addBoards: (state, { payload }: PayloadAction<IBoardData>) => {
+      state.allBoardsData = [...state.allBoardsData,payload];
     },
+    setUrl: (state,{payload}:PayloadAction<string>) => {
+      state.url = payload
+    },
+    setChangeBoard: (state,{payload}:PayloadAction<Partial<IBoardData>>) => {
+      state.changeBoard = payload
+    }
   },
 });
 export default boardSlice;
@@ -55,5 +62,7 @@ export const {
   setError,
   setAllBoards,
   setCurrentBoard,
-  setUpdate,
+  addBoards,
+  setUrl,
+  setChangeBoard
 } = boardSlice.actions;

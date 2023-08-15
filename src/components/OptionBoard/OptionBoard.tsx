@@ -2,16 +2,19 @@ import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import style from "./OptionBoard.module.scss";
 import { popupsSelector } from "store/selectors";
 import {
+  openCreateSection,
   setDeleteBoardShow,
   setOptionBoardShow,
 } from "store/slices/popupsSlice/popupSlice";
 import { useEffect, useRef, useState } from "react";
+import { PageLocation } from "types";
+import { setChangeBoard } from "store/slices/boardSlice/boardSlice";
 
 const OptionBoard = () => {
-  const { optionboard } = useAppSelector(popupsSelector);
+  const { optionboard ,changePopup} = useAppSelector(popupsSelector);
   const [questionBlock, setQuestionBlock] = useState(false);
  const divRef = useRef<HTMLDivElement>(null);
-
+  const {allBoardsData} = useAppSelector(state=>state.boardSlice)
   const dispatch = useAppDispatch();
   const onClose = () => {
     dispatch(setOptionBoardShow(false));
@@ -33,6 +36,22 @@ const OptionBoard = () => {
     dispatch(setOptionBoardShow(false));
     setQuestionBlock(false);
   };
+  const openChangeBoardMenu = () => {
+    const id = optionboard.id;
+    const elem = allBoardsData.find(el=>el.id === id);
+    dispatch(openCreateSection({
+      menuActive:true,
+      menuBlock:PageLocation.CREATEBOARD,
+      currentLeft:optionboard.currentLeft ,
+      currentTop:optionboard.currentTop - 65
+    }))
+    if(elem){
+      dispatch(setChangeBoard(elem))
+    }else{
+      dispatch(setChangeBoard({}))
+    }
+    
+  }
   return optionboard.show ? (
     <div
       ref={divRef}
@@ -73,7 +92,7 @@ const OptionBoard = () => {
             <span>close board</span>
             <span>{">"}</span>
           </div>
-          <div className={style.settingsSection}>
+          <div onClick={openChangeBoardMenu} className={style.settingsSection}>
             <span>change board options</span>
             <span>{">"}</span>
           </div>

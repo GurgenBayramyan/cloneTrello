@@ -360,3 +360,13 @@
 .k6{
     display: none;
 }
+.headerS4{
+    height: 30px;
+    padding: 5px;
+    background-color: $search-bg;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all ease-in-out 200ms;
+    color: black;
+    align-self: center;
+}

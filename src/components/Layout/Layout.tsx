@@ -15,6 +15,7 @@ import classNames from 'classnames';
 import SideBar from 'components/SideBar/SideBar';
 import OptionBoard from 'components/OptionBoard/OptionBoard';
 import DeleteBoard from 'components/DeleteBoard/DeleteBoard';
+import CreateMenu from 'components/CreateMenu/CreateMenu';
 
 
 const Layout:FC<ILayoutProps> = ({ children }) => {
@@ -39,7 +40,8 @@ const Layout:FC<ILayoutProps> = ({ children }) => {
       <TaskSettings taskName="TaskName" />
       <OptionBoard />
       <DeleteBoard />
-      <div
+      <CreateMenu />        
+    <div
         onClick={setOption}
         className={classNames(style.settings, {
           [style.settingsIsNone]: show,

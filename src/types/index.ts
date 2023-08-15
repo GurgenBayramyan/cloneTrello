@@ -24,3 +24,6 @@ export enum Menus{
     PRIVATE = "Private",
     PUBLIC = "Public"
 }
+export enum StatusCode{
+    OK = 200
+}

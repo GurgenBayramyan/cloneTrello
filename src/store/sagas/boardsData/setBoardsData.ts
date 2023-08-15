@@ -3,20 +3,21 @@ import { toast } from "react-toastify";
 import { call, put, select, takeLatest } from "redux-saga/effects";
 import { deleteBoard, getAllBoards, getBoard, setBoard } from "services/autication";
 import { deleteBoardAction, getAllBoardsAction, getBoardDataAction, setBoardDataAction } from "store/actionTypes";
-import { allBordersSelector } from "store/selectors";
-import { IBoardData, IBoardInitialState, ICurrentGetBoardData } from "store/slices/boardSlice/boarSliceTypes";
-import { loading,  setAllBoards,  setBoardData, setCurrentBoardData, setError, setUpdate } from "store/slices/boardSlice/boardSlice";
+import { allBordersSelector, idCurrentBoardSelector } from "store/selectors";
+import { IBoardData, ICurrentGetBoardData } from "store/slices/boardSlice/boarSliceTypes";
+import { addBoards, loading,  setAllBoards,  setBoardData, setCurrentBoardData, setError} from "store/slices/boardSlice/boardSlice";
 import { setDeleteBoardShow } from "store/slices/popupsSlice/popupSlice";
 import { IActionCreateBoardSaga, IActionGetBoardDatas } from "store/types";
+import { StatusCode } from "types";
+import { message } from "types/constants";
 
 
 function* setBoardSaga(action: IActionCreateBoardSaga) {
     const {boardTitle,navigate,bg} = action.payload;
-    yield put(setUpdate(true))
     const  data:IBoardData = yield call(setBoard,boardTitle,bg);
     yield  put(setBoardData(data));
+    yield put(addBoards(data))
     yield  navigate(`/board/${data.id}`)
-    yield put(setUpdate(false))
 }
 function* getBoardSaga(action:IActionGetBoardDatas ) {
     const id = action.payload
@@ -36,17 +37,22 @@ function* getAllboardsSaga (action:any){
 function* deleteBoardSaga (action:any){
     const {id,navigate} = action.payload
     const allBoards:IBoardData[]= yield select(allBordersSelector);
-    const CurrentID:number = yield select(state=>state.boardSlice.currentBoard.id)
+    const CurrentID:number = yield select(idCurrentBoardSelector)
     const filteredArray =  filterForId(allBoards,id);
     const status:number = yield call(deleteBoard,id);
-    yield put(setAllBoards(filteredArray));
-    yield put(setDeleteBoardShow(false));
-    if(id === CurrentID){
-        yield navigate('/')
+  
+    if(status === StatusCode.OK){
+        yield put(setAllBoards(filteredArray));
+        
+        if(id === CurrentID){
+            yield navigate('/')
+        }
+        toast.success(message, {
+        })
+    }else{
+        toast.error(status)
     }
-    
-    toast.success("boardDeleted sucsess", {
-    })
+    yield put(setDeleteBoardShow(false));
 }
 export function* watchSetBoardSaga() {
     yield takeLatest(setBoardDataAction, setBoardSaga)

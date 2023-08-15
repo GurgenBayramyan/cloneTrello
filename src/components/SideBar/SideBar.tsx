@@ -1,14 +1,17 @@
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
-import { MouseEvent, useEffect, useRef, useState } from "react";
+import { MouseEvent, useEffect,  useState } from "react";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import { getAllBoardsAction } from "store/actionTypes";
 import { useNavigate } from "react-router-dom";
 import { setCurrentBoard } from "store/slices/boardSlice/boardSlice";
-import style from "./SideBar.module.scss";
-import { setOptionBoardPosition} from "store/slices/popupsSlice/popupSlice";
+import {
+  setOptionBoardPosition,
+} from "store/slices/popupsSlice/popupSlice";
 import { popupsSelector } from "store/selectors";
+import style from "./SideBar.module.scss";
+import { IBoardData } from "store/slices/boardSlice/boarSliceTypes";
 
 const SideBar = () => {
   const dispatch = useAppDispatch();
@@ -21,23 +24,28 @@ const SideBar = () => {
   };
   useEffect(() => {
     dispatch(getAllBoardsAction());
-  }, [allBoards.upDate]);
+  }, []);
   const handleNavigate = (id: number) => {
     const elem = allBoards.allBoardsData.find((el) => el.id === id);
     dispatch(setCurrentBoard(elem!));
     navigate(`/board/${id}`);
   };
-  const openOptionBoard = (e:MouseEvent<HTMLDivElement>,name:string,id:number) => {
+  const openOptionBoard = (
+    e: MouseEvent<HTMLDivElement>,
+    elem:IBoardData
+  ) => {
     e.stopPropagation();
-    const{top,left} = e.currentTarget.getBoundingClientRect();
-    dispatch(setOptionBoardPosition({
-      top,
-      left,
-      show:!optionboard.show,
-      name:name,
-      id,
-    }))
-  }
+    const { top, left } = e.currentTarget.getBoundingClientRect();
+    dispatch(
+      setOptionBoardPosition({
+        top,
+        left,
+        show: !optionboard.show,
+        name: elem.name,
+        id:elem.id,
+      })
+    );
+  };
 
   return (
     <div className={`${style.leftContainer} ${open && style.close} `}>
@@ -66,6 +74,7 @@ const SideBar = () => {
           <h5>Your boards</h5>
         </div>
         {allBoards.allBoardsData.map((el) => {
+          
           return (
             <div
               key={el.id}
@@ -80,8 +89,11 @@ const SideBar = () => {
                 <span>{el.name}</span>
               </div>
               <div className={style.iconBlock}>
-                <div  onClick={(e)=>openOptionBoard(e,el.name,el.id)} className={style.firstIcon}>
-                  <span >...</span>
+                <div
+                  onClick={(e) => openOptionBoard(e, el)}
+                  className={style.firstIcon}
+                >
+                  <span>...</span>
                 </div>
                 <div className={style.lastIcon}>
                   <StarBorderIcon />

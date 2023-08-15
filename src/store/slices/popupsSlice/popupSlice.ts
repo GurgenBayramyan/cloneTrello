@@ -10,14 +10,16 @@ const initialState: IWorkspaceInitial = {
   },
   menuState:{
     menuBlock:PageLocation.CREATEMENU,
-    menuActive:false
+    menuActive:false,
+    currentTop:0,
+    currentLeft:0
   },
   backgroundState:{
     show:false,
     top: 0,
     right: 0
   },
-  url:"https://images.unsplash.com/photo-1690692322953-fb0f543c6658?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjkxMjQ1MTQ4fA&ixlib=rb-4.0.3&q=80&w=400https://images.unsplash.com/photo-1690692322953-fb0f543c6658?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjkxMjQ1MTQ4fA&ixlib=rb-4.0.3&q=80&w=400",
+ 
   optionboard:{
     show: false,
     currentTop: 0,
@@ -26,6 +28,9 @@ const initialState: IWorkspaceInitial = {
     id:0
   },
   deleteBoard:{
+    show:false
+  },
+  changePopup:{
     show:false
   }
 };
@@ -46,6 +51,8 @@ const popupSlice = createSlice({
         openCreateSection:(state,{payload}:PayloadAction<IStateBlock>) => {
             state.menuState.menuActive = payload.menuActive
             state.menuState.menuBlock = payload.menuBlock
+            state.menuState.currentLeft = payload.currentLeft
+            state.menuState.currentTop = payload.currentTop
         },
         goToMain:(state,{payload}:PayloadAction<string>)=>{
             state.menuState.menuBlock = payload
@@ -63,9 +70,7 @@ const popupSlice = createSlice({
           state.backgroundState.top = payload.top - 188
           state.backgroundState.right = payload.right
         },
-        setUrl: (state,{payload}:PayloadAction<string>) => {
-          state.url = payload
-        },
+       
         setOptionBoardShow:(state,{payload}:PayloadAction<boolean>)=>{
             state.optionboard.show = payload
         },
@@ -78,6 +83,9 @@ const popupSlice = createSlice({
         },
         setDeleteBoardShow:(state,{payload}:PayloadAction<boolean>) => {
           state.deleteBoard.show = payload
+        },
+        setChangePopUp: (state,{payload}:PayloadAction<boolean>) =>{
+          state.changePopup.show = payload
         }
 
     }
@@ -94,8 +102,8 @@ export const {
   openBackMenuBlock,
   closeMenu,
   setPositionCurrent,
-  setUrl,
   setOptionBoardShow,
   setOptionBoardPosition,
-  setDeleteBoardShow
+  setDeleteBoardShow,
+  setChangePopUp
 } = popupSlice.actions;

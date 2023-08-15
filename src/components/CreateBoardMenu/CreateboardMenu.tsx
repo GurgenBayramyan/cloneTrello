@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import classNames from "classnames";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { ICreateBoardsMenu } from "./CreateBoardMenuTypes";
+import DoneIcon from '@mui/icons-material/Done';
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import {
   goToMain,
@@ -11,7 +12,6 @@ import {
   setClose,
   setPosition,
   setPositionCurrent,
-  setUrl,
 } from "store/slices/popupsSlice/popupSlice";
 import { getChangeDivPosition } from "helpers";
 import { PageLocation } from "types";
@@ -20,14 +20,16 @@ import { useNavigate } from "react-router-dom";
 import { setBoardDataAction } from "store/actionTypes";
 import style from "./Createboard.module.scss";
 import { backgraundImages, backgraundImagesDown } from "types/constants";
+import { setUrl } from "store/slices/boardSlice/boardSlice";
 
 const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
   const navigate = useNavigate();
   const divRef = useRef<HTMLDivElement>(null);
   const parentRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
-  const visibility = useAppSelector(popupsSelector);
-
+  const {backgroundState,workspace} = useAppSelector(popupsSelector);
+  const allboards = useAppSelector(state=>state.boardSlice);
+  const{changeBoard} = useAppSelector(state=>state.boardSlice);
   const handleAddBackgraund = (url:string) => {
     
     dispatch(setUrl(url));
@@ -41,7 +43,7 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
         right,
       })
     );
-    dispatch(openBackMenuBlock(!visibility.backgroundState.show));
+    dispatch(openBackMenuBlock(!backgroundState.show));
   };
   const locationMain = () => {
     dispatch(goToMain(PageLocation.CREATEMENU));
@@ -50,8 +52,10 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
   const openMenu = () => {
     dispatch(
       openCreateSection({
-        menuActive: !visibility.menuState.menuActive,
+        menuActive: false,
         menuBlock: PageLocation.CREATEMENU,
+        currentTop:0,
+        currentLeft:0
       })
     );
   };
@@ -71,25 +75,30 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
     const { top, left } = block.getBoundingClientRect();
     const findPosition = getChangeDivPosition(top, left);
     dispatch(setPosition(findPosition));
-    dispatch(setClose(!visibility.workspace.show));
+    dispatch(setClose(!workspace.show));
   };
-  const onSubmit: SubmitHandler<{ boardTitle: string }> = async (data) => {
-    dispatch(setBoardDataAction({ boardTitle: data.boardTitle, navigate,bg:visibility.url}));
+  const onSubmit: SubmitHandler<{ boardTitle: string }> =  (data) => {
+    dispatch(setBoardDataAction({ boardTitle: data.boardTitle, navigate,bg:allboards.url}));
     dispatch(
       openCreateSection({
         menuActive: false,
         menuBlock: PageLocation.CREATEMENU,
+        currentTop:0,
+        currentLeft:0
       })
     );
+
    
   };
+  // const editSubmit:SubmitHandler<{ boardTitle: string }> =  (data) => {
 
+  // }
   return (
     <div className={style.creatBoardParentTwo}>
       <div className={style.creatBoardParentTwo_header}>
-        <div onClick={locationMain} className={style.rightIcon}>
+       { !changeBoard.id && <div onClick={locationMain} className={style.rightIcon}>
           <span className={style.left}>{"<"}</span>
-        </div>
+        </div>}
         <span className={style.boardTitle}>Create board</span>
         <div onClick={openMenu} className={style.rightIcon}>
           <span>x</span>
@@ -98,7 +107,7 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
       <div
         className={`${style.backgraundImg}`}
         style={{
-          backgroundImage: `url(${visibility.url})`,
+          backgroundImage: `url(${allboards.url})`,
         }}
       >
         <div className={style.childBackgraundImg}>
@@ -114,9 +123,12 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
           {backgraundImages.map((img) => {
             return (
               <div
-                onClick={()=>handleAddBackgraund(img)}
-                style={{ backgroundImage: `url("${img}")` }}
-              ></div>
+                key={img.url}
+                onClick={()=>handleAddBackgraund(img.url)}
+                style={{ backgroundImage: `url("${img.url}")` }}
+              >
+                 {allboards.url === img.url && <DoneIcon fontSize="small" sx={{color:"black"}} /> }
+              </div>
             );
           })}
         </div>
@@ -124,14 +136,18 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
           {backgraundImagesDown.map((img) => {
             return (
               <div
+               key={img.url}
                 onClick={()=>handleAddBackgraund(img.url)}
                 title={img.simbol}
                 style={{ backgroundImage: `url("${img.url}")` }}
-              ></div>
+              >
+                {allboards.url === img.url && <DoneIcon fontSize="small" sx={{color:"black"}}  />}
+              </div>
             );
           })}
           <div
             ref={parentRef}
+            data-block="change"
             data-name="divparents"
             tabIndex={0}
             onClick={openBackMenu}
@@ -148,6 +164,7 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
           </label>
           <input
             autoFocus
+            data-block="change"
             type="text"
             id="boardTitle"
             {...register("boardTitle", {
@@ -160,7 +177,7 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
         <div className={style.selectBlock}>
           <label>Visability</label>
           <div ref={divRef} onClick={openVisibility} className={style.select}>
-            <span>{visibility.workspace.content}</span>
+            <span>{workspace.content}</span>
             <div className={style.iconBlock}>
               <KeyboardArrowDownIcon />
             </div>
@@ -176,7 +193,7 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
           >
             Create
           </button>
-          <button className={style.templateBtn}>Start with a template</button>
+          <button data-block="change" type="button" className={style.templateBtn}>Start with a template</button>
         </div>
         <div className={style.paragBlock}>
           <p>

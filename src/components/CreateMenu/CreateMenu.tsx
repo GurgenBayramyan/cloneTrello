@@ -5,44 +5,51 @@ import CreateMenuContent from "components/CreateMenuContent/CreateMenuContent";
 import CreateboardMenu from "components/CreateBoardMenu/CreateboardMenu";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import { popupsSelector } from "store/selectors";
-import { closeMenu, openCreateSection } from "store/slices/popupsSlice/popupSlice";
+import { closeMenu } from "store/slices/popupsSlice/popupSlice";
+import { setChangeBoard } from "store/slices/boardSlice/boardSlice";
 
 const CreateMenu = () => {
-  const divRef = useRef<HTMLDivElement>(null)
-  const {menuState} = useAppSelector(popupsSelector);
-  const visibility = useAppSelector(popupsSelector);
+  const divRef = useRef<HTMLDivElement>(null);
+  const { menuState, backgroundState, workspace } =
+    useAppSelector(popupsSelector);
+    const{changeBoard} = useAppSelector(state=>state.boardSlice)
   const dispatch = useAppDispatch();
 
-
   useEffect(() => {
-    
-    if(!visibility.backgroundState.show) {
-      divRef.current!.focus()
+    if (!backgroundState.show) {
+      divRef.current!.focus();
     }
-
-  }, [visibility.backgroundState.show,visibility.workspace.content])
-
+  }, [backgroundState.show, workspace.content]);
 
   const handleBlur = (event: FocusEvent<HTMLElement>) => {
-    if(!event.relatedTarget) {
-      dispatch(closeMenu())
+    if (!event.relatedTarget) {
+      dispatch(closeMenu());
     }
-  
-  }
+    if(changeBoard.id){
+      dispatch(setChangeBoard({}))
+    }
+  };
 
- const openMenu = () => {
-    dispatch(openCreateSection({
-      menuActive:!menuState.menuActive,
-      menuBlock:(PageLocation.CREATEMENU)
-    }))
- }
   return (
-    <div ref={divRef} data-name='divparent' onBlur={handleBlur} tabIndex={0} className={style.header_div}>
-      <button className={style.header} onClick={openMenu}>Create</button>
+    <div
+      ref={divRef}
+      data-name="divparent"
+      onBlur={handleBlur}
+      tabIndex={0}
+      className={style.header_div}
+      style={{
+        top: `${menuState.currentTop}px`,
+        left: `${menuState.currentLeft}px`,
+      }}
+    >
       {menuState.menuActive && (
-        <div  data-name="parent">
-          {menuState.menuBlock === PageLocation.CREATEMENU && <CreateMenuContent  />}
-          {menuState.menuBlock === PageLocation.CREATEBOARD && <CreateboardMenu   />}
+        <div data-name="parent">
+          {menuState.menuBlock === PageLocation.CREATEMENU && (
+            <CreateMenuContent />
+          )}
+          {menuState.menuBlock === PageLocation.CREATEBOARD && (
+            <CreateboardMenu />
+          )}
         </div>
       )}
     </div>

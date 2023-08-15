@@ -7,6 +7,8 @@ interface IWorkspace {
 export interface IStateBlock{
   menuActive:boolean
   menuBlock:string
+  currentTop:number
+  currentLeft:number
 }
 interface IBackgroundBlockInitial{
   show:boolean,
@@ -25,9 +27,11 @@ export interface IWorkspaceInitial {
   workspace:IWorkspace
   menuState:IStateBlock
   backgroundState:IBackgroundBlockInitial
-  url:string,
   optionboard:Ioptionboard
   deleteBoard:{
+    show:boolean
+  },
+  changePopup:{
     show:boolean
   }
  
