@@ -68,7 +68,7 @@ const popupSlice = createSlice({
         },
         setPositionCurrent: (state,{payload}:PayloadAction<{top:number,right:number}>) => {
           state.backgroundState.top = payload.top - 188
-          state.backgroundState.right = payload.right
+          state.backgroundState.right = payload.right 
         },
        
         setOptionBoardShow:(state,{payload}:PayloadAction<boolean>)=>{

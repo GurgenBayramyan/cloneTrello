@@ -1,5 +1,4 @@
-import { useEffect, useState, FocusEvent, useRef } from "react";
-import style from "./CreateMenu.module.scss";
+import { useEffect, FocusEvent, useRef } from "react";
 import { PageLocation } from "types";
 import CreateMenuContent from "components/CreateMenuContent/CreateMenuContent";
 import CreateboardMenu from "components/CreateBoardMenu/CreateboardMenu";
@@ -7,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import { popupsSelector } from "store/selectors";
 import { closeMenu } from "store/slices/popupsSlice/popupSlice";
 import { setChangeBoard } from "store/slices/boardSlice/boardSlice";
+import style from "./CreateMenu.module.scss";
 
 const CreateMenu = () => {
   const divRef = useRef<HTMLDivElement>(null);
@@ -25,7 +25,7 @@ const CreateMenu = () => {
     if (!event.relatedTarget) {
       dispatch(closeMenu());
     }
-    if(changeBoard.id){
+    if(changeBoard.id && !event.relatedTarget){
       dispatch(setChangeBoard({}))
     }
   };

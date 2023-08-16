@@ -7,3 +7,4 @@ export const setBoardDataAction = createAction<IPayloadBoardData>("setBoardDataA
 export const getBoardDataAction = createAction<string>("getBoardData")
 export const getAllBoardsAction = createAction("getAllBoards")
 export const deleteBoardAction = createAction<{id:number,navigate:(to: string, options?: object) => void;}>("deleteBoard")
+export const setBoardDataChangeAction = createAction<IPayloadBoardData>("setBoardDataChangeAction")

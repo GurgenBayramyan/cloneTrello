@@ -144,3 +144,16 @@ export const filterForId = (state:IBoardData[],id:number) => {
     return el.id != id
   })
 }
+
+export const changeAllBoards = (id:number,allBoards:IBoardData[],bg:string,boardTitle:string) => {
+  return allBoards.map(board=>{
+    if(board.id === id){
+      return {
+          ...board,
+          background:bg,
+          name:boardTitle
+      }
+    }
+    return board
+  })
+}

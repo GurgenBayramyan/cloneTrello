@@ -28,6 +28,10 @@ const boardSlice = createSlice({
     ) => {
       state.currentBoard = { ...payload };
     },
+    setChangeCurrentBoard: (state,{payload}:PayloadAction<{background:string,name:string}>) => {
+      state.currentBoard.background = payload.background
+      state.currentBoard.name = payload.name
+    },
     loading: (state, { payload }: PayloadAction<boolean>) => {
       state.loading = payload;
     },
@@ -51,7 +55,8 @@ const boardSlice = createSlice({
     },
     setChangeBoard: (state,{payload}:PayloadAction<Partial<IBoardData>>) => {
       state.changeBoard = payload
-    }
+    },
+   
   },
 });
 export default boardSlice;
@@ -64,5 +69,6 @@ export const {
   setCurrentBoard,
   addBoards,
   setUrl,
-  setChangeBoard
+  setChangeBoard,
+  setChangeCurrentBoard
 } = boardSlice.actions;

@@ -24,6 +24,7 @@ import UserNameIcon from "components/UserNameIcon/UserNameIcon";
 import { contentSliceSelector, popupsSelector } from "store/selectors";
 import { openCreateSection } from "store/slices/popupsSlice/popupSlice";
 import { PageLocation } from "types";
+import { setChangeBoard } from "store/slices/boardSlice/boardSlice";
 
 
 const  Header = () => {
@@ -78,6 +79,7 @@ const  Header = () => {
         currentTop:top,
         currentLeft:left
       }))
+      dispatch(setChangeBoard({}))
    }
   return (
     <header className={style.header}>

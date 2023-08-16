@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import { openBackMenuBlock } from "store/slices/popupsSlice/popupSlice";
 import { useEffect, useRef } from "react";
-import { backgroundStateSelector, popupsSelector } from "store/selectors";
+import { backgroundStateSelector} from "store/selectors";
 import DoneIcon from '@mui/icons-material/Done';
 import style from "./BoardBackgraund.module.scss";
 import { backgraundImagesFirst, backgraundImagesFor, backgraundImagesLast, backgraundImagesTree } from "types/constants";
@@ -31,7 +31,7 @@ const BoardBackgraund = () => {
     dispatch(setUrl(url));
   }
   return (
-   show ?  <div ref={divRef} onBlur={handleBlur} tabIndex={0} style={{top:`${top}px`,right:`${right}px`}} className={style.boardBackgraund}>
+   show ?  <div ref={divRef} onBlur={handleBlur} tabIndex={0} style={{top:`${top}px`,left:`${right}px`}} className={style.boardBackgraund}>
    <div className={style.boardBackgraund_header}>
      <p>Board backgraund</p>
      <span onClick={handleClose}>x</span>

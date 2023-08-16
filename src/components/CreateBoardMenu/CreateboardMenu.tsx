@@ -1,9 +1,9 @@
-import { FC, useRef } from "react";
+import { FC, useEffect, useRef } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import classNames from "classnames";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { ICreateBoardsMenu } from "./CreateBoardMenuTypes";
-import DoneIcon from '@mui/icons-material/Done';
+import DoneIcon from "@mui/icons-material/Done";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import {
   goToMain,
@@ -16,27 +16,33 @@ import {
 import { getChangeDivPosition } from "helpers";
 import { PageLocation } from "types";
 import { popupsSelector } from "store/selectors";
-import { useNavigate } from "react-router-dom";
-import { setBoardDataAction } from "store/actionTypes";
+import {  useNavigate, useParams } from "react-router-dom";
+import {
+  setBoardDataAction,
+  setBoardDataChangeAction,
+} from "store/actionTypes";
 import style from "./Createboard.module.scss";
 import { backgraundImages, backgraundImagesDown } from "types/constants";
-import { setUrl } from "store/slices/boardSlice/boardSlice";
+import { setChangeBoard, setUrl } from "store/slices/boardSlice/boardSlice";
 
 const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
   const navigate = useNavigate();
   const divRef = useRef<HTMLDivElement>(null);
   const parentRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
-  const {backgroundState,workspace} = useAppSelector(popupsSelector);
-  const allboards = useAppSelector(state=>state.boardSlice);
-  const{changeBoard} = useAppSelector(state=>state.boardSlice);
-  const handleAddBackgraund = (url:string) => {
-    
+
+  const { backgroundState, workspace } = useAppSelector(popupsSelector);
+  const allboards = useAppSelector((state) => state.boardSlice);
+  const params = useParams();
+  const { changeBoard } = useAppSelector((state) => state.boardSlice);
+
+  const handleAddBackgraund = (url: string) => {
     dispatch(setUrl(url));
   };
 
   const openBackMenu = () => {
     const { top, right } = parentRef.current!.getBoundingClientRect();
+
     dispatch(
       setPositionCurrent({
         top,
@@ -54,8 +60,8 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
       openCreateSection({
         menuActive: false,
         menuBlock: PageLocation.CREATEMENU,
-        currentTop:0,
-        currentLeft:0
+        currentTop: 0,
+        currentLeft: 0,
       })
     );
   };
@@ -65,10 +71,20 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
     handleSubmit,
     formState: { errors },
     watch,
+    reset,
   } = useForm<{ boardTitle: string }>({
     mode: "onTouched",
   });
-
+  useEffect(() => {
+    if (changeBoard.id) {
+      reset({
+        boardTitle: changeBoard.name,
+      });
+      dispatch(setUrl(changeBoard.background!));
+    }else{
+      dispatch(setUrl("https://images.unsplash.com/photo-1691168712328-924865142ba4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjkxNjUyNjA4fA&ixlib=rb-4.0.3&q=80&w=1200"))
+    }
+  }, []);
   const value = watch("boardTitle");
   const openVisibility = () => {
     const block = divRef.current!;
@@ -77,29 +93,58 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
     dispatch(setPosition(findPosition));
     dispatch(setClose(!workspace.show));
   };
-  const onSubmit: SubmitHandler<{ boardTitle: string }> =  (data) => {
-    dispatch(setBoardDataAction({ boardTitle: data.boardTitle, navigate,bg:allboards.url}));
+  const onSubmit: SubmitHandler<{ boardTitle: string }> = (data) => {
+    dispatch(
+      setBoardDataAction({
+        boardTitle: data.boardTitle,
+        navigate,
+        bg: allboards.url,
+      })
+    );
     dispatch(
       openCreateSection({
         menuActive: false,
         menuBlock: PageLocation.CREATEMENU,
-        currentTop:0,
-        currentLeft:0
+        currentTop: 0,
+        currentLeft: 0,
       })
     );
-
-   
   };
-  // const editSubmit:SubmitHandler<{ boardTitle: string }> =  (data) => {
-
-  // }
+  const editSubmit: SubmitHandler<{ boardTitle: string }> = (data) => {
+    dispatch(
+      openCreateSection({
+        menuActive: false,
+        menuBlock: PageLocation.CREATEMENU,
+        currentTop: 0,
+        currentLeft: 0,
+      })
+    );
+    dispatch(
+      setBoardDataChangeAction({
+        id: changeBoard.id,
+        boardTitle: data.boardTitle,
+        navigate,
+        bg: allboards.url,
+        patch: params.id,
+      })
+    );
+    dispatch(setChangeBoard({}));
+  };
   return (
     <div className={style.creatBoardParentTwo}>
       <div className={style.creatBoardParentTwo_header}>
-       { !changeBoard.id && <div onClick={locationMain} className={style.rightIcon}>
-          <span className={style.left}>{"<"}</span>
-        </div>}
-        <span className={style.boardTitle}>Create board</span>
+        {!changeBoard.id && (
+          <div onClick={locationMain} className={style.rightIcon}>
+            <span className={style.left}>{"<"}</span>
+          </div>
+        )}
+        <span
+          className={classNames(style.boardTitle, {
+            [style.title]: changeBoard.id,
+          })}
+        >
+          {changeBoard.id ? "Change board" : "Create board"}
+        </span>
         <div onClick={openMenu} className={style.rightIcon}>
           <span>x</span>
         </div>
@@ -124,10 +169,12 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
             return (
               <div
                 key={img.url}
-                onClick={()=>handleAddBackgraund(img.url)}
+                onClick={() => handleAddBackgraund(img.url)}
                 style={{ backgroundImage: `url("${img.url}")` }}
               >
-                 {allboards.url === img.url && <DoneIcon fontSize="small" sx={{color:"black"}} /> }
+                {allboards.url === img.url && (
+                  <DoneIcon fontSize="small" sx={{ color: "black" }} />
+                )}
               </div>
             );
           })}
@@ -136,12 +183,14 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
           {backgraundImagesDown.map((img) => {
             return (
               <div
-               key={img.url}
-                onClick={()=>handleAddBackgraund(img.url)}
+                key={img.url}
+                onClick={() => handleAddBackgraund(img.url)}
                 title={img.simbol}
                 style={{ backgroundImage: `url("${img.url}")` }}
               >
-                {allboards.url === img.url && <DoneIcon fontSize="small" sx={{color:"black"}}  />}
+                {allboards.url === img.url && (
+                  <DoneIcon fontSize="small" sx={{ color: "black" }} />
+                )}
               </div>
             );
           })}
@@ -157,7 +206,11 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
           </div>
         </div>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form
+        onSubmit={
+          changeBoard.id ? handleSubmit(editSubmit) : handleSubmit(onSubmit)
+        }
+      >
         <div className={style.labelBlock}>
           <label htmlFor="boardTitle">
             Board Title <span>*</span>
@@ -191,9 +244,15 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
             })}
             type="submit"
           >
-            Create
+            {!changeBoard.id ? "Create" : "Change"}
           </button>
-          <button data-block="change" type="button" className={style.templateBtn}>Start with a template</button>
+          <button
+            data-block="change"
+            type="button"
+            className={style.templateBtn}
+          >
+            Start with a template
+          </button>
         </div>
         <div className={style.paragBlock}>
           <p>

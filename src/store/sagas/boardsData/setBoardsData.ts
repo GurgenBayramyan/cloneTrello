@@ -1,11 +1,11 @@
-import { filterForId } from "helpers";
+import { changeAllBoards, filterForId } from "helpers";
 import { toast } from "react-toastify";
 import { call, put, select, takeLatest } from "redux-saga/effects";
-import { deleteBoard, getAllBoards, getBoard, setBoard } from "services/autication";
-import { deleteBoardAction, getAllBoardsAction, getBoardDataAction, setBoardDataAction } from "store/actionTypes";
+import { deleteBoard, getAllBoards, getBoard, setBoard, setChangeBoard } from "services/autication";
+import { deleteBoardAction, getAllBoardsAction, getBoardDataAction, setBoardDataAction, setBoardDataChangeAction } from "store/actionTypes";
 import { allBordersSelector, idCurrentBoardSelector } from "store/selectors";
 import { IBoardData, ICurrentGetBoardData } from "store/slices/boardSlice/boarSliceTypes";
-import { addBoards, loading,  setAllBoards,  setBoardData, setCurrentBoardData, setError} from "store/slices/boardSlice/boardSlice";
+import { addBoards, loading,  setAllBoards,  setBoardData, setChangeCurrentBoard, setCurrentBoard, setCurrentBoardData, setError} from "store/slices/boardSlice/boardSlice";
 import { setDeleteBoardShow } from "store/slices/popupsSlice/popupSlice";
 import { IActionCreateBoardSaga, IActionGetBoardDatas } from "store/types";
 import { StatusCode } from "types";
@@ -54,9 +54,24 @@ function* deleteBoardSaga (action:any){
     }
     yield put(setDeleteBoardShow(false));
 }
+function* changeBoardsSaga (action:any){
+    const {id,navigate,bg,boardTitle,patch} = action.payload;
+    
+    const allBoards:IBoardData[]= yield select(allBordersSelector);
+    const data:ICurrentGetBoardData = yield call(setChangeBoard,id,boardTitle,bg);
+    yield put(setAllBoards(changeAllBoards(id,allBoards,bg,boardTitle)));
+    yield put(setChangeCurrentBoard({
+        name:boardTitle,
+        background:bg
+    }))
+    if(!(patch == id)){
+        navigate(`/board/${id}`)
+    }
+}
 export function* watchSetBoardSaga() {
     yield takeLatest(setBoardDataAction, setBoardSaga)
     yield takeLatest(getBoardDataAction,getBoardSaga)
     yield takeLatest(getAllBoardsAction,getAllboardsSaga)
     yield takeLatest(deleteBoardAction,deleteBoardSaga)
+    yield takeLatest(setBoardDataChangeAction,changeBoardsSaga)
 }
