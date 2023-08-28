@@ -4,7 +4,7 @@ import CreateMenuContent from "components/CreateMenuContent/CreateMenuContent";
 import CreateboardMenu from "components/CreateBoardMenu/CreateboardMenu";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import { popupsSelector } from "store/selectors";
-import { closeMenu } from "store/slices/popupsSlice/popupSlice";
+import { closeMenu, openBackMenuBlock } from "store/slices/popupsSlice/popupSlice";
 import { setChangeBoard } from "store/slices/boardSlice/boardSlice";
 import style from "./CreateMenu.module.scss";
 
@@ -28,6 +28,7 @@ const CreateMenu = () => {
     if(changeBoard.id && !event.relatedTarget){
       dispatch(setChangeBoard({}))
     }
+    dispatch(openBackMenuBlock(false))
   };
 
   return (

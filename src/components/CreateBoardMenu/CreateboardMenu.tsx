@@ -16,7 +16,7 @@ import {
 import { getChangeDivPosition } from "helpers";
 import { PageLocation } from "types";
 import { popupsSelector } from "store/selectors";
-import {  useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   setBoardDataAction,
   setBoardDataChangeAction,
@@ -64,6 +64,8 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
         currentLeft: 0,
       })
     );
+    dispatch(setClose(false));
+    dispatch(openBackMenuBlock(false));
   };
 
   const {
@@ -81,8 +83,12 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
         boardTitle: changeBoard.name,
       });
       dispatch(setUrl(changeBoard.background!));
-    }else{
-      dispatch(setUrl("https://images.unsplash.com/photo-1691168712328-924865142ba4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjkxNjUyNjA4fA&ixlib=rb-4.0.3&q=80&w=1200"))
+    } else {
+      dispatch(
+        setUrl(
+          "https://images.unsplash.com/photo-1691168712328-924865142ba4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjkxNjUyNjA4fA&ixlib=rb-4.0.3&q=80&w=1200"
+        )
+      );
     }
   }, []);
   const value = watch("boardTitle");

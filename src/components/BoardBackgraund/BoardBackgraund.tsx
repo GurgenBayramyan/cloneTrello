@@ -16,13 +16,14 @@ const BoardBackgraund = () => {
   const divRef = useRef<HTMLDivElement>(null);
   useEffect(()=>{
     divRef.current?.focus()
-  },[show])
+  },[])
   const handleClose = () => {
       dispatch(openBackMenuBlock(false))
   }
   const handleBlur = (e:React.FocusEvent<HTMLDivElement>) => {
     const relatedTarget = e.relatedTarget as HTMLElement;
-    if(relatedTarget?.dataset.name === "divparents"){
+    console.log(relatedTarget)
+    if(relatedTarget?.dataset.name === "divparents" ){
       return
     }
     dispatch(openBackMenuBlock(false))
@@ -31,7 +32,7 @@ const BoardBackgraund = () => {
     dispatch(setUrl(url));
   }
   return (
-   show ?  <div ref={divRef} onBlur={handleBlur} tabIndex={0} style={{top:`${top}px`,left:`${right}px`}} className={style.boardBackgraund}>
+   show ?  <div ref={divRef} onBlur={handleBlur} tabIndex={0}  style={{top:`${top}px`,left:`${right}px`}} className={style.boardBackgraund}>
    <div className={style.boardBackgraund_header}>
      <p>Board backgraund</p>
      <span onClick={handleClose}>x</span>

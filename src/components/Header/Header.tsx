@@ -112,7 +112,7 @@ const  Header = () => {
         <MenuIcon onClick={handleOpenMenu} className={style.header_menuIcon} />
         <div
           className={
-            headerState.open == false
+            headerState.open === false
               ? style.header_menuBlock
               : style.header_menuBlockClose
           }

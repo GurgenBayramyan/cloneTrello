@@ -4,6 +4,7 @@ import {
   IBoardInitialState,
   ICurrentGetBoardData,
 } from "./boarSliceTypes";
+import { urlBassic } from "types/constants";
 
 const initialState: IBoardInitialState = {
   loading: false,
@@ -12,7 +13,7 @@ const initialState: IBoardInitialState = {
   error: false,
   allBoardsData: [],
   changeBoard:{},
-  url:"https://images.unsplash.com/photo-1690692322953-fb0f543c6658?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjkxMjQ1MTQ4fA&ixlib=rb-4.0.3&q=80&w=400https://images.unsplash.com/photo-1690692322953-fb0f543c6658?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjkxMjQ1MTQ4fA&ixlib=rb-4.0.3&q=80&w=400",
+  url:urlBassic,
 };
 
 const boardSlice = createSlice({

@@ -4,20 +4,24 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { MouseEvent, useEffect,  useState } from "react";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import { getAllBoardsAction } from "store/actionTypes";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { setCurrentBoard } from "store/slices/boardSlice/boardSlice";
 import {
+  closeMenu,
   setOptionBoardPosition,
 } from "store/slices/popupsSlice/popupSlice";
 import { popupsSelector } from "store/selectors";
 import style from "./SideBar.module.scss";
 import { IBoardData } from "store/slices/boardSlice/boarSliceTypes";
+import classNames from "classnames";
 
 const SideBar = () => {
   const dispatch = useAppDispatch();
   const allBoards = useAppSelector((state) => state.boardSlice);
-  const { optionboard } = useAppSelector(popupsSelector);
+  const { optionboard} = useAppSelector(popupsSelector);
   const navigate = useNavigate();
+  const {id} = useParams();
+  
   const [open, setOpen] = useState(true);
   const handleMenu = () => {
     setOpen(!open);
@@ -29,22 +33,24 @@ const SideBar = () => {
     const elem = allBoards.allBoardsData.find((el) => el.id === id);
     dispatch(setCurrentBoard(elem!));
     navigate(`/board/${id}`);
+    
   };
   const openOptionBoard = (
     e: MouseEvent<HTMLDivElement>,
     elem:IBoardData
   ) => {
-    e.stopPropagation();
     const { top, left } = e.currentTarget.getBoundingClientRect();
+    
     dispatch(
       setOptionBoardPosition({
-        top,
-        left,
+        currentTop:top + 35,
+        currentLeft:left,
         show: !optionboard.show,
         name: elem.name,
         id:elem.id,
       })
     );
+    dispatch(closeMenu())
   };
 
   return (
@@ -79,7 +85,9 @@ const SideBar = () => {
             <div
               key={el.id}
               onClick={() => handleNavigate(el.id)}
-              className={style.boardBlock}
+              className={classNames(style.boardBlock,{
+                [style.linkActive]:el.id === +id!
+              })}
             >
               <div className={style.taskInfo}>
                 <div
@@ -90,6 +98,8 @@ const SideBar = () => {
               </div>
               <div className={style.iconBlock}>
                 <div
+                  tabIndex={0}
+                  data-name="spred"
                   onClick={(e) => openOptionBoard(e, el)}
                   className={style.firstIcon}
                 >

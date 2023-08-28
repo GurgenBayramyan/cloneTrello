@@ -15,7 +15,7 @@ interface IBackgroundBlockInitial{
   top:number
   right:number
 }
-interface   Ioptionboard{
+export interface   Ioptionboard{
   show: boolean,
   currentTop: number,
   currentLeft: number,

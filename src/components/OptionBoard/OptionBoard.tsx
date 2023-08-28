@@ -6,19 +6,17 @@ import {
   setDeleteBoardShow,
   setOptionBoardShow,
 } from "store/slices/popupsSlice/popupSlice";
-import { useEffect, useRef, useState } from "react";
+import { FocusEvent, MouseEvent, useEffect, useRef, useState } from "react";
 import { PageLocation } from "types";
 import { setChangeBoard } from "store/slices/boardSlice/boardSlice";
 
 const OptionBoard = () => {
-  const { optionboard ,changePopup} = useAppSelector(popupsSelector);
+  const { optionboard } = useAppSelector(popupsSelector);
   const [questionBlock, setQuestionBlock] = useState(false);
  const divRef = useRef<HTMLDivElement>(null);
   const {allBoardsData} = useAppSelector(state=>state.boardSlice)
   const dispatch = useAppDispatch();
-  const onClose = () => {
-    dispatch(setOptionBoardShow(false));
-  };
+
   const handleDeleteboard = () => {
     setQuestionBlock(!questionBlock);
   };
@@ -32,9 +30,16 @@ const OptionBoard = () => {
     handleDeleteboard();
     dispatch(setDeleteBoardShow(true));
   };
-  const handleBlur = () => {
+  const handleBlur = (e:FocusEvent<HTMLElement> | MouseEvent<HTMLElement>) => {
+    const relatedTarget = e.relatedTarget as HTMLElement;
+    
+    if(relatedTarget?.dataset.name === 'spred') {
+      return 
+    }
+    
     dispatch(setOptionBoardShow(false));
     setQuestionBlock(false);
+   
   };
   const openChangeBoardMenu = () => {
     const id = optionboard.id;
@@ -43,7 +48,7 @@ const OptionBoard = () => {
       menuActive:true,
       menuBlock:PageLocation.CREATEBOARD,
       currentLeft:optionboard.currentLeft ,
-      currentTop:optionboard.currentTop - 65
+      currentTop:optionboard.currentTop - 45
     }))
     if(elem){
       dispatch(setChangeBoard(elem))
@@ -70,7 +75,7 @@ const OptionBoard = () => {
           </div>
         )}
         <p title={optionboard.name}>{optionboard.name}</p>
-        <span data-name="close" onClick={onClose}>
+        <span data-name="close" onClick={handleBlur}>
           x
         </span>
       </div>

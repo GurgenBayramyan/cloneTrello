@@ -47,8 +47,7 @@ function* deleteBoardSaga (action:any){
         if(id === CurrentID){
             yield navigate('/')
         }
-        toast.success(message, {
-        })
+        toast.success(message)
     }else{
         toast.error(status)
     }
@@ -64,6 +63,7 @@ function* changeBoardsSaga (action:any){
         name:boardTitle,
         background:bg
     }))
+    toast.success("Board is Changed")
     if(!(patch == id)){
         navigate(`/board/${id}`)
     }

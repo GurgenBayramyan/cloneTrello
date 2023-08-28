@@ -4,10 +4,11 @@ import { FC } from 'react';
 import { IArchiveProps } from './ArchiveTypes';
 import { useAppDispatch, useAppSelector } from 'hooks/changDispatchSekector';
 import { setShowModal } from 'store/slices/modalSlice/modalSlice';
+import { modalBlockSelector } from 'store/selectors';
 
 const Archive:FC<IArchiveProps> = () => {
     const dispatch = useAppDispatch();
-  const modal = useAppSelector(state => state.modallMeniu);
+  const modal = useAppSelector(modalBlockSelector);
   const onClose = () => {
     dispatch(setShowModal(!modal.upModalShow))
   };

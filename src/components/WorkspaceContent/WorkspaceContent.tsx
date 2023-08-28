@@ -25,10 +25,14 @@ const WorkspaceContent = () => {
   const handleBlur = (e:React.FocusEvent<HTMLDivElement>) => {
     
     const relatedTarget = e.relatedTarget as HTMLElement;
-    if(relatedTarget?.dataset.name === 'divparent'){
+    if(relatedTarget?.dataset.name === 'divparent' ){
+      dispatch(setClose(false));
       return
     }
-    
+    if(relatedTarget?.dataset.name === 'divparents'){
+      dispatch(setClose(false));
+      return
+    }
     dispatch(setClose(false))
     dispatch(closeMenu())
 

@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { IStateBlock, IWorkspaceInitial } from "./popupSliceTypes";
+import { IStateBlock, IWorkspaceInitial, Ioptionboard } from "./popupSliceTypes";
 import { Menus, PageLocation } from "types";
 const initialState: IWorkspaceInitial = {
   workspace: {
@@ -49,10 +49,7 @@ const popupSlice = createSlice({
             state.workspace.show = payload
         },
         openCreateSection:(state,{payload}:PayloadAction<IStateBlock>) => {
-            state.menuState.menuActive = payload.menuActive
-            state.menuState.menuBlock = payload.menuBlock
-            state.menuState.currentLeft = payload.currentLeft
-            state.menuState.currentTop = payload.currentTop
+            state.menuState = payload
         },
         goToMain:(state,{payload}:PayloadAction<string>)=>{
             state.menuState.menuBlock = payload
@@ -74,12 +71,8 @@ const popupSlice = createSlice({
         setOptionBoardShow:(state,{payload}:PayloadAction<boolean>)=>{
             state.optionboard.show = payload
         },
-        setOptionBoardPosition:(state,{payload}:PayloadAction<{top:number,left:number,show:boolean,name:string,id:number}>) => {
-          state.optionboard.show = payload.show
-          state.optionboard.currentLeft = payload.left
-          state.optionboard.currentTop = payload.top + 25
-          state.optionboard.name = payload.name
-          state.optionboard.id = payload.id
+        setOptionBoardPosition:(state,{payload}:PayloadAction<Ioptionboard>) => {
+          state.optionboard = payload
         },
         setDeleteBoardShow:(state,{payload}:PayloadAction<boolean>) => {
           state.deleteBoard.show = payload

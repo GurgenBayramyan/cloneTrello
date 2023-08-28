@@ -1,21 +1,22 @@
-import { FC, useEffect, useRef, useState } from "react";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
-import FilterListIcon from "@mui/icons-material/FilterList";
 import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";
+import FilterListIcon from "@mui/icons-material/FilterList";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import ListIcon from "@mui/icons-material/List";
-import ShareIcon from "@mui/icons-material/Share";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
-import List from "components/List/List";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
+import ShareIcon from "@mui/icons-material/Share";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import { CircularProgress } from "@mui/material";
 import AddBlock from "components/AddBlock/AddBlock";
-import style from "./Content.module.scss";
+import List from "components/List/List";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
+import { FC, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getBoardDataAction } from "store/actionTypes";
-import { CircularProgress} from "@mui/material";
+import { boardSliceSelector } from "store/selectors";
 import { loading } from "store/slices/boardSlice/boardSlice";
+import style from "./Content.module.scss";
 
 const Content: FC = () => {
   const [state, setState] = useState<{
@@ -27,23 +28,22 @@ const Content: FC = () => {
   });
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const board = useAppSelector((state) => state.boardSlice);
+  const board = useAppSelector(boardSliceSelector);
 
   const { id } = useParams();
-  useEffect(()=>{
-    dispatch(loading(true))
-  },[])
+  useEffect(() => {
+    dispatch(loading(true));
+  }, []);
   useEffect(() => {
     if (id) {
       dispatch(getBoardDataAction(id));
     }
-    
   }, [id]);
-  useEffect(()=>{
-    if(board.error){
-      navigate("/error")
+  useEffect(() => {
+    if (board.error) {
+      navigate("/error");
     }
-  },[board.error])
+  }, [board.error]);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const handleOpenMenu = () => {
@@ -55,7 +55,10 @@ const Content: FC = () => {
   };
 
   return !board.loading ? (
-    <div style={{backgroundImage:`url(${board.currentBoard.background})`}} className={style.rightContainer}>
+    <div
+      style={{ backgroundImage: `url(${board.currentBoard.background})` }}
+      className={style.rightContainer}
+    >
       <div className={style.topSec}>
         <div className={style.leftBlock}>
           <h3>{board.currentBoard.name}</h3>
@@ -172,9 +175,8 @@ const Content: FC = () => {
     </div>
   ) : (
     <div className={style.loading}>
-      <CircularProgress  />
+      <CircularProgress />
     </div>
-   
   );
 };
 
