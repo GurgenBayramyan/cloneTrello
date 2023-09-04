@@ -1,4 +1,3 @@
-import { IBoardData } from "./slices/boardSlice/boarSliceTypes";
 
 export interface IPayloadBoardData{
     boardTitle: string
@@ -13,10 +12,14 @@ export interface IActionCreateBoardSaga{
     type:string
 }
 export interface IActionGetBoardDatas{
-    payload:string
+    payload:IBoardDataId,
     type:string
 }
 export interface IActiongetAllBoards{
-    payload:IBoardData[]
+    payload:IBoardDataId
     type:string
+}
+export interface IBoardDataId{
+    id: string
+    navigate:(to: string, options?: object) => void;
 }

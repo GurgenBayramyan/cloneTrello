@@ -7,7 +7,6 @@ import {
 import { urlBassic } from "types/constants";
 
 const initialState: IBoardInitialState = {
-  loading: false,
   boardData: [],
   currentBoard: {},
   error: false,
@@ -32,9 +31,6 @@ const boardSlice = createSlice({
     setChangeCurrentBoard: (state,{payload}:PayloadAction<{background:string,name:string}>) => {
       state.currentBoard.background = payload.background
       state.currentBoard.name = payload.name
-    },
-    loading: (state, { payload }: PayloadAction<boolean>) => {
-      state.loading = payload;
     },
     setError: (state, { payload }: PayloadAction<boolean>) => {
       state.error = payload;
@@ -64,7 +60,6 @@ export default boardSlice;
 export const {
   setBoardData,
   setCurrentBoardData,
-  loading,
   setError,
   setAllBoards,
   setCurrentBoard,

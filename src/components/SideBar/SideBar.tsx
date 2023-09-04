@@ -1,7 +1,7 @@
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
-import { MouseEvent, useEffect,  useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import { getAllBoardsAction } from "store/actionTypes";
 import { useNavigate, useParams } from "react-router-dom";
@@ -20,9 +20,9 @@ const SideBar = () => {
   const allBoards = useAppSelector((state) => state.boardSlice);
   const { optionboard} = useAppSelector(popupsSelector);
   const navigate = useNavigate();
-  const {id} = useParams();
-  
-  const [open, setOpen] = useState(true);
+  const { id } = useParams();
+
+  const [open, setOpen] = useState(false);
   const handleMenu = () => {
     setOpen(!open);
   };
@@ -33,24 +33,20 @@ const SideBar = () => {
     const elem = allBoards.allBoardsData.find((el) => el.id === id);
     dispatch(setCurrentBoard(elem!));
     navigate(`/board/${id}`);
-    
   };
-  const openOptionBoard = (
-    e: MouseEvent<HTMLDivElement>,
-    elem:IBoardData
-  ) => {
+  const openOptionBoard = (e: MouseEvent<HTMLDivElement>, elem: IBoardData) => {
     const { top, left } = e.currentTarget.getBoundingClientRect();
-    
+
     dispatch(
       setOptionBoardPosition({
-        currentTop:top + 35,
-        currentLeft:left,
+        currentTop: top + 35,
+        currentLeft: left,
         show: !optionboard.show,
         name: elem.name,
-        id:elem.id,
+        id: elem.id,
       })
     );
-    dispatch(closeMenu())
+    dispatch(closeMenu());
   };
 
   return (
@@ -80,13 +76,12 @@ const SideBar = () => {
           <h5>Your boards</h5>
         </div>
         {allBoards.allBoardsData.map((el) => {
-          
           return (
             <div
               key={el.id}
               onClick={() => handleNavigate(el.id)}
-              className={classNames(style.boardBlock,{
-                [style.linkActive]:el.id === +id!
+              className={classNames(style.boardBlock, {
+                [style.linkActive]: el.id === +id!,
               })}
             >
               <div className={style.taskInfo}>

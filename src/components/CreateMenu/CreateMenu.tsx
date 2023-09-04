@@ -3,8 +3,8 @@ import { PageLocation } from "types";
 import CreateMenuContent from "components/CreateMenuContent/CreateMenuContent";
 import CreateboardMenu from "components/CreateBoardMenu/CreateboardMenu";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
-import { popupsSelector } from "store/selectors";
-import { closeMenu, openBackMenuBlock } from "store/slices/popupsSlice/popupSlice";
+import { boardSliceSelector, popupsSelector } from "store/selectors";
+import { closeMenu } from "store/slices/popupsSlice/popupSlice";
 import { setChangeBoard } from "store/slices/boardSlice/boardSlice";
 import style from "./CreateMenu.module.scss";
 
@@ -12,23 +12,23 @@ const CreateMenu = () => {
   const divRef = useRef<HTMLDivElement>(null);
   const { menuState, backgroundState, workspace } =
     useAppSelector(popupsSelector);
-    const{changeBoard} = useAppSelector(state=>state.boardSlice)
+  const { changeBoard } = useAppSelector(boardSliceSelector);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (!backgroundState.show) {
       divRef.current!.focus();
     }
-  }, [backgroundState.show, workspace.content]);
+  }, [backgroundState.show, workspace.content, menuState]);
 
   const handleBlur = (event: FocusEvent<HTMLElement>) => {
-    if (!event.relatedTarget) {
+    const reletedTarget = event.relatedTarget;
+    if (!reletedTarget) {
       dispatch(closeMenu());
     }
-    if(changeBoard.id && !event.relatedTarget){
-      dispatch(setChangeBoard({}))
+    if (changeBoard.id && !reletedTarget) {
+      dispatch(setChangeBoard({}));
     }
-    dispatch(openBackMenuBlock(false))
   };
 
   return (

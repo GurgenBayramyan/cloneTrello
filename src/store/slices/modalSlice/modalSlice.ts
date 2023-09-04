@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { boolean } from "yup";
 const initialState = {
     upModalShow:false,
     showModal:false

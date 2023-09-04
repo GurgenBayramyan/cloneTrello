@@ -1,15 +1,14 @@
-import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { SubmitErrorHandler, SubmitHandler, useForm} from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schemaRegistr } from "schemas";
-import { IRegistration } from "./RegistrationTypes";
-import { postRegistration } from "services/autication";
-import { ToastContainer, ToastOptions, toast} from "react-toastify";
-import style from "./Registration.module.scss";
-import {toastDefaultValue } from "helpers";
 import classNames from "classnames";
-import { IErrorObjectForAlert, RespStatus } from "types";
+import { toastDefaultValue } from "helpers";
+import { SubmitErrorHandler, SubmitHandler, useForm } from "react-hook-form";
+import { NavLink, useNavigate } from "react-router-dom";
+import { ToastContainer, ToastOptions, toast } from "react-toastify";
+import { schemaRegistr } from "schemas";
+import { postRegistration } from "services/autication";
+import { RespStatus } from "types";
+import style from "./Registration.module.scss";
+import { IRegistration } from "./RegistrationTypes";
 
 const Registration = () => {
   const navigate = useNavigate()
@@ -17,12 +16,10 @@ const Registration = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
-    watch
   } = useForm<IRegistration>({
     resolver: yupResolver(schemaRegistr),
   });
-  const {repeatPassword,password} = watch();
+  
 
 
   const onSubmit: SubmitHandler<IRegistration> = async(data) => {

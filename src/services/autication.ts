@@ -25,52 +25,30 @@ export const postRegistration = async (data: IRegistration) => {
 
 export const setBoard = async (boardTitle: string, bg: string) => {
   const url = "https://young-citadel-44598.herokuapp.com/boards";
-
-  try {
-    const { data } = await axios.post(
-      url,
-      { name: boardTitle, background: bg },
-      { withCredentials: true }
-    );
-
-    return data;
-  } catch (err: any) {
-    const { data } = err.response;
-    return data;
-  }
+  const resp = await axios.post(
+    url,
+    { name: boardTitle, background: bg },
+    { withCredentials: true }
+  );
+  return resp.data;
 };
 export const getBoard = async (id: string) => {
   const url = `https://young-citadel-44598.herokuapp.com/boards/${id}`;
-
-  try {
-    const { data } = await axios.get(url, { withCredentials: true });
-    return data;
-  } catch (err: any) {
-    const { data } = err.response;
-    return data;
-  }
+  const resp = await axios.get(url, { withCredentials: true });
+  return resp.data;
 };
 export const getAllBoards = async () => {
   const url = `https://young-citadel-44598.herokuapp.com/boards`;
-  try {
-    const { data } = await axios.get(url, { withCredentials: true });
-    return data;
-  } catch (err: any) {
-    const { data } = err.response;
-    return data;
-  }
+  const  resp = await axios.get(url, { withCredentials: true });
+  return resp.data;
+  
 };
 
 export const deleteBoard = async (id: number) => {
   const url = `https://young-citadel-44598.herokuapp.com/boards/${id}`;
+  const resp = await axios.delete(url, { withCredentials: true });
+  return resp.status
 
-  try {
-    const { status } = await axios.delete(url, { withCredentials: true });
-    return status;
-  } catch (err: any) {
-    const { data } = err.response;
-    return data;
-  }
 };
 
 export const setChangeBoard = async (
@@ -79,16 +57,11 @@ export const setChangeBoard = async (
   bg: string
 ) => {
   const url = `https://young-citadel-44598.herokuapp.com/boards/${id}`;
+  const  resp  = await axios.put(
+    url,
+    { name: boardTitle, background: bg },
+    { withCredentials: true }
+  );
+  return resp.data
 
-  try {
-    const { data } = await axios.put(
-      url,
-      { name: boardTitle, background: bg },
-      { withCredentials: true }
-    );
-      
-    return data
-  } catch (err: any) {
-    return "Board not found"
-  }
 };

@@ -1,16 +1,16 @@
-import { MouseEvent, FC, useRef} from "react";
-import { ITask } from "./TaskTypes";
 import CreateIcon from "@mui/icons-material/Create";
 import MenuIcon from "@mui/icons-material/Menu";
-import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
-import { setStyles } from "store/slices/taskSettings/taskSettingsSlice";
-import { setShowOptionDiv } from "store/slices/showOptiondivSlice/showOptionDivSlice";
-import { setMenu } from "store/slices/showMenuUserSlice/showMenuUserSlice";
 import UserNameIcon from "components/UserNameIcon/UserNameIcon";
-import style from "./Task.module.scss";
+import { getPositonShow } from "helpers";
+import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
+import { FC, MouseEvent, useRef } from "react";
 import { setShowMenuUserSelector, setShowOptionDivSelector } from "store/selectors";
-import {  getPositonShow } from "helpers";
 import { setShowModal } from "store/slices/modalSlice/modalSlice";
+import { setMenu } from "store/slices/showMenuUserSlice/showMenuUserSlice";
+import { setShowOptionDiv } from "store/slices/showOptiondivSlice/showOptionDivSlice";
+import { setStyles } from "store/slices/taskSettings/taskSettingsSlice";
+import style from "./Task.module.scss";
+import { ITask } from "./TaskTypes";
 
 
 const Task: FC<ITask> = () => {
@@ -19,7 +19,7 @@ const Task: FC<ITask> = () => {
   const flag = useAppSelector(setShowMenuUserSelector)
   const taskDiv = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLDivElement>(null);
-  const modal = useAppSelector(state => state.modallMeniu)
+  const modal = useAppSelector(state => state.modallMeniu);
   const openModal = () => {
     dispatch(setShowModal(!modal.showModal))
   };

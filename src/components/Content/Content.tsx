@@ -7,7 +7,6 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import ShareIcon from "@mui/icons-material/Share";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
-import { CircularProgress } from "@mui/material";
 import AddBlock from "components/AddBlock/AddBlock";
 import List from "components/List/List";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
@@ -15,7 +14,6 @@ import { FC, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getBoardDataAction } from "store/actionTypes";
 import { boardSliceSelector } from "store/selectors";
-import { loading } from "store/slices/boardSlice/boardSlice";
 import style from "./Content.module.scss";
 
 const Content: FC = () => {
@@ -32,18 +30,10 @@ const Content: FC = () => {
 
   const { id } = useParams();
   useEffect(() => {
-    dispatch(loading(true));
-  }, []);
-  useEffect(() => {
     if (id) {
-      dispatch(getBoardDataAction(id));
+      dispatch(getBoardDataAction({ id, navigate }));
     }
   }, [id]);
-  useEffect(() => {
-    if (board.error) {
-      navigate("/error");
-    }
-  }, [board.error]);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const handleOpenMenu = () => {
@@ -54,7 +44,7 @@ const Content: FC = () => {
     setState({ ...state, leftMenu: !state.leftMenu });
   };
 
-  return !board.loading ? (
+  return (
     <div
       style={{ backgroundImage: `url(${board.currentBoard.background})` }}
       className={style.rightContainer}
@@ -162,20 +152,16 @@ const Content: FC = () => {
       <div className={style.rightContainer_down}>
         <div ref={scrollRef} className={style.downBlock}>
           <List title="To do" />
-          <List title="To do" />
-          <List title="To do" />
-          <List title="To do" />
-          <List title="To do" />
+          <List title="in progress" />
+          <List title="on Hold" />
+          <List title="reWiev" />
+          <List title="calaburation" />
           <List title="To do" />
           <List title="To do" />
           <List title="To do" />
           <AddBlock />
         </div>
       </div>
-    </div>
-  ) : (
-    <div className={style.loading}>
-      <CircularProgress />
     </div>
   );
 };

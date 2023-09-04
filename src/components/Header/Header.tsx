@@ -1,4 +1,4 @@
-import  { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AppsIcon from "@mui/icons-material/Apps";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import style from "./Header.module.scss";
@@ -7,80 +7,83 @@ import SearchIcon from "@mui/icons-material/Search";
 import ContactSupportIcon from "@mui/icons-material/ContactSupport";
 import DisplaySettingsIcon from "@mui/icons-material/DisplaySettings";
 import MenuIcon from "@mui/icons-material/Menu";
-import ClearAllIcon from '@mui/icons-material/ClearAll';
+import ClearAllIcon from "@mui/icons-material/ClearAll";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import ElectricBoltIcon from "@mui/icons-material/ElectricBolt";
-import { IHeaderState} from './HeaderTypes';
+import { IHeaderState } from "./HeaderTypes";
 import classNames from "classnames";
 import { fetchLogout, toastDefaultValue } from "helpers";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import { getUserDataAction } from "store/actionTypes";
-import LoginIcon from '@mui/icons-material/Login';
+import LoginIcon from "@mui/icons-material/Login";
 import { ToastOptions, toast } from "react-toastify";
 import UserNameIcon from "components/UserNameIcon/UserNameIcon";
 import { contentSliceSelector, popupsSelector } from "store/selectors";
 import { openCreateSection } from "store/slices/popupsSlice/popupSlice";
 import { PageLocation } from "types";
 import { setChangeBoard } from "store/slices/boardSlice/boardSlice";
+import { setToken } from "store/slices/contentSlice/contentSlice";
 
-
-const  Header = () => {
-    const[headerState,setHeaderState] = useState<IHeaderState>({
-        open:true,
-        menuView:true,
-        userMenu:true
-    })
-    const createDivRef = useRef<HTMLButtonElement>(null)
-    const {menuState} = useAppSelector(popupsSelector);
-    const{data}=useAppSelector(contentSliceSelector);
-    const navigate = useNavigate();
-    const dispatch =  useAppDispatch()
-    useEffect(()=>{
-      dispatch(getUserDataAction())
-    },[])
-    const handleOpenMenu = () => {
-        setHeaderState({...headerState,
-          open:!headerState.open,
-          menuView:headerState.open ? true:headerState.menuView,
-          userMenu:true
-        })
-
-    }
-    const handleViewMenu = () => {
-      setHeaderState({
-        ...headerState,
-        menuView:!headerState.menuView,
-        open:headerState.menuView ? true:headerState.open,
-        userMenu:true
+const Header = () => {
+  const [headerState, setHeaderState] = useState<IHeaderState>({
+    open: true,
+    menuView: true,
+    userMenu: true,
+  });
+  const createDivRef = useRef<HTMLButtonElement>(null);
+  const { menuState } = useAppSelector(popupsSelector);
+  const { data } = useAppSelector(contentSliceSelector);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getUserDataAction());
+  }, []);
+  const handleOpenMenu = () => {
+    setHeaderState({
+      ...headerState,
+      open: !headerState.open,
+      menuView: headerState.open ? true : headerState.menuView,
+      userMenu: true,
+    });
+  };
+  const handleViewMenu = () => {
+    setHeaderState({
+      ...headerState,
+      menuView: !headerState.menuView,
+      open: headerState.menuView ? true : headerState.open,
+      userMenu: true,
+    });
+  };
+  const handleOpenUserMenu = () => {
+    setHeaderState({
+      userMenu: !headerState.userMenu,
+      menuView: true,
+      open: true,
+    });
+  };
+  const handlelogOut = async () => {
+    const resp = await fetchLogout();
+    const { messege } = resp.data;
+    toast.success(messege, toastDefaultValue() as ToastOptions<{}>);
+    Cookies.remove("token");
+    dispatch(setToken(""));
+    navigate("/login");
+  };
+  const openMenu = () => {
+    const { top, left } = createDivRef.current!.getBoundingClientRect();
+    dispatch(
+      openCreateSection({
+        menuActive: !menuState.menuActive,
+        menuBlock: PageLocation.CREATEMENU,
+        currentTop: top,
+        currentLeft: left,
       })
-    }
-    const handleOpenUserMenu = () => {
-        setHeaderState({
-          userMenu:!headerState.userMenu,
-          menuView:true,
-          open:true
-        })
-    }
-    const handlelogOut = async() => {
-     const resp = await fetchLogout();
-     const {messege} = resp.data;
-     toast.success(messege,toastDefaultValue() as ToastOptions<{}>)  
-     Cookies.remove("token");
-     navigate("/login");
-    }
-    const openMenu = () => {
-      const {top,left} = createDivRef.current!.getBoundingClientRect();
-      dispatch(openCreateSection({
-        menuActive:!menuState.menuActive,
-        menuBlock:(PageLocation.CREATEMENU),
-        currentTop:top,
-        currentLeft:left
-      }))
-      dispatch(setChangeBoard({}))
-   }
+    );
+    dispatch(setChangeBoard({}));
+  };
   return (
     <header className={style.header}>
       <div className={style.header_navbar}>
@@ -106,7 +109,13 @@ const  Header = () => {
           <span>Templates</span>
           <KeyboardArrowDownIcon sx={{ cursor: "pointer" }} />
         </div>
-        <button ref={createDivRef} className={style.headerS4} onClick={openMenu}>Create</button>
+        <button
+          ref={createDivRef}
+          className={style.headerS4}
+          onClick={openMenu}
+        >
+          Create
+        </button>
       </div>
       <div>
         <MenuIcon onClick={handleOpenMenu} className={style.header_menuIcon} />
@@ -239,5 +248,5 @@ const  Header = () => {
       </div>
     </header>
   );
-}
-export default Header
+};
+export default Header;

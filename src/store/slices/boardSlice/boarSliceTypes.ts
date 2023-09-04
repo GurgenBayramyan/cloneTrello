@@ -8,7 +8,6 @@ export interface IBoardData {
 
 
 export interface IBoardInitialState {
-  loading: boolean;
   boardData: IBoardData[];
   currentBoard:ICurrentGetBoardData;
   error:boolean
