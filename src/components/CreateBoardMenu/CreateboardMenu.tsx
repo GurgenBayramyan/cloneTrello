@@ -24,6 +24,7 @@ import {
 import style from "./Createboard.module.scss";
 import { backgraundImages, backgraundImagesDown } from "types/constants";
 import { setChangeBoard, setUrl } from "store/slices/boardSlice/boardSlice";
+import {  LinearProgress } from "@mui/material";
 
 const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
   const { backgroundState, workspace } = useAppSelector(popupsSelector);
   const allboards = useAppSelector((state) => state.boardSlice);
   const params = useParams();
-  const { changeBoard } = useAppSelector((state) => state.boardSlice);
+  const { changeBoard,loading } = useAppSelector((state) => state.boardSlice);
 
   const handleAddBackgraund = (url: string) => {
     dispatch(setUrl(url));
@@ -107,24 +108,8 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
         bg: allboards.url,
       })
     );
-    dispatch(
-      openCreateSection({
-        menuActive: false,
-        menuBlock: PageLocation.CREATEMENU,
-        currentTop: 0,
-        currentLeft: 0,
-      })
-    );
   };
   const editSubmit: SubmitHandler<{ boardTitle: string }> = (data) => {
-    dispatch(
-      openCreateSection({
-        menuActive: false,
-        menuBlock: PageLocation.CREATEMENU,
-        currentTop: 0,
-        currentLeft: 0,
-      })
-    );
     dispatch(
       setBoardDataChangeAction({
         id: changeBoard.id,
@@ -251,6 +236,8 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
             type="submit"
           >
             {!changeBoard.id ? "Create" : "Change"}
+            {loading && <LinearProgress />}
+            
           </button>
           <button
             data-block="change"
@@ -262,7 +249,7 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
         </div>
         <div className={style.paragBlock}>
           <p>
-            By using images from Unsplash, you agree to their{" "}
+            By using images from Unsplash, you agree to their
             <span>license</span> and <span>Terms of Service</span>
           </p>
         </div>

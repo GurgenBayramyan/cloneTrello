@@ -13,6 +13,7 @@ const initialState: IBoardInitialState = {
   allBoardsData: [],
   changeBoard:{},
   url:urlBassic,
+  loading:false
 };
 
 const boardSlice = createSlice({
@@ -53,6 +54,9 @@ const boardSlice = createSlice({
     setChangeBoard: (state,{payload}:PayloadAction<Partial<IBoardData>>) => {
       state.changeBoard = payload
     },
+    setLoadingCreateAndChange:(state,{payload}:PayloadAction<Partial<boolean>>) => {
+      state.loading = payload
+    },
    
   },
 });
@@ -66,5 +70,6 @@ export const {
   addBoards,
   setUrl,
   setChangeBoard,
-  setChangeCurrentBoard
+  setChangeCurrentBoard,
+  setLoadingCreateAndChange
 } = boardSlice.actions;

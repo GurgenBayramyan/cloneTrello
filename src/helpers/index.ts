@@ -1,6 +1,8 @@
 import axios from "axios";
 import { IRegistration } from "components/Registration/RegistrationTypes";
-import { IBoardData, IBoardInitialState, ICurrentGetBoardData } from "store/slices/boardSlice/boarSliceTypes";
+import {
+  IBoardData,
+} from "store/slices/boardSlice/boarSliceTypes";
 
 export const removeRepeatPasword = (data: IRegistration) => {
   const filteredUserObject = Object.entries(data).filter(([key]) => {
@@ -74,7 +76,7 @@ export const getPosition = (
   width: number,
   height: number,
   top: number,
-  left: number,
+  left: number
 ) => {
   if (top + height > window.innerHeight) {
     if (left + width > window.innerWidth) {
@@ -96,64 +98,79 @@ export const getPosition = (
       currentTop: 80,
     };
   }
-}
- export const getPositonShow = (top:number,left:number,width:number,show:boolean) => {
-  if(top + 300 > window.innerHeight){
-   return  {
-      top:590,
-      left:left + width - 25,
-      show:!show
-    }
-  }else{
-    return {
-        top:top + 30,
-        left:left + width - 25,
-        show:!show
-      }
-  }
- }  
- export const getTemplateMenuStates = (
-  div:HTMLElement
+};
+export const getPositonShow = (
+  top: number,
+  left: number,
+  width: number,
+  show: boolean
 ) => {
+  if (top + 300 > window.innerHeight) {
+    return {
+      top: 590,
+      left: left + width - 25,
+      show: !show,
+    };
+  } else {
+    return {
+      top: top + 30,
+      left: left + width - 25,
+      show: !show,
+    };
+  }
+};
+export const getTemplateMenuStates = (div: HTMLElement) => {
   const { top, height } = div.getBoundingClientRect();
 
-  if ((top + height + 20) > window.innerHeight) {
-    return true
-    
-  }else{
-    return false
+  if (top + height + 20 > window.innerHeight) {
+    return true;
+  } else {
+    return false;
   }
 };
 
-export const getChangeDivPosition = (top:number,left:number) => {
-  const minus = (top +300) - window.innerHeight
-    if(top + 300 > window.innerHeight){
-      return {
-        top: top -minus  - 50,
-        left:left
-      }
-    }
+export const getChangeDivPosition = (top: number, left: number) => {
+  const minus = top + 300 - window.innerHeight;
+  if (top + 300 > window.innerHeight) {
     return {
-      top:top + 50,
-      left:left
-    }
-}
+      top: top - minus - 50,
+      left: left,
+    };
+  }
+  return {
+    top: top + 50,
+    left: left,
+  };
+};
 
-export const filterForId = (state:IBoardData[],id:number) => {
-  return state.filter(el=> {
-    return el.id != id
-  })
-}
+export const filterForId = (state: IBoardData[], id: number) => {
+  return state.filter((el) => {
+    return el.id !== id;
+  });
+};
 
-export const changeAllBoards = (id:number,allBoards:IBoardData[],bg:string,boardTitle:string) => {
-  return allBoards.map(board=>{
-    if(board.id === id){
+export const changeAllBoards = (
+  id: number,
+  allBoards: IBoardData[],
+  bg: string,
+  boardTitle: string
+) => {
+  return allBoards.map((board) => {
+    if (board.id === id) {
       return {
-          ...board,
-          background:bg,
-          name:boardTitle
-      }
+        ...board,
+        background: bg,
+        name: boardTitle,
+      };
     }
-    return board
-  })
+    return board;
+  });
+};
+export const getPositionSection = (top:number) => {
+  if(top + 650 > window.innerHeight){
+     return top -(top + 650 - window.innerHeight)
+  }
+  return top
 }
+
+

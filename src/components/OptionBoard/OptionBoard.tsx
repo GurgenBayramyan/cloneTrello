@@ -5,58 +5,64 @@ import {
   openCreateSection,
   setDeleteBoardShow,
   setOptionBoardShow,
+  setOptionBoardToDefault,
+  setQuestionBlock,
 } from "store/slices/popupsSlice/popupSlice";
-import { FocusEvent, MouseEvent, useEffect, useRef, useState } from "react";
+import { FocusEvent, MouseEvent, useEffect, useRef } from "react";
 import { PageLocation } from "types";
 import { setChangeBoard } from "store/slices/boardSlice/boardSlice";
+import { getPositionSection } from "helpers";
 
 const OptionBoard = () => {
-  const { optionboard } = useAppSelector(popupsSelector);
-  const [questionBlock, setQuestionBlock] = useState(false);
- const divRef = useRef<HTMLDivElement>(null);
-  const {allBoardsData} = useAppSelector(state=>state.boardSlice)
+  const { optionboard, questionBlock } = useAppSelector(popupsSelector);
+  const divRef = useRef<HTMLDivElement>(null);
+  const { allBoardsData } = useAppSelector((state) => state.boardSlice);
   const dispatch = useAppDispatch();
 
   const handleDeleteboard = () => {
-    setQuestionBlock(!questionBlock);
+    dispatch(setQuestionBlock(!questionBlock));
   };
   useEffect(() => {
-    if(divRef.current) {
-      divRef.current!.focus()
+    if (divRef.current) {
+      divRef.current!.focus();
     }
+    
+  
   }, [optionboard.show]);
   const handleOpenDeleteBlock = () => {
     dispatch(setOptionBoardShow(false));
     handleDeleteboard();
     dispatch(setDeleteBoardShow(true));
   };
-  const handleBlur = (e:FocusEvent<HTMLElement> | MouseEvent<HTMLElement>) => {
+  const handleBlur = (e: FocusEvent<HTMLElement> | MouseEvent<HTMLElement>) => {
     const relatedTarget = e.relatedTarget as HTMLElement;
-    
-    if(relatedTarget?.dataset.name === 'spred') {
-      return 
+
+    if (relatedTarget?.dataset.name === "spred") {
+      divRef.current?.focus();
+      return;
     }
-    
+
     dispatch(setOptionBoardShow(false));
-    setQuestionBlock(false);
-   
+    dispatch(setOptionBoardToDefault());
+    dispatch(setQuestionBlock(false));
   };
   const openChangeBoardMenu = () => {
     const id = optionboard.id;
-    const elem = allBoardsData.find(el=>el.id === id);
-    dispatch(openCreateSection({
-      menuActive:true,
-      menuBlock:PageLocation.CREATEBOARD,
-      currentLeft:optionboard.currentLeft ,
-      currentTop:optionboard.currentTop - 45
-    }))
-    if(elem){
-      dispatch(setChangeBoard(elem))
-    }else{
-      dispatch(setChangeBoard({}))
+    const elem = allBoardsData.find((el) => el.id === id);
+    dispatch(
+      openCreateSection({
+        menuActive: true,
+        menuBlock: PageLocation.CREATEBOARD,
+        currentLeft: optionboard.currentLeft,
+        currentTop: getPositionSection(optionboard.currentTop - 45), 
+      })
+    );
+    if (elem) {
+      dispatch(setChangeBoard(elem));
+    } else {
+      dispatch(setChangeBoard({}));
     }
-    
-  }
+  };
   return optionboard.show ? (
     <div
       ref={divRef}
@@ -108,5 +114,3 @@ const OptionBoard = () => {
 };
 
 export default OptionBoard;
-
-

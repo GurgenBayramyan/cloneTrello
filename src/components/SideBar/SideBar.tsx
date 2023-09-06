@@ -4,11 +4,12 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { MouseEvent, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import { getAllBoardsAction } from "store/actionTypes";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { setCurrentBoard } from "store/slices/boardSlice/boardSlice";
 import {
   closeMenu,
   setOptionBoardPosition,
+  setQuestionBlock,
 } from "store/slices/popupsSlice/popupSlice";
 import { popupsSelector } from "store/selectors";
 import style from "./SideBar.module.scss";
@@ -17,10 +18,12 @@ import classNames from "classnames";
 
 const SideBar = () => {
   const dispatch = useAppDispatch();
-  const allBoards = useAppSelector((state) => state.boardSlice);
-  const { optionboard} = useAppSelector(popupsSelector);
+  const { allBoardsData, changeBoard } = useAppSelector(
+    (state) => state.boardSlice
+  );
+  const { optionboard } = useAppSelector(popupsSelector);
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { pathname } = useLocation();
 
   const [open, setOpen] = useState(false);
   const handleMenu = () => {
@@ -30,22 +33,25 @@ const SideBar = () => {
     dispatch(getAllBoardsAction());
   }, []);
   const handleNavigate = (id: number) => {
-    const elem = allBoards.allBoardsData.find((el) => el.id === id);
+    const elem = allBoardsData.find((el) => el.id === id);
     dispatch(setCurrentBoard(elem!));
     navigate(`/board/${id}`);
   };
   const openOptionBoard = (e: MouseEvent<HTMLDivElement>, elem: IBoardData) => {
+    e.stopPropagation();
     const { top, left } = e.currentTarget.getBoundingClientRect();
 
     dispatch(
       setOptionBoardPosition({
         currentTop: top + 35,
         currentLeft: left,
-        show: !optionboard.show,
+        show: true,
         name: elem.name,
         id: elem.id,
       })
     );
+    dispatch(setQuestionBlock(false));
+
     dispatch(closeMenu());
   };
 
@@ -75,13 +81,15 @@ const SideBar = () => {
         <div className={style.titleBlock}>
           <h5>Your boards</h5>
         </div>
-        {allBoards.allBoardsData.map((el) => {
+        {allBoardsData.map((el) => {
           return (
             <div
               key={el.id}
               onClick={() => handleNavigate(el.id)}
               className={classNames(style.boardBlock, {
-                [style.linkActive]: el.id === +id!,
+                [style.linkActive]: el.id === +pathname.slice(-2)!,
+                [style.activeMenu]:
+                  el.id === optionboard.id || el.id === changeBoard.id,
               })}
             >
               <div className={style.taskInfo}>
@@ -96,7 +104,7 @@ const SideBar = () => {
                   tabIndex={0}
                   data-name="spred"
                   onClick={(e) => openOptionBoard(e, el)}
-                  className={style.firstIcon}
+                  className={classNames(style.firstIcon)}
                 >
                   <span>...</span>
                 </div>
