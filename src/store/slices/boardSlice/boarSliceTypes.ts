@@ -22,4 +22,5 @@ export interface ICurrentGetBoardData {
   sortId?: number;
   userId?: number;
   error?: object;
+  loading?: boolean;
 }

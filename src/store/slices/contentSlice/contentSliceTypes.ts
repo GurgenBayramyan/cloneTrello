@@ -8,6 +8,4 @@ export interface IUserData {
 
 export interface IContentInitial {
   data: IUserData;
-  token: string;
-  loading: boolean;
 }

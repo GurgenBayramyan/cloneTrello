@@ -29,7 +29,6 @@ import {
 import { openCreateSection } from "store/slices/popupsSlice/popupSlice";
 import { PageLocation } from "types";
 import { setChangeBoard } from "store/slices/boardSlice/boardSlice";
-import { setToken } from "store/slices/contentSlice/contentSlice";
 
 const Header = () => {
   const [headerState, setHeaderState] = useState<IHeaderState>({
@@ -74,7 +73,6 @@ const Header = () => {
     const { messege } = resp.data;
     toast.success(messege, toastDefaultValue() as ToastOptions<{}>);
     Cookies.remove("token");
-    dispatch(setToken(""));
     navigate("/login");
   };
   const openMenu = () => {

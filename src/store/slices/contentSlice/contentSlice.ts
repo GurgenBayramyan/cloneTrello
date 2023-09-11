@@ -8,9 +8,7 @@ const initialState: IContentInitial = {
     genders: "",
     email: "",
     age: "",
-  },
-  token: "",
-  loading: true,
+  }
 };
 
 const contentSlice = createSlice({
@@ -20,13 +18,7 @@ const contentSlice = createSlice({
     setUserData: (state, { payload }: PayloadAction<IUserData>) => {
       state.data = payload;
     },
-    setToken: (state, { payload }: PayloadAction<string>) => {
-      state.token = payload;
-    },
-    setLoading: (state, { payload }: PayloadAction<boolean>) => {
-      state.loading = payload;
-    },
   },
 });
 export default contentSlice;
-export const { setUserData, setToken, setLoading } = contentSlice.actions;
+export const { setUserData} = contentSlice.actions;

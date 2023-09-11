@@ -57,6 +57,9 @@ const boardSlice = createSlice({
     setLoadingCreateAndChange:(state,{payload}:PayloadAction<Partial<boolean>>) => {
       state.loading = payload
     },
+    setCurrentLoading:(state,{payload}:PayloadAction<Partial<boolean>>) => {
+      state.currentBoard.loading = payload
+    }
    
   },
 });
@@ -71,5 +74,6 @@ export const {
   setUrl,
   setChangeBoard,
   setChangeCurrentBoard,
-  setLoadingCreateAndChange
+  setLoadingCreateAndChange,
+  setCurrentLoading
 } = boardSlice.actions;

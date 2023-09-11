@@ -12,7 +12,6 @@ import Cookies from "js-cookie";
 import classNames from "classnames";
 import { RespStatus } from "types";
 import { useAppDispatch } from "hooks/changDispatchSekector";
-import { setToken } from "store/slices/contentSlice/contentSlice";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -34,7 +33,6 @@ const Login = () => {
       toast.success(message, toastDefaultValue() as ToastOptions<{}>);
       navigate("/");
       Cookies.set("token", token);
-      dispatch(setToken(token));
       reset();
     } else {
       toast.error(resp.response.data, {

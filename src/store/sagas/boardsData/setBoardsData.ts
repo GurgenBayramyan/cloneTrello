@@ -26,9 +26,9 @@ import {
   setBoardData,
   setChangeCurrentBoard,
   setCurrentBoardData,
+  setCurrentLoading,
   setLoadingCreateAndChange,
 } from "store/slices/boardSlice/boardSlice";
-import { setLoading } from "store/slices/contentSlice/contentSlice";
 import {
   openCreateSection,
   setDeleteBoardShow,
@@ -59,9 +59,11 @@ function* setBoardSaga(action: IActionCreateBoardSaga) {
     toast.error(err.message);
   }
   yield put(setLoadingCreateAndChange(false));
+  
 }
 function* getBoardSaga(action: IActionGetBoardDatas) {
   const { id } = action.payload;
+  
   try {
     const data: ICurrentGetBoardData = yield call(getBoard, id);
     yield put(setCurrentBoardData(data));
@@ -69,11 +71,11 @@ function* getBoardSaga(action: IActionGetBoardDatas) {
   } catch (err) {
    console.log(err)
   }
-  yield put(setLoading(false));
-
+  yield put(setCurrentLoading(false))
 }
 
 function* getAllboardsSaga(action: any) {
+  yield put(setCurrentLoading(true))
   try {
     const data: IBoardData[] = yield call(getAllBoards);
     yield put(setAllBoards(data));

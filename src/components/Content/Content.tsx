@@ -15,6 +15,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getBoardDataAction } from "store/actionTypes";
 import { boardSliceSelector } from "store/selectors";
 import style from "./Content.module.scss";
+import Loading from "components/Loading/Loading";
+import { CircularProgress } from "@mui/material";
 
 const Content: FC = () => {
   const [state, setState] = useState<{
@@ -25,10 +27,10 @@ const Content: FC = () => {
     leftMenu: true,
   });
 
-  const {currentBoard} = useAppSelector(boardSliceSelector);
+  const { currentBoard } = useAppSelector(boardSliceSelector);
 
   const scrollRef = useRef<HTMLDivElement>(null);
-    const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
   useEffect(() => {
@@ -45,7 +47,11 @@ const Content: FC = () => {
     setState({ ...state, leftMenu: !state.leftMenu });
   };
 
-  return (
+  return currentBoard.loading ? (
+    <div className={style.wrapperLoading}>
+      <CircularProgress disableShrink />
+    </div>
+  ) : (
     <div
       style={{ backgroundImage: `url(${currentBoard.background})` }}
       className={style.rightContainer}
