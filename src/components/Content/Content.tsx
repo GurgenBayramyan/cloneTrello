@@ -24,17 +24,18 @@ const Content: FC = () => {
     menu: true,
     leftMenu: true,
   });
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const board = useAppSelector(boardSliceSelector);
 
+  const {currentBoard} = useAppSelector(boardSliceSelector);
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+    const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { id } = useParams();
   useEffect(() => {
     if (id) {
       dispatch(getBoardDataAction({ id, navigate }));
     }
   }, [id]);
-  const scrollRef = useRef<HTMLDivElement>(null);
 
   const handleOpenMenu = () => {
     setState({ ...state, menu: !state.menu });
@@ -46,12 +47,12 @@ const Content: FC = () => {
 
   return (
     <div
-      style={{ backgroundImage: `url(${board.currentBoard.background})` }}
+      style={{ backgroundImage: `url(${currentBoard.background})` }}
       className={style.rightContainer}
     >
       <div className={style.topSec}>
         <div className={style.leftBlock}>
-          <h3>{board.currentBoard.name}</h3>
+          <h3>{currentBoard.name}</h3>
           <StarBorderIcon className={style.starIcon} />
           <div className={style.textBlock}>
             <PeopleAltIcon />

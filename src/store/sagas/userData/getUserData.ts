@@ -9,7 +9,6 @@ import { IUserData } from "store/slices/contentSlice/contentSliceTypes";
 function* setUserSaga(): Generator<any, void> {
   const data = yield call(getUSerData);
   yield put(setUserData(data as IUserData));
- 
 }
 
 export function* watchUserSaga() {

@@ -7,20 +7,18 @@ import { getAllBoardsAction } from "store/actionTypes";
 import { useLocation, useNavigate } from "react-router-dom";
 import { setCurrentBoard } from "store/slices/boardSlice/boardSlice";
 import {
-  closeMenu,
   setOptionBoardPosition,
-  setQuestionBlock,
+  setOptionBoardToDefault,
 } from "store/slices/popupsSlice/popupSlice";
-import { popupsSelector } from "store/selectors";
+import { boardSliceSelector, popupsSelector } from "store/selectors";
 import style from "./SideBar.module.scss";
 import { IBoardData } from "store/slices/boardSlice/boarSliceTypes";
 import classNames from "classnames";
+import { setChangeBoard } from "../../store/slices/boardSlice/boardSlice";
 
 const SideBar = () => {
   const dispatch = useAppDispatch();
-  const { allBoardsData, changeBoard } = useAppSelector(
-    (state) => state.boardSlice
-  );
+  const { allBoardsData, changeBoard } = useAppSelector(boardSliceSelector);
   const { optionboard } = useAppSelector(popupsSelector);
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -37,22 +35,26 @@ const SideBar = () => {
     dispatch(setCurrentBoard(elem!));
     navigate(`/board/${id}`);
   };
+  const toDefaultState = () => {
+    dispatch(setChangeBoard({}));
+    dispatch(setOptionBoardToDefault());
+  }
+
   const openOptionBoard = (e: MouseEvent<HTMLDivElement>, elem: IBoardData) => {
     e.stopPropagation();
     const { top, left } = e.currentTarget.getBoundingClientRect();
-
+   
     dispatch(
       setOptionBoardPosition({
         currentTop: top + 35,
         currentLeft: left,
-        show: true,
+        show: elem.id === changeBoard.id ? !optionboard.show : true,
         name: elem.name,
         id: elem.id,
       })
     );
-    dispatch(setQuestionBlock(false));
-
-    dispatch(closeMenu());
+    optionboard.show ? toDefaultState() :  dispatch(setChangeBoard(elem));
+   
   };
 
   return (
@@ -81,6 +83,7 @@ const SideBar = () => {
         <div className={style.titleBlock}>
           <h5>Your boards</h5>
         </div>
+        
         {allBoardsData.map((el) => {
           return (
             <div

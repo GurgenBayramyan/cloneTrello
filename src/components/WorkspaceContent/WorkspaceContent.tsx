@@ -33,6 +33,10 @@ const WorkspaceContent = () => {
       dispatch(setClose(false));
       return
     }
+    if(relatedTarget?.dataset.block === "change"){
+      dispatch(setClose(false));
+      return
+    }
     dispatch(setClose(false))
     dispatch(closeMenu())
 
@@ -42,7 +46,7 @@ const WorkspaceContent = () => {
   return (
     visibility.workspace.show ? <div  ref={ref}  onBlur={handleBlur} tabIndex={0}  style={{top:`${visibility.workspace.currentTop}px`,left:`${visibility.workspace.currentLeft}px`}} className={style.workspaceContent}>
     <div data-name="Private" onClick={()=>handleChangeVisibility(Menus.PRIVATE)} className={classNames(style.custom,{
-      [style.customActive]:visibility.workspace.content == "Private"
+      [style.customActive]:visibility.workspace.content === "Private"
     })}>
       <div className={style.iconBlock}>
         <HttpsIcon  sx={{fontSize:"20px"}} />

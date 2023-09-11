@@ -54,21 +54,23 @@ function* setBoardSaga(action: IActionCreateBoardSaga) {
       })
     );
     yield navigate(`/board/${data.id}`);
+    toast.success("Board created successfully")
   } catch (err: any) {
     toast.error(err.message);
   }
   yield put(setLoadingCreateAndChange(false));
 }
 function* getBoardSaga(action: IActionGetBoardDatas) {
-  const { id, navigate } = action.payload;
+  const { id } = action.payload;
   try {
     const data: ICurrentGetBoardData = yield call(getBoard, id);
     yield put(setCurrentBoardData(data));
     
   } catch (err) {
-    navigate("/error");
+   console.log(err)
   }
   yield put(setLoading(false));
+
 }
 
 function* getAllboardsSaga(action: any) {

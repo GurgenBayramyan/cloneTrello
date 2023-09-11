@@ -18,3 +18,29 @@
     display: flex;
     flex: 1;
 }
+.spinner_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: salmon;
+
+    .spinner {
+        display: block;
+        width: 70px;
+        height: 70px;
+        border: 7px solid transparent;
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s linear infinite;
+        border-top-color: red;
+        animation: spin 1s linear infinite;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

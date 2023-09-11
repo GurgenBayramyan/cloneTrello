@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef } from "react";
+import { FC, FocusEvent, useEffect, useRef } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import classNames from "classnames";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -15,7 +15,7 @@ import {
 } from "store/slices/popupsSlice/popupSlice";
 import { getChangeDivPosition } from "helpers";
 import { PageLocation } from "types";
-import { popupsSelector } from "store/selectors";
+import { boardSliceSelector, popupsSelector } from "store/selectors";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   setBoardDataAction,
@@ -24,7 +24,7 @@ import {
 import style from "./Createboard.module.scss";
 import { backgraundImages, backgraundImagesDown } from "types/constants";
 import { setChangeBoard, setUrl } from "store/slices/boardSlice/boardSlice";
-import {  LinearProgress } from "@mui/material";
+import { LinearProgress } from "@mui/material";
 
 const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
   const navigate = useNavigate();
@@ -33,9 +33,8 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
   const dispatch = useAppDispatch();
 
   const { backgroundState, workspace } = useAppSelector(popupsSelector);
-  const allboards = useAppSelector((state) => state.boardSlice);
+  const { changeBoard, loading, url } = useAppSelector(boardSliceSelector);
   const params = useParams();
-  const { changeBoard,loading } = useAppSelector((state) => state.boardSlice);
 
   const handleAddBackgraund = (url: string) => {
     dispatch(setUrl(url));
@@ -50,8 +49,10 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
         right,
       })
     );
+
     dispatch(openBackMenuBlock(!backgroundState.show));
   };
+
   const locationMain = () => {
     dispatch(goToMain(PageLocation.CREATEMENU));
   };
@@ -65,7 +66,9 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
         currentLeft: 0,
       })
     );
+
     dispatch(setClose(false));
+
     dispatch(openBackMenuBlock(false));
   };
 
@@ -105,7 +108,7 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
       setBoardDataAction({
         boardTitle: data.boardTitle,
         navigate,
-        bg: allboards.url,
+        bg: url,
       })
     );
   };
@@ -115,14 +118,15 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
         id: changeBoard.id,
         boardTitle: data.boardTitle,
         navigate,
-        bg: allboards.url,
+        bg: url,
         patch: params.id,
       })
     );
     dispatch(setChangeBoard({}));
   };
+ 
   return (
-    <div className={style.creatBoardParentTwo}>
+    <div  className={style.creatBoardParentTwo}>
       <div className={style.creatBoardParentTwo_header}>
         {!changeBoard.id && (
           <div onClick={locationMain} className={style.rightIcon}>
@@ -143,7 +147,7 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
       <div
         className={`${style.backgraundImg}`}
         style={{
-          backgroundImage: `url(${allboards.url})`,
+          backgroundImage: `url(${url})`,
         }}
       >
         <div className={style.childBackgraundImg}>
@@ -163,7 +167,7 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
                 onClick={() => handleAddBackgraund(img.url)}
                 style={{ backgroundImage: `url("${img.url}")` }}
               >
-                {allboards.url === img.url && (
+                {url === img.url && (
                   <DoneIcon fontSize="small" sx={{ color: "black" }} />
                 )}
               </div>
@@ -179,7 +183,7 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
                 title={img.simbol}
                 style={{ backgroundImage: `url("${img.url}")` }}
               >
-                {allboards.url === img.url && (
+                {url === img.url && (
                   <DoneIcon fontSize="small" sx={{ color: "black" }} />
                 )}
               </div>
@@ -237,7 +241,6 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
           >
             {!changeBoard.id ? "Create" : "Change"}
             {loading && <LinearProgress />}
-            
           </button>
           <button
             data-block="change"

@@ -112,7 +112,7 @@ const popupSlice = createSlice({
     },
     setLoadingDelete: (state,{payload}:PayloadAction<boolean>) => {
       state.loadingDelete = payload
-    }
+    },
   },
 });
 
@@ -134,5 +134,5 @@ export const {
   setQuestionBlock,
   setOptionBoardToDefault,
   setMenuStateCurrentTop,
-  setLoadingDelete
+  setLoadingDelete,
 } = popupSlice.actions;

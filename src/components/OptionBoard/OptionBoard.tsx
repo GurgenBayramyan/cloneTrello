@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import style from "./OptionBoard.module.scss";
-import { popupsSelector } from "store/selectors";
+import { boardSliceSelector, popupsSelector } from "store/selectors";
 import {
   openCreateSection,
   setDeleteBoardShow,
@@ -11,12 +11,12 @@ import {
 import { FocusEvent, MouseEvent, useEffect, useRef } from "react";
 import { PageLocation } from "types";
 import { setChangeBoard } from "store/slices/boardSlice/boardSlice";
-import { getPositionSection } from "helpers";
+import { getPositionQuestionBlock, getPositionSection } from "helpers";
 
 const OptionBoard = () => {
   const { optionboard, questionBlock } = useAppSelector(popupsSelector);
   const divRef = useRef<HTMLDivElement>(null);
-  const { allBoardsData } = useAppSelector((state) => state.boardSlice);
+  const { allBoardsData } = useAppSelector(boardSliceSelector);
   const dispatch = useAppDispatch();
 
   const handleDeleteboard = () => {
@@ -27,7 +27,6 @@ const OptionBoard = () => {
       divRef.current!.focus();
     }
     
-  
   }, [optionboard.show]);
   const handleOpenDeleteBlock = () => {
     dispatch(setOptionBoardShow(false));
@@ -36,12 +35,13 @@ const OptionBoard = () => {
   };
   const handleBlur = (e: FocusEvent<HTMLElement> | MouseEvent<HTMLElement>) => {
     const relatedTarget = e.relatedTarget as HTMLElement;
-
     if (relatedTarget?.dataset.name === "spred") {
       divRef.current?.focus();
       return;
     }
-
+    if (relatedTarget?.dataset.block !== "change") {
+      dispatch(setChangeBoard({}));
+    }
     dispatch(setOptionBoardShow(false));
     dispatch(setOptionBoardToDefault());
     dispatch(setQuestionBlock(false));
@@ -54,14 +54,10 @@ const OptionBoard = () => {
         menuActive: true,
         menuBlock: PageLocation.CREATEBOARD,
         currentLeft: optionboard.currentLeft,
-        currentTop: getPositionSection(optionboard.currentTop - 45), 
+        currentTop: getPositionSection(optionboard.currentTop - 45),
       })
     );
-    if (elem) {
-      dispatch(setChangeBoard(elem));
-    } else {
-      dispatch(setChangeBoard({}));
-    }
+    elem ? dispatch(setChangeBoard(elem)) : dispatch(setChangeBoard({}));
   };
   return optionboard.show ? (
     <div
@@ -69,7 +65,7 @@ const OptionBoard = () => {
       onBlur={handleBlur}
       tabIndex={0}
       style={{
-        top: `${optionboard.currentTop}px`,
+        top: `${getPositionQuestionBlock(optionboard.currentTop)}px`,
         left: `${optionboard.currentLeft}px`,
       }}
       className={style.option}

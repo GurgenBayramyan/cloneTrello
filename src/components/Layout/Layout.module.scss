@@ -1,8 +1,8 @@
 .layoutBlock{
     display: flex;
     flex-direction: column;
-    height: 100vh;
     overflow: hidden;
+    height: 100%;
 }
 .content {
     display: flex;
@@ -26,6 +26,7 @@
         border-top-color: white;
         animation: spin 1s linear infinite;
         border-top-color: red;
+        animation: spin 1s linear infinite;
     }
 }
 

@@ -7,7 +7,6 @@
     display: flex;
     transition: all 500ms ease;
     flex-direction: column;
-
     .numbers {
         display: flex;
         color: wheat;
@@ -40,7 +39,22 @@
         flex: 1;
         display: flex;
         flex-direction: column;
-
+        max-height: calc(100vh - 130px);
+        overflow-x: hidden;
+        &::-webkit-scrollbar {
+            width: 10px;
+    
+        }
+    
+        &::-webkit-scrollbar-track {
+            background-color: transparent;
+            border-radius: 4px;
+        }
+    
+        &::-webkit-scrollbar-thumb {
+            background-color: rgba(168, 166, 166, 0.6);
+            border-radius: 4px;
+        }
         .linkActive {
             background-color: #9f9cad80;
         }
@@ -123,6 +137,8 @@
     }
 
     &:hover {
+        background-color: #837f97;
+
         .iconBlock {
             display: flex;
 

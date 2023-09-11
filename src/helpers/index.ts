@@ -173,4 +173,11 @@ export const getPositionSection = (top:number) => {
   return top
 }
 
+export const getPositionQuestionBlock = (top:number) => {
+    if(top + 150 > window.innerHeight){
+      return top -(top + 150 - window.innerHeight)
+    }
+    return top
+}
+
 

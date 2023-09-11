@@ -21,7 +21,11 @@ import { getUserDataAction } from "store/actionTypes";
 import LoginIcon from "@mui/icons-material/Login";
 import { ToastOptions, toast } from "react-toastify";
 import UserNameIcon from "components/UserNameIcon/UserNameIcon";
-import { contentSliceSelector, popupsSelector } from "store/selectors";
+import {
+  boardSliceSelector,
+  contentSliceSelector,
+  popupsSelector,
+} from "store/selectors";
 import { openCreateSection } from "store/slices/popupsSlice/popupSlice";
 import { PageLocation } from "types";
 import { setChangeBoard } from "store/slices/boardSlice/boardSlice";
@@ -35,6 +39,7 @@ const Header = () => {
   });
   const createDivRef = useRef<HTMLButtonElement>(null);
   const { menuState } = useAppSelector(popupsSelector);
+  const { changeBoard } = useAppSelector(boardSliceSelector);
   const { data } = useAppSelector(contentSliceSelector);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -74,14 +79,26 @@ const Header = () => {
   };
   const openMenu = () => {
     const { top, left } = createDivRef.current!.getBoundingClientRect();
-    dispatch(
-      openCreateSection({
-        menuActive: !menuState.menuActive,
-        menuBlock: PageLocation.CREATEMENU,
-        currentTop: top,
-        currentLeft: left,
-      })
-    );
+
+    if (changeBoard.id) {
+      dispatch(
+        openCreateSection({
+          menuActive: true,
+          menuBlock: PageLocation.CREATEMENU,
+          currentTop: top,
+          currentLeft: left,
+        })
+      );
+    } else {
+      dispatch(
+        openCreateSection({
+          menuActive: !menuState.menuActive,
+          menuBlock: PageLocation.CREATEMENU,
+          currentTop: top,
+          currentLeft: left,
+        })
+      );
+    }
     dispatch(setChangeBoard({}));
   };
   return (
@@ -110,6 +127,7 @@ const Header = () => {
           <KeyboardArrowDownIcon sx={{ cursor: "pointer" }} />
         </div>
         <button
+          data-name="btn"
           ref={createDivRef}
           className={style.headerS4}
           onClick={openMenu}
