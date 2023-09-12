@@ -181,3 +181,10 @@ export const getPositionQuestionBlock = (top:number) => {
 }
 
 
+export const findBoard = (state:IBoardData[],id:string) =>{
+   const elem = state.find(board => board.id === +id);
+   if(elem) {
+    return true
+   }
+   return false
+}

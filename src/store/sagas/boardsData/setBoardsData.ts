@@ -68,7 +68,8 @@ function* getBoardSaga(action: IActionGetBoardDatas) {
     const data: ICurrentGetBoardData = yield call(getBoard, id);
     yield put(setCurrentBoardData(data));
     
-  } catch (err) {
+  } catch (err:any) {
+    toast.error(err.response.data.error)
    console.log(err)
   }
   yield put(setCurrentLoading(false))

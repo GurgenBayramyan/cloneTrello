@@ -1,7 +1,7 @@
 import  { useState } from 'react';
 import style from './NotFound.module.scss'
 
-const NotFoundComponent = () => {
+const NotFound = () => {
   const [isAnimating, setIsAnimating] = useState(false);
 
   const startAnimation = () => {
@@ -24,4 +24,4 @@ const NotFoundComponent = () => {
   );
 };
 
-export default NotFoundComponent;
+export default NotFound;

@@ -15,8 +15,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getBoardDataAction } from "store/actionTypes";
 import { boardSliceSelector } from "store/selectors";
 import style from "./Content.module.scss";
-import Loading from "components/Loading/Loading";
 import { CircularProgress } from "@mui/material";
+import { findBoard } from "helpers";
+import NotFound from "components/NotFound/NotFound";
 
 const Content: FC = () => {
   const [state, setState] = useState<{
@@ -27,7 +28,7 @@ const Content: FC = () => {
     leftMenu: true,
   });
 
-  const { currentBoard } = useAppSelector(boardSliceSelector);
+  const { currentBoard, allBoardsData } = useAppSelector(boardSliceSelector);
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
@@ -36,7 +37,9 @@ const Content: FC = () => {
   useEffect(() => {
     if (id) {
       dispatch(getBoardDataAction({ id, navigate }));
+      
     }
+    
   }, [id]);
 
   const handleOpenMenu = () => {
@@ -46,6 +49,12 @@ const Content: FC = () => {
   const handleCloseLeftMenu = () => {
     setState({ ...state, leftMenu: !state.leftMenu });
   };
+
+  if(!findBoard(allBoardsData,id!)){
+    return(
+      <NotFound />
+    )
+  }
 
   return currentBoard.loading ? (
     <div className={style.wrapperLoading}>
