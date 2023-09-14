@@ -125,3 +125,12 @@ export const backgraundImagesFor: IObject[] = [
 
 export const message = "Board deleted sucsess";
 export const urlBassic = "https://images.unsplash.com/photo-1690692322953-fb0f543c6658?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjkxMjQ1MTQ4fA&ixlib=rb-4.0.3&q=80&w=400https://images.unsplash.com/photo-1690692322953-fb0f543c6658?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjkxMjQ1MTQ4fA&ixlib=rb-4.0.3&q=80&w=400"
+export const basicUrlList = "https://young-citadel-44598.herokuapp.com/categories";
+
+export const optionBoardDefaultState = {
+  show: false,
+  currentTop: 0,
+  currentLeft: 0,
+  name: "",
+  id: 0,
+};

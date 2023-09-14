@@ -5,6 +5,7 @@ import {
   Ioptionboard,
 } from "./popupSliceTypes";
 import { Menus, PageLocation } from "types";
+import { optionBoardDefaultState } from "types/constants";
 const initialState: IWorkspaceInitial = {
   workspace: {
     show: false,
@@ -99,13 +100,7 @@ const popupSlice = createSlice({
       state.questionBlock = payload;
     },
     setOptionBoardToDefault: (state) => {
-      state.optionboard = {
-        show: false,
-        currentTop: 0,
-        currentLeft: 0,
-        name: "",
-        id: 0,
-      };
+      state.optionboard = optionBoardDefaultState;
     },
     setMenuStateCurrentTop: (state,{payload}: PayloadAction<number>) => {
       state.menuState.currentTop = payload

@@ -6,6 +6,7 @@ import showMenuUserSlice from "./slices/showMenuUserSlice/showMenuUserSlice";
 import modalSlice from "./slices/modalSlice/modalSlice";
 import popup from "./slices/popupsSlice/popupSlice";
 import boardSlice from "./slices/boardSlice/boardSlice";
+import ListSlice from "./slices/listSlice/listSlice";
 
 
 
@@ -16,5 +17,6 @@ export const rootReducer = combineReducers({
     [showMenuUserSlice.name]:showMenuUserSlice.reducer,
     [modalSlice.name]:modalSlice.reducer,
     [popup.name]:popup.reducer,
-    [boardSlice.name]:boardSlice.reducer
+    [boardSlice.name]:boardSlice.reducer,
+    [ListSlice.name]:ListSlice.reducer
 })

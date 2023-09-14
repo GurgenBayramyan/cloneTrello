@@ -10,3 +10,4 @@ export const backgroundStateSelector = (state:RootState) => state.popupSlice.bac
 export const allBordersSelector = (state:RootState)=>state.boardSlice.allBoardsData
 export const idCurrentBoardSelector = (state:RootState)=>state.boardSlice.currentBoard.id
 export const boardSliceSelector = (state:RootState) => state.boardSlice
+export const listSliceSelector = (state:RootState) =>  state.listSlice

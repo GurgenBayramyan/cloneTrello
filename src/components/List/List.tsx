@@ -1,28 +1,28 @@
-import { useState, FC, useRef, useEffect } from "react";
+import BackupTableIcon from "@mui/icons-material/BackupTable";
+import OptionList from "components/OptionList/OptionList";
+import Task from "components/Task/Task";
+import Templates from "components/Templates/Templates";
+import { useAppDispatch } from "hooks/changDispatchSekector";
+import { FC, useState, } from "react";
+import { useParams } from "react-router-dom";
+import { changeListAction } from "store/actionTypes";
 import style from "./List.module.scss";
 import { IListProps, IListState } from "./ListTypes";
-import BackupTableIcon from "@mui/icons-material/BackupTable";
-import Task from "components/Task/Task";
-import OptionList from "components/OptionList/OptionList";
-import Templates from "components/Templates/Templates";
-import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
-import { setShowModal } from "store/slices/modalSlice/modalSlice";
 
 
-const List: FC<IListProps> = ({ title}) => {
+
+
+const List: FC<IListProps> = ({ title, listId}) => {
   const [changeTitle, setChangeTitle] = useState(title);
   const [showMenuUser,setShowMenuUser] = useState(false)
+
   const [listState, setListState] = useState<IListState>({
     addCard: false,
     titleBlock: true,
 
   });
-  const divRef = useRef<HTMLDivElement>(null)
+  const {id} = useParams();
   const dispatch = useAppDispatch();
-  const modal = useAppSelector(state => state.modallMeniu)
-  const openModal = () => {
-    dispatch(setShowModal(!modal.upModalShow))
-  };
   const handleChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChangeTitle(event.target.value);
   };
@@ -45,7 +45,9 @@ const List: FC<IListProps> = ({ title}) => {
   };
   const blurForTitle = () => {
     setListState({ ...listState, titleBlock: !listState.titleBlock });
+    dispatch(changeListAction({Listid:listId.toString(),name:changeTitle!,boardId:id!}))
   };
+
   const closeAddBlock = (e: React.FocusEvent<HTMLElement>) => {
     const target = e.relatedTarget as HTMLElement;
     if (target?.dataset?.name === "addCard") {
@@ -61,18 +63,20 @@ const List: FC<IListProps> = ({ title}) => {
       <div className={style.listBlock_header}>
         {listState.titleBlock ? (
           <div onClick={setTitle} className={style.titleBlock}>
-            <span>{title}</span>
+            <span>{changeTitle}</span>
           </div>
         ) : (
-          <input
+          <form onSubmit={blurForTitle} >
+            <input
             type="text"
             value={changeTitle}
             onBlur={blurForTitle}
             autoFocus={true}
             onChange={(e) => handleChangeTitle(e)}
           />
+          </form>
         )}
-        <OptionList />
+        <OptionList  listId={listId} />
       </div>
       <div className={style.tasks}>
         <Task />

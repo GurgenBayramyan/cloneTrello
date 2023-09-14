@@ -4,7 +4,7 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { MouseEvent, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import { getAllBoardsAction } from "store/actionTypes";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { setCurrentBoard } from "store/slices/boardSlice/boardSlice";
 import {
   setOptionBoardPosition,
@@ -21,8 +21,8 @@ const SideBar = () => {
   const { allBoardsData, changeBoard } = useAppSelector(boardSliceSelector);
   const { optionboard } = useAppSelector(popupsSelector);
   const navigate = useNavigate();
-  const { pathname } = useLocation();
 
+  const {id} = useParams();
   const [open, setOpen] = useState(false);
   const handleMenu = () => {
     setOpen(!open);
@@ -90,7 +90,7 @@ const SideBar = () => {
               key={el.id}
               onClick={() => handleNavigate(el.id)}
               className={classNames(style.boardBlock, {
-                [style.linkActive]: el.id === +pathname.slice(-2)!,
+                [style.linkActive]: el.id === +id!,
                 [style.activeMenu]:
                   el.id === optionboard.id || el.id === changeBoard.id,
               })}

@@ -12,24 +12,21 @@ import List from "components/List/List";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import { FC, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getBoardDataAction } from "store/actionTypes";
-import { boardSliceSelector } from "store/selectors";
+import { getBoardDataAction, setAllListAction } from "store/actionTypes";
+import { boardSliceSelector, listSliceSelector } from "store/selectors";
 import style from "./Content.module.scss";
 import { CircularProgress } from "@mui/material";
 import { findBoard } from "helpers";
 import NotFound from "components/NotFound/NotFound";
+import { iContentState } from "./ContentTypes";
 
 const Content: FC = () => {
-  const [state, setState] = useState<{
-    menu: boolean;
-    leftMenu: boolean;
-  }>({
+  const [state, setState] = useState<iContentState>({
     menu: true,
     leftMenu: true,
   });
-
   const { currentBoard, allBoardsData } = useAppSelector(boardSliceSelector);
-
+  const {lists} = useAppSelector(listSliceSelector);
   const scrollRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -37,10 +34,11 @@ const Content: FC = () => {
   useEffect(() => {
     if (id) {
       dispatch(getBoardDataAction({ id, navigate }));
-      
+      dispatch(setAllListAction({id,}))
     }
     
   }, [id]);
+
 
   const handleOpenMenu = () => {
     setState({ ...state, menu: !state.menu });
@@ -167,14 +165,11 @@ const Content: FC = () => {
       </div>
       <div className={style.rightContainer_down}>
         <div ref={scrollRef} className={style.downBlock}>
-          <List title="To do" />
-          <List title="in progress" />
-          <List title="on Hold" />
-          <List title="reWiev" />
-          <List title="calaburation" />
-          <List title="To do" />
-          <List title="To do" />
-          <List title="To do" />
+            {!!lists.length && lists.map(list => {
+              return (
+                <List listId={list!.id} title={list!.name}  key={list!.id}/>
+              )
+            })}
           <AddBlock />
         </div>
       </div>

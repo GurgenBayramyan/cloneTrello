@@ -1,5 +1,6 @@
 export interface IListProps{
-    title:string
+    title?:string
+    listId:number
 }
 export interface IListState{
     addCard:boolean

@@ -15,14 +15,14 @@ import MembersInfo from "components/MembersInfo/MembersInfo";
 import CoverInfo from "components/CoverInfo/CoverInfo";
 import MoveInfo from "components/MoveInfo/MoveInfo";
 import CopyInfo from "components/CopyInfo/CopyInfo";
-import { setShowOptionDivSelector, taskSettingsSliceSelector } from "store/selectors";
+import { modalBlockSelector, setShowOptionDivSelector, taskSettingsSliceSelector } from "store/selectors";
 import style from "./TaskSettings.module.scss";
 import { setShowModal } from "store/slices/modalSlice/modalSlice";
 
 
 const TaskSettings = ({taskName}: ITaskSettings) => {
   const styles = useAppSelector(taskSettingsSliceSelector);
-  const modal = useAppSelector(state => state.modallMeniu)
+  const modal = useAppSelector(modalBlockSelector)
   const { show } = useAppSelector(setShowOptionDivSelector);
   const dispatch = useAppDispatch();
   const [postion,setPosition] = useState<number>(0)
