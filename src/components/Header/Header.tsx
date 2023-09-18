@@ -26,7 +26,7 @@ import {
   contentSliceSelector,
   popupsSelector,
 } from "store/selectors";
-import { openCreateSection } from "store/slices/popupsSlice/popupSlice";
+import { openCreateSection, setClose } from "store/slices/popupsSlice/popupSlice";
 import { PageLocation } from "types";
 import { setChangeBoard } from "store/slices/boardSlice/boardSlice";
 
