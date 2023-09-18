@@ -23,6 +23,9 @@ const CreateMenu = () => {
 
   const handleBlur = (event: FocusEvent<HTMLElement>) => {
     const reletedTarget = event.relatedTarget as HTMLElement;
+
+    console.log(reletedTarget)
+  
     if (!reletedTarget) {
       dispatch(closeMenu());
     }

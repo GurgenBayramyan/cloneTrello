@@ -4,7 +4,7 @@
     flex-direction: column;
     min-width: 272px;
     height: max-content;
-    background-color: #c5cad2;
+    background-color:#c5cad2 ;
     border-radius: 9px;
     cursor: pointer;
     &_header {
@@ -16,12 +16,14 @@
         font-weight: 400;
         position: relative;
         input{
-            width: 80%;
-            background-color: #c5cad2;
+            width: 100%;
+            background-color: #6c7c96;
+            color: #f1f2f3;
+            font-weight: 700;
+            padding: 5px 10px;
             outline: none;
-            border-radius: 2px;
-            border: 1px solid rgba(177, 185, 199, 0.877);
-            box-shadow: #dae6fa 1px 1px 4px 3px;
+            border-radius: 3px;
+            border: 1px solid #85B8FF;
         }
         h4 {
             padding: 2px 8px;
@@ -82,6 +84,7 @@
 }   
 
 .titleBlock{
+    margin-left: 10px;
     flex: 1;
     align-self: center;
 }

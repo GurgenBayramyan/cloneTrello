@@ -44,8 +44,10 @@ const List: FC<IListProps> = ({ title, listId}) => {
     setListState({ ...listState, titleBlock: !listState.titleBlock });
   };
   const blurForTitle = () => {
-    setListState({ ...listState, titleBlock: !listState.titleBlock });
+    if(changeTitle){
     dispatch(changeListAction({Listid:listId.toString(),name:changeTitle!,boardId:id!}))
+    }
+    setListState({ ...listState, titleBlock: !listState.titleBlock });
   };
 
   const closeAddBlock = (e: React.FocusEvent<HTMLElement>) => {
