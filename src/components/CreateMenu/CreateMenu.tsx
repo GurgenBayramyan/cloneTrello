@@ -4,7 +4,7 @@ import CreateMenuContent from "components/CreateMenuContent/CreateMenuContent";
 import CreateboardMenu from "components/CreateBoardMenu/CreateboardMenu";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import { boardSliceSelector, popupsSelector } from "store/selectors";
-import { closeMenu } from "store/slices/popupsSlice/popupSlice";
+import { closeMenu, setClose } from "store/slices/popupsSlice/popupSlice";
 import { setChangeBoard } from "store/slices/boardSlice/boardSlice";
 import style from "./CreateMenu.module.scss";
 
@@ -23,7 +23,7 @@ const CreateMenu = () => {
 
   const handleBlur = (event: FocusEvent<HTMLElement>) => {
     const reletedTarget = event.relatedTarget as HTMLElement;
-
+    
     if (!reletedTarget) {
       dispatch(closeMenu());
     }

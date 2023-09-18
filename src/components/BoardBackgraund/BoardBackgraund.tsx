@@ -30,6 +30,9 @@ const BoardBackgraund = () => {
   };
   const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
     const relatedTarget = e.relatedTarget as HTMLElement;
+    if(relatedTarget?.dataset.name === "btn"){
+      return
+    }
     if (relatedTarget?.dataset.name === "divparents") {
       return;
     }

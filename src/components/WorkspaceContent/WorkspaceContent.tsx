@@ -34,9 +34,7 @@ const WorkspaceContent = () => {
   };
   const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
     const relatedTarget = e.relatedTarget as HTMLElement;
-    // console.log(relatedTarget)
     if(relatedTarget?.dataset.name === "btn"){
-      dispatch(setClose(false));
       return
     }
     if (relatedTarget?.dataset.name === "openVi") {
