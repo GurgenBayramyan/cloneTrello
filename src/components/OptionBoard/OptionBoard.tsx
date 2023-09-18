@@ -11,7 +11,7 @@ import {
 import { FocusEvent, MouseEvent, useEffect, useRef } from "react";
 import { PageLocation } from "types";
 import { setChangeBoard } from "store/slices/boardSlice/boardSlice";
-import { getPositionQuestionBlock, getPositionSection } from "helpers";
+import { getPositionQuestionBlock, getPositionSectionTop } from "helpers";
 
 const OptionBoard = () => {
   const { optionboard, questionBlock } = useAppSelector(popupsSelector);
@@ -53,8 +53,7 @@ const OptionBoard = () => {
       openCreateSection({
         menuActive: true,
         menuBlock: PageLocation.CREATEBOARD,
-        currentLeft: optionboard.currentLeft,
-        currentTop: getPositionSection(optionboard.currentTop - 45),
+        ...getPositionSectionTop(optionboard.currentTop,optionboard.currentLeft),
       })
     );
     elem ? dispatch(setChangeBoard(elem)) : dispatch(setChangeBoard({}));

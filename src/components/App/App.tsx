@@ -9,11 +9,12 @@ import TaskSettings from "components/TaskSettings/TaskSettings";
 import UserSection from "components/UserSection/UserSection";
 import WorkspaceContent from "components/WorkspaceContent/WorkspaceContent";
 import { ToastContainer } from "react-toastify";
+import style from './App.module.scss'
 import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
-    <>
+    <div className={style.App}>
       <MainRoutes />
       <ModalBackgraund />
       <UserSection />
@@ -25,7 +26,7 @@ const App = () => {
       <DeleteBoard />
       <CreateMenu />
       <ToastContainer />
-    </>
+    </div>
   );
 };
 export default App;

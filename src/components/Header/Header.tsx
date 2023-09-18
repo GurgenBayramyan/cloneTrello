@@ -77,26 +77,14 @@ const Header = () => {
   };
   const openMenu = () => {
     const { top, left } = createDivRef.current!.getBoundingClientRect();
-
-    if (changeBoard.id) {
-      dispatch(
-        openCreateSection({
-          menuActive: true,
-          menuBlock: PageLocation.CREATEMENU,
-          currentTop: top,
-          currentLeft: left,
-        })
-      );
-    } else {
-      dispatch(
-        openCreateSection({
-          menuActive: !menuState.menuActive,
-          menuBlock: PageLocation.CREATEMENU,
-          currentTop: top,
-          currentLeft: left,
-        })
-      );
-    }
+    dispatch(
+      openCreateSection({
+        menuActive: changeBoard.id ? true : !menuState.menuActive,
+        menuBlock: PageLocation.CREATEMENU,
+        currentTop: top,
+        currentLeft: left,
+      })
+    );
     dispatch(setChangeBoard({}));
   };
   return (

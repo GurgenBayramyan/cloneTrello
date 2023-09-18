@@ -276,8 +276,6 @@
     opacity: 0;
 }
 .loading{
-    flex: 1;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -289,4 +287,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
+    width: 100%;
 }

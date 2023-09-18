@@ -105,19 +105,11 @@ export const getPositonShow = (
   width: number,
   show: boolean
 ) => {
-  if (top + 300 > window.innerHeight) {
-    return {
-      top: 590,
-      left: left + width - 25,
-      show: !show,
-    };
-  } else {
-    return {
-      top: top + 30,
-      left: left + width - 25,
-      show: !show,
-    };
-  }
+  return {
+    top: top + 300 > window.innerHeight ? 590 : top + 30,
+    left: left + width - 25,
+    show: !show,
+  };
 };
 export const getTemplateMenuStates = (div: HTMLElement) => {
   const { top, height } = div.getBoundingClientRect();
@@ -133,7 +125,7 @@ export const getChangeDivPosition = (top: number, left: number) => {
   const minus = top + 300 - window.innerHeight;
   if (top + 300 > window.innerHeight) {
     return {
-      top: top - minus - 50,
+      top: top - minus - 140,
       left: left,
     };
   }
@@ -166,12 +158,20 @@ export const changeAllBoards = (
     return board;
   });
 };
-export const getPositionSection = (top:number) => {
-  if(top + 650 > window.innerHeight){
-     return top -(top + 650 - window.innerHeight)
+export const getPositionSectionTop = (top:number,left:number) => {
+  if(top + 600 > window.innerHeight){
+     return {
+     currentTop : top -(top + 650 - window.innerHeight),
+     currentLeft: left + 70
+     }
+
   }
-  return top
+  return {
+    currentTop: top - 50,
+    currentLeft:left 
+  }
 }
+
 
 export const getPositionQuestionBlock = (top:number) => {
     if(top + 150 > window.innerHeight){

@@ -10,19 +10,20 @@ import style from "./CreateMenu.module.scss";
 
 const CreateMenu = () => {
   const divRef = useRef<HTMLDivElement>(null);
-  const { menuState, backgroundState, workspace } =
-    useAppSelector(popupsSelector);
+  const { menuState, backgroundState,workspace } = useAppSelector(popupsSelector);
   const { changeBoard } = useAppSelector(boardSliceSelector);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!backgroundState.show) {
+    if(!workspace.show && !backgroundState.show && menuState.menuActive){
       divRef.current!.focus();
     }
-  }, [backgroundState.show, workspace.content, menuState]);
+  }, [backgroundState.show,workspace.show,menuState.menuActive]);
+
 
   const handleBlur = (event: FocusEvent<HTMLElement>) => {
     const reletedTarget = event.relatedTarget as HTMLElement;
+
     if (!reletedTarget) {
       dispatch(closeMenu());
     }

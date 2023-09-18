@@ -22,7 +22,7 @@ const SideBar = () => {
   const { optionboard } = useAppSelector(popupsSelector);
   const navigate = useNavigate();
 
-  const {id} = useParams();
+  const { id } = useParams();
   const [open, setOpen] = useState(false);
   const handleMenu = () => {
     setOpen(!open);
@@ -38,12 +38,14 @@ const SideBar = () => {
   const toDefaultState = () => {
     dispatch(setChangeBoard({}));
     dispatch(setOptionBoardToDefault());
-  }
+  };
 
   const openOptionBoard = (e: MouseEvent<HTMLDivElement>, elem: IBoardData) => {
     e.stopPropagation();
     const { top, left } = e.currentTarget.getBoundingClientRect();
-   
+    optionboard.show && elem.id === optionboard.id
+      ? toDefaultState()
+      : dispatch(setChangeBoard(elem));
     dispatch(
       setOptionBoardPosition({
         currentTop: top + 35,
@@ -53,8 +55,6 @@ const SideBar = () => {
         id: elem.id,
       })
     );
-    optionboard.show ? toDefaultState() :  dispatch(setChangeBoard(elem));
-   
   };
 
   return (
@@ -83,7 +83,7 @@ const SideBar = () => {
         <div className={style.titleBlock}>
           <h5>Your boards</h5>
         </div>
-        
+
         {allBoardsData.map((el) => {
           return (
             <div
@@ -91,8 +91,7 @@ const SideBar = () => {
               onClick={() => handleNavigate(el.id)}
               className={classNames(style.boardBlock, {
                 [style.linkActive]: el.id === +id!,
-                [style.activeMenu]:
-                  el.id === optionboard.id || el.id === changeBoard.id,
+                [style.activeMenu]: el.id === changeBoard.id,
               })}
             >
               <div className={style.taskInfo}>
