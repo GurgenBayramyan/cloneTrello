@@ -32,39 +32,44 @@ function* setAllListSaga(action: PayloadAction<ISetAllListSaga>) {
 function* createListSaga(
   action: PayloadAction<ICreateListSaga>
 ): Generator<any, void, any> {
-  const { id, fieldName, changeLoading } = action.payload;
-  changeLoading();
+  const { id, fieldName, changeLoading, handleChangeActive } = action.payload;
+  
   try {
+    changeLoading();
     const resp = yield call(createList, id, fieldName);
     const lists: IList[] = yield call(getAllLists, id);
     yield put(getAlllists(lists));
     toast.success(resp.statusText);
+    changeLoading();
+    handleChangeActive()
   } catch (err: unknown) {
     console.log(err);
   }
-  changeLoading();
+  
 }
 function* deleteListSaga(
   action: PayloadAction<IDeleteListSaga>
 ): Generator<any, void, any> {
-  const { Listid, boardId, changeLoading } = action.payload;
-  changeLoading();
+  const { listid, boardId, changeLoading } = action.payload;
+ 
   try {
-    const resp: string = yield call(deleteList, Listid);
+    changeLoading();
+    const resp: string = yield call(deleteList, listid);
     const lists: IList[] = yield call(getAllLists, boardId);
     yield put(getAlllists(lists));
     toast.success(resp);
+    changeLoading();
   } catch (err: unknown) {
     console.log(err);
   }
-  changeLoading();
+  
 }
 function* changeListSaga(
   action: PayloadAction<IChangeListSaga>
 ): Generator<any, void, any> {
-  const { Listid, name, boardId } = action.payload;
+  const { listid, name, boardId } = action.payload;
   try {
-    const resp = yield call(changeLists, Listid, { name });
+    yield call(changeLists, listid, { name });
     const lists: IList[] = yield call(getAllLists, boardId);
     yield put(getAlllists(lists));
   } catch (err: unknown) {

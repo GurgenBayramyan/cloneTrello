@@ -34,7 +34,7 @@ const Content: FC = () => {
   useEffect(() => {
     if (id) {
       dispatch(getBoardDataAction({ id, navigate }));
-      dispatch(setAllListAction({id,}))
+      dispatch(setAllListAction({id}))
     }
     
   }, [id]);

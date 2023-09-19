@@ -11,5 +11,5 @@ export interface IRespData {
 
 export interface IListTypes {
   lists: Partial<IList[]>;
-  ListId: null | string;
+  listId: null | string;
 }

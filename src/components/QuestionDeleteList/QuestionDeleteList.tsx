@@ -10,14 +10,14 @@ import { CircularProgress } from "@mui/material";
 const QuestionDeleteList: FC<IQuesTionProps> = ({ onClose }) => {
   const [loading, setloading] = useState(false);
   const dispatch = useAppDispatch();
-  const { ListId } = useAppSelector(listSliceSelector);
+  const { listId } = useAppSelector(listSliceSelector);
   const { id } = useParams();
   const changeLoading = () => {
     setloading((prev) => !prev)
   }
   const handleDeleteList = () => {
-    if (ListId) {
-      dispatch(deleteListAction({ Listid: ListId, boardId: id!,changeLoading, }));
+    if (listId) {
+      dispatch(deleteListAction({ listid: listId, boardId: id!,changeLoading, }));
     }
   };
  

@@ -4,6 +4,7 @@ import Task from "components/Task/Task";
 import Templates from "components/Templates/Templates";
 import { useAppDispatch } from "hooks/changDispatchSekector";
 import { FC, useState, } from "react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { changeListAction } from "store/actionTypes";
 import style from "./List.module.scss";
@@ -13,7 +14,6 @@ import { IListProps, IListState } from "./ListTypes";
 
 
 const List: FC<IListProps> = ({ title, listId}) => {
-  const [changeTitle, setChangeTitle] = useState(title);
   const [showMenuUser,setShowMenuUser] = useState(false)
 
   const [listState, setListState] = useState<IListState>({
@@ -23,9 +23,18 @@ const List: FC<IListProps> = ({ title, listId}) => {
   });
   const {id} = useParams();
   const dispatch = useAppDispatch();
-  const handleChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setChangeTitle(event.target.value);
-  };
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      title:title
+  }
+  });
+  const watchTitle = watch("title");
+
 
   const handleClick = () => {
     setShowMenuUser(true)
@@ -43,12 +52,16 @@ const List: FC<IListProps> = ({ title, listId}) => {
   const setTitle = () => {
     setListState({ ...listState, titleBlock: !listState.titleBlock });
   };
-  const blurForTitle = () => {
-    if(changeTitle){
-    dispatch(changeListAction({Listid:listId.toString(),name:changeTitle!,boardId:id!}))
+  
+
+  const changeListTitle: SubmitHandler<FieldValues> =  (data) => {
+    if(watchTitle === title || !watchTitle){
+      setListState({ ...listState, titleBlock: !listState.titleBlock });
+      return
     }
+    dispatch(changeListAction({listid:listId.toString(),name:watchTitle!,boardId:id!}))
     setListState({ ...listState, titleBlock: !listState.titleBlock });
-  };
+  }
 
   const closeAddBlock = (e: React.FocusEvent<HTMLElement>) => {
     const target = e.relatedTarget as HTMLElement;
@@ -65,16 +78,15 @@ const List: FC<IListProps> = ({ title, listId}) => {
       <div className={style.listBlock_header}>
         {listState.titleBlock ? (
           <div onClick={setTitle} className={style.titleBlock}>
-            <span>{changeTitle}</span>
+            <span>{watchTitle}</span>
           </div>
         ) : (
-          <form onSubmit={blurForTitle} >
+          <form onSubmit={handleSubmit(changeListTitle)} >
             <input
             type="text"
-            value={changeTitle}
-            onBlur={blurForTitle}
             autoFocus={true}
-            onChange={(e) => handleChangeTitle(e)}
+            {...register("title",{minLength:1})}
+            onBlur={changeListTitle}
           />
           </form>
         )}
@@ -83,14 +95,7 @@ const List: FC<IListProps> = ({ title, listId}) => {
       <div className={style.tasks}>
         <Task />
         <Task />
-        <Task />
-        <Task />
-        <Task />
-        <Task />
-        <Task />
-        <Task />
-        <Task />
-        <Task />
+   
 
         {listState.addCard ? (
           <div className={style.addCardActive}>

@@ -3,9 +3,9 @@ import {  IList, IListTypes } from "./listSliceTypes";
 
 const initialState: IListTypes = {
    lists: [],
-   ListId:null
+   listId:null
 }
-const ListSlice = createSlice({
+const listSlice = createSlice({
     name:"listSlice",
     initialState,
     reducers:{
@@ -16,10 +16,10 @@ const ListSlice = createSlice({
         state.lists.push(payload)
        },
        setListId:(state,{payload}:PayloadAction<string>) => {
-         state.ListId = payload
+         state.listId = payload
        }
     }
     
 })
-export default ListSlice
-export const {getAlllists,addList,setListId} = ListSlice.actions
+export default listSlice
+export const {getAlllists,addList,setListId} = listSlice.actions
