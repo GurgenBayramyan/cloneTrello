@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import style from "./OptionBoard.module.scss";
-import { boardSliceSelector, popupsSelector } from "store/selectors";
+import {  boardsSelector, popupsSelector } from "store/selectors";
 import {
   openCreateSection,
   setDeleteBoardShow,
@@ -16,7 +16,7 @@ import { getPositionQuestionBlock, getPositionSection } from "helpers";
 const OptionBoard = () => {
   const { optionboard, questionBlock } = useAppSelector(popupsSelector);
   const divRef = useRef<HTMLDivElement>(null);
-  const { allBoardsData } = useAppSelector(boardSliceSelector);
+ const boards = useAppSelector(boardsSelector.selectEntities)
   const dispatch = useAppDispatch();
 
   const handleDeleteboard = () => {
@@ -48,7 +48,7 @@ const OptionBoard = () => {
   };
   const openChangeBoardMenu = () => {
     const id = optionboard.id;
-    const elem = allBoardsData.find((el) => el.id === id);
+    const elem = boards[id];
     dispatch(
       openCreateSection({
         menuActive: true,

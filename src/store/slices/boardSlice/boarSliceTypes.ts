@@ -7,10 +7,7 @@ export interface IBoardData {
 }
 
 export interface IBoardInitialState {
-  boardData: IBoardData[];
-  currentBoard: ICurrentGetBoardData;
   error: boolean;
-  allBoardsData: IBoardData[];
   url: string;
   changeBoard: Partial<IBoardData>;
   loading: boolean;

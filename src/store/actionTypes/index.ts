@@ -13,8 +13,9 @@ export const setBoardDataAction =
 export const getBoardDataAction = createAction<IBoardDataId>("getBoardData");
 export const getAllBoardsAction = createAction("getAllBoards");
 export const deleteBoardAction = createAction<{
-  id: number;
+  currentid: number;
   navigate: (to: string, options?: object) => void;
+  id:string
 }>("deleteBoard");
 export const setBoardDataChangeAction = createAction<IPayloadBoardData>(
   "setBoardDataChangeAction"

@@ -13,10 +13,8 @@ import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import { FC, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getBoardDataAction, setAllListAction } from "store/actionTypes";
-import { boardSliceSelector, listSliceSelector } from "store/selectors";
+import { boardsSelector, listSliceSelector } from "store/selectors";
 import style from "./Content.module.scss";
-import { CircularProgress } from "@mui/material";
-import { findBoard } from "helpers";
 import NotFound from "components/NotFound/NotFound";
 import { iContentState } from "./ContentTypes";
 
@@ -25,12 +23,12 @@ const Content: FC = () => {
     menu: true,
     leftMenu: true,
   });
-  const { currentBoard, allBoardsData } = useAppSelector(boardSliceSelector);
   const {lists} = useAppSelector(listSliceSelector);
   const scrollRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
+  const currentBoard = useAppSelector(state => boardsSelector.selectById(state, id!))
   useEffect(() => {
     if (id) {
       dispatch(getBoardDataAction({ id, navigate }));
@@ -48,24 +46,20 @@ const Content: FC = () => {
     setState({ ...state, leftMenu: !state.leftMenu });
   };
 
-  if(!findBoard(allBoardsData,id!)){
+  if(!currentBoard){
     return(
       <NotFound />
     )
   }
 
-  return currentBoard.loading ? (
-    <div className={style.wrapperLoading}>
-      <CircularProgress disableShrink />
-    </div>
-  ) : (
+  return  (
     <div
-      style={{ backgroundImage: `url(${currentBoard.background})` }}
+      style={{ backgroundImage: `url(${currentBoard!.background})` }}
       className={style.rightContainer}
     >
       <div className={style.topSec}>
         <div className={style.leftBlock}>
-          <h3>{currentBoard.name}</h3>
+          <h3>{currentBoard!.name}</h3>
           <StarBorderIcon className={style.starIcon} />
           <div className={style.textBlock}>
             <PeopleAltIcon />

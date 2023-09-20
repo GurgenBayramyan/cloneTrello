@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import { MouseEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate} from "react-router-dom";
 import { deleteBoardAction } from "store/actionTypes";
 import { popupsSelector } from "store/selectors";
 import { setDeleteBoardShow } from "store/slices/popupsSlice/popupSlice";
@@ -16,14 +16,18 @@ const DeleteBoard = () => {
     dispatch(setDeleteBoardShow(false));
   };
 
+  const location = useLocation();
+ 
+
   const stopPropagation = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
   const handleDelete = () => {
     dispatch(
       deleteBoardAction({
-        id: optionboard.id,
+        currentid: optionboard.id,
         navigate,
+        id:location.pathname.split("/").reverse()[0]
       })
     );
   };
