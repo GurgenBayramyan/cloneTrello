@@ -1,6 +1,5 @@
-import { changeAllBoards, filterForId } from "helpers";
 import { toast } from "react-toastify";
-import { call, put, select, takeLatest } from "redux-saga/effects";
+import { call, put, takeLatest } from "redux-saga/effects";
 import {
   deleteBoard,
   getAllBoards,
@@ -15,19 +14,14 @@ import {
   setBoardDataAction,
   setBoardDataChangeAction,
 } from "store/actionTypes";
-import { allBordersSelector, idCurrentBoardSelector } from "store/selectors";
 import {
   IBoardData,
-  ICurrentGetBoardData,
 } from "store/slices/boardSlice/boarSliceTypes";
 import {
-  addBoards,
+  boardDelete,
   setAllBoards,
-  setBoardData,
-  setChangeCurrentBoard,
-  setCurrentBoardData,
-  setCurrentLoading,
   setLoadingCreateAndChange,
+  updateBoard,
 } from "store/slices/boardSlice/boardSlice";
 import {
   openCreateSection,
@@ -43,8 +37,8 @@ function* setBoardSaga(action: IActionCreateBoardSaga) {
   yield put(setLoadingCreateAndChange(true));
   try {
     const data: IBoardData = yield call(setBoard, boardTitle, bg);
-    yield put(setBoardData(data));
-    yield put(addBoards(data));
+    const allBords: IBoardData[] = yield call(getAllBoards);
+    yield put(setAllBoards(allBords));
     yield put(
       openCreateSection({
         menuActive: false,
@@ -65,21 +59,21 @@ function* getBoardSaga(action: IActionGetBoardDatas) {
   const { id } = action.payload;
   
   try {
-    const data: ICurrentGetBoardData = yield call(getBoard, id);
-    yield put(setCurrentBoardData(data));
-    
+    const data: IBoardData= yield call(getBoard, id);
+    yield put(updateBoard(data))
   } catch (err:any) {
     toast.error(err.response.data.error)
    console.log(err)
   }
-  yield put(setCurrentLoading(false))
 }
 
 function* getAllboardsSaga(action: any) {
-  yield put(setCurrentLoading(true))
+  
   try {
+    yield put(setLoadingCreateAndChange(true))
     const data: IBoardData[] = yield call(getAllBoards);
     yield put(setAllBoards(data));
+    yield put(setLoadingCreateAndChange(false))
   } catch (err: any) {
     toast.error(err.data);
   }
@@ -87,16 +81,14 @@ function* getAllboardsSaga(action: any) {
 
 function* deleteBoardSaga(action: any) {
   yield put(setLoadingDelete(true));
-  const { id, navigate } = action.payload;
-  const allBoards: IBoardData[] = yield select(allBordersSelector);
-  const CurrentID: number = yield select(idCurrentBoardSelector);
+  const { currentid, navigate , id} = action.payload;
   try {
-    const status: number = yield call(deleteBoard, id);
+    const status: number = yield call(deleteBoard, currentid);
+    
     if (status === StatusCode.OK) {
-      const filteredArray = filterForId(allBoards, id);
-      yield put(setAllBoards(filteredArray));
+        yield put(boardDelete(currentid))
 
-      if (id === CurrentID) {
+      if (currentid === +id) {
         yield navigate("/");
       }
       toast.success(message);
@@ -113,21 +105,14 @@ function* deleteBoardSaga(action: any) {
 function* changeBoardsSaga(action: any) {
   const { id, navigate, bg, boardTitle, patch } = action.payload;
   yield put(setLoadingCreateAndChange(true));
-  const allBoards: IBoardData[] = yield select(allBordersSelector);
   try {
-    const data: ICurrentGetBoardData = yield call(
+    const data: IBoardData = yield call(
       setChangeBoard,
       id,
       boardTitle,
       bg
     );
-    yield put(setAllBoards(changeAllBoards(id, allBoards, bg, boardTitle)));
-    yield put(
-      setChangeCurrentBoard({
-        name: boardTitle,
-        background: bg,
-      })
-    );
+    yield put(updateBoard(data))
     toast.success("Board is Changed");
     if (!(patch === id)) {
       navigate(`/board/${id}`);

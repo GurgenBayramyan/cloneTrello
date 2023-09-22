@@ -1,6 +1,5 @@
 import BoardBackgraund from "components/BoardBackgraund/BoardBackgraund";
 import CreateMenu from "components/CreateMenu/CreateMenu";
-import DeleteBoard from "components/DeleteBoard/DeleteBoard";
 import MainRoutes from "components/MainRoutes/MainRoutes";
 import ModalBackgraund from "components/ModalBackgraund/ModalBackgraund";
 import ModalBlock from "components/ModallBlock/ModalBlock";
@@ -13,6 +12,7 @@ import style from './App.module.scss'
 import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
+
   return (
     <div className={style.App}>
       <MainRoutes />
@@ -23,7 +23,6 @@ const App = () => {
       <ModalBlock />
       <TaskSettings taskName="TaskName" />
       <OptionBoard />
-      <DeleteBoard />
       <CreateMenu />
       <ToastContainer />
     </div>

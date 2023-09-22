@@ -2,9 +2,10 @@ import { ILogin } from "components/login/LoginTypes";
 import axios from "axios";
 import { IRegistration } from "components/Registration/RegistrationTypes";
 import { removeRepeatPasword } from "helpers";
+import { basicUrl } from "types/constants";
 
 export const postLogin = async (data: ILogin) => {
-  const url = "https://young-citadel-44598.herokuapp.com/login";
+  const url = `${basicUrl}/login`;
   try {
     const resp = await axios.post(url, data, { withCredentials: true });
     return resp;
@@ -14,7 +15,7 @@ export const postLogin = async (data: ILogin) => {
 };
 
 export const postRegistration = async (data: IRegistration) => {
-  const url = "https://young-citadel-44598.herokuapp.com/register";
+  const url = `${basicUrl}/register`;
   try {
     const resp = await axios.post(url, removeRepeatPasword(data));
     return resp;
@@ -24,7 +25,7 @@ export const postRegistration = async (data: IRegistration) => {
 };
 
 export const setBoard = async (boardTitle: string, bg: string) => {
-  const url = "https://young-citadel-44598.herokuapp.com/boards";
+  const url = `${basicUrl}/boards`;
   const resp = await axios.post(
     url,
     { name: boardTitle, background: bg },
@@ -33,19 +34,19 @@ export const setBoard = async (boardTitle: string, bg: string) => {
   return resp.data;
 };
 export const getBoard = async (id: string) => {
-  const url = `https://young-citadel-44598.herokuapp.com/boards/${id}`;
+  const url = `${basicUrl}/boards/${id}`;
   const resp = await axios.get(url, { withCredentials: true });
   return resp.data;
 };
 export const getAllBoards = async () => {
-  const url = `https://young-citadel-44598.herokuapp.com/boards`;
+  const url = `${basicUrl}/boards`;
   const  resp = await axios.get(url, { withCredentials: true });
   return resp.data;
   
 };
 
 export const deleteBoard = async (id: number) => {
-  const url = `https://young-citadel-44598.herokuapp.com/boards/${id}`;
+  const url = `${basicUrl}/boards/${id}`;
   const resp = await axios.delete(url, { withCredentials: true });
   return resp.status
 
@@ -56,7 +57,7 @@ export const setChangeBoard = async (
   boardTitle: string,
   bg: string
 ) => {
-  const url = `https://young-citadel-44598.herokuapp.com/boards/${id}`;
+  const url = `${basicUrl}/boards/${id}`;
   const  resp  = await axios.put(
     url,
     { name: boardTitle, background: bg },

@@ -1,79 +1,60 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import {
-  IBoardData,
-  IBoardInitialState,
-  ICurrentGetBoardData,
-} from "./boarSliceTypes";
+  PayloadAction,
+  createEntityAdapter,
+  createSlice,
+} from "@reduxjs/toolkit";
+import { IBoardData, IBoardInitialState } from "./boarSliceTypes";
 import { urlBassic } from "types/constants";
 
+export const boardsAdapter = createEntityAdapter<IBoardData>({
+  selectId: (board) => board.id,
+});
+
 const initialState: IBoardInitialState = {
-  boardData: [],
-  currentBoard: {},
   error: false,
-  allBoardsData: [],
-  changeBoard:{},
-  url:urlBassic,
-  loading:false
+  changeBoard: {},
+  url: urlBassic,
+  loading: false,
+  data:boardsAdapter.getInitialState(),
 };
+
 
 const boardSlice = createSlice({
   name: "boardSlice",
   initialState,
   reducers: {
-    setBoardData: (state, { payload }: PayloadAction<IBoardData>) => {
-      state.boardData = [...state.boardData, payload];
+    updateBoard: (state, { payload }) => {
+      boardsAdapter.updateOne(state.data, { id: payload.id, changes: payload });
     },
-    setCurrentBoardData: (
-      state,
-      { payload }: PayloadAction<ICurrentGetBoardData>
-    ) => {
-      state.currentBoard = { ...payload };
-    },
-    setChangeCurrentBoard: (state,{payload}:PayloadAction<{background:string,name:string}>) => {
-      state.currentBoard.background = payload.background
-      state.currentBoard.name = payload.name
-    },
-    setError: (state, { payload }: PayloadAction<boolean>) => {
-      state.error = payload;
+    boardDelete: (state, { payload }) => {
+      boardsAdapter.removeOne(state.data, payload);
     },
     setAllBoards: (state, { payload }: PayloadAction<IBoardData[]>) => {
-      state.allBoardsData = [...payload];
+      boardsAdapter.setAll(state.data, payload);
     },
-    setCurrentBoard: (
+    setUrl: (state, { payload }: PayloadAction<string>) => {
+      state.url = payload;
+    },
+    setChangeBoard: (
       state,
-      { payload }: PayloadAction<ICurrentGetBoardData>
+      { payload }: PayloadAction<Partial<IBoardData>>
     ) => {
-      state.currentBoard = payload;
+      state.changeBoard = payload;
     },
-    addBoards: (state, { payload }: PayloadAction<IBoardData>) => {
-      state.allBoardsData = [...state.allBoardsData,payload];
+    setLoadingCreateAndChange: (
+      state,
+      { payload }: PayloadAction<Partial<boolean>>
+    ) => {
+      state.loading = payload;
     },
-    setUrl: (state,{payload}:PayloadAction<string>) => {
-      state.url = payload
-    },
-    setChangeBoard: (state,{payload}:PayloadAction<Partial<IBoardData>>) => {
-      state.changeBoard = payload
-    },
-    setLoadingCreateAndChange:(state,{payload}:PayloadAction<Partial<boolean>>) => {
-      state.loading = payload
-    },
-    setCurrentLoading:(state,{payload}:PayloadAction<Partial<boolean>>) => {
-      state.currentBoard.loading = payload
-    }
-   
   },
 });
 export default boardSlice;
 export const {
-  setBoardData,
-  setCurrentBoardData,
-  setError,
   setAllBoards,
-  setCurrentBoard,
-  addBoards,
   setUrl,
   setChangeBoard,
-  setChangeCurrentBoard,
   setLoadingCreateAndChange,
-  setCurrentLoading
+  updateBoard,
+  boardDelete
 } = boardSlice.actions;

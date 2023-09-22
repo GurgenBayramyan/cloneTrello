@@ -34,15 +34,15 @@ export interface ICreateListSaga {
   id: string;
   fieldName: string;
   changeLoading: () => void;
+  handleChangeActive: () => void
 }
 
 export interface IDeleteListSaga {
-  Listid: string;
-  boardId: string;
+  listid: string;
   changeLoading: () => void;
 }
 export interface IChangeListSaga {
-  Listid: string;
+  listid: string;
   name: string;
   boardId: string;
 }

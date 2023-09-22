@@ -26,4 +26,5 @@ export interface IBoardDataId{
 export interface IDeleteBoardAction{
     id: number
     navigate:(to: string, options?: object) => void;
+    currentid?:number
 }

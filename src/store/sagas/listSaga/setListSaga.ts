@@ -13,7 +13,7 @@ import {
   deleteListAction,
   setAllListAction,
 } from "store/actionTypes";
-import { getAlllists } from "store/slices/listSlice/listSlice";
+import { addList, getAlllists, listDelete, setLoading, upDateList } from "store/slices/listSlice/listSlice";
 import { IList } from "store/slices/listSlice/listSliceTypes";
 import {
   IChangeListSaga,
@@ -25,48 +25,54 @@ import {
 function* setAllListSaga(action: PayloadAction<ISetAllListSaga>) {
   const { id } = action.payload;
   try {
+    yield put(setLoading(true))
     const lists: IList[] = yield call(getAllLists, id);
     yield put(getAlllists(lists));
-  } catch (err: unknown) {}
+    yield put(setLoading(false))
+  } catch (err: unknown) {
+    
+  }
 }
 function* createListSaga(
   action: PayloadAction<ICreateListSaga>
 ): Generator<any, void, any> {
-  const { id, fieldName, changeLoading } = action.payload;
-  changeLoading();
+  const { id, fieldName, changeLoading, handleChangeActive } = action.payload;
+  
   try {
+    changeLoading();
     const resp = yield call(createList, id, fieldName);
-    const lists: IList[] = yield call(getAllLists, id);
-    yield put(getAlllists(lists));
+    yield put(addList(resp.data))
     toast.success(resp.statusText);
+    changeLoading();
+    handleChangeActive()
   } catch (err: unknown) {
     console.log(err);
   }
-  changeLoading();
+  
 }
 function* deleteListSaga(
   action: PayloadAction<IDeleteListSaga>
-): Generator<any, void, any> {
-  const { Listid, boardId, changeLoading } = action.payload;
-  changeLoading();
+) {
+  const { listid,  changeLoading } = action.payload;
+ 
   try {
-    const resp: string = yield call(deleteList, Listid);
-    const lists: IList[] = yield call(getAllLists, boardId);
-    yield put(getAlllists(lists));
+    changeLoading();
+    const resp: string = yield call(deleteList, listid);
+    yield put(listDelete(listid))
     toast.success(resp);
+    changeLoading();
   } catch (err: unknown) {
     console.log(err);
   }
-  changeLoading();
+  
 }
 function* changeListSaga(
   action: PayloadAction<IChangeListSaga>
 ): Generator<any, void, any> {
-  const { Listid, name, boardId } = action.payload;
+  const { listid, name } = action.payload;
   try {
-    const resp = yield call(changeLists, Listid, { name });
-    const lists: IList[] = yield call(getAllLists, boardId);
-    yield put(getAlllists(lists));
+    const list = yield call(changeLists, listid, { name });
+    yield put(upDateList(list))
   } catch (err: unknown) {
     console.log(err);
   }

@@ -5,21 +5,23 @@ import { MouseEvent, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import { getAllBoardsAction } from "store/actionTypes";
 import { useNavigate, useParams } from "react-router-dom";
-import { setCurrentBoard } from "store/slices/boardSlice/boardSlice";
 import {
   setOptionBoardPosition,
   setOptionBoardToDefault,
 } from "store/slices/popupsSlice/popupSlice";
-import { boardSliceSelector, popupsSelector } from "store/selectors";
+import { boardSliceSelector, boardsSelector, popupsSelector } from "store/selectors";
 import style from "./SideBar.module.scss";
 import { IBoardData } from "store/slices/boardSlice/boarSliceTypes";
 import classNames from "classnames";
 import { setChangeBoard } from "../../store/slices/boardSlice/boardSlice";
+import { EntityId } from "@reduxjs/toolkit";
 
 const SideBar = () => {
   const dispatch = useAppDispatch();
-  const { allBoardsData, changeBoard } = useAppSelector(boardSliceSelector);
+  const {  changeBoard } = useAppSelector(boardSliceSelector);
   const { optionboard } = useAppSelector(popupsSelector);
+  const boardsEnt = useAppSelector(boardsSelector.selectEntities);
+  const boardsIds = useAppSelector(boardsSelector.selectIds);
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -31,14 +33,13 @@ const SideBar = () => {
     dispatch(getAllBoardsAction());
   }, []);
   const handleNavigate = (id: number) => {
-    const elem = allBoardsData.find((el) => el.id === id);
-    dispatch(setCurrentBoard(elem!));
     navigate(`/board/${id}`);
   };
   const toDefaultState = () => {
     dispatch(setChangeBoard({}));
     dispatch(setOptionBoardToDefault());
   };
+
 
   const openOptionBoard = (e: MouseEvent<HTMLDivElement>, elem: IBoardData) => {
     e.stopPropagation();
@@ -83,29 +84,31 @@ const SideBar = () => {
         <div className={style.titleBlock}>
           <h5>Your boards</h5>
         </div>
-
-        {allBoardsData.map((el) => {
+        
+        {boardsIds.map((elemId: EntityId) => {
           return (
             <div
-              key={el.id}
-              onClick={() => handleNavigate(el.id)}
+              key={+elemId}
+              onClick={() => handleNavigate(+elemId)}
               className={classNames(style.boardBlock, {
-                [style.linkActive]: el.id === +id!,
-                [style.activeMenu]: el.id === changeBoard.id,
+
+                [style.linkActive]: elemId === +id!,
+                [style.activeMenu]:
+                elemId === optionboard.id || elemId === changeBoard.id,
               })}
             >
               <div className={style.taskInfo}>
                 <div
-                  style={{ backgroundImage: `url(${el.background})` }}
+                  style={{ backgroundImage: `url(${boardsEnt[elemId]?.background})` }}
                   className={style.backgraundBlock}
                 ></div>
-                <span>{el.name}</span>
+                <span>{boardsEnt[elemId]?.name}</span>
               </div>
               <div className={style.iconBlock}>
                 <div
                   tabIndex={0}
                   data-name="spred"
-                  onClick={(e) => openOptionBoard(e, el)}
+                  onClick={(e) => openOptionBoard(e, boardsEnt[elemId]!)}
                   className={classNames(style.firstIcon)}
                 >
                   <span>...</span>

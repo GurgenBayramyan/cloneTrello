@@ -2,14 +2,13 @@ import axios from "axios";
 import { basicUrlList } from "types/constants";
 
 export const getAllLists = async (id: string) => {
-  const resp = await axios.get(
-    `${basicUrlList}/${id}`,
-    { withCredentials: true }
-  );
+  const resp = await axios.get(`${basicUrlList}/${id}`, {
+    withCredentials: true,
+  });
   return resp.data;
 };
 export const createList = async (id: string, fieldName: string) => {
-  const resp = await axios.post(
+  return await axios.post(
     basicUrlList,
     {
       boardId: id,
@@ -17,16 +16,15 @@ export const createList = async (id: string, fieldName: string) => {
     },
     { withCredentials: true }
   );
-  return resp;
+  
 };
-export const deleteList = async(id:string) =>{
+export const deleteList = async (id: string) => {
   const url = `${basicUrlList}/${id}`;
-  const resp = await axios.delete(url,{withCredentials:true});
-  return resp.data
-}
+  const resp = await axios.delete(url, { withCredentials: true });
+  return resp.data;
+};
 
-export const changeLists= async(id:string,body:{name:string}) =>{
+export const changeLists = async (id: string, body: { name: string }) => {
   const url = `${basicUrlList}/${id}`;
-  const resp = await axios.put(url,body,{withCredentials:true});
-  return resp
-}
+  return (await axios.put(url, body, { withCredentials: true })).data;
+};

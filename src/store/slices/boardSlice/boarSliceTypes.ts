@@ -1,3 +1,5 @@
+import { DictionaryNum } from "@reduxjs/toolkit/dist/entities/models";
+
 export interface IBoardData {
   id: number;
   name: string;
@@ -5,22 +7,19 @@ export interface IBoardData {
   userId: number;
   background?: string;
 }
-
+export type EntityId = number | string
+export interface Dictionary<T> extends DictionaryNum<T> {
+  [id: string]: T | undefined
+}
+export interface EntityState<T> {
+  ids: EntityId[]
+  entities: Dictionary<T>
+}
 export interface IBoardInitialState {
-  boardData: IBoardData[];
-  currentBoard: ICurrentGetBoardData;
   error: boolean;
-  allBoardsData: IBoardData[];
   url: string;
   changeBoard: Partial<IBoardData>;
   loading: boolean;
+  data :EntityState<IBoardData>
 }
-export interface ICurrentGetBoardData {
-  background?: string;
-  id?: number;
-  name?: string;
-  sortId?: number;
-  userId?: number;
-  error?: object;
-  loading?: boolean;
-}
+

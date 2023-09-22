@@ -1,23 +1,21 @@
-import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
+import { useAppDispatch } from "hooks/changDispatchSekector";
 import { FC, useState } from "react";
 import { deleteListAction } from "store/actionTypes";
 import style from "./QuestionDeleteList.module.scss";
 import { IQuesTionProps } from "./QuestionDeleteListTypes";
 import { useParams } from "react-router-dom";
-import { listSliceSelector } from "store/selectors";
 import { CircularProgress } from "@mui/material";
 
-const QuestionDeleteList: FC<IQuesTionProps> = ({ onClose }) => {
+const QuestionDeleteList: FC<IQuesTionProps> = ({ onClose,listId}) => {
   const [loading, setloading] = useState(false);
   const dispatch = useAppDispatch();
-  const { ListId } = useAppSelector(listSliceSelector);
   const { id } = useParams();
   const changeLoading = () => {
     setloading((prev) => !prev)
   }
   const handleDeleteList = () => {
-    if (ListId) {
-      dispatch(deleteListAction({ Listid: ListId, boardId: id!,changeLoading, }));
+    if (listId) {
+      dispatch(deleteListAction({ listid:listId.toString(),changeLoading, }));
     }
   };
  

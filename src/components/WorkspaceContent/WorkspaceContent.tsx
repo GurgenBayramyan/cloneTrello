@@ -13,50 +13,37 @@ import classNames from "classnames";
 import style from "./WorkspaceContent.module.scss";
 import { Menus } from "types";
 import { setChangeBoard } from "store/slices/boardSlice/boardSlice";
+
 const WorkspaceContent = () => {
   const ref = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
-  const {workspace} = useAppSelector(popupsSelector);
+  const { workspace } = useAppSelector(popupsSelector);
 
   useEffect(() => {
-    if(workspace.show){
+    if (workspace.show) {
       ref.current?.focus();
     }
-    
- 
   }, [workspace.show]);
 
-
-  const handleChangeVisibility = (e:MouseEvent<HTMLElement>,name: string) => {
+  const handleChangeVisibility = (e: MouseEvent<HTMLElement>, name: string) => {
     dispatch(changeContent(name));
     dispatch(setClose(false));
-    
   };
   const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
     const relatedTarget = e.relatedTarget as HTMLElement;
-    if(relatedTarget?.dataset.name === "btn"){
-      return
-    }
-    if (relatedTarget?.dataset.name === "openVi") {
-      return;
-    }
-    if (relatedTarget?.dataset.name === "divparent") {
-      dispatch(setClose(false));
-      return;
-    }
-    if (relatedTarget?.dataset.name === "divparents") {
-      dispatch(setClose(false));
-      return;
-    }
-    if (relatedTarget?.dataset.block === "change") {
+    if (
+      relatedTarget?.dataset.name === "btn" ||
+      relatedTarget?.dataset.name === "openVi" ||
+      relatedTarget?.dataset.name === "divparent" ||
+      relatedTarget?.dataset.name === "divparents" ||
+      relatedTarget?.dataset.block === "change"
+    ) {
       dispatch(setClose(false));
       return;
     }
     dispatch(setClose(false));
     dispatch(closeMenu());
     dispatch(setChangeBoard({}));
-  
-    
   };
 
   return workspace.show ? (
@@ -122,7 +109,6 @@ const WorkspaceContent = () => {
         </div>
       </div>
     </div>
-  ) : null;
+  ) : null
 };
-
 export default WorkspaceContent;

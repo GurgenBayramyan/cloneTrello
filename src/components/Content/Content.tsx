@@ -13,32 +13,41 @@ import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import { FC, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getBoardDataAction, setAllListAction } from "store/actionTypes";
-import { boardSliceSelector, listSliceSelector } from "store/selectors";
+import {
+  boardSliceSelector,
+  boardsSelector,
+  listSelector,
+  listSliceSelector,
+} from "store/selectors";
 import style from "./Content.module.scss";
-import { CircularProgress } from "@mui/material";
-import { findBoard } from "helpers";
 import NotFound from "components/NotFound/NotFound";
 import { iContentState } from "./ContentTypes";
+import { CircularProgress } from "@mui/material";
+import Loading from "components/Loading/Loading";
 
 const Content: FC = () => {
   const [state, setState] = useState<iContentState>({
     menu: true,
     leftMenu: true,
   });
-  const { currentBoard, allBoardsData } = useAppSelector(boardSliceSelector);
-  const {lists} = useAppSelector(listSliceSelector);
+  const lists = useAppSelector(listSelector.selectEntities);
+  const listIds = useAppSelector(listSelector.selectIds);
+  const { loadingList } = useAppSelector(listSliceSelector);
+  const { loading } = useAppSelector(boardSliceSelector);
   const scrollRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
+
   useEffect(() => {
     if (id) {
       dispatch(getBoardDataAction({ id, navigate }));
-      dispatch(setAllListAction({id,}))
+      dispatch(setAllListAction({ id }));
     }
-    
   }, [id]);
-
+  const currentBoard = useAppSelector((state) =>
+    boardsSelector.selectById(state, id!)
+  );
 
   const handleOpenMenu = () => {
     setState({ ...state, menu: !state.menu });
@@ -48,24 +57,22 @@ const Content: FC = () => {
     setState({ ...state, leftMenu: !state.leftMenu });
   };
 
-  if(!findBoard(allBoardsData,id!)){
-    return(
-      <NotFound />
-    )
+  if (!currentBoard && !loading) {
+    return <NotFound />;
   }
 
-  return currentBoard.loading ? (
-    <div className={style.wrapperLoading}>
+  return loading ? (
+    <div className={style.wrapper}>
       <CircularProgress disableShrink />
     </div>
   ) : (
     <div
-      style={{ backgroundImage: `url(${currentBoard.background})` }}
+      style={{ backgroundImage: `url(${currentBoard!.background})` }}
       className={style.rightContainer}
     >
       <div className={style.topSec}>
         <div className={style.leftBlock}>
-          <h3>{currentBoard.name}</h3>
+          <h3>{currentBoard!.name}</h3>
           <StarBorderIcon className={style.starIcon} />
           <div className={style.textBlock}>
             <PeopleAltIcon />
@@ -163,14 +170,19 @@ const Content: FC = () => {
           </div>
         </div>
       </div>
+
       <div className={style.rightContainer_down}>
         <div ref={scrollRef} className={style.downBlock}>
-            {!!lists.length && lists.map(list => {
-              return (
-                <List listId={list!.id} title={list!.name}  key={list!.id}/>
-              )
-            })}
-          <AddBlock />
+          {loadingList ? (
+            <Loading background="transparent" spinnerColor="#fff" />
+          ) : (
+            !!listIds.length &&
+            listIds.map((id) => {
+              return <List listId={+id!} title={lists[id]!.name} key={+id} />;
+            })
+          )}
+          
+         {!loadingList && <AddBlock />}
         </div>
       </div>
     </div>

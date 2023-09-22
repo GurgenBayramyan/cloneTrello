@@ -18,51 +18,66 @@ const AddBlock = () => {
   } = useForm<{ fieldName: string }>({
     mode: "onSubmit",
   });
-  const changeLoading = () =>{
-    setLoading((prev)=> !prev)
-  }
-  const onSubmit: SubmitHandler<{ fieldName: string }> = async (data) => {
-    dispatch(createListAction({ id: id!, fieldName: data.fieldName,changeLoading, }));
-    reset();
+  const changeLoading = () => {
+    setLoading((prev) => !prev);
   };
   const handleChangeActive = () => {
     setActive((prev) => !prev);
   };
+  const onSubmit: SubmitHandler<{ fieldName: string }> = async (data) => {
+    dispatch(
+      createListAction({
+        id: id!,
+        fieldName: data.fieldName,
+        changeLoading,
+        handleChangeActive: handleChangeActive,
+      })
+    );
+    reset();
+  };
+
   const handleBlur = (e: FocusEvent<HTMLElement>) => {
     if (e.relatedTarget) {
       return;
     }
-    setActive((prev) => !prev);
+    handleChangeActive();
     reset();
   };
 
-  return loading ? (
-    <div className={style.loading}>
-      <CircularProgress color="success" />
-    </div>
-  ) : active ? (
-    <form
-      onBlur={handleBlur}
-      tabIndex={0}
-      onSubmit={handleSubmit(onSubmit)}
-      className={style.formListAdd}
-    >
-      <input
-        autoFocus={true}
-        type="text"
-        {...register("fieldName", {
-          required: true,
-        })}
-      />
-      <div className={style.columnBlock}>
-        <input data-name="sb" type="submit" value="add List" />
-        <span onClick={handleChangeActive}>X</span>
-      </div>
-    </form>
-  ) : (
-    <div onClick={handleChangeActive} className={style.addBlock}>
-      <span>+</span>
-      <span>Add another list</span>
+  return (
+    <div>
+      {loading && (
+        <div className={style.loading}>
+          <CircularProgress color="success" />
+        </div>
+      )}{" "}
+      {active ? (
+        <form
+          onBlur={handleBlur}
+          tabIndex={0}
+          onSubmit={handleSubmit(onSubmit)}
+          className={style.formListAdd}
+        >
+          <input
+            autoFocus={true}
+            type="text"
+            placeholder="enter list title"
+            {...register("fieldName", {
+              required: true,
+            })}
+          />
+          <div className={style.columnBlock}>
+            <input data-name="sb" type="submit" value="Add list" />
+            <span onClick={handleChangeActive}>X</span>
+          </div>
+        </form>
+      ) : (
+        <div onClick={handleChangeActive} className={style.addBlock}>
+          <span>+</span>
+          <span>Add another list</span>
+        </div>
+      )}
+      
     </div>
   );
 };
