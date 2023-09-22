@@ -6,22 +6,22 @@ import {
 import { IBoardData, IBoardInitialState } from "./boarSliceTypes";
 import { urlBassic } from "types/constants";
 
+export const boardsAdapter = createEntityAdapter<IBoardData>({
+  selectId: (board) => board.id,
+});
+
 const initialState: IBoardInitialState = {
   error: false,
   changeBoard: {},
   url: urlBassic,
   loading: false,
+  data:boardsAdapter.getInitialState(),
 };
-export const boardsAdapter = createEntityAdapter<IBoardData>({
-  selectId: (board) => board.id,
-});
+
 
 const boardSlice = createSlice({
   name: "boardSlice",
-  initialState: {
-    ...initialState,
-    data: boardsAdapter.getInitialState(),
-  },
+  initialState,
   reducers: {
     updateBoard: (state, { payload }) => {
       boardsAdapter.updateOne(state.data, { id: payload.id, changes: payload });

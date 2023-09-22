@@ -16,7 +16,6 @@ import {
 } from "store/actionTypes";
 import {
   IBoardData,
-  ICurrentGetBoardData,
 } from "store/slices/boardSlice/boarSliceTypes";
 import {
   boardDelete,
@@ -60,7 +59,7 @@ function* getBoardSaga(action: IActionGetBoardDatas) {
   const { id } = action.payload;
   
   try {
-    const data: ICurrentGetBoardData = yield call(getBoard, id);
+    const data: IBoardData= yield call(getBoard, id);
     yield put(updateBoard(data))
   } catch (err:any) {
     toast.error(err.response.data.error)
@@ -69,9 +68,12 @@ function* getBoardSaga(action: IActionGetBoardDatas) {
 }
 
 function* getAllboardsSaga(action: any) {
+  
   try {
+    yield put(setLoadingCreateAndChange(true))
     const data: IBoardData[] = yield call(getAllBoards);
     yield put(setAllBoards(data));
+    yield put(setLoadingCreateAndChange(false))
   } catch (err: any) {
     toast.error(err.data);
   }
@@ -105,7 +107,7 @@ function* changeBoardsSaga(action: any) {
   const { id, navigate, bg, boardTitle, patch } = action.payload;
   yield put(setLoadingCreateAndChange(true));
   try {
-    const data: ICurrentGetBoardData = yield call(
+    const data: IBoardData = yield call(
       setChangeBoard,
       id,
       boardTitle,

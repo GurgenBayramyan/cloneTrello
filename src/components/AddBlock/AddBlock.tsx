@@ -77,7 +77,7 @@ const AddBlock = () => {
           <span>Add another list</span>
         </div>
       )}
-      ;
+      
     </div>
   );
 };

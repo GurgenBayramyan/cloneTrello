@@ -39,7 +39,6 @@ export interface ICreateListSaga {
 
 export interface IDeleteListSaga {
   listid: string;
-  boardId: string;
   changeLoading: () => void;
 }
 export interface IChangeListSaga {

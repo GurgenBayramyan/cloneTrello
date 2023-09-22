@@ -17,7 +17,7 @@ const QuestionDeleteList: FC<IQuesTionProps> = ({ onClose }) => {
   }
   const handleDeleteList = () => {
     if (listId) {
-      dispatch(deleteListAction({ listid: listId, boardId: id!,changeLoading, }));
+      dispatch(deleteListAction({ listid: listId,changeLoading, }));
     }
   };
  

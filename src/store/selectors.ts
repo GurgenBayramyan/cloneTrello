@@ -1,5 +1,6 @@
 import { RootState } from "store";
 import { boardsAdapter } from "./slices/boardSlice/boardSlice";
+import { listAdapter } from "./slices/listSlice/listSlice";
 
 export const setShowOptionDivSelector = (state: RootState) =>
   state.setShowOptionDiv;
@@ -16,4 +17,6 @@ export const listSliceSelector = (state: RootState) => state.listSlice;
 export const boardsSelector = boardsAdapter.getSelectors<RootState>(
   (state) => state.boardSlice.data
 );
-
+export const listSelector = listAdapter.getSelectors<RootState>(
+  (state) => state.listSlice.lists
+);

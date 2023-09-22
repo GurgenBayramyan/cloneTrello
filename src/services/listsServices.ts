@@ -26,5 +26,5 @@ export const deleteList = async (id: string) => {
 
 export const changeLists = async (id: string, body: { name: string }) => {
   const url = `${basicUrlList}/${id}`;
-  return await axios.put(url, body, { withCredentials: true });
+  return (await axios.put(url, body, { withCredentials: true })).data;
 };
