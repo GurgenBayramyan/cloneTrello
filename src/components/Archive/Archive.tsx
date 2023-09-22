@@ -2,8 +2,16 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import style from './Archive.module.scss'
 import { FC } from 'react';
 import { IArchiveProps } from './ArchiveTypes';
+import { useAppDispatch, useAppSelector } from 'hooks/changDispatchSekector';
+import { setShowModal } from 'store/slices/modalSlice/modalSlice';
+import { modalBlockSelector } from 'store/selectors';
 
-const Archive:FC<IArchiveProps> = ({onClose}) => {
+const Archive:FC<IArchiveProps> = () => {
+    const dispatch = useAppDispatch();
+  const modal = useAppSelector(modalBlockSelector);
+  const onClose = () => {
+    dispatch(setShowModal(!modal.upModalShow))
+  };
   return (
     <div className={style.archiveBlock}>
       <div className={style.leftBlock}>

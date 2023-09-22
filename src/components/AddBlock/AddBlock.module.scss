@@ -1,4 +1,5 @@
-.addBlock{
+@import '../../assets//style.scss';
+.addBlock {
     min-width: 300px;
     padding: 15px 10px;
     border-radius: 15px;
@@ -8,13 +9,66 @@
     gap: 8px;
     font-weight: 900;
     transition: all ease-in-out .3s;
-    span{
+
+    span {
         color: white;
         cursor: pointer;
     }
-    &:hover{
-        span{
+
+    &:hover {
+        span {
             color: rgb(223, 182, 146);
         }
     }
+}
+
+.formListAdd {
+    min-width: 300px;
+    padding: 15px 10px;
+    border-radius: 15px;
+    background-color: rgba(100, 96, 90, 0.596);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-weight: 900;
+    transition: all ease-in-out .3s;
+
+    .columnBlock {
+        display: flex;
+        gap: 12px;
+        cursor: pointer;
+        
+    }
+
+    span {
+        color: white;
+        align-self: center;
+    }
+
+    input[type=text] {
+        background-color: #bfc2c7;
+        color: #e0ecf8;
+        font-weight: 700;
+        padding: 5px 10px;
+        outline: none;
+        border-radius: 3px;
+        border: 1px solid #85B8FF;
+
+    }
+
+    input[type=submit] {
+        padding: 8px;
+        background-color: rgb(144, 180, 235);
+        border-radius: 4px;
+        color: rgb(26, 24, 24);
+        outline: none;
+        border:#85B8FF;
+        cursor: pointer;
+        &:hover{
+            background-color: rgba(59, 134, 255, 0.466);
+        }
+    }
+}
+.loading{
+ @include loadingStyles;
 }

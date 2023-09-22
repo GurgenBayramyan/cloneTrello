@@ -1,4 +1,4 @@
-import { ComponentType, FC, FocusEvent, MouseEvent, useState } from "react";
+import { ComponentType,FocusEvent, MouseEvent, useState } from "react";
 import style from "./Openable.module.scss";
 
 

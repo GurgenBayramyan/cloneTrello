@@ -1,5 +1,51 @@
-.id{
-    background-color: aqua;
-    width: 100vh;
-    height: 100vh;
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #472b2b;
+  width: 100%;
+
+  h5 {
+
+    font-size: 24px;
+    color: #ff0000;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+
+    animation: slideIn 1s ease both, pulse 2s ease infinite;
+    transform-origin: center;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
 }

@@ -1,52 +1,6 @@
 @import '../../assets//style.scss';
 @import '../../assets//vars.scss';
 
-.content {
-    display: flex;
-    flex: 1;
-    
-    .leftContainer {
-        width: 300px;
-        background-color: $leftContainer-bg;
-
-        display: flex;
-        transition: all 500ms ease;
-        flex-direction: column;
-        .numbers {
-            display: flex;
-            color: wheat;
-            font-weight: 800;
-            padding: 8px;
-
-            .first {
-                padding: 5px 10px;
-                background-color: $first-bg;
-
-                span {
-                    font-size: 20px;
-                }
-
-            }
-
-            .last {
-                padding: 8px;
-            }
-        }
-
-        &_top {
-            height: 55px;
-            border-bottom: 1px solid #4D4746;
-            position: relative;
-
-        }
-
-        &_down {
-            flex: 1;
-
-        }
-
-    }
-
     .close {
         width: 25px;
 
@@ -131,14 +85,15 @@
         
     }
 
-    @media(max-width:320px) {
-        .leftContainer {
-            width: 100%;
-        }
+   
 
-        .close {
-            width: 25px;
-        }
+@media(max-width:320px) {
+    .leftContainer {
+        width: 100%;
+    }
+
+    .close {
+        width: 25px;
     }
 }
 
@@ -147,7 +102,8 @@
     align-items: center;
     justify-content: space-between;
     padding: 10px 50px;
-    width: 550px;
+    min-width: 550px;
+    max-width: max-content;
     color: white;
 
     h3 {
@@ -318,4 +274,15 @@
     width: 0;
     height: 0;
     opacity: 0;
+}
+.wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #9caab88e;
 }

@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 const initialState = {
-    upModalShow:false
+    upModalShow:false,
+    showModal:false
 }
 const ModalSlice = createSlice({
     name:"modallMeniu",
@@ -8,8 +9,12 @@ const ModalSlice = createSlice({
     reducers:{
         setShow:(state,{payload}:PayloadAction<boolean>) =>{
             state.upModalShow = payload
+        },
+        setShowModal : (state,{payload}:PayloadAction<boolean>) =>{
+            state.showModal = payload
         }
     }
+    
 })
 export default ModalSlice
-export const {setShow} = ModalSlice.actions
+export const {setShow,setShowModal} = ModalSlice.actions

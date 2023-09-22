@@ -37,22 +37,27 @@ import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import RemoveFromQueueIcon from "@mui/icons-material/RemoveFromQueue";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
-import { setShow } from "store/slices/modalSlice/modalSlice";
+import { setShow, setShowModal } from "store/slices/modalSlice/modalSlice";
 import { modalBlockSelector } from "store/selectors";
 import Archive from "components/Archive/Archive";
-import style from "./ModalBlock.module.scss";
 import DeleteModal from "components/DeleteModal/DeleteModal";
+import style from "./ModalBlock.module.scss";
 
-const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
+
+const ModalBlock: FC<IModal> = () => {
   const [valueInput, setValueInput] = useState("Axios");
   const dispatch = useAppDispatch();
   const modalState = useAppSelector(modalBlockSelector);
+  const modal = useAppSelector(state => state.modallMeniu)
   const [hide, setHide] = useState(false);
   const [showUp, setShowUp] = useState(false);
   const [state, setState] = useState<IModalState>({
     taskDesc: true,
     comment: false,
   });
+  const openModal = () => {
+    dispatch(setShowModal(!modal.showModal))
+  };
   const [deleteModal, setDeleteModal] = useState(false);
   const MembersModal = Openable(
     () => <MembersContent />,
@@ -114,7 +119,7 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
 
   const openTemplateModal = () => {
     setShowUp(false);
-    dispatch(setShow(!modalState.upModalShow));
+    dispatch(setShow(!modal.upModalShow));
   };
   const openArchiveBlock = () => {
     dispatch(setShow(false));
@@ -133,12 +138,12 @@ const ModalBlock: FC<IModal> = ({ openModal, showModal }) => {
     <div
       onClick={openModal}
       className={classNames(style.modal, {
-        [style.isActive]: showModal,
+        [style.isActive]: modal.showModal,
       })}
     >
       <div onClick={(e) => e.stopPropagation()} className={style.task_desc}>
-        {!!modalState.upModalShow && <UpModalComponent onClose={openModal} />}
-        {!!showUp && <Archive onClose={openModal} />}
+        {!!modalState.upModalShow && <UpModalComponent />}
+        {!!showUp && <Archive />}
         <div className={style.modalBlock}>
           <div className={style.modalBlock_header}>
             <div className={style.taskName}>

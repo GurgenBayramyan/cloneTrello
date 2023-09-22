@@ -1,11 +1,19 @@
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import style from "./UpModalComponent.module.scss";
-import { FC } from 'react';
+import { FC, useEffect, useRef } from 'react';
 import { IUpmodalProps } from './UpModalComponentTypes';
+import { useAppDispatch, useAppSelector } from 'hooks/changDispatchSekector';
+import { setShowModal } from 'store/slices/modalSlice/modalSlice';
 
-const UpModalComponent:FC<IUpmodalProps> = ({onClose}) => {
+const UpModalComponent:FC<IUpmodalProps> = () => {
+  const dispatch = useAppDispatch();
+  const modal = useAppSelector(state => state.modallMeniu);
+  const onClose = () => {
+    dispatch(setShowModal(!modal.upModalShow))
+  };
+
   return (
-    <div className={style.upModalComponent}>
+    <div  className={style.upModalComponent}>
       <div className={style.leftBlock}>
         <div className={style.cardblock}></div>
         <span>This is a Template card.</span>

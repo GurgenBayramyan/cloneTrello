@@ -53,3 +53,15 @@
     justify-content: center;
     align-self: center;
 }
+@mixin loadingStyles{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(85, 117, 91, 0.336);
+    z-index: 6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

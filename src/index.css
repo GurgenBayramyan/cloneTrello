@@ -4,6 +4,7 @@
   margin: 0;
   text-decoration: none;
   list-style: none;
+
 }
 body {
   margin: 0;
@@ -20,11 +21,12 @@ code {
 body{
   overflow: hidden;
 }
-
 #root{
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
   overflow: hidden;
+  height: 100vh;
 }
 
+
+
+
+  

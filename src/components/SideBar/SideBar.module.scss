@@ -1,0 +1,184 @@
+@import '../../assets//style.scss';
+@import '../../assets//vars.scss';
+
+.leftContainer {
+    width: 350px;
+    background-color: $leftContainer-bg;
+    display: flex;
+    transition: all 500ms ease;
+    flex-direction: column;
+    .numbers {
+        display: flex;
+        color: wheat;
+        font-weight: 800;
+        padding: 8px;
+
+        .first {
+            padding: 5px 10px;
+            background-color: $first-bg;
+
+            span {
+                font-size: 20px;
+            }
+
+        }
+
+        .last {
+            padding: 8px;
+        }
+    }
+
+    &_top {
+        height: 55px;
+        border-bottom: 1px solid #4D4746;
+        position: relative;
+
+    }
+
+    &_down {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        max-height: calc(100vh - 130px);
+        overflow-x: hidden;
+        &::-webkit-scrollbar {
+            width: 10px;
+    
+        }
+    
+        &::-webkit-scrollbar-track {
+            background-color: transparent;
+            border-radius: 4px;
+        }
+    
+        &::-webkit-scrollbar-thumb {
+            background-color: rgba(168, 166, 166, 0.6);
+            border-radius: 4px;
+        }
+        .linkActive {
+            background-color: #9f9cad80;
+        }
+    }
+
+}
+
+.close {
+    width: 15px;
+
+    .numbers {
+        display: none;
+    }
+
+    .boardBlock,
+    .titleBlock {
+        display: none;
+    }
+}
+
+.openBlock {
+    position: absolute;
+    top: 15px;
+    right: -15px;
+    color: wheat;
+    padding: 4px;
+
+    &:hover {
+        background-color: #837f97;
+    }
+}
+
+.iconBlock {
+    display: flex;
+    gap: 15px;
+    display: none;
+
+    span {
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -khtml-user-select: none;
+    }
+}
+
+.closeblock {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: wheat;
+    padding: 4px;
+    border-radius: 14px 14px;
+
+    &:hover {
+        background-color: #837f97;
+    }
+}
+
+.titleBlock {
+    padding: 15px 8px;
+    color: #9aa7b6;
+    font-size: 18px;
+}
+
+.boardBlock {
+    padding: 6px 8px;
+    display: flex;
+    justify-content: space-between;
+    color: #9aa7b6;
+    cursor: pointer;
+
+    .taskInfo {
+        display: flex;
+        gap: 5px;
+
+        span {
+            align-self: center;
+        }
+    }
+
+    &:hover {
+        background-color: #837f97;
+
+        .iconBlock {
+            display: flex;
+
+            .firstIcon {
+                padding: 0 8px;
+                border-radius: 5px;
+
+                &:hover {
+                    background-color: #a0a4a8;
+                    color: black;
+                }
+            }
+
+        }
+    }
+
+
+}
+
+.backgraundBlock {
+    width: 35px;
+    height: 28px;
+    background-position: center center;
+    background-size: cover;
+}
+
+.changeBlock {
+    position: absolute;
+}
+
+.activeMenu {
+    .iconBlock {
+        display: flex;
+
+        .firstIcon {
+            padding: 0 8px;
+            border-radius: 5px;
+            background-color: #a0a4a8;
+            color: black;
+        }
+
+    }
+}

@@ -1,25 +1,42 @@
-import { useState, FC, useRef, useEffect } from "react";
+import BackupTableIcon from "@mui/icons-material/BackupTable";
+import OptionList from "components/OptionList/OptionList";
+import Task from "components/Task/Task";
+import Templates from "components/Templates/Templates";
+import { useAppDispatch} from "hooks/changDispatchSekector";
+import { FC, useState, } from "react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
+import { changeListAction } from "store/actionTypes";
 import style from "./List.module.scss";
 import { IListProps, IListState } from "./ListTypes";
-import BackupTableIcon from "@mui/icons-material/BackupTable";
-import Task from "components/Task/Task";
-import OptionList from "components/OptionList/OptionList";
-import Templates from "components/Templates/Templates";
 
 
-const List: FC<IListProps> = ({ title, openModal }) => {
-  const [changeTitle, setChangeTitle] = useState(title);
+
+
+
+const List: FC<IListProps> = ({ title, listId}) => {
   const [showMenuUser,setShowMenuUser] = useState(false)
+
   const [listState, setListState] = useState<IListState>({
     addCard: false,
     titleBlock: true,
 
   });
-  const divRef = useRef<HTMLDivElement>(null)
 
-  const handleChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setChangeTitle(event.target.value);
-  };
+  const {id} = useParams();
+  const dispatch = useAppDispatch();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      title:title
+  }
+  });
+  const watchTitle = watch("title");
+
 
   const handleClick = () => {
     setShowMenuUser(true)
@@ -37,9 +54,17 @@ const List: FC<IListProps> = ({ title, openModal }) => {
   const setTitle = () => {
     setListState({ ...listState, titleBlock: !listState.titleBlock });
   };
-  const blurForTitle = () => {
+  
+
+  const changeListTitle: SubmitHandler<FieldValues> =  (data) => {
+    if(watchTitle === title || !watchTitle){
+      setListState({ ...listState, titleBlock: !listState.titleBlock });
+      return
+    }
+    dispatch(changeListAction({listid:listId.toString(),name:watchTitle!,boardId:id!}))
     setListState({ ...listState, titleBlock: !listState.titleBlock });
-  };
+  }
+
   const closeAddBlock = (e: React.FocusEvent<HTMLElement>) => {
     const target = e.relatedTarget as HTMLElement;
     if (target?.dataset?.name === "addCard") {
@@ -55,30 +80,24 @@ const List: FC<IListProps> = ({ title, openModal }) => {
       <div className={style.listBlock_header}>
         {listState.titleBlock ? (
           <div onClick={setTitle} className={style.titleBlock}>
-            <span>{title}</span>
+            <span>{watchTitle}</span>
           </div>
         ) : (
-          <input
+          <form onSubmit={handleSubmit(changeListTitle)} >
+            <input
             type="text"
-            value={changeTitle}
-            onBlur={blurForTitle}
             autoFocus={true}
-            onChange={(e) => handleChangeTitle(e)}
+            {...register("title",{minLength:1})}
+            onBlur={changeListTitle}
           />
+          </form>
         )}
-        <OptionList />
+        <OptionList  listId={listId} />
       </div>
       <div className={style.tasks}>
-        <Task openModal={openModal} />
-        <Task openModal={openModal} />
-        <Task openModal={openModal} />
-        <Task openModal={openModal} />
-        <Task openModal={openModal} />
-        <Task openModal={openModal} />
-        <Task openModal={openModal} />
-        <Task openModal={openModal} />
-        <Task openModal={openModal} />
-        <Task openModal={openModal} />
+        <Task />
+        <Task />
+   
 
         {listState.addCard ? (
           <div className={style.addCardActive}>
@@ -121,7 +140,7 @@ const List: FC<IListProps> = ({ title, openModal }) => {
             <BackupTableIcon    sx={{ cursor: "pointer", fontSize: "12px" }} />
             </button>
            
-           {showMenuUser &&  <Templates onClose={closeUserMenu} openModal={openModal}/>}
+           {showMenuUser &&  <Templates onClose={closeUserMenu} />}
           </div>
         </div>
       )}

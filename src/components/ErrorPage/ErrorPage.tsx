@@ -1,12 +1,11 @@
-import DeleteModal from "components/DeleteModal/DeleteModal"
-import style from "./ErrorPage.module.scss"
-import Templates from 'components/Templates/Templates'
+import style from "./ErrorPage.module.scss";
 
-
-const ErrorPage = ()=> {
+const ErrorPage = () => {
   return (
-    <div className={style.id}></div>
-  )
-}
+    <div className={style.error}>
+      <h5>This page is not a fount</h5>
+    </div>
+  );
+};
 
-export default ErrorPage
+export default ErrorPage;

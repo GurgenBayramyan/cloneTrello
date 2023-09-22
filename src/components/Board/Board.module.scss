@@ -1,0 +1,46 @@
+.settings{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.521);
+    transition: opacity 300ms ease;
+    z-index: 1;
+}
+.settingsIsNone{
+    width: 0;
+    height: 0;
+    opacity: 0;
+    top: -500px;
+    left: -700px;
+}
+.content{
+    display: flex;
+    flex: 1;
+}
+.spinner_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: salmon;
+
+    .spinner {
+        display: block;
+        width: 70px;
+        height: 70px;
+        border: 7px solid transparent;
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s linear infinite;
+        border-top-color: red;
+        animation: spin 1s linear infinite;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

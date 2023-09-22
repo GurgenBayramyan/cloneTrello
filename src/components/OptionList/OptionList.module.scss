@@ -1,17 +1,18 @@
 .optionBlock{
     background-color: white;
     border-radius: 8px;
-    padding: 10px 0px;
+    padding: 7px 0px;
     position: absolute;
     top: 50px;
     left: 230px;
     width: 250px;
     z-index: 1;
     font-weight: 800;
+    font-size: 14px;
     &_header{
        display: flex;
        justify-content: center;
-       padding-bottom: 15px;
+       padding-bottom: 10px;
        p{
         align-self: center;
        }
@@ -45,7 +46,7 @@
 .standartBlock{
     padding: 6px 12px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 11px;
     
     &:hover{
         background-color: #4e5c7331;

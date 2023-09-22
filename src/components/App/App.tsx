@@ -1,26 +1,28 @@
-import React, { useEffect } from "react";
-import Login from "../login";
-import { Route, Routes } from "react-router-dom";
-import Home from "../Home/Home";
-import Registration from "../Registration";
+import BoardBackgraund from "components/BoardBackgraund/BoardBackgraund";
+import CreateMenu from "components/CreateMenu/CreateMenu";
+import MainRoutes from "components/MainRoutes/MainRoutes";
+import ModalBackgraund from "components/ModalBackgraund/ModalBackgraund";
+import ModalBlock from "components/ModallBlock/ModalBlock";
+import OptionBoard from "components/OptionBoard/OptionBoard";
+import TaskSettings from "components/TaskSettings/TaskSettings";
+import UserSection from "components/UserSection/UserSection";
+import WorkspaceContent from "components/WorkspaceContent/WorkspaceContent";
 import { ToastContainer } from "react-toastify";
-import ErrorPage from "components/ErrorPage/ErrorPage";
-import Protected from "hoc/CompletedRoutes/Protected";
-import ProtectedLoginRegistr from "hoc/CompletedRoutLoginRegistr/ProtectedLoginRegistr";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
-  const HomeComponent = Protected(Home)
-  const LoginComponent = ProtectedLoginRegistr(Login)
-  const RegistrationComponent = ProtectedLoginRegistr(Registration)
 
   return (
     <>
-      <Routes>
-        <Route path="/" element={<HomeComponent  />} />
-        <Route path="login" element={<LoginComponent />} />
-        <Route path="registration" element={<RegistrationComponent />} />
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
+      <MainRoutes />
+      <ModalBackgraund />
+      <UserSection />
+      <BoardBackgraund />
+      <WorkspaceContent />
+      <ModalBlock />
+      <TaskSettings taskName="TaskName" />
+      <OptionBoard />
+      <CreateMenu />
       <ToastContainer />
     </>
   );
