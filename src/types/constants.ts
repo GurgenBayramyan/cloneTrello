@@ -7,6 +7,7 @@ interface IUrls {
   id: number;
   url: string;
 }
+export const  basicUrl = "https://young-citadel-44598.herokuapp.com";
 
 export const backgraundImages: IUrls[] = [
   {
