@@ -36,9 +36,8 @@ const WorkspaceContent = () => {
       relatedTarget?.dataset.name === "openVi" ||
       relatedTarget?.dataset.name === "divparent" ||
       relatedTarget?.dataset.name === "divparents" ||
-      relatedTarget?.dataset.block === "change"
+      relatedTarget?.dataset.block === "change" 
     ) {
-      dispatch(setClose(false));
       return;
     }
     dispatch(setClose(false));
@@ -59,7 +58,7 @@ const WorkspaceContent = () => {
     >
       <div
         data-name="Private"
-        onClick={(e) => handleChangeVisibility(e,Menus.PRIVATE)}
+        onClick={(e) => handleChangeVisibility(e, Menus.PRIVATE)}
         className={classNames(style.custom, {
           [style.customActive]: workspace.content === "Private",
         })}
@@ -74,7 +73,7 @@ const WorkspaceContent = () => {
       </div>
       <div
         data-name="Workspace"
-        onClick={(e) => handleChangeVisibility(e,Menus.WORKSPACE)}
+        onClick={(e) => handleChangeVisibility(e, Menus.WORKSPACE)}
         className={classNames(style.custom, {
           [style.customActive]: workspace.content === "Workspace",
         })}
@@ -92,7 +91,7 @@ const WorkspaceContent = () => {
       </div>
       <div
         data-name="Public"
-        onClick={(e) => handleChangeVisibility(e,Menus.PUBLIC)}
+        onClick={(e) => handleChangeVisibility(e, Menus.PUBLIC)}
         className={classNames(style.custom, {
           [style.customActive]: workspace.content === "Public",
         })}
@@ -109,6 +108,6 @@ const WorkspaceContent = () => {
         </div>
       </div>
     </div>
-  ) : null
+  ) : null;
 };
 export default WorkspaceContent;

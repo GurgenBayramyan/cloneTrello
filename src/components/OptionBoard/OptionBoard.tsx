@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import style from "./OptionBoard.module.scss";
-import {  boardsSelector, popupsSelector } from "store/selectors";
+import {  boardSliceSelector, boardsSelector, popupsSelector } from "store/selectors";
 import {
   openCreateSection,
   setDeleteBoardShow,
@@ -15,6 +15,7 @@ import { getPositionQuestionBlock, getPositionSectionTop } from "helpers";
 
 const OptionBoard = () => {
   const { optionboard, questionBlock } = useAppSelector(popupsSelector);
+  const{changeBoard} = useAppSelector(boardSliceSelector)
   const divRef = useRef<HTMLDivElement>(null);
  const boards = useAppSelector(boardsSelector.selectEntities)
   const dispatch = useAppDispatch();
@@ -42,7 +43,6 @@ const OptionBoard = () => {
     if (relatedTarget?.dataset.block !== "change") {
       dispatch(setChangeBoard({}));
     }
-    dispatch(setOptionBoardShow(false));
     dispatch(setOptionBoardToDefault());
     dispatch(setQuestionBlock(false));
   };

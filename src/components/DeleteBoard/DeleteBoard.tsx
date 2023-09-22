@@ -7,6 +7,8 @@ import { setDeleteBoardShow } from "store/slices/popupsSlice/popupSlice";
 import style from "./DeleteBoard.module.scss";
 import { CircularProgress } from "@mui/material";
 
+
+
 const DeleteBoard = () => {
   const { deleteBoard, optionboard, loadingDelete } =
     useAppSelector(popupsSelector);

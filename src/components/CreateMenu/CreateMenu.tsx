@@ -23,15 +23,16 @@ const CreateMenu = () => {
 
   const handleBlur = (event: FocusEvent<HTMLElement>) => {
     const reletedTarget = event.relatedTarget as HTMLElement;
-  
     if (!reletedTarget) {
       dispatch(closeMenu());
     }
     if (changeBoard.id && !reletedTarget) {
       dispatch(setChangeBoard({}));
     }
+    if(reletedTarget?.dataset.name === "btn"){
+      divRef.current!.focus();
+    }
     if (reletedTarget?.dataset.name === "spred") {
-      dispatch(setChangeBoard({}));
       dispatch(closeMenu());
     }
   };

@@ -44,9 +44,10 @@ const SideBar = () => {
   const openOptionBoard = (e: MouseEvent<HTMLDivElement>, elem: IBoardData) => {
     e.stopPropagation();
     const { top, left } = e.currentTarget.getBoundingClientRect();
-    optionboard.show && elem.id === optionboard.id
-      ? toDefaultState()
-      : dispatch(setChangeBoard(elem));
+    if(changeBoard.id === elem.id ){
+      dispatch(setChangeBoard({}))
+      return
+    }
     dispatch(
       setOptionBoardPosition({
         currentTop: top + 35,
@@ -56,6 +57,10 @@ const SideBar = () => {
         id: elem.id,
       })
     );
+    optionboard.show && elem.id === optionboard.id
+    ? toDefaultState()
+    : dispatch(setChangeBoard(elem));
+
   };
 
   return (

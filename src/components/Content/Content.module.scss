@@ -1,95 +1,91 @@
 @import '../../assets//style.scss';
 @import '../../assets//vars.scss';
 
-.close {
-    width: 25px;
+    .close {
+        width: 25px;
 
-    .numbers {
-        display: none;
-    }
-}
-
-
-.openBlock {
-    position: absolute;
-    top: 15px;
-    right: -15px;
-    color: wheat;
-    padding: 4px;
-
-    &:hover {
-        background-color: #837f97;
-    }
-}
-
-.closeblock {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    color: wheat;
-    padding: 4px;
-    border-radius: 14px 14px;
-
-    &:hover {
-        background-color: #837f97;
-    }
-}
-
-.rightContainer {
-    overflow: hidden;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    background: url("https://codetheweb.blog/assets/img/posts/css-advanced-background-images/cover.jpg");
-    background-size: cover;
-
-    .topSec {
-        display: flex;
-        justify-content: space-between;
-        height: 55px;
-        background-color: rgb(54, 48, 44);
-
-        @media(max-width: 895px) {
+        .numbers {
             display: none;
         }
     }
-}
-
-.rightContainer_down {
-    flex: 1;
-    display: flex;
 
 
-    .downBlock {
+    .openBlock {
+        position: absolute;
+        top: 15px;
+        right: -15px;
+        color: wheat;
+        padding: 4px;
 
-        margin-bottom: 15px;
-        display: flex;
-        overflow-x: scroll;
-        position: relative;
-        gap: 50px;
-        padding: 15px;
-        padding-right: 140px;
-        width: 100%;
-        align-items: flex-start;
-
-        &::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        &::-webkit-scrollbar-track {
-            background-color: transparent;
-            border-radius: 4px;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            background-color: rgba(128, 125, 125, 0.6);
-            border-radius: 4px;
+        &:hover {
+            background-color: #837f97;
         }
     }
 
-}
+    .closeblock {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        color: wheat;
+        padding: 4px;
+        border-radius: 14px 14px;
 
+        &:hover {
+            background-color: #837f97;
+        }
+    }
 
+    .rightContainer {
+        overflow: hidden;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        background: url("https://codetheweb.blog/assets/img/posts/css-advanced-background-images/cover.jpg");
+        background-size: cover;
+       
+        .topSec {
+            display: flex;
+            justify-content: space-between;
+            height: 55px;
+            background-color: rgb(54, 48, 44);
+            @media(max-width: 895px) {
+                display: none;
+            }
+        }
+    }
+
+    .rightContainer_down {
+        flex: 1;
+        display: flex;
+     
+        
+        .downBlock{
+      
+           margin-bottom: 15px;
+           display: flex;
+           overflow-x: scroll;
+           position: relative;
+           gap: 50px;
+           padding: 15px;
+           padding-right: 140px;
+           width: 100%;
+           align-items: flex-start;
+
+           &::-webkit-scrollbar {
+            width: 10px;
+          }
+          &::-webkit-scrollbar-track {
+            background-color: transparent;
+            border-radius: 4px;
+          }
+          &::-webkit-scrollbar-thumb {
+            background-color: rgba(128, 125, 125, 0.6);
+            border-radius: 4px;
+          }}
+        
+    }
+
+   
 
 @media(max-width:320px) {
     .leftContainer {
@@ -265,8 +261,7 @@
     }
 
 }
-
-.settings {
+.settings{
     position: absolute;
     width: 100vw;
     height: 100vh;
@@ -275,9 +270,20 @@
     transition: opacity 300ms ease;
     z-index: 1;
 }
-
-.settingsIsNone {
+.settingsIsNone{
     width: 0;
     height: 0;
     opacity: 0;
+}
+
+.wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #9caab88e;
 }

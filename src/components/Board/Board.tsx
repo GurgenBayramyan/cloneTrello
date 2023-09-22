@@ -5,10 +5,9 @@ import { createPortal } from "react-dom";
 
 
 const Board = () => {
-  const root = document.getElementById("root") as HTMLElement
   return (
     <Layout>
-        {createPortal(<DeleteBoard />,root)}  <DeleteBoard />
+        {createPortal(<DeleteBoard />,document.body)} 
       <Content />
     </Layout>
   );

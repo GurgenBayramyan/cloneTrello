@@ -1,8 +1,6 @@
 import axios from "axios";
 import { IRegistration } from "components/Registration/RegistrationTypes";
-import {
-  IBoardData,
-} from "store/slices/boardSlice/boarSliceTypes";
+import { IBoardData } from "store/slices/boardSlice/boarSliceTypes";
 
 export const removeRepeatPasword = (data: IRegistration) => {
   const filteredUserObject = Object.entries(data).filter(([key]) => {
@@ -120,25 +118,12 @@ export const getTemplateMenuStates = (div: HTMLElement) => {
     return false;
   }
 };
-
 export const getChangeDivPosition = (top: number, left: number) => {
   const minus = top + 300 - window.innerHeight;
-  if (top + 300 > window.innerHeight) {
-    return {
-      top: top - minus - 140,
-      left: left,
-    };
-  }
   return {
-    top: top + 50,
+    top: top + 300 > window.innerHeight ? top - minus - 140 : top + 50,
     left: left,
   };
-};
-
-export const filterForId = (state: IBoardData[], id: number) => {
-  return state.filter((el) => {
-    return el.id !== id;
-  });
 };
 
 export const changeAllBoards = (
@@ -158,33 +143,29 @@ export const changeAllBoards = (
     return board;
   });
 };
-export const getPositionSectionTop = (top:number,left:number) => {
-  if(top + 600 > window.innerHeight){
-     return {
-     currentTop : top -(top + 650 - window.innerHeight),
-     currentLeft: left + 70
-     }
-
+export const getPositionSectionTop = (top: number, left: number) => {
+  if (top + 600 > window.innerHeight) {
+    return {
+      currentTop: top - (top + 650 - window.innerHeight),
+      currentLeft: left + 70,
+    };
   }
   return {
     currentTop: top - 50,
-    currentLeft:left 
+    currentLeft: left,
+  };
+};
+
+export const getPositionQuestionBlock = (top: number) => {
+  return top + 150 > window.innerHeight
+    ? top - (top + 150 - window.innerHeight)
+    : top;
+};
+
+export const findBoard = (state: IBoardData[], id: string) => {
+  const elem = state.find((board) => board.id === +id);
+  if (elem) {
+    return true;
   }
-}
-
-
-export const getPositionQuestionBlock = (top:number) => {
-    if(top + 150 > window.innerHeight){
-      return top -(top + 150 - window.innerHeight)
-    }
-    return top
-}
-
-
-export const findBoard = (state:IBoardData[],id:string) =>{
-   const elem = state.find(board => board.id === +id);
-   if(elem) {
-    return true
-   }
-   return false
-}
+  return false;
+};
