@@ -182,7 +182,7 @@ const Content: FC = () => {
             })
           )}
           
-         {!loadingList &&  <AddBlock />}
+         {loadingList && <AddBlock />}
         </div>
       </div>
     </div>
