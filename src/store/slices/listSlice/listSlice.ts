@@ -11,7 +11,6 @@ export const listAdapter = createEntityAdapter<IList>({
 
 const initialState: IListTypes = {
   lists: listAdapter.getInitialState(),
-  listId: null,
   loadingList:false
 };
 
@@ -31,13 +30,10 @@ const listSlice = createSlice({
     listDelete: (state:IListTypes,{payload}) =>{
       listAdapter.removeOne(state.lists,payload)
     },
-    setListId: (state, { payload }: PayloadAction<string>) => {
-      state.listId = payload;
-    },
     setLoading:(state,{payload}:PayloadAction<boolean>) => {
       state.loadingList = payload
     }
   },
 });
 export default listSlice;
-export const { getAlllists, addList, setListId, upDateList, listDelete ,setLoading} = listSlice.actions;
+export const { getAlllists, addList,  upDateList, listDelete ,setLoading} = listSlice.actions;

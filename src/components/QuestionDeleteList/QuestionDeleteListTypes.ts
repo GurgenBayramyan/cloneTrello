@@ -1,3 +1,4 @@
 export interface IQuesTionProps{
-    onClose:() => void
+    onClose:() => void;
+    listId:number
 }

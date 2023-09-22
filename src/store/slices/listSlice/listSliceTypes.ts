@@ -21,6 +21,5 @@ export interface IRespData {
 
 export interface IListTypes {
   lists: EntityState<IList>
-  listId: null | string;
   loadingList:boolean
 }

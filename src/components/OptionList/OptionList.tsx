@@ -1,18 +1,13 @@
 import classNames from "classnames";
-import { FC, useEffect, useState } from "react";
+import { FC,useState } from "react";
 import style from "./OptionList.module.scss";
 import QuestionDeleteList from "components/QuestionDeleteList/QuestionDeleteList";
-import { useAppDispatch } from "hooks/changDispatchSekector";
-import { setListId } from "store/slices/listSlice/listSlice";
+
 
 const OptionList:FC<{listId:number}> = ({listId}) => {
   const [optionBlock, setOptionBlock] = useState(true);
   const [questionBlock, setQuestionBlock] = useState(false);
 
-  const dispatch  = useAppDispatch()
-  useEffect(()=>{
-    dispatch(setListId(listId.toString()))
-  },[optionBlock])
   const handleOpenOption = () => {
     setOptionBlock(!optionBlock);
     
@@ -32,7 +27,7 @@ const OptionList:FC<{listId:number}> = ({listId}) => {
     <div tabIndex={0} onBlur={blurForOption}>
       <h4 onClick={handleOpenOption}>...</h4>
       {questionBlock ? (
-        <QuestionDeleteList onClose={openQuestionBlock} />
+        <QuestionDeleteList onClose={openQuestionBlock} listId={listId}/>
       ) : (
         <div
           className={classNames(style.optionBlock, {

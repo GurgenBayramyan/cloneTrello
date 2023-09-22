@@ -2,7 +2,7 @@ import BackupTableIcon from "@mui/icons-material/BackupTable";
 import OptionList from "components/OptionList/OptionList";
 import Task from "components/Task/Task";
 import Templates from "components/Templates/Templates";
-import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
+import { useAppDispatch} from "hooks/changDispatchSekector";
 import { FC, useState, } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
