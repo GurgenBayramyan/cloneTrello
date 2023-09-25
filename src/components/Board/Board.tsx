@@ -7,7 +7,7 @@ import { createPortal } from "react-dom";
 const Board = () => {
   return (
     <Layout>
-        {createPortal(<DeleteBoard />,document.body)} 
+      {createPortal( <DeleteBoard />,document.body)}
       <Content />
     </Layout>
   );

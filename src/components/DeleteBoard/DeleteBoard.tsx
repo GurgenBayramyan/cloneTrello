@@ -1,11 +1,12 @@
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
-import { MouseEvent } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { deleteBoardAction } from "store/actionTypes";
 import { popupsSelector } from "store/selectors";
-import { setDeleteBoardShow } from "store/slices/popupsSlice/popupSlice";
+import { setDeleteBoardShow, setOptionBoardToDefault } from "store/slices/popupsSlice/popupSlice";
 import style from "./DeleteBoard.module.scss";
 import { CircularProgress } from "@mui/material";
+import { setChangeBoard } from '../../store/slices/boardSlice/boardSlice'
 
 
 
@@ -15,10 +16,14 @@ const DeleteBoard = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const handleClose = () => {
+    dispatch(setChangeBoard({}))
+    dispatch(setOptionBoardToDefault());
     dispatch(setDeleteBoardShow(false));
+    
   };
 
   const { id } = useParams();
+
 
   const stopPropagation = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();

@@ -19,7 +19,7 @@ import { EntityId } from "@reduxjs/toolkit";
 const SideBar = () => {
   const dispatch = useAppDispatch();
   const {  changeBoard } = useAppSelector(boardSliceSelector);
-  const { optionboard } = useAppSelector(popupsSelector);
+  const { optionboard ,menuState } = useAppSelector(popupsSelector);
   const boardsEnt = useAppSelector(boardsSelector.selectEntities);
   const boardsIds = useAppSelector(boardsSelector.selectIds);
   const navigate = useNavigate();
@@ -44,7 +44,11 @@ const SideBar = () => {
   const openOptionBoard = (e: MouseEvent<HTMLDivElement>, elem: IBoardData) => {
     e.stopPropagation();
     const { top, left } = e.currentTarget.getBoundingClientRect();
-    if(changeBoard.id === elem.id ){
+    if(!changeBoard.id && menuState.menuActive){
+      toDefaultState()
+        return
+    }
+    if(changeBoard.id === elem.id && !optionboard.show ){
       dispatch(setChangeBoard({}))
       return
     }

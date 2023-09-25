@@ -36,8 +36,13 @@ const WorkspaceContent = () => {
       relatedTarget?.dataset.name === "openVi" ||
       relatedTarget?.dataset.name === "divparent" ||
       relatedTarget?.dataset.name === "divparents" ||
-      relatedTarget?.dataset.block === "change" 
+      relatedTarget?.dataset.block === "change"
     ) {
+      return;
+    }
+    if (relatedTarget?.dataset.name === "spred") {
+      dispatch(setClose(false));
+      dispatch(closeMenu());
       return;
     }
     dispatch(setClose(false));

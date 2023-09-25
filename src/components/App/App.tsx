@@ -10,6 +10,7 @@ import WorkspaceContent from "components/WorkspaceContent/WorkspaceContent";
 import { ToastContainer } from "react-toastify";
 import style from './App.module.scss'
 import "react-toastify/dist/ReactToastify.css";
+import DeleteBoard from "components/DeleteBoard/DeleteBoard";
 
 const App = () => {
 
@@ -25,6 +26,7 @@ const App = () => {
       <OptionBoard />
       <CreateMenu />
       <ToastContainer />
+     
     </div>
   );
 };
