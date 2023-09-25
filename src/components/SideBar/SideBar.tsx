@@ -19,12 +19,12 @@ import { EntityId } from "@reduxjs/toolkit";
 const SideBar = () => {
   const dispatch = useAppDispatch();
   const {  changeBoard } = useAppSelector(boardSliceSelector);
-  const { optionboard } = useAppSelector(popupsSelector);
+  const { optionboard ,menuState } = useAppSelector(popupsSelector);
   const boardsEnt = useAppSelector(boardsSelector.selectEntities);
   const boardsIds = useAppSelector(boardsSelector.selectIds);
   const navigate = useNavigate();
 
-  const {id} = useParams();
+  const { id } = useParams();
   const [open, setOpen] = useState(false);
   const handleMenu = () => {
     setOpen(!open);
@@ -38,13 +38,20 @@ const SideBar = () => {
   const toDefaultState = () => {
     dispatch(setChangeBoard({}));
     dispatch(setOptionBoardToDefault());
-  }
+  };
 
 
   const openOptionBoard = (e: MouseEvent<HTMLDivElement>, elem: IBoardData) => {
     e.stopPropagation();
     const { top, left } = e.currentTarget.getBoundingClientRect();
-    
+    if(!changeBoard.id && menuState.menuActive){
+      toDefaultState()
+        return
+    }
+    if(changeBoard.id === elem.id && !optionboard.show ){
+      dispatch(setChangeBoard({}))
+      return
+    }
     dispatch(
       setOptionBoardPosition({
         currentTop: top + 35,
@@ -54,8 +61,10 @@ const SideBar = () => {
         id: elem.id,
       })
     );
-    optionboard.show ? toDefaultState() :  dispatch(setChangeBoard(elem));
-   
+    optionboard.show && elem.id === optionboard.id
+    ? toDefaultState()
+    : dispatch(setChangeBoard(elem));
+
   };
 
   return (
@@ -91,6 +100,7 @@ const SideBar = () => {
               key={+elemId}
               onClick={() => handleNavigate(+elemId)}
               className={classNames(style.boardBlock, {
+
                 [style.linkActive]: elemId === +id!,
                 [style.activeMenu]:
                 elemId === optionboard.id || elemId === changeBoard.id,

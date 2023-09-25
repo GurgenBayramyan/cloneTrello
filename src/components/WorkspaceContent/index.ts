@@ -1,1 +1,1 @@
-export{default} from './WorkspaceContent'
+export {default} from './WorkspaceContent'

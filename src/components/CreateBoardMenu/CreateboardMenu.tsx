@@ -1,4 +1,4 @@
-import { FC, FocusEvent, useEffect, useRef } from "react";
+import { FC,  useEffect, useRef } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import classNames from "classnames";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -6,6 +6,7 @@ import { ICreateBoardsMenu } from "./CreateBoardMenuTypes";
 import DoneIcon from "@mui/icons-material/Done";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import {
+  changeContent,
   goToMain,
   openBackMenuBlock,
   openCreateSection,
@@ -14,7 +15,7 @@ import {
   setPositionCurrent,
 } from "store/slices/popupsSlice/popupSlice";
 import { getChangeDivPosition } from "helpers";
-import { PageLocation } from "types";
+import { Menus, PageLocation } from "types";
 import { boardSliceSelector, popupsSelector } from "store/selectors";
 import { useNavigate, useParams } from "react-router-dom";
 import {
@@ -22,7 +23,12 @@ import {
   setBoardDataChangeAction,
 } from "store/actionTypes";
 import style from "./Createboard.module.scss";
-import { backgraundImages, backgraundImagesDown } from "types/constants";
+import {
+  backgraundImages,
+  backgraundImagesDown,
+  basicBackgroundUrl,
+  trelloImgUrl,
+} from "types/constants";
 import { setChangeBoard, setUrl } from "store/slices/boardSlice/boardSlice";
 import { LinearProgress } from "@mui/material";
 
@@ -35,7 +41,9 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
   const { backgroundState, workspace } = useAppSelector(popupsSelector);
   const { changeBoard, loading, url } = useAppSelector(boardSliceSelector);
   const params = useParams();
-
+  useEffect(()=>{
+    dispatch(changeContent(Menus.WORKSPACE));
+  },[])
   const handleAddBackgraund = (url: string) => {
     dispatch(setUrl(url));
   };
@@ -66,10 +74,9 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
         currentLeft: 0,
       })
     );
-
     dispatch(setClose(false));
-
     dispatch(openBackMenuBlock(false));
+    dispatch(setChangeBoard({}));
   };
 
   const {
@@ -88,11 +95,7 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
       });
       dispatch(setUrl(changeBoard.background!));
     } else {
-      dispatch(
-        setUrl(
-          "https://images.unsplash.com/photo-1691168712328-924865142ba4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjkxNjUyNjA4fA&ixlib=rb-4.0.3&q=80&w=1200"
-        )
-      );
+      dispatch(setUrl(basicBackgroundUrl));
     }
   }, []);
   const value = watch("boardTitle");
@@ -124,9 +127,9 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
     );
     dispatch(setChangeBoard({}));
   };
- 
+
   return (
-    <div  className={style.creatBoardParentTwo}>
+    <div className={style.creatBoardParentTwo}>
       <div className={style.creatBoardParentTwo_header}>
         {!changeBoard.id && (
           <div onClick={locationMain} className={style.rightIcon}>
@@ -152,7 +155,7 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
       >
         <div className={style.childBackgraundImg}>
           <img
-            src="https://trello.com/assets/14cda5dc635d1f13bc48.svg"
+            src={trelloImgUrl}
             alt=""
           />
         </div>
@@ -224,7 +227,7 @@ const CreateboardMenu: FC<ICreateBoardsMenu> = () => {
 
         <div className={style.selectBlock}>
           <label>Visability</label>
-          <div ref={divRef} onClick={openVisibility} className={style.select}>
+          <div ref={divRef} tabIndex={0} data-name="openVi" onClick={openVisibility} className={style.select}>
             <span>{workspace.content}</span>
             <div className={style.iconBlock}>
               <KeyboardArrowDownIcon />

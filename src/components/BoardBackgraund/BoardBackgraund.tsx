@@ -1,5 +1,8 @@
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
-import { openBackMenuBlock } from "store/slices/popupsSlice/popupSlice";
+import {
+  closeMenu,
+  openBackMenuBlock,
+} from "store/slices/popupsSlice/popupSlice";
 import { useEffect, useRef } from "react";
 import { backgroundStateSelector } from "store/selectors";
 import DoneIcon from "@mui/icons-material/Done";
@@ -18,15 +21,23 @@ const BoardBackgraund = () => {
   const allboards = useAppSelector((state) => state.boardSlice);
   const divRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    divRef.current?.focus();
+    if(show){
+      divRef.current?.focus();
+    }
   }, [show]);
   const handleClose = () => {
     dispatch(openBackMenuBlock(false));
   };
   const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
     const relatedTarget = e.relatedTarget as HTMLElement;
+    if(relatedTarget?.dataset.name === "btn"){
+      return
+    }
     if (relatedTarget?.dataset.name === "divparents") {
       return;
+    }
+    if (relatedTarget?.dataset.name === "spred") {
+      dispatch(closeMenu());
     }
     dispatch(openBackMenuBlock(false));
   };

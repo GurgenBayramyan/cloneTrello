@@ -26,7 +26,7 @@ import {
   contentSliceSelector,
   popupsSelector,
 } from "store/selectors";
-import { openCreateSection } from "store/slices/popupsSlice/popupSlice";
+import { openBackMenuBlock, openCreateSection, setClose } from "store/slices/popupsSlice/popupSlice";
 import { PageLocation } from "types";
 import { setChangeBoard } from "store/slices/boardSlice/boardSlice";
 
@@ -37,7 +37,7 @@ const Header = () => {
     userMenu: true,
   });
   const createDivRef = useRef<HTMLButtonElement>(null);
-  const { menuState } = useAppSelector(popupsSelector);
+  const { menuState, workspace , backgroundState } = useAppSelector(popupsSelector);
   const { changeBoard } = useAppSelector(boardSliceSelector);
   const { data } = useAppSelector(contentSliceSelector);
   const navigate = useNavigate();
@@ -77,26 +77,23 @@ const Header = () => {
   };
   const openMenu = () => {
     const { top, left } = createDivRef.current!.getBoundingClientRect();
+    
+    dispatch(
+      openCreateSection({
+        menuActive: changeBoard.id ? true : !menuState.menuActive,
+        menuBlock: PageLocation.CREATEMENU,
+        currentTop: top,
+        currentLeft: left,
+      })
+    );
 
-    if (changeBoard.id) {
-      dispatch(
-        openCreateSection({
-          menuActive: true,
-          menuBlock: PageLocation.CREATEMENU,
-          currentTop: top,
-          currentLeft: left,
-        })
-      );
-    } else {
-      dispatch(
-        openCreateSection({
-          menuActive: !menuState.menuActive,
-          menuBlock: PageLocation.CREATEMENU,
-          currentTop: top,
-          currentLeft: left,
-        })
-      );
+    if(workspace.show) {
+      dispatch(setClose(false))
     }
+    if(backgroundState.show){
+      dispatch(openBackMenuBlock(false))
+    }
+
     dispatch(setChangeBoard({}));
   };
   return (

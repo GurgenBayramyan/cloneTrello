@@ -1,5 +1,5 @@
 import { createAction } from "@reduxjs/toolkit";
-import { IBoardDataId, IPayloadBoardData } from "store/types";
+import { IBoardDataId, IDeleteBoardAction, IPayloadBoardData } from "store/types";
 import {
   IChangeListSaga,
   ICreateListSaga,
@@ -12,11 +12,7 @@ export const setBoardDataAction =
   createAction<IPayloadBoardData>("setBoardDataAction");
 export const getBoardDataAction = createAction<IBoardDataId>("getBoardData");
 export const getAllBoardsAction = createAction("getAllBoards");
-export const deleteBoardAction = createAction<{
-  currentid: number;
-  navigate: (to: string, options?: object) => void;
-  id:string
-}>("deleteBoard");
+export const deleteBoardAction = createAction<IDeleteBoardAction>("deleteBoard");
 export const setBoardDataChangeAction = createAction<IPayloadBoardData>(
   "setBoardDataChangeAction"
 );

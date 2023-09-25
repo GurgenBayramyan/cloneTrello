@@ -135,3 +135,6 @@ export const optionBoardDefaultState = {
   name: "",
   id: 0,
 };
+
+export const basicBackgroundUrl = "https://images.unsplash.com/photo-1691168712328-924865142ba4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3MDY2fDB8MXxjb2xsZWN0aW9ufDF8MzE3MDk5fHx8fHwyfHwxNjkxNjUyNjA4fA&ixlib=rb-4.0.3&q=80&w=1200";
+export const trelloImgUrl = "https://trello.com/assets/14cda5dc635d1f13bc48.svg"

@@ -7,33 +7,47 @@ import {
   closeMenu,
   setClose,
 } from "store/slices/popupsSlice/popupSlice";
-import React, { useEffect, useRef } from "react";
+import React, { MouseEvent, useEffect, useRef } from "react";
 import { popupsSelector } from "store/selectors";
 import classNames from "classnames";
 import style from "./WorkspaceContent.module.scss";
 import { Menus } from "types";
+import { setChangeBoard } from "store/slices/boardSlice/boardSlice";
+
 const WorkspaceContent = () => {
   const ref = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
   const { workspace } = useAppSelector(popupsSelector);
 
   useEffect(() => {
-    ref.current?.focus();
+    if (workspace.show) {
+      ref.current?.focus();
+    }
   }, [workspace.show]);
 
-  const handleChangeVisibility = (name: string) => {
+  const handleChangeVisibility = (e: MouseEvent<HTMLElement>, name: string) => {
     dispatch(changeContent(name));
-
     dispatch(setClose(false));
   };
   const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
     const relatedTarget = e.relatedTarget as HTMLElement;
-    if (relatedTarget?.dataset.name === "divparent" || relatedTarget?.dataset.name === "divparents" || relatedTarget?.dataset.block === "change") {
+    if (
+      relatedTarget?.dataset.name === "btn" ||
+      relatedTarget?.dataset.name === "openVi" ||
+      relatedTarget?.dataset.name === "divparent" ||
+      relatedTarget?.dataset.name === "divparents" ||
+      relatedTarget?.dataset.block === "change"
+    ) {
+      return;
+    }
+    if (relatedTarget?.dataset.name === "spred") {
       dispatch(setClose(false));
+      dispatch(closeMenu());
       return;
     }
     dispatch(setClose(false));
     dispatch(closeMenu());
+    dispatch(setChangeBoard({}));
   };
 
   return workspace.show ? (
@@ -49,7 +63,7 @@ const WorkspaceContent = () => {
     >
       <div
         data-name="Private"
-        onClick={() => handleChangeVisibility(Menus.PRIVATE)}
+        onClick={(e) => handleChangeVisibility(e, Menus.PRIVATE)}
         className={classNames(style.custom, {
           [style.customActive]: workspace.content === "Private",
         })}
@@ -64,7 +78,7 @@ const WorkspaceContent = () => {
       </div>
       <div
         data-name="Workspace"
-        onClick={() => handleChangeVisibility(Menus.WORKSPACE)}
+        onClick={(e) => handleChangeVisibility(e, Menus.WORKSPACE)}
         className={classNames(style.custom, {
           [style.customActive]: workspace.content === "Workspace",
         })}
@@ -82,9 +96,9 @@ const WorkspaceContent = () => {
       </div>
       <div
         data-name="Public"
-        onClick={() => handleChangeVisibility(Menus.PUBLIC)}
+        onClick={(e) => handleChangeVisibility(e, Menus.PUBLIC)}
         className={classNames(style.custom, {
-          [style.customActive]:workspace.content === "Public",
+          [style.customActive]: workspace.content === "Public",
         })}
       >
         <div className={style.iconBlock}>
@@ -101,5 +115,4 @@ const WorkspaceContent = () => {
     </div>
   ) : null;
 };
-
 export default WorkspaceContent;

@@ -89,7 +89,6 @@ function* deleteBoardSaga(action: any) {
         yield put(boardDelete(currentid))
 
       if (currentid === +id) {
-        console.log("yay")
         yield navigate("/");
       }
       toast.success(message);

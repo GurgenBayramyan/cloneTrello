@@ -7,8 +7,11 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import ShareIcon from "@mui/icons-material/Share";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
+import { CircularProgress } from "@mui/material";
 import AddBlock from "components/AddBlock/AddBlock";
 import List from "components/List/List";
+import Loading from "components/Loading/Loading";
+import NotFound from "components/NotFound/NotFound";
 import { useAppDispatch, useAppSelector } from "hooks/changDispatchSekector";
 import { FC, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -20,10 +23,8 @@ import {
   listSliceSelector,
 } from "store/selectors";
 import style from "./Content.module.scss";
-import NotFound from "components/NotFound/NotFound";
 import { iContentState } from "./ContentTypes";
-import { CircularProgress } from "@mui/material";
-import Loading from "components/Loading/Loading";
+
 
 const Content: FC = () => {
   const [state, setState] = useState<iContentState>({

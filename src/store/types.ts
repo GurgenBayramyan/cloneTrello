@@ -23,3 +23,8 @@ export interface IBoardDataId{
     id: string
     navigate:(to: string, options?: object) => void;
 }
+export interface IDeleteBoardAction{
+    id: number
+    navigate:(to: string, options?: object) => void;
+    currentid?:number
+}

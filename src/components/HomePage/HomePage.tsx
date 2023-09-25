@@ -1,6 +1,6 @@
 
-import style from "./HomePage.module.scss";
 import Layout from "components/Layout/Layout";
+import style from "./HomePage.module.scss";
 
 const HomePage = () => {
 
